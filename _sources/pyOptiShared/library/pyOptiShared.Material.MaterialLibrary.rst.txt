@@ -1,0 +1,39 @@
+﻿pyOptiShared.Material.MaterialLibrary
+=====================================
+
+.. currentmodule:: pyOptiShared.Material
+
+.. autoclass:: MaterialLibrary
+   :members:
+   :show-inheritance:
+   :class-doc-from: init
+   :member-order: groupwise
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+         ~MaterialLibrary.LoadFromFolder
+      
+      
+      
+         ~MaterialLibrary.addMaterial
+      
+      
+         ~MaterialLibrary.getMatDict
+      
+      
+         ~MaterialLibrary.getMaterialFromName
+      
+      
+         ~MaterialLibrary.getMaterialFromNum
+      
+   
+   
+
+   
+   
+   

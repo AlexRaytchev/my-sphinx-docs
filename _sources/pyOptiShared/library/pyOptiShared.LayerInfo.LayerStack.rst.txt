@@ -1,0 +1,88 @@
+﻿pyOptiShared.LayerInfo.LayerStack
+=================================
+
+.. currentmodule:: pyOptiShared.LayerInfo
+
+.. autoclass:: LayerStack
+   :members:
+   :show-inheritance:
+   :class-doc-from: init
+   :member-order: groupwise
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+         ~LayerStack.GetLayer
+      
+      
+         ~LayerStack.GetLayerOffsetFunc
+      
+      
+         ~LayerStack.GetLayerThickness
+      
+      
+         ~LayerStack.GetLayerZmin
+      
+      
+         ~LayerStack.GetLayersWithTol
+      
+      
+         ~LayerStack.GetMinZmin
+      
+      
+         ~LayerStack.GetTotalThickness
+      
+      
+         ~LayerStack.GetZBounds
+      
+      
+         ~LayerStack.Show
+      
+      
+      
+         ~LayerStack.addLayer
+      
+      
+         ~LayerStack.addMaterial
+      
+      
+         ~LayerStack.addMaterialLayer
+      
+      
+         ~LayerStack.getLayerCladMatNum
+      
+      
+         ~LayerStack.getLayerCladMatObj
+      
+      
+         ~LayerStack.getLayerMaterialNum
+      
+      
+         ~LayerStack.getLayerMaterialObj
+      
+      
+         ~LayerStack.getMaterialMap
+      
+      
+         ~LayerStack.loadFromFolder
+      
+      
+         ~LayerStack.setBGandSub
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LayerStack.background
+      ~LayerStack.substrate
+   
+   

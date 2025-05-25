@@ -1,0 +1,206 @@
+.. _layer-stack:
+
+Layer Stack
+=============================
+
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: top
+
+Overview
+--------------------------
+
+A :class:`LayerStack <pyOptiShared.LayerInfo.LayerStack>` is a class that is used to handle a series of 
+:class:`LayerInfo <pyOptiShared.LayerInfo.LayerInfo>` objects. It contains a :class:`dict` that uses 
+**unique user-defined** :attr:`layer_number <pyOptiShared.LayerInfo.LayerInfo.layer_number>`
+as ``key`` for its respective :class:`LayerInfo <pyOptiShared.LayerInfo.LayerInfo>` ``value``. 
+
+In summary, each layer in your fabrication process corresponds to a :class:`LayerInfo <pyOptiShared.LayerInfo.LayerInfo>` 
+object. In a general form a layer stack can be repsented with the following diagram:
+
+.. grid:: 1
+
+    .. grid-item-card::  Layer Stack Organization
+
+        .. image:: ../_static/layers.svg
+           :alt: A graphical representation of a generic layer stack.
+           :width: 100%
+           :align: center
+           :name: layerstack_config
+
+        - Space below the minimum ``z_min`` is considered **substrate**.
+        - Space above the maximum ``z_max`` is considered **background**.
+        - If **cladding material** is not specified it **defaults to background**.
+        - By default **substrate** and **background** defaults to ``Air_default``.
+        - ``z_min`` determines the order in which the layers are stacked.
+        - **Layer number** must match those in the ``.gds`` file.
+        - **Cladding** will be used for **empty spaces inside the layer** as well, not just at the edges.
+        - Every material in a particular layer must derive from the :class:`Material <pyOptiShared.Material.Material>` object.
+        - Care should be taken to **avoid overlapping layers**.
+
+Layer Stack and Layer Info Considerations
+---------------------------------------------
+Following are a few considerations to take into account when adding layers to the layer stack.
+
+- Each layer must have a unique layer number;
+- Care should be taken so that :attr:`z_min <pyOptiShared.LayerInfo.LayerInfo.z_min>` and :attr:`thickness <pyOptiShared.LayerInfo.LayerInfo.thickness>` attributes of multiple :class:`LayerInfo <pyOptiShared.LayerInfo.LayerInfo>` dont end up overalping;
+- If a **cladding material** is **not defined** when instantiating or adding a layer to the layer stack, it will be **considered as background**, and the default :attr:`background <pyOptiShared.LayerInfo.LayerStack.background>` material of the layer stack will be used.
+- Materials are automatically an uniquely added to an internal :class:`MaterialLibrary` inside the :class:`LayerStack` instance;
+- By default :attr:`background <pyOptiShared.LayerInfo.LayerStack.background>` and :attr:`substrate <pyOptiShared.LayerInfo.LayerStack.substrate>` are set to Air.
+
+
+Examples
+--------------------
+
+The following examples will cover some specific settings of the :class:`LayerStack <pyOptiShared.LayerInfo.LayerStack>` 
+and at the end it aggregates all the example snipets into a complete setup.
+For more deatails please check the :ref:`API documentation <layer-stack-api>`.
+
+Defining Material Objects
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This is example is just a reminder on how to define :ref:`material objects <material-library>` to 
+be used by layers in a simulation script. Such material will be used in subsequent examples for 
+creating :class:`LayerInfo <pyOptiShared.LayerInfo.LayerInfo>` and :class:`LayerStack <pyOptiShared.LayerInfo.LayerStack>`
+objects.
+
+.. code-block:: python
+
+    from pyOptiShared.Material import ConstMaterial
+    
+    myindex1p45 = ConstMaterial(mat_name="myindex1p45", epsReal=1.45**2)
+    myindex3p5 = ConstMaterial(mat_name="myindex3p5", epsReal=3.5**2)
+
+Defining Side Wall Angle Functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The side wall functions must follow the python signature of the method defined by the 
+:meth:`GetOffset <pyOptiShared.LayerInfo.LayerInfo.GetOffset>` method. This guarantees the correct 
+evaluation of the side wall offset at a given ``z`` height at a particular layer. A negative 
+offset **erodes** the wall, while a positive one **dilates** it.
+
+.. code-block:: python
+
+    import numpy as np
+
+    def offset_erode(z:float, zmin:float, zmax:float, layer:int, datatype:int) -> float:
+        offset = -0.1*np.sin(np.pi*(z-zmin)/(zmax-zmin)) # Half sinusoid profile - Erode (-ve offset)
+        return offset
+    def offset_dilate(z:float, zmin:float, zmax:float, layer:int, datatype:int) -> float:
+        offset = 0.1*np.sin(np.pi*(z-zmin)/(zmax-zmin)) # Half sinusoid profile - Dilation (+ve offset)
+        return offset
+
+Once this methods are defined they can be passed as the argument for ``sideWallFunct`` in the 
+:meth:`addLayer <pyOptiShared.LayerInfo.LayerStack.addLayer>`, as will be demonstrated in 
+the next example.
+
+Adding Layers to a LayerStack
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+    from pyOptiShared.LayerInfo import LayerStack
+
+    layer_stack = LayerStack()
+    layer_stack.addLayer(name="L1", number=1, thickness=0.25, zmin=0.0,
+                        material=myindex3p5, cladding=myindex1p45,
+                        sideWallFunct=offset_erode)
+    layer_stack.addLayer(name="L2", number=2, thickness=0.25, zmin=0.25,
+                        material=myindex3p5, cladding=myindex1p45,
+                        sideWallFunct=offset_dilate)
+
+Setting Background and Substrate Materials
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once the :class:`LayerStack <pyOptiShared.LayerInfo.LayerStack>` is defined, we can set the 
+appropriate background and substrate material using the :meth:`setBGandSub <pyOptiShared.LayerInfo.LayerStack.setBGandSub>` 
+method. 
+
+.. code-block:: python
+
+    layer_stack.setBGandSub(background=myindex1p45, substrate=myindex1p45)
+
+Visualizing the Layer Stack
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The layer stack can be visualized using the :meth:`Show <pyOptiShared.LayerInfo.LayerStack.Show>` method.
+It also allows exporting the stack to a file if ``filename`` is specified along with the ``.svg`` extension, for example.
+
+.. code-block:: python
+
+    from pyOptiShared.DeviceGeometry import DeviceGeometry
+    from pyOptiShared.LayerInfo import LayerStack
+    from pyOptiShared.Material import ConstMaterial
+	
+    #Specifying Materials and Colors
+    si02_mat = ConstMaterial(mat_name="SiO2", epsReal=1.45**2,color='lightgreen')
+    si_mat = ConstMaterial(mat_name="Si", epsReal=3.5**2,color='lightblue')
+    air_mat = ConstMaterial(mat_name="Air", epsReal=1**2,color='lightyellow')
+    
+    layer_stack = LayerStack()
+    layer_stack.addLayer(name="L1", number=1, thickness=0.22, zmin=0.0,
+                        material=si_mat, cladding=si02_mat,
+                        sideWallAng=20)
+    layer_stack.addLayer(name="L2", number=2, thickness=0.22, zmin=0.0,
+                        material=si02_mat, cladding=si02_mat,
+                        sideWallAng=0)
+
+    layer_stack.setBGandSub(background=air_mat, substrate=si02_mat)
+
+    layer_stack.Show(filename='layerstack_example.svg')
+
+.. figure:: ../_static/layerstack_example.svg
+    :width: 90%
+    :align: center
+
+.. _layer-stack-examples:
+
+A Complete Layer Stack Setup
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+This example uses the information provided in the previous examples to construct a 
+full instantiation and setup of a :class:`LayerStack <pyOptiShared.LayerInfo.LayerStack>`.
+
+.. code-block:: python
+
+    import numpy as np
+    from pyOptiShared.LayerInfo import LayerStack
+    from pyOptiShared.Material import ConstMaterial
+
+    ##########################################
+    ###         Material Settings          ###
+    ##########################################
+    myindex1p45 = ConstMaterial(mat_name="myindex1p45", epsReal=1.45**2)
+    myindex3p5 = ConstMaterial(mat_name="myindex3p5", epsReal=3.5**2)
+
+    ##########################################
+    ###       Layer Stack Settings         ###
+    ##########################################
+    def offset_erode(z:float, zmin:float, zmax:float, layer:int, datatype:int) -> float:
+        offset = -0.1*np.sin(2*np.pi*(z-zmin)/(zmax-zmin)) # Half sinusoid profile - Erode (-ve offset)
+        return offset
+
+    def offset_dilate(z:float, zmin:float, zmax:float, layer:int, datatype:int) -> float:
+        offset = 0.1*np.sin(np.pi*(z-zmin)/(zmax-zmin)) # Half sinusoid profile - Dilation (+ve offset)
+        return offset
+
+    layer_stack = LayerStack()
+    layer_stack.addLayer(name="L1", number=1, thickness=0.25, zmin=0.0,
+                        material=myindex3p5, cladding=myindex1p45,
+                        sideWallFunct=offset_erode)
+    layer_stack.addLayer(name="L2", number=2, thickness=0.25, zmin=0.25,
+                        material=myindex3p5, cladding=myindex1p45,
+                        sideWallFunct=offset_dilate)
+    layer_stack.setBGandSub(background=myindex1p45, substrate=myindex1p45)
+
+.. _layer-stack-api:
+
+API Documentation
+--------------------
+
+.. autosummary::
+   :toctree: library
+   :template: members.rst
+   
+   pyOptiShared.LayerInfo.LayerStack
+   pyOptiShared.LayerInfo.LayerInfo

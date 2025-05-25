@@ -1,0 +1,83 @@
+.. _material-library:
+
+Material Library
+=============================
+
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: top
+
+Overview
+--------------------------
+
+The **material library** is an object that holds a dictionary of :class:`Material <pyOptiShared.Material.Material>`
+objects. Internaly, each material is stored using a unique material number that gets assigned whenever a material is 
+instantiated.
+
+This library is stored internaly in a :class:`LayerStack <pyOptiShared.LayerStack.LayerStack>` to be usedby multiple
+:class:`LayerInfo <pyOptiShared.LayerStack.LayerInfo>` objects when determining properties of substrate, background, base and cladding materials.
+
+Alternatively the user can use this object to collect and organize multiple material objects. You can check examples down below on how to add and retrieve the material
+objects. However, most solvers will rely on a :class:`LayerStack <pyOptiShared.LayerStack.LayerStack>` object that itself controls its own instance of the
+:class:`MaterialLibrary <pyOptiShared.Material.MaterialLibrary>`.
+
+
+Material Models
+--------------------
+
+Following is a list of **material models** that can be used to define **material properties**.
+Cehck them out for details and usage examples.
+
+.. toctree::
+   :maxdepth: 2
+   
+   BaseMaterial
+   ConstMaterial
+   SellmeierMaterial
+   ExperimentalMaterial
+
+Example
+--------------------
+
+This main example covers the instantiation of a library plus ways of adding and getting
+material from it. for more deatail please check the :ref:`API documentation <material-library-api>`.
+
+.. code-block:: python
+
+   from pyOptiShared.Material import MaterialLibrary
+   from pyOptiShared.Material import ConstMaterial
+
+   # Instantiates the Library
+   library = MaterialLibrary()
+
+   # Creates a constant material
+   material = ConstMaterial("my_material", epsReal=3.45, epsImag=0.001)
+
+   # Adds the material to the library
+   library.addMaterial(material)
+
+   # Get the material library as a dictionary
+   mat_dict = library.getMatDict()
+   print(mat_dict)
+
+   # Get 'my_material' from the library
+   my_material = library.getMaterialFromName("my_material")
+
+   # Get 'Air' a default const material number 2 from the library
+   air_material = library.getMaterialFromNum(2)
+
+.. _material-library-api:
+
+API Documentation
+--------------------
+
+.. autosummary::
+   :toctree: library
+   :template: members.rst
+   
+   pyOptiShared.Material.MaterialLibrary
+   pyOptiShared.Material.Material
+   pyOptiShared.Material.ConstMaterial
+   pyOptiShared.Material.SellmeierMaterial
+   pyOptiShared.Material.ExperimentalMaterial

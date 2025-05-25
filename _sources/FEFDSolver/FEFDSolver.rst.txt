@@ -1,0 +1,109 @@
+.. _fefd-intro:
+
+Finite-Element Frequency-Domain (FEFD) Electromagnetic Solver
+=================================================================
+
+**Based on:**
+
+A. Z. Elsherbeni, V. Demir,  
+*"The Finite-Difference Time-Domain Method for Electromagnetics with MATLAB® Simulations"*, 2nd Edition,  
+SciTech Publishing, 2015. ISBN: 9781613531754
+
+Susan C. Hagness, Allen Taflove,  
+*"Computational Electrodynamics: The Finite-Difference Time-Domain Method"*, 3rd Edition,  
+Artech House, 2005. ISBN: 9781580538329
+
+Overview
+--------
+
+This solver implements the **Finite-Difference Time-Domain (FDTD)** method for solving Maxwell’s equations in time and space, specifically optimized for the simulation of **integrated photonic devices**. The implementation is grounded in the foundational works by Taflove, Hagness, Elsherbeni, and Demir, and adapts their rigorous mathematical formulation to a highly automated and scalable simulation environment.
+
+It supports **linear, isotropic, non-dispersive** materials and provides advanced features tailored to photonic circuit design, such as **automatic mode injection**, **port detection**, and **S-parameter extraction**.
+
+Key Features
+------------
+
+- **Time-domain Maxwell solver** using second-order central difference in both time and space.
+- **Perfectly Matched Layer (CPML)** boundary conditions for accurate open-region simulations (as per Elsherbeni and Demir).
+- **GDSII Integration**: Reads standard GDS layout files to define device geometry.
+- **Port Identification & Mode Matching**:
+  - Automatic port detection and classification.
+  - Single-mode excitation using computed eigenmodes.
+  - Mode solver integration for accurate injection and extraction.
+- **S-Parameter Computation**:
+  - Computes scattering parameters (S-matrix) from time-domain data.
+  - Automatically exports results in standard `.sNp` format.
+- **HDF5 Output**:
+  - All simulation data, field snapshots, and metadata are stored in `.h5` format for efficient post-processing.
+
+Mathematical Foundation
+-----------------------
+
+The FDTD method discretizes Maxwell’s curl equations using a **Yee grid**:
+
+.. math::
+
+   \begin{align}
+   \frac{\partial \mathbf{B}}{\partial t} &= -\nabla \times \mathbf{E} \\
+   \frac{\partial \mathbf{D}}{\partial t} &= \nabla \times \mathbf{H}
+   \end{align}
+
+In linear, non-dispersive, and isotropic media, we use:
+
+.. math::
+
+   \mathbf{D} = \varepsilon \mathbf{E}, \quad \mathbf{B} = \mu \mathbf{H}
+
+Time stepping is performed using a leapfrog scheme:
+
+- Update magnetic field :math:`\mathbf{H}` at half-integer time steps.
+- Update electric field :math:`\mathbf{E}` at integer time steps.
+
+Boundary Conditions
+-------------------
+
+This solver supports **Convolutional Perfectly Matched Layer (CPML)** absorbing boundary conditions, as described in Chapter 8 of Elsherbeni & Demir. CPML is used to prevent artificial reflections at simulation domain boundaries.
+
+Applications
+---------------------------
+
+This solver is particularly suited for:
+
+- Silicon photonics and integrated optical circuits
+- Passive photonic devices (e.g., splitters, multiplexers, filters)
+- Waveguide tapering, crossings, and junctions
+
+.. _fefd-file-output:
+
+File Output
+---------------------------
+
+The results of the simulation are save into two data files and are also 
+available using a results object in python that facilitates data analysis and visualization:
+
+- **HDF5 (`.hdf5`)**: Complete simulation datasets, fields, and diagnostics.
+- **Touchstone (`.snp`)**: Scattering parameters in industry-standard format for N-port devices.
+- :class:`FDTDSimResults <pyOptiShared.SimResults.FDTDSimResults>`: A python object that facilitates results navigation (support to :class:`NXdata <pyOptiShared.SimResults.NXdata>`).
+
+
+Examples
+--------------------
+
+Subpixel Averaging - 90 Deg Bend
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+example
+
+
+
+API Documentation
+--------------------
+
+.. autosummary::
+   :toctree: library
+   :template: members.rst
+   
+   FEMFy.fefd_solver.FEFDSolver
+   FEMFy.fefd_results.FEMFySolverResults
+
+

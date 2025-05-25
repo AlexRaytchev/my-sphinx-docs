@@ -1,0 +1,354 @@
+.. _device-geometry:
+
+Device Geometry
+=============================
+
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: top
+
+Overview
+--------------------------
+
+The :class:`DeviceGeometry <pyOptiShared.DeviceGeometry.DeviceGeometry>` class is the instance that will handle the device
+physical charachteristics. Currently it handles ``.gds`` files, only. It is capable of extending the 2D GDSII description of the
+device into a 3D structure that includes handling slanted walls defined in the :class:`LayerStack <pyOptiShared.LayerInfo.LayerStack>`.
+It is also the piece of code that handles material meshing given a cloud of points. 
+
+It is the last step in the simulation setup prior to configuring the solver settings. It relies mainly on a 
+:class:`LayerStack <pyOptiShared.LayerInfo.LayerStack>` object, a ``.gds`` file and port detection settings.
+
+Considerations
+---------------------------------------------
+Following are a few considerations to take into account when configuring the device geometry.
+
+- The :meth:`SetSettings <pyOptiShared.DeviceGeometry.DeviceGeometry.SetSettings>` is the main method for setting up the device geometry;
+- The :meth:`SetAutoPortSettings <pyOptiShared.DeviceGeometry.DeviceGeometry.SetAutoPortSettings>` is the method for setting up the auto port detection settings;
+- It currently support ``.gds`` files, only. But future support to ``.stl`` files is in order for a future release;
+- It relies on a single :class:`LayerStack <pyOptiShared.LayerInfo.LayerStack>` and its internal :class:`MaterialLibrary <pyOptiShared.Material.MaterialLibrary>` to define the properties of the nodes in the simulation region.
+
+Device and Port Buffers
+--------------------------------
+
+When setting up a :class:`DeviceGeometry <pyOptiShared.DeviceGeometry.DeviceGeometry>` instance, the user should care 
+with the device and port buffer definitions. Consider the following figures:
+
+.. grid:: 2
+
+    .. grid-item-card::  Top View
+
+        .. figure:: ../_static/port_ext.svg
+           :width: 100%
+           :align: center
+
+    .. grid-item-card::  Cross Section
+
+        .. figure:: ../_static/port_xsection.svg
+           :width: 100%
+           :align: center
+
+The **Top View** displays the **Mask Layout** defined in the raw ``.gds`` file. The edges touching the **GDSII Border**
+can be detected as ports, for example, the one on the left. A port will consist of two elementes: a monitor and a source.
+The **Port Monitor** is place precisely at the GDSII Border, while the source for **Mode Injection** is place half way through the 
+:meth:`buffers <pyOptiShared.DeviceGeometry.DeviceGeometry.buffers>` dimension.
+
+The :meth:`buffers <pyOptiShared.DeviceGeometry.DeviceGeometry.buffers>` property specify how much empty space will be added/padded
+around the **Mask Layout** to avoid direct touching of the layout with the solver boundary conditions.
+
+The **Cross Section** view, display a cross section of the port, it includes the other two :meth:`buffers <pyOptiShared.DeviceGeometry.DeviceGeometry.buffers>`
+as **Simulation Domain Buffers**. To be flexible in terms of mode calculation, each port detection direction, can contain its own ``buffer`` (``x``, ``y``) values.
+The **Port Buffers** are used to extend the port size the regular waveguide dimension, allowing that the calculated modes are zero at the perimeter defined by the 
+**Port Border**. If the **Port Border** will never exceed the **Simulation Domain Border**.
+
+You can check the :ref:`complete device geometry example <complete-deg-example>` for more details on the **Simulation Domain Buffer** and the **Port Buffer**.
+
+Auto Port Detection and Port Numbering
+---------------------------------------
+
+The :class:`DeviceGeometry <pyOptiShared.DeviceGeometry.DeviceGeometry>` uses an auxiliary GDS tool to detect ports automatically.
+This tool relies on finding two consecutive points that are touching the boundaries of the GDSII file. This detection relies on spifying
+the minimum and maximum width of the ports, as well as wich edges to detect (e.g., ``'X'``, ``'Y'``). Once the ports are detected, they follow
+the numbering order provided in the follwoing diagram, plus, there is the addition of the the ``'o'`` letter to it.
+
+
+.. grid:: 1
+
+    .. grid-item-card::  Port Numbering Rule
+
+        .. figure:: ../_static/port_numbering.svg
+           :width: 100%
+           :align: center
+
+Examples
+--------------------
+
+The following examples will cover some specific settings of the :class:`DeviceGeometry <pyOptiShared.DeviceGeometry.DeviceGeometry>` 
+and at the end it aggregates some of the example snipets into a more elaborate setup. That can be used prior instancing a specific EM solver.
+For more deatails please check the :ref:`API documentation <device-geometry-api>`.
+
+Initial Setup Without Port detection
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+By default there is no need to detect ports, for example, when using the :ref:`VFD Mode Solver <vfd-intro>`.
+So in this example we present how to instantiate a :class:`DeviceGeometry <pyOptiShared.DeviceGeometry.DeviceGeometry>`
+and then add a :download:`wg.gds <../_static/wg.gds>` GDSII file to specify the geometry type.
+
+In this example we are padding the simulation in all directions by 1.5 microns, to add some empty space between the
+waveguide and the edges of the simulation region. The ``geometry_type="Fixed"`` indicates that the geometry speficiations
+is done via a static GDSII file (non-parametric structure). The ``layer_stack`` argument can be define as presented in the
+:ref:`LayerStack examples <layer-stack-examples>`.
+
+
+.. code-block:: python
+
+    from pyOptiShared.DeviceGeometry import DeviceGeometry
+
+    device_geometry = DeviceGeometry()
+    device_geometry.SetSettings(
+        layer_stack=layer_stack,
+        geometry_type="Fixed",
+        gds_file=r"wg.gds",
+        buffers={'x':1.5,'y':1.5,'z':1.5}
+    )
+
+Uniform Grid from the Geometry Bounding Box
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Considering the previous waveguide example, we can then extract the bounding box of the device geometry
+and construct an array of linearly spaced points that we can later identify to which materials they are
+defined from.
+
+.. code-block:: python
+
+    import numpy as np
+    from pyOptiShared.DeviceGeometry import DeviceGeometry
+
+    device_geometry = DeviceGeometry()
+    device_geometry.SetSettings(
+        layer_stack=layer_stack,
+        geometry_type="Fixed",
+        gds_file=r"wg.gds",
+        buffers={'x':1.5,'y':1.5,'z':1.5}
+    )
+
+    bbox = dev_geom.GetBoundingBox(zbWithBuffer=True)
+    (xmin, xmax), (ymin, ymax), (zmin, zmax) = bbox
+    xx = np.linspace(xmin, xmax, int(nx*kk))
+    yy = np.linspace(ymin, ymax, int(ny*kk))
+    zz = np.linspace(zmin, zmax, int(nz*kk))
+
+    XX, YY, ZZ = np.meshgrid(xx, yy, zz, indexing='ij')
+    points = np.asarray([XX.ravel(), YY.ravel(), ZZ.ravel()])
+
+
+Obtaining a Material Mesh/Permittivity from a Cloud of points
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once the points are determined from device geometry bounding box, we can then retrieve the 
+material mesh by calling the :meth:`GetMaterialMesh <pyOptiShared.DeviceGeometry.DeviceGeometry.GetMaterialMesh>` method.
+This mesh contains an array of material numbers, that can be converted to their rescpective permittivity values at a particular
+wavelength using the :meth:`GetPermittivityMesh <pyOptiShared.DeviceGeometry.DeviceGeometry.GetPermittivityMesh>` method.
+
+.. code-block:: python
+
+    import numpy as np
+    from pyOptiShared.DeviceGeometry import DeviceGeometry
+
+    lamb = 1.55 # um
+
+    device_geometry = DeviceGeometry()
+    device_geometry.SetSettings(
+        layer_stack=layer_stack,
+        geometry_type="Fixed",
+        gds_file=r"wg.gds",
+        buffers={'x':1.5,'y':1.5,'z':1.5}
+    )
+
+    bbox = dev_geom.GetBoundingBox(zbWithBuffer=True)
+    (xmin, xmax), (ymin, ymax), (zmin, zmax) = bbox
+    xx = np.linspace(xmin, xmax, int(nx*kk))
+    yy = np.linspace(ymin, ymax, int(ny*kk))
+    zz = np.linspace(zmin, zmax, int(nz*kk))
+
+    # Crete the mesh arrays and linearize the points
+    XX, YY, ZZ = np.meshgrid(xx, yy, zz, indexing='ij')
+    points = np.asarray([XX.ravel(), YY.ravel(), ZZ.ravel()])
+
+    # Get the material and permittivity meshes
+    material_mesh = dev_geom.GetMaterialMesh(points)
+    eps = dev_geom.GetPermittivityMesh(material_mesh, lamb)
+
+    # Get back a 3D array of the linear points
+    shape = (xx.shape[0] // kk, kk,
+                    yy.shape[0] // kk, kk,
+                    zz.shape[0] // kk, kk)
+    eps = eps.reshape(shape)
+
+Defining Auto Port Settings:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Auto port settings are used in auto port detection of ports in GDSII files.
+For that we use the :meth:`SetAutoPortSettings <pyOptiShared.DeviceGeometry.DeviceGeometry.SetAutoPortSettings>` method.
+Since it relies on a particular GDSII file, we have to **call it after** the :meth:`SetSettings <pyOptiShared.DeviceGeometry.DeviceGeometry.SetSettings>` method.
+
+There are for arguments:
+
+- ``direction`` that can be ``x``, ``y`` or ``both``. It indicates in which of the Top View bounds the ports should be detected.
+- ``min`` and ``max``, the determine the minimun/maximun port widths to be detected. This can be either a single ``float`` (used for both x and y), a ``list[float, float]`` (x and y independently).
+- ``buffer``, that determines how much empty space will be added around the port cross section to properly accomodate mode profiles.
+
+    - It can be a single ``float``, that will be used for both ``x`` and ``y`` ports extending by the same quantity both *width* and *height*;
+    - It can be a ``list[float, float]`` that will be used for both ``x`` and ``y`` ports extending by the *width* and *height* independently; or
+    - A more complex ``list[float, float]`` that controls independently width and height for each bounds.
+
+Please, refer to :meth:`SetAutoPortSettings <pyOptiShared.DeviceGeometry.DeviceGeometry.SetAutoPortSettings>` for more details on the auto port detection settings.
+
+Following is a  more complete example, that will be used to detect ports on all sides, with idendependent *width* and *height* buffers.
+The GDSII file corresponds to a waveguide crossing (:download:`wgcrossing.gds <../_static/wgcrossing.gds>`).
+
+.. code-block:: python
+
+    import numpy as np
+    from pyOptiShared.LayerInfo import LayerStack
+    from pyOptiShared.Material import ConstMaterial
+    from pyOptiShared.DeviceGeometry import DeviceGeometry
+
+    ##########################################
+    ###         Material Settings          ###
+    ##########################################
+    myindex1p45 = ConstMaterial(mat_name="myindex1p45", epsReal=1.45**2)
+    myindex3p5 = ConstMaterial(mat_name="myindex3p5", epsReal=3.5**2)
+
+    ##########################################
+    ###       Layer Stack Settings         ###
+    ##########################################
+    layer_stack = LayerStack()
+    layer_stack.addLayer(name="L1", number=1, thickness=0.25, zmin=0.0,
+                        material=myindex3p5)
+    layer_stack.addLayer(name="L2", number=2, thickness=0.25, zmin=0.25,
+                        material=myindex3p5)
+    layer_stack.setBGandSub(background=myindex1p45, substrate=myindex1p45)
+
+    ##########################################
+    ###   Device Geometry/Port Settings    ###
+    ##########################################
+    device_geometry = DeviceGeometry()
+    device_geometry.SetSettings(
+        layer_stack=layer_stack,
+        geometry_type="Fixed",
+        gds_file=r"wgcrossing.gds",
+        buffers={'x':1.5,'y':1.5,'z':1.5}
+    )
+    device_geometry.SetAutoPortSettings(
+        direction="both",
+        buffer=[[2, 1.5],[1.5, 1.25]], # [[x_width, x_height],[y_width, y_height]]
+        min=[0.2, 0.21], # [x_min, y_min]
+        max=[0.5, 0.49], # [x_max, y_max]
+    )
+
+Visualizing the Geometry Setup
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following example shows a complete setup with visualization of thed evice
+geometry using the :meth:`Show <pyOptiShared.DeviceGeometry.DeviceGeometry.Show>` method. 
+The GDSII file corresponds to a waveguide crossing (:download:`wgcrossing.gds <../_static/wgcrossing.gds>`)
+
+.. code-block:: python
+
+    from pyOptiShared.DeviceGeometry import DeviceGeometry
+    from pyOptiShared.LayerInfo import LayerStack
+    from pyOptiShared.Material import ConstMaterial
+
+    si02_mat = ConstMaterial(mat_name="SiO2", epsReal=1.45**2,color='lightgreen')
+    si_mat = ConstMaterial(mat_name="Si", epsReal=3.5**2,color='lightblue')
+    air_mat = ConstMaterial(mat_name="Air", epsReal=1**2,color='lightyellow')
+    layer_stack = LayerStack()
+
+    layer_stack.addLayer(name="L1", number=1, thickness=0.22, zmin=0.0,
+                        material=si_mat, cladding=si02_mat,
+                        sideWallAng=20)
+    layer_stack.addLayer(name="L2", number=2, thickness=0.22, zmin=0.0,
+                        material=si02_mat, cladding=si02_mat,
+                        sideWallAng=0)
+
+    layer_stack.setBGandSub(background=air_mat, substrate=si02_mat)
+
+    device_geometry = DeviceGeometry()
+    device_geometry.SetSettings(
+        layer_stack=layer_stack,
+        geometry_type="Fixed",
+        gds_file='wgcrossing.gds',
+        buffers={'x':1.5,'y':1.5,'z':1.5}
+    )
+    device_geometry.SetAutoPortSettings(
+        direction="both",
+        buffer=1.5,
+    )
+
+    device_geometry.Show()
+
+.. figure:: ../_static/dev_geometry_crossing_show_example.svg
+    :width: 80%
+    :align: center
+
+.. _complete-deg-example:
+
+A Complete Device Geometry Setup
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+This example uses the information provided in the previous examples to construct a 
+full instantiation and setup of a :class:`LayerStack <pyOptiShared.LayerInfo.LayerStack>`.
+This is example is usefull for simulations using the :ref:`pyFDTD Solver <fdtd-intro>` or
+the :ref:`VFD Mode Solver <vfd-intro>`. It starts by configuring some materials, creating the layer stack
+and finaly setting up the :class:`DeviceGeometry <pyOptiShared.DeviceGeometry.DeviceGeometry>`. The device
+under charachterization is a dielectric waveguide (:download:`wg.gds <../_static/wg.gds>`).
+
+.. code-block:: python
+
+    import numpy as np
+    from pyOptiShared.LayerInfo import LayerStack
+    from pyOptiShared.Material import ConstMaterial
+    from pyOptiShared.DeviceGeometry import DeviceGeometry
+
+    ##########################################
+    ###         Material Settings          ###
+    ##########################################
+    myindex1p45 = ConstMaterial(mat_name="myindex1p45", epsReal=1.45**2)
+    myindex3p5 = ConstMaterial(mat_name="myindex3p5", epsReal=3.5**2)
+
+    ##########################################
+    ###       Layer Stack Settings         ###
+    ##########################################
+    layer_stack = LayerStack()
+    layer_stack.addLayer(name="L1", number=1, thickness=0.25, zmin=0.0,
+                        material=myindex3p5)
+    layer_stack.addLayer(name="L2", number=2, thickness=0.25, zmin=0.25,
+                        material=myindex3p5)
+    layer_stack.setBGandSub(background=myindex1p45, substrate=myindex1p45)
+
+    ##########################################
+    ###   Device Geometry/Port Settings    ###
+    ##########################################
+    device_geometry = DeviceGeometry()
+    device_geometry.SetSettings(
+        layer_stack=layer_stack,
+        geometry_type="Fixed",
+        gds_file=r"wg.gds",
+        buffers={'x':1.5,'y':1.5,'z':1.5}
+    )
+    device_geometry.SetAutoPortSettings(
+        direction="x",
+        buffer=1.0,
+        min=0.2,
+        max=0.5,
+    )
+
+.. _device-geometry-api:
+
+API Documentation
+--------------------
+
+.. autosummary::
+   :toctree: library
+   :template: members.rst
+   
+   pyOptiShared.DeviceGeometry.DeviceGeometry

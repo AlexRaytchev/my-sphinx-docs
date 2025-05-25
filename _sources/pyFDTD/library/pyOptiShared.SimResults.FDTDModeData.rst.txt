@@ -1,0 +1,34 @@
+﻿pyOptiShared.SimResults.FDTDModeData
+====================================
+
+.. currentmodule:: pyOptiShared.SimResults
+
+.. autoclass:: FDTDModeData
+   :members:
+   :show-inheritance:
+   :class-doc-from: init
+   :member-order: groupwise
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FDTDModeData.fields
+      ~FDTDModeData.neff
+      ~FDTDModeData.ng
+      ~FDTDModeData.permeability
+      ~FDTDModeData.permittivity
+   
+   

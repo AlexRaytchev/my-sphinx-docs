@@ -1,0 +1,323 @@
+.. _vfd-intro:
+
+Vector Finite Difference (VFD) Mode Solver
+==========================================
+
+
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: top
+
+**Based on:**
+
+A. B. Fallahkhair, K. S. Li, and T. E. Murphy,  
+*"Vector Finite Difference Modesolver for Anisotropic Dielectric Waveguides"*,  
+**Journal of Lightwave Technology**, Vol. 26, No. 11, pp. 1423–1431, 2008.  
+`DOI: 10.1109/JLT.2008.923643 <https://doi.org/10.1109/JLT.2008.923643>`_
+
+Overview
+--------
+
+This solver implements a **full-vector finite-difference mode-solving algorithm** for analyzing dielectric waveguides, based on the method presented by Fallahkhair et al. It is designed to compute the **guided modes** of **anisotropic, lossy, and inhomogeneous dielectric structures** in two dimensions (2D), making it ideal for modeling complex photonic components such as:
+
+- Integrated optical waveguides
+- Photonic crystal fibers
+- Nanophotonic waveguides
+
+Unlike scalar or semi-vectorial approximations, this solver fully resolves the **vectorial coupling** of the electromagnetic field, supporting anisotropic dielectric permittivity and complex materials with loss.
+
+Key Features
+------------
+
+- **Full-vector field computation**: Solves for all components (Ex, Ey, Ez) of the electric field.
+- **Anisotropic permittivity support**: Handles diagonal tensor permittivity (εₓ, εᵧ, ε_z).
+- **Complex eigenvalues**: Supports lossy materials and leaky modes.
+- **Finite difference discretization**: Uses central-difference schemes on structured Cartesian grids.
+- **TE, TM, and hybrid modes**: Accurately identifies all types of guided modes.
+
+Mathematical Method
+-------------------
+
+The method solves the frequency-domain *curl-curl* Maxwell equation:
+
+.. math::
+
+   \nabla \times \left( \frac{1}{\mu} \nabla \times \mathbf{E} \right) = \omega^2 \varepsilon \mathbf{E}
+
+Using finite difference discretization, this becomes a large, sparse generalized eigenvalue problem of the form:
+
+.. math::
+
+   \mathbf{A} \mathbf{E} = \beta^2 \mathbf{B} \mathbf{E}
+
+Where:
+
+- :math:`\mathbf{E}` is the electric field eigenvector,
+- :math:`\beta` is the complex propagation constant,
+- :math:`\mathbf{A}` and :math:`\mathbf{B}` are sparse matrices representing the differential operators.
+
+The eigenvalues :math:`\beta^2` are used to extract the effective refractive index:
+
+.. math::
+
+   n_{\text{eff}} = \frac{\beta}{k_0}
+
+Applications
+------------
+
+- Silicon photonics and integrated optical waveguides
+- Photonic crystal fibers and birefringent fiber design
+- Electro-optic and magneto-optic materials
+- Design of structures with material loss or gain
+- Analysis of hybrid modes in high-index-contrast devices
+
+Examples
+------------------------
+
+Dielectric Waveguide Mode Analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This examples uses a rectangular dielectric waveguide GDSII mask (:download:`wg.gds <../_static/wg.gds>`).
+Then, it sets some constant materials for use as substrate, background and waveguide filling materials. After that, it sets the 
+device geometry using the ``.gds`` file with 1 micron padding all around. 
+
+.. raw:: html
+
+    <iframe src="../_static/wg_view.html"
+            width="100%"
+            height="300px"
+            frameborder="0px">
+    </iframe>
+
+Finally the solver is instanced and the settings that follow are used to setup the proper cross section cut for mode analysis.
+The cut is set to the ``YZ`` plane as the propagation happens along ``X``. Then we set cut loation to ``0`` (along the x-axis) that
+according to the ``.gds`` file corresponds to the begining of the dielectric waveguide. The ``wavelength`` is set from 1.5-1.6 microns, the initial guess to 3.4
+and the number of modes (``nmodes``) to 4. the tolerance is set to ``1e-8`` (``0.0`` would mena machine precision).
+
+The mode solver solves for the H-fields first. Setting the boundaries to PMC, enforces tangetial H-fields to the boundaries of the cross section to be zero.
+Other boundary options can be found in `SetSimSettings <pyModeSolver.py_mode_solver.VFDModeSolver.SetSimSettings>`.
+
+The results are set to be saved in the ``ModeResults`` folder with the name ``my_results``. If multiple simulations are run, and the ``res_filename``
+already exists, the solver will append date and time to make it unique.
+
+The ``Run`` command is called to start the simulation, that returns a `ModeSolverResults <pyOptiShared.SimResults.ModeSolverResults>` object.
+You can check it for detailed members and methods. Overall it provides an easy and pythonic way of navigating through the results.
+For example:
+
+- ``<results>.PlotMode()`` will provide the field profile of different modes at different frequencies.
+- ``<results>.PlotPermittivity()`` will allow you to visualize the cross section permittivity profile.
+- ``<results>.PlotIndex('neff')`` will plot the modes effective refractive index for one or multiple modes.
+- ``<results>.PlotIndex('ng')`` will plot the modes effective group index for one or multiple modes.
+
+.. code-block:: python
+
+   from pyModeSolver.py_mode_solver import VFDModeSolver
+   from pyOptiShared.LayerInfo import LayerStack
+   from pyOptiShared.DeviceGeometry import DeviceGeometry
+   from pyOptiShared.Material import ConstMaterial
+
+   ##########################################
+   ###             WG GDS File            ###
+   ##########################################
+   filename = "wg.gds"
+
+   ##########################################
+   ###         Material Settings          ###
+   ##########################################
+   myindex1p45 = ConstMaterial("myindex1p45", epsReal=1.45**2, epsImag=0.0)
+   myindex3p5 = ConstMaterial("myindex3p5", epsReal=3.5**2, epsImag=0.0)
+
+   ##########################################
+   ###       Layer Stack Settings         ###
+   ##########################################
+   layer_stack = LayerStack()
+   layer_stack.addLayer(number=1,material=myindex3p5, thickness=0.25, zmin=0, sideWallAng=0, cladding="Air_default")
+   layer_stack.addLayer(number=2,material=myindex3p5, thickness=0.25, zmin=0.25, sideWallAng=0, cladding="Air_default")
+   layer_stack.setBGandSub(background="Air_default", substrate=myindex1p45)
+
+   ##########################################
+   ###   Device Geometry/Port Settings    ###
+   ##########################################
+   device_geometry = DeviceGeometry()
+   device_geometry.SetSettings(layer_stack=layer_stack,
+                              geometry_type="Fixed",
+                              gds_file=filename,
+                              buffers={'x':1,'y':1,'z':1})
+
+   ##########################################
+   ###       ModeSolver Settings          ###
+   ##########################################
+   mode_solver = VFDModeSolver()
+   mode_solver.SetBoundaries(min_x = {"bc":"pmc"}, max_x = {"bc":"pmc"},
+                           min_y = {"bc":"pmc"}, max_y = {"bc":"pmc"},)
+   mode_solver.SetSimSettings(device_geometry = device_geometry,
+                              mesh={"dx": 0.025,"dy": 0.025, "dz": 0.025},
+                              wavelength={"min":1.5,"max":1.6,"npts": 5},
+                              nguess = 2.1,
+                              nmodes = 4,
+                              cut_plane = "YZ",
+                              cut_location = 0.0,
+                              tol = 1e-8,
+                              savepath = "./ModeResults",
+                              res_filename = "my_results")
+
+   ##########################################
+   ###   Run and Results Visualization    ###
+   ##########################################
+   results = mode_solver.Run()
+
+
+   results.PlotMode() # Fundamental Mode Profile
+   results.PlotPermittivity()  # Material Profile
+   results.PlotIndex('neff',modes=[0,1,2,3]) # Effective Refractive Index
+   results.PlotIndex('ng',modes=[0,1,2,3]) # Effective Group Index
+
+
+.. grid:: 4
+
+    .. grid-item-card::  Fundamental Mode Profile
+
+        .. figure:: ../_static/nxdata_modesolver1.png
+           :width: 100%
+           :align: center
+
+    .. grid-item-card::  Material Profile
+
+        .. figure:: ../_static/nxdata_modesolver2.png
+           :width: 100%
+           :align: center
+
+
+    .. grid-item-card::  Effective Refractive Index
+
+        .. figure:: ../_static/nxdata_modesolver3.png
+           :width: 100%
+           :align: center
+
+
+    .. grid-item-card::  Effective Group Index
+
+        .. figure:: ../_static/nxdata_modesolver4.png
+           :width: 100%
+           :align: center
+
+
+Fiber - ``gdstk`` and XY Cut Mode Analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This example uses the ``gdstk`` module to create a GDSII file of a fiber and then compute its mode profile.
+
+.. code-block:: python
+
+   import gdstk
+   import os
+
+   from pyModeSolver.py_mode_solver import VFDModeSolver
+   from pyOptiShared.LayerInfo import LayerStack
+   from pyOptiShared.DeviceGeometry import DeviceGeometry
+   from pyOptiShared.Material import ConstMaterial,ExperimentalMaterial
+
+   ##########################################
+   ###         Create Fiber GDS File         ###
+   ##########################################
+   filename = "fiber.gds"
+   lib = gdstk.Library()
+   cell = lib.new_cell("fiber")
+   circle = gdstk.ellipse((0, 0), 7.5,layer=1)
+   cell.add(circle)
+   lib.write_gds(filename)
+
+   ##########################################
+   ###         Material Settings          ###
+   ##########################################
+   air_mat = ConstMaterial("air", epsReal=1, epsImag=0.0)
+
+   sio2_exp = ExperimentalMaterial("my_material")
+   sio2_exp.SetFromRefDotInfo(shelf="main", book="SiO2", page="Malitson", wavelength_unit=1e-6)
+
+   ##########################################
+   ###       Layer Stack Settings         ###
+   ##########################################
+   layer_stack = LayerStack()
+   layer_stack.addLayer(number=1,material=sio2_exp, thickness=0.0, zmin=0, sideWallAng=0, cladding=air_mat)
+   layer_stack.setBGandSub(background=air_mat, substrate=air_mat)
+
+   ##########################################
+   ###   Device Geometry/Port Settings    ###
+   ##########################################
+   device_geometry = DeviceGeometry()
+   device_geometry.SetSettings(layer_stack=layer_stack,
+                              geometry_type="Fixed",
+                              gds_file=filename,
+                              buffers={'x':5,'y':5,'z':5})
+
+   ##########################################
+   ###       ModeSolver Settings          ###
+   ##########################################
+   mode_solver = VFDModeSolver()
+   mode_solver.SetBoundaries(min_x = {"bc":"pmc"}, max_x = {"bc":"pmc"},
+                           min_y = {"bc":"pmc"}, max_y = {"bc":"pmc"},)
+   mode_solver.SetSimSettings(device_geometry = device_geometry,
+                              mesh={"dx": 0.5,"dy": 0.5, "dz": 0.5},
+                              wavelength={"min":1.5,"max":1.6,"npts": 11},
+                              nguess = 3.4,
+                              nmodes = 1,
+                              cut_plane = "XY",
+                              cut_location = 0.0,
+                              tol = 1e-8,
+                              savepath = "./ModeResults",
+                              res_filename = "my_results")
+
+   ##########################################
+   ###      Run and Post Processing       ###
+   ##########################################
+   results = mode_solver.Run()
+
+
+   ## Built in plotting functions
+   results.PlotMode() # Fundamental Mode Profile
+   results.PlotPermittivity()  # Material Profile
+   results.PlotIndex('neff',modes=[0]) # Effective Refractive Index
+   results.PlotIndex('ng',modes=[0]) # Effective Group Index
+
+
+.. grid:: 4
+
+    .. grid-item-card::  Fundamental Mode Profile
+
+        .. figure:: ../_static/fiber_modesolver1.png
+           :width: 100%
+           :align: center
+
+    .. grid-item-card::  Material Profile
+
+        .. figure:: ../_static/fiber_modesolver2.png
+           :width: 100%
+           :align: center
+
+
+    .. grid-item-card::  Effective Refractive Index
+
+        .. figure:: ../_static/fiber_modesolver3.png
+           :width: 100%
+           :align: center
+
+
+    .. grid-item-card::  Effective Group Index
+
+        .. figure:: ../_static/fiber_modesolver4.png
+           :width: 100%
+           :align: center
+
+
+API Documentation
+--------------------
+
+.. autosummary::
+   :toctree: library
+   :template: members.rst
+   
+   pyModeSolver.py_mode_solver.VFDModeSolver
+   pyOptiShared.SimResults.ModeSolverResults
+   pyOptiShared.SimResults.BaseSimResults

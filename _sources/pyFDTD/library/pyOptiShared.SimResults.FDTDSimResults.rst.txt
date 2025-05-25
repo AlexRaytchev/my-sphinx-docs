@@ -1,0 +1,52 @@
+﻿pyOptiShared.SimResults.FDTDSimResults
+======================================
+
+.. currentmodule:: pyOptiShared.SimResults
+
+.. autoclass:: FDTDSimResults
+   :members:
+   :show-inheritance:
+   :class-doc-from: init
+   :member-order: groupwise
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+         ~FDTDSimResults.GetSPArray
+      
+      
+         ~FDTDSimResults.PlotDFTMonitor
+      
+      
+         ~FDTDSimResults.PlotPermittivity
+      
+      
+         ~FDTDSimResults.PlotSParameters
+      
+      
+         ~FDTDSimResults.PlotTimeMonitor
+      
+      
+      
+         ~FDTDSimResults.loadHDF5
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FDTDSimResults.mode_sources
+      ~FDTDSimResults.permeability
+      ~FDTDSimResults.permittivity
+      ~FDTDSimResults.runs
+      ~FDTDSimResults.sparameters
+   
+   

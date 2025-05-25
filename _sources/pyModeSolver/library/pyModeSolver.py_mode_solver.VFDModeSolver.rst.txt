@@ -1,0 +1,42 @@
+﻿pyModeSolver.py\_mode\_solver.VFDModeSolver
+===========================================
+
+.. currentmodule:: pyModeSolver.py_mode_solver
+
+.. autoclass:: VFDModeSolver
+   :members:
+   :show-inheritance:
+   :class-doc-from: init
+   :member-order: groupwise
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+         ~VFDModeSolver.Run
+      
+      
+         ~VFDModeSolver.SetBoundaries
+      
+      
+         ~VFDModeSolver.SetSimSettings
+      
+      
+      
+         ~VFDModeSolver.get_core_simulator
+      
+      
+         ~VFDModeSolver.set_boundaries
+      
+      
+         ~VFDModeSolver.set_sim_settings
+      
+   
+   
+
+   
+   
+   
