@@ -1,0 +1,201 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finite-Element Frequency-Domain (FEFD) Electromagnetic Solver &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Optiwaves's Python EM Modules
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../pyOptiShared/SharedLibraries.html">Shared Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Finite-Element Frequency-Domain (FEFD) Electromagnetic Solver</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/FEFDSolver/FEFDSolver.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="finite-element-frequency-domain-fefd-electromagnetic-solver">
+<span id="fefd-intro"></span><h1>Finite-Element Frequency-Domain (FEFD) Electromagnetic Solver<a class="headerlink" href="#finite-element-frequency-domain-fefd-electromagnetic-solver" title="Link to this heading"></a></h1>
+<p><strong>Based on:</strong></p>
+<p>A. Z. Elsherbeni, V. Demir,
+<em>“The Finite-Difference Time-Domain Method for Electromagnetics with MATLAB® Simulations”</em>, 2nd Edition,
+SciTech Publishing, 2015. ISBN: 9781613531754</p>
+<p>Susan C. Hagness, Allen Taflove,
+<em>“Computational Electrodynamics: The Finite-Difference Time-Domain Method”</em>, 3rd Edition,
+Artech House, 2005. ISBN: 9781580538329</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This solver implements the <strong>Finite-Difference Time-Domain (FDTD)</strong> method for solving Maxwell’s equations in time and space, specifically optimized for the simulation of <strong>integrated photonic devices</strong>. The implementation is grounded in the foundational works by Taflove, Hagness, Elsherbeni, and Demir, and adapts their rigorous mathematical formulation to a highly automated and scalable simulation environment.</p>
+<p>It supports <strong>linear, isotropic, non-dispersive</strong> materials and provides advanced features tailored to photonic circuit design, such as <strong>automatic mode injection</strong>, <strong>port detection</strong>, and <strong>S-parameter extraction</strong>.</p>
+</section>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Time-domain Maxwell solver</strong> using second-order central difference in both time and space.</p></li>
+<li><p><strong>Perfectly Matched Layer (CPML)</strong> boundary conditions for accurate open-region simulations (as per Elsherbeni and Demir).</p></li>
+<li><p><strong>GDSII Integration</strong>: Reads standard GDS layout files to define device geometry.</p></li>
+<li><p><strong>Port Identification &amp; Mode Matching</strong>:
+- Automatic port detection and classification.
+- Single-mode excitation using computed eigenmodes.
+- Mode solver integration for accurate injection and extraction.</p></li>
+<li><p><strong>S-Parameter Computation</strong>:
+- Computes scattering parameters (S-matrix) from time-domain data.
+- Automatically exports results in standard <cite>.sNp</cite> format.</p></li>
+<li><p><strong>HDF5 Output</strong>:
+- All simulation data, field snapshots, and metadata are stored in <cite>.h5</cite> format for efficient post-processing.</p></li>
+</ul>
+</section>
+<section id="mathematical-foundation">
+<h2>Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Link to this heading"></a></h2>
+<p>The FDTD method discretizes Maxwell’s curl equations using a <strong>Yee grid</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\frac{\partial \mathbf{B}}{\partial t} &amp;= -\nabla \times \mathbf{E} \\
+\frac{\partial \mathbf{D}}{\partial t} &amp;= \nabla \times \mathbf{H}
+\end{align}\end{split}\]</div>
+<p>In linear, non-dispersive, and isotropic media, we use:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{D} = \varepsilon \mathbf{E}, \quad \mathbf{B} = \mu \mathbf{H}\]</div>
+<p>Time stepping is performed using a leapfrog scheme:</p>
+<ul class="simple">
+<li><p>Update magnetic field <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> at half-integer time steps.</p></li>
+<li><p>Update electric field <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> at integer time steps.</p></li>
+</ul>
+</section>
+<section id="boundary-conditions">
+<h2>Boundary Conditions<a class="headerlink" href="#boundary-conditions" title="Link to this heading"></a></h2>
+<p>This solver supports <strong>Convolutional Perfectly Matched Layer (CPML)</strong> absorbing boundary conditions, as described in Chapter 8 of Elsherbeni &amp; Demir. CPML is used to prevent artificial reflections at simulation domain boundaries.</p>
+</section>
+<section id="applications">
+<h2>Applications<a class="headerlink" href="#applications" title="Link to this heading"></a></h2>
+<p>This solver is particularly suited for:</p>
+<ul class="simple">
+<li><p>Silicon photonics and integrated optical circuits</p></li>
+<li><p>Passive photonic devices (e.g., splitters, multiplexers, filters)</p></li>
+<li><p>Waveguide tapering, crossings, and junctions</p></li>
+</ul>
+</section>
+<section id="file-output">
+<span id="fefd-file-output"></span><h2>File Output<a class="headerlink" href="#file-output" title="Link to this heading"></a></h2>
+<p>The results of the simulation are save into two data files and are also
+available using a results object in python that facilitates data analysis and visualization:</p>
+<ul class="simple">
+<li><p><strong>HDF5 (`.hdf5`)</strong>: Complete simulation datasets, fields, and diagnostics.</p></li>
+<li><p><strong>Touchstone (`.snp`)</strong>: Scattering parameters in industry-standard format for N-port devices.</p></li>
+<li><p><a class="reference internal" href="../pyFDTD/library/pyOptiShared.SimResults.FDTDSimResults.html#pyOptiShared.SimResults.FDTDSimResults" title="pyOptiShared.SimResults.FDTDSimResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">FDTDSimResults</span></code></a>: A python object that facilitates results navigation (support to <a class="reference internal" href="../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata"><code class="xref py py-class docutils literal notranslate"><span class="pre">NXdata</span></code></a>).</p></li>
+</ul>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<section id="subpixel-averaging-90-deg-bend">
+<h3>Subpixel Averaging - 90 Deg Bend<a class="headerlink" href="#subpixel-averaging-90-deg-bend" title="Link to this heading"></a></h3>
+<p>example</p>
+</section>
+</section>
+<section id="api-documentation">
+<h2>API Documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="library/FEMFy.fefd_solver.FEFDSolver.html#FEMFy.fefd_solver.FEFDSolver" title="FEMFy.fefd_solver.FEFDSolver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FEMFy.fefd_solver.FEFDSolver</span></code></a>()</p></td>
+<td><p>Finite Element Frequency Domain</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="library/FEMFy.fefd_results.FEMFySolverResults.html#FEMFy.fefd_results.FEMFySolverResults" title="FEMFy.fefd_results.FEMFySolverResults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FEMFy.fefd_results.FEMFySolverResults</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

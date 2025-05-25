@@ -1,0 +1,1115 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finite-Difference Time-Domain (FDTD) Electromagnetic Solver &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver" href="library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html" />
+    <link rel="prev" title="pyOptiShared.SimResults.BaseSimResults" href="../pyModeSolver/library/pyOptiShared.SimResults.BaseSimResults.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Optiwaves's Python EM Modules
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../pyOptiShared/SharedLibraries.html">Shared Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#boundary-conditions">Boundary Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#applications">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-output">File Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#checking-solver-global-units">Checking Solver Global Units</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#degree-bend-subpixel-averaging">90 Degree Bend - Subpixel Averaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#s-bend-creating-a-gif-from-fields">S-Bend - Creating a GIF from Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#splitter-field-over-device-strucutre-outline">Splitter - Field over Device Strucutre Outline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#polarization-converter-using-a-tapered-silicon-ridge-waveguide">Polarization Converter Using a Tapered Silicon Ridge Waveguide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulation-setup">Simulation Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#results">Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#waveguide-crossing-using-port-symmetry">Waveguide Crossing - Using Port Symmetry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#api-documentation">API Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html">pyFDTDKernel.pyFDTDSolver.pyFDTDSolver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library/pyOptiShared.SimResults.FDTDSimResults.html">pyOptiShared.SimResults.FDTDSimResults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library/pyOptiShared.SimResults.FDTDModeData.html">pyOptiShared.SimResults.FDTDModeData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="library/pyOptiShared.SimResults.FDTDSimRun.html">pyOptiShared.SimResults.FDTDSimRun</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pyFDTD/pyFDTD.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="finite-difference-time-domain-fdtd-electromagnetic-solver">
+<span id="fdtd-intro"></span><h1>Finite-Difference Time-Domain (FDTD) Electromagnetic Solver<a class="headerlink" href="#finite-difference-time-domain-fdtd-electromagnetic-solver" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#key-features" id="id3">Key Features</a></p></li>
+<li><p><a class="reference internal" href="#mathematical-foundation" id="id4">Mathematical Foundation</a></p></li>
+<li><p><a class="reference internal" href="#boundary-conditions" id="id5">Boundary Conditions</a></p></li>
+<li><p><a class="reference internal" href="#applications" id="id6">Applications</a></p></li>
+<li><p><a class="reference internal" href="#file-output" id="id7">File Output</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id8">Examples</a></p>
+<ul>
+<li><p><a class="reference internal" href="#checking-solver-global-units" id="id9">Checking Solver Global Units</a></p></li>
+<li><p><a class="reference internal" href="#degree-bend-subpixel-averaging" id="id10">90 Degree Bend - Subpixel Averaging</a></p></li>
+<li><p><a class="reference internal" href="#s-bend-creating-a-gif-from-fields" id="id11">S-Bend - Creating a GIF from Fields</a></p></li>
+<li><p><a class="reference internal" href="#splitter-field-over-device-strucutre-outline" id="id12">Splitter - Field over Device Strucutre Outline</a></p></li>
+<li><p><a class="reference internal" href="#polarization-converter-using-a-tapered-silicon-ridge-waveguide" id="id13">Polarization Converter Using a Tapered Silicon Ridge Waveguide</a></p></li>
+<li><p><a class="reference internal" href="#waveguide-crossing-using-port-symmetry" id="id14">Waveguide Crossing - Using Port Symmetry</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id15">API Documentation</a></p></li>
+</ul>
+</nav>
+<p><strong>Based on:</strong></p>
+<p>A. Z. Elsherbeni, V. Demir,
+<em>“The Finite-Difference Time-Domain Method for Electromagnetics with MATLAB® Simulations”</em>, 2nd Edition,
+SciTech Publishing, 2015. ISBN: 9781613531754</p>
+<p>Susan C. Hagness, Allen Taflove,
+<em>“Computational Electrodynamics: The Finite-Difference Time-Domain Method”</em>, 3rd Edition,
+Artech House, 2005. ISBN: 9781580538329</p>
+<section id="overview">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This solver implements the <strong>Finite-Difference Time-Domain (FDTD)</strong> method for solving Maxwell’s equations in time and space, specifically optimized for the simulation of <strong>integrated photonic devices</strong>. The implementation is grounded in the foundational works by Taflove, Hagness, Elsherbeni, and Demir, and adapts their rigorous mathematical formulation to a highly automated and scalable simulation environment.</p>
+<p>It supports <strong>linear, isotropic, non-dispersive</strong> materials and provides advanced features tailored to photonic circuit design, such as <strong>automatic mode injection</strong>, <strong>port detection</strong>, and <strong>S-parameter extraction</strong>.</p>
+</section>
+<section id="key-features">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Key Features</a><a class="headerlink" href="#key-features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Time-domain Maxwell solver</strong> using second-order central difference in both time and space.</p></li>
+<li><p><strong>Perfectly Matched Layer (CPML)</strong> boundary conditions for accurate open-region simulations (as per Elsherbeni and Demir).</p></li>
+<li><p><strong>GDSII Integration</strong>: Reads standard GDS layout files to define device geometry.</p></li>
+<li><p><strong>Port Identification &amp; Mode Matching</strong>:
+- Automatic port detection and classification.
+- Single-mode excitation using computed eigenmodes.
+- Mode solver integration for accurate injection and extraction.</p></li>
+<li><p><strong>S-Parameter Computation</strong>:
+- Computes scattering parameters (S-matrix) from time-domain data.
+- Automatically exports results in standard <cite>.sNp</cite> format.</p></li>
+<li><p><strong>HDF5 Output</strong>:
+- All simulation data, field snapshots, and metadata are stored in <cite>.h5</cite> format for efficient post-processing.</p></li>
+</ul>
+</section>
+<section id="mathematical-foundation">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Mathematical Foundation</a><a class="headerlink" href="#mathematical-foundation" title="Link to this heading"></a></h2>
+<p>The FDTD method discretizes Maxwell’s curl equations using a <strong>Yee grid</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\frac{\partial \mathbf{B}}{\partial t} &amp;= -\nabla \times \mathbf{E} \\
+\frac{\partial \mathbf{D}}{\partial t} &amp;= \nabla \times \mathbf{H}
+\end{align}\end{split}\]</div>
+<p>In linear, non-dispersive, and isotropic media, we use:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{D} = \varepsilon \mathbf{E}, \quad \mathbf{B} = \mu \mathbf{H}\]</div>
+<p>Time stepping is performed using a leapfrog scheme:</p>
+<ul class="simple">
+<li><p>Update magnetic field <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> at half-integer time steps.</p></li>
+<li><p>Update electric field <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> at integer time steps.</p></li>
+</ul>
+</section>
+<section id="boundary-conditions">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Boundary Conditions</a><a class="headerlink" href="#boundary-conditions" title="Link to this heading"></a></h2>
+<p>This solver supports <strong>Convolutional Perfectly Matched Layer (CPML)</strong> absorbing boundary conditions, as described in Chapter 8 of Elsherbeni &amp; Demir. CPML is used to prevent artificial reflections at simulation domain boundaries.</p>
+</section>
+<section id="applications">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Applications</a><a class="headerlink" href="#applications" title="Link to this heading"></a></h2>
+<p>This solver is particularly suited for:</p>
+<ul class="simple">
+<li><p>Silicon photonics and integrated optical circuits</p></li>
+<li><p>Passive photonic devices (e.g., splitters, multiplexers, filters)</p></li>
+<li><p>Waveguide tapering, crossings, and junctions</p></li>
+</ul>
+</section>
+<section id="file-output">
+<span id="fdtd-file-output"></span><h2><a class="toc-backref" href="#contents" role="doc-backlink">File Output</a><a class="headerlink" href="#file-output" title="Link to this heading"></a></h2>
+<p>The results of the simulation are save into two data files and are also
+available using a results object in python that facilitates data analysis and visualization:</p>
+<ul class="simple">
+<li><p><strong>HDF5 (`.hdf5`)</strong>: Complete simulation datasets, fields, and diagnostics.</p></li>
+<li><p><strong>Touchstone (`.snp`)</strong>: Scattering parameters in industry-standard format for N-port devices.</p></li>
+<li><p><a class="reference internal" href="library/pyOptiShared.SimResults.FDTDSimResults.html#pyOptiShared.SimResults.FDTDSimResults" title="pyOptiShared.SimResults.FDTDSimResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">FDTDSimResults</span></code></a>: A python object that facilitates results navigation (support to <a class="reference internal" href="../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata"><code class="xref py py-class docutils literal notranslate"><span class="pre">NXdata</span></code></a>).</p></li>
+</ul>
+</section>
+<section id="examples">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<section id="checking-solver-global-units">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Checking Solver Global Units</a><a class="headerlink" href="#checking-solver-global-units" title="Link to this heading"></a></h3>
+<p>Whenever starting a simulation, it is good to confirm the solver global units.
+For convenience the <a class="reference internal" href="library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver" title="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyFDTDSolver</span></code></a> provides the
+<a class="reference internal" href="library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.GetGlobalUnits" title="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.GetGlobalUnits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GetGlobalUnits</span></code></a> method that presents
+the solver settings:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.pyFDTDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyFDTDSolver</span>
+
+<span class="n">solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
+<span class="n">units</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">GetGlobalUnits</span><span class="p">(</span><span class="n">print_units</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="degree-bend-subpixel-averaging">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">90 Degree Bend - Subpixel Averaging</a><a class="headerlink" href="#degree-bend-subpixel-averaging" title="Link to this heading"></a></h3>
+<p>This examples shows the effect using subpixel averaging on a 90 degree bend (<a class="reference download internal" download="" href="../_downloads/dece5c542acec9d37dfff4fdd400fad1/bend90.gds"><code class="xref download docutils literal notranslate"><span class="pre">bend90.gds</span></code></a>):</p>
+<a class="reference internal image-reference" href="../_images/bend90.svg"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../_images/bend90.svg" style="width: 40%;" />
+</a>
+<p>The simulation setup in the code snippet below. It sets four different simulation settings,
+by changing the space step from 50 nm to 25 nm while varying the subpixel_level from 1 (off) to 2.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.pyFDTDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyFDTDSolver</span>
+
+<span class="c1"># Material Settings</span>
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
+
+<span class="c1"># Layer Stack Settings</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                    <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">Show</span><span class="p">()</span>
+
+<span class="c1">#Device Geometry Settings</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetSettings</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">geometry_type</span><span class="o">=</span><span class="s2">&quot;Fixed&quot;</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="s1">&#39;bend90.gds&#39;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span><span class="n">buffer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="nb">min</span><span class="o">=</span><span class="p">[</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.45</span><span class="p">],</span><span class="nb">max</span><span class="o">=</span><span class="p">[</span><span class="mf">0.55</span><span class="p">,</span><span class="mf">0.55</span><span class="p">])</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">Show</span><span class="p">()</span>
+
+<span class="c1"># Simulation Settings and Runs</span>
+<span class="n">lmin</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">lmax</span> <span class="o">=</span> <span class="mf">1.6</span>
+<span class="n">lcen</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="n">lmin</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">npts</span><span class="o">=</span><span class="mi">21</span>
+<span class="n">tfinal</span> <span class="o">=</span> <span class="mi">1500</span>
+
+<span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">mode_indices</span><span class="o">=</span><span class="mi">0</span><span class="p">,,</span><span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span><span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="mf">0.11</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
+                        <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span>
+                        <span class="n">save_ex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ez</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">save_hx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_hy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_hz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.050</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">results_filename</span><span class="o">=</span><span class="s1">&#39;bend90_spx_1_50nm&#39;</span><span class="p">,</span>
+                        <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span><span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.050</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">results_filename</span><span class="o">=</span><span class="s1">&#39;bend90_spx_2_50nm&#39;</span><span class="p">,</span>
+                        <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span><span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.025</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">results_filename</span><span class="o">=</span><span class="s1">&#39;bend90_spx_1_25nm&#39;</span><span class="p">,</span>
+                        <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span><span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.025</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">results_filename</span><span class="o">=</span><span class="s1">&#39;bend90_spx_2_25nm&#39;</span><span class="p">,</span>
+                        <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span><span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The post processing part consists of loading the HDF5 results file into the <a class="reference internal" href="library/pyOptiShared.SimResults.FDTDSimResults.html#pyOptiShared.SimResults.FDTDSimResults" title="pyOptiShared.SimResults.FDTDSimResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">FDTDSimResults</span></code></a>
+objects and then using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> for visualization of the data. The code is available in the following folded section.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Post Processing Code</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mpld3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.SimResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDTDSimResults</span>
+
+<span class="c1"># Plotting Options</span>
+<span class="n">my_cmap</span> <span class="o">=</span> <span class="s1">&#39;turbo&#39;</span> <span class="c1"># For Colormap selection</span>
+<span class="n">save_svg</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Save figure in SVG format</span>
+<span class="n">save_html</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Uses mpld3 and export figure to HTML</span>
+
+<span class="c1"># Load the Results Files</span>
+<span class="n">results_spx1</span> <span class="o">=</span> <span class="n">FDTDSimResults</span><span class="p">()</span>
+<span class="n">results_spx1</span><span class="o">.</span><span class="n">loadHDF5</span><span class="p">(</span><span class="s1">&#39;results/bend90_spx_1_50nm.hdf5&#39;</span><span class="p">)</span>
+<span class="n">results_spx2</span> <span class="o">=</span> <span class="n">FDTDSimResults</span><span class="p">()</span>
+<span class="n">results_spx2</span><span class="o">.</span><span class="n">loadHDF5</span><span class="p">(</span><span class="s1">&#39;results/bend90_spx_2_50nm.hdf5&#39;</span><span class="p">)</span>
+<span class="n">results_spx3</span> <span class="o">=</span> <span class="n">FDTDSimResults</span><span class="p">()</span>
+<span class="n">results_spx3</span><span class="o">.</span><span class="n">loadHDF5</span><span class="p">(</span><span class="s1">&#39;results/bend90_spx_1_25nm.hdf5&#39;</span><span class="p">)</span>
+<span class="n">results_spx4</span> <span class="o">=</span> <span class="n">FDTDSimResults</span><span class="p">()</span>
+<span class="n">results_spx4</span><span class="o">.</span><span class="n">loadHDF5</span><span class="p">(</span><span class="s1">&#39;results/bend90_spx_2_25nm.hdf5&#39;</span><span class="p">)</span>
+
+<span class="c1"># Get the Material Cross sections</span>
+<span class="n">mat_grd_spx1</span> <span class="o">=</span> <span class="n">results_spx1</span><span class="o">.</span><span class="n">permittivity</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;EPS_X&#39;</span><span class="p">)[:,:,</span><span class="mi">40</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">mat_grd_spx2</span> <span class="o">=</span> <span class="n">results_spx2</span><span class="o">.</span><span class="n">permittivity</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;EPS_X&#39;</span><span class="p">)[:,:,</span><span class="mi">40</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">mat_grd_spx3</span> <span class="o">=</span> <span class="n">results_spx3</span><span class="o">.</span><span class="n">permittivity</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;EPS_X&#39;</span><span class="p">)[:,:,</span><span class="mi">73</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">mat_grd_spx4</span> <span class="o">=</span> <span class="n">results_spx4</span><span class="o">.</span><span class="n">permittivity</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;EPS_X&#39;</span><span class="p">)[:,:,</span><span class="mi">73</span><span class="p">]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+<span class="c1"># Get the Fields</span>
+<span class="n">Hz_spx1</span> <span class="o">=</span> <span class="n">results_spx1</span><span class="o">.</span><span class="n">runs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dftmonitors</span><span class="p">[</span><span class="s1">&#39;MyDFTMonitor1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;Hz&#39;</span><span class="p">)</span>
+<span class="n">Hz_spx2</span> <span class="o">=</span> <span class="n">results_spx2</span><span class="o">.</span><span class="n">runs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dftmonitors</span><span class="p">[</span><span class="s1">&#39;MyDFTMonitor1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;Hz&#39;</span><span class="p">)</span>
+<span class="n">Hz_spx3</span> <span class="o">=</span> <span class="n">results_spx3</span><span class="o">.</span><span class="n">runs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dftmonitors</span><span class="p">[</span><span class="s1">&#39;MyDFTMonitor1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;Hz&#39;</span><span class="p">)</span>
+<span class="n">Hz_spx4</span> <span class="o">=</span> <span class="n">results_spx4</span><span class="o">.</span><span class="n">runs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dftmonitors</span><span class="p">[</span><span class="s1">&#39;MyDFTMonitor1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;Hz&#39;</span><span class="p">)</span>
+
+<span class="n">Hz_cs1</span> <span class="o">=</span> <span class="n">Hz_spx1</span><span class="p">[</span><span class="mi">11</span><span class="p">,:,:]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">Hz_cs2</span> <span class="o">=</span> <span class="n">Hz_spx2</span><span class="p">[</span><span class="mi">11</span><span class="p">,:,:]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">Hz_cs3</span> <span class="o">=</span> <span class="n">Hz_spx3</span><span class="p">[</span><span class="mi">11</span><span class="p">,:,:]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">Hz_cs4</span> <span class="o">=</span> <span class="n">Hz_spx4</span><span class="p">[</span><span class="mi">11</span><span class="p">,:,:]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+<span class="c1"># General Plot Settings</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_plot_settings</span><span class="p">(</span><span class="n">ax</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">Axes</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># HTML Saving Routine</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">export_html</span><span class="p">(</span><span class="n">fig</span><span class="p">:</span><span class="n">plt</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">html_str</span> <span class="o">=</span> <span class="n">mpld3</span><span class="o">.</span><span class="n">fig_to_html</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="o">+</span><span class="s2">&quot;.html&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">html_str</span><span class="p">)</span>
+
+<span class="c1"># Field Comparison Plots</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Hz_cs1</span><span class="p">),</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
+<span class="n">set_plot_settings</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="s2">&quot;Space Step: 25nm - Subp. Level: 1&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Hz_cs2</span><span class="p">),</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
+<span class="n">set_plot_settings</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="s2">&quot;Space Step: 50nm - Subp. Level: 2&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Hz_cs3</span><span class="p">),</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
+<span class="n">set_plot_settings</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="s2">&quot;Space Step: 25nm - Subp. Level: 1&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Hz_cs4</span><span class="p">),</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
+<span class="n">set_plot_settings</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="s2">&quot;Space Step: 25nm - Subp. Level: 2&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Magnetic Field - Hz&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">save_svg</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;subpixel_Hz.svg&#39;</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">save_html</span><span class="p">:</span> <span class="n">export_html</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">&quot;subpixel_Hz&quot;</span><span class="p">)</span>
+
+<span class="c1"># Field Comparison Plots - Zoomed</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Hz_cs1</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">150</span><span class="p">,</span><span class="mi">100</span><span class="p">:</span><span class="mi">175</span><span class="p">]),</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
+<span class="n">set_plot_settings</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="s2">&quot;$H_z$ - Space Step=50nm Sub. Av.=1-&gt;Off&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Hz_cs2</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">150</span><span class="p">,</span><span class="mi">100</span><span class="p">:</span><span class="mi">175</span><span class="p">]),</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
+<span class="n">set_plot_settings</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="s2">&quot;$H_z$ - Space Step=50nm Sub. Av.=2&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Hz_cs3</span><span class="p">[</span><span class="mi">80</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span><span class="mi">200</span><span class="p">:</span><span class="mi">350</span><span class="p">]),</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
+<span class="n">set_plot_settings</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="s2">&quot;$H_z$ - Space Step=25nm Sub. Av.=1-&gt;Off&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Hz_cs4</span><span class="p">[</span><span class="mi">80</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span><span class="mi">200</span><span class="p">:</span><span class="mi">350</span><span class="p">]),</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
+<span class="n">set_plot_settings</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="s2">&quot;$H_z$ - Space Step=25nm Sub. Av.=2&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">save_svg</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;subpixel_Hz_zoomed.svg&#39;</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">save_html</span><span class="p">:</span> <span class="n">export_html</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">&quot;subpixel_Hz_zoomed&quot;</span><span class="p">)</span>
+
+<span class="c1"># Material Comparison Plots - Zoomed</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">mat_grd_spx1</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">150</span><span class="p">,</span><span class="mi">100</span><span class="p">:</span><span class="mi">175</span><span class="p">]),</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
+<span class="n">set_plot_settings</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="s2">&quot;$\epsilon_{r,x}$ - Space Step=50nm Sub. Av.=1-&gt;Off&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">mat_grd_spx2</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">150</span><span class="p">,</span><span class="mi">100</span><span class="p">:</span><span class="mi">175</span><span class="p">]),</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
+<span class="n">set_plot_settings</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="s2">&quot;$\epsilon_{r,x}$ - Space Step=50nm Sub. Av.=2&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">mat_grd_spx3</span><span class="p">[</span><span class="mi">80</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span><span class="mi">200</span><span class="p">:</span><span class="mi">350</span><span class="p">]),</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
+<span class="n">set_plot_settings</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="s2">&quot;$\epsilon_{r,x}$ - Space Step=25nm Sub. Av.=1-&gt;Off&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">mat_grd_spx4</span><span class="p">[</span><span class="mi">80</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span><span class="mi">200</span><span class="p">:</span><span class="mi">350</span><span class="p">]),</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">my_cmap</span><span class="p">)</span>
+<span class="n">set_plot_settings</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="s2">&quot;$\epsilon_{r,x}$ - Space Step=25nm Sub. Av.=2&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">save_svg</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;subpixel_epsx_zoomed.svg&#39;</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">save_html</span><span class="p">:</span> <span class="n">export_html</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">&quot;subpixel_epsx_zoomed&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get Wavelength and S21 Data</span>
+<span class="n">lam</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">results_spx1</span><span class="o">.</span><span class="n">sparameters</span><span class="p">[</span><span class="s1">&#39;S21&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;wavelength&#39;</span><span class="p">))</span>
+
+<span class="c1"># Get SParameter Data - S21 - Tranmission</span>
+<span class="n">s21_spx1</span> <span class="o">=</span> <span class="n">results_spx1</span><span class="o">.</span><span class="n">sparameters</span><span class="p">[</span><span class="s1">&#39;S21&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">s21_spx2</span> <span class="o">=</span> <span class="n">results_spx2</span><span class="o">.</span><span class="n">sparameters</span><span class="p">[</span><span class="s1">&#39;S21&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">s21_spx3</span> <span class="o">=</span> <span class="n">results_spx3</span><span class="o">.</span><span class="n">sparameters</span><span class="p">[</span><span class="s1">&#39;S21&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">s21_spx4</span> <span class="o">=</span> <span class="n">results_spx4</span><span class="o">.</span><span class="n">sparameters</span><span class="p">[</span><span class="s1">&#39;S21&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot Transmittance - |S21|^2</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Transmittance - $|S_</span><span class="si">{21}</span><span class="s1">|^2$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">s21_spx1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Space Step=50nm Sub. Av.=1-&gt;Off&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">s21_spx2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Space Step=50nm Sub. Av.=2&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">s21_spx3</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Space Step=25nm Sub. Av.=1-&gt;Off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">s21_spx4</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Space Step=25nm Sub. Av.=2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength (um)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center right&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">save_svg</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;subpixel_s21.svg&#39;</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">save_html</span><span class="p">:</span> <span class="n">export_html</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">&quot;subpixel_s21&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get SParameter Data - S11 - Reflection</span>
+<span class="n">s11_spx1</span> <span class="o">=</span> <span class="n">results_spx1</span><span class="o">.</span><span class="n">sparameters</span><span class="p">[</span><span class="s1">&#39;S11&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">s11_spx2</span> <span class="o">=</span> <span class="n">results_spx2</span><span class="o">.</span><span class="n">sparameters</span><span class="p">[</span><span class="s1">&#39;S11&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">s11_spx3</span> <span class="o">=</span> <span class="n">results_spx3</span><span class="o">.</span><span class="n">sparameters</span><span class="p">[</span><span class="s1">&#39;S11&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">s11_spx4</span> <span class="o">=</span> <span class="n">results_spx4</span><span class="o">.</span><span class="n">sparameters</span><span class="p">[</span><span class="s1">&#39;S11&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot Reflectance - |S11|^2</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Reflectance - $|S_</span><span class="si">{11}</span><span class="s1">|^2$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">s11_spx1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Space Step=50nm Sub. Av.=1-&gt;Off&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">s11_spx2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Space Step=50nm Sub. Av.=2&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">s11_spx3</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Space Step=25nm Sub. Av.=1-&gt;Off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">s11_spx4</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Space Step=25nm Sub. Av.=2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength (um)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">save_svg</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;subpixel_s11.svg&#39;</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="n">pad_inches</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">save_html</span><span class="p">:</span> <span class="n">export_html</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s2">&quot;subpixel_s11&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Permittivity Profile</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The permittivity plots show the averaging of the material properties, specialy at curved locations. The subpixel
+averaging allows better description of the material properties on thos conditions, reducing the stair-casing of
+the permittivity profile.</p>
+<a class="reference internal image-reference" href="../_images/subpixel_epsx_zoomed.svg"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../_images/subpixel_epsx_zoomed.svg" style="width: 100%;" />
+</a>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Field Profiles</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">In the full field plots, it is possible to see that a coarse mesh without subpixel averaging presents field
+leakage as the mode propagates thorugh the bend. It gets reduces as we add the subpixel averaging. Increasing
+the subpixel averaging can provide similar results to those of almost halfing the space step.</p>
+<a class="reference internal image-reference" href="../_images/subpixel_Hz.svg"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../_images/subpixel_Hz.svg" style="width: 100%;" />
+</a>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Zoomed Field Profiles:</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">It is more obivoues the fields looks smoother at a higher subpixel level. Usualy, level two is enough, as higher levels, might deteriorate the
+meshing process, without relevant increase in the results accuracy.</p>
+<a class="reference internal image-reference" href="../_images/subpixel_Hz_zoomed.svg"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../_images/subpixel_Hz_zoomed.svg" style="width: 100%;" />
+</a>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Transmittance:</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">It is clear that the 50nm mesh is not enough for properly capturing the reflection and transmission of the bend.
+Reducing the space-step improves the results while, increasing the subpixel average improves the accuracy of the results
+without sacrificing simulation time.</p>
+<iframe src="../_static/subpixel_example/subpixel_s21.html"
+        width="100%"
+        height="500px"
+        frameborder="0px">
+</iframe></div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Reflecttance:</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Similar to the transmittance results, the reflecttance gets improved with subpixel averaging, lowering the reflection and making them more accurate
+as the subpixel level gets increased to two.</p>
+<iframe src="../_static/subpixel_example/subpixel_s11.html"
+        width="100%"
+        height="500px"
+        frameborder="0px">
+</iframe></div>
+</details></section>
+<section id="s-bend-creating-a-gif-from-fields">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">S-Bend - Creating a GIF from Fields</a><a class="headerlink" href="#s-bend-creating-a-gif-from-fields" title="Link to this heading"></a></h3>
+<p>For this example we are going to simulate an S-bend (<a class="reference download internal" download="" href="../_downloads/b47a41433267fb20b722bf05d0aa9dcc/sbend.gds"><code class="xref download docutils literal notranslate"><span class="pre">bend90.gds</span></code></a>) and
+then create a <code class="docutils literal notranslate"><span class="pre">.gif</span></code> from the main component of the injected mode overlaping with the permittivity grid.</p>
+<a class="reference internal image-reference" href="../_images/sbend.svg"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../_images/sbend.svg" style="width: 40%;" />
+</a>
+<p>In this particular example we make use of the <strong>Time Monitor</strong> to store the fields at particular time instants, so we can animate them later.
+The python script for this simulation is presented in the following code snipet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.pyFDTDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyFDTDSolver</span>
+
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
+
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                    <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetSettings</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">geometry_type</span><span class="o">=</span><span class="s2">&quot;Fixed&quot;</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="s1">&#39;sbend.gds&#39;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">buffer</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">lmin</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">lmax</span> <span class="o">=</span> <span class="mf">1.6</span>
+<span class="n">lcen</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="n">lmin</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">npts</span><span class="o">=</span><span class="mi">21</span>
+<span class="n">tfinal</span> <span class="o">=</span> <span class="mi">350</span>
+
+<span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">mode_indices</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddTimeMonitor</span><span class="p">(</span><span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="mf">0.11</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyTimeMonitor1&quot;</span><span class="p">,</span>
+                          <span class="n">npts</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                          <span class="n">save_hx</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">save_hy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_hz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">results_filename</span><span class="o">=</span><span class="s1">&#39;sbend&#39;</span><span class="p">,</span>
+                        <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span><span class="n">auto_shutoff_limit</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Once the simulation is over, we can generate a <code class="docutils literal notranslate"><span class="pre">.gif</span></code> animation of the main mode component propagating
+thorugh the s-bend using the following code:</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Post Processing Code</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.pyFDTDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyFDTDSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.SimResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDTDSimResults</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">Normalize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegularGridInterpolator</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">GenerateGif</span><span class="p">(</span><span class="n">data</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">eps</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;output.gif&#39;</span><span class="p">):</span>
+  <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+  <span class="n">ni</span><span class="p">,</span><span class="n">nj</span><span class="p">,</span><span class="n">nk</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+  <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">nj</span><span class="p">)</span>
+  <span class="n">y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">nk</span><span class="p">)</span>
+  <span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">nj</span><span class="p">)</span>
+  <span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">nk</span><span class="p">)</span>
+  <span class="n">X2</span><span class="p">,</span><span class="n">Y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span><span class="p">)</span>
+  <span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span>
+
+  <span class="k">if</span> <span class="n">eps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">eps</span> <span class="o">=</span> <span class="n">eps</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span>
+      <span class="n">eps</span> <span class="o">=</span> <span class="n">eps</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+      <span class="n">perm_interp</span> <span class="o">=</span> <span class="n">RegularGridInterpolator</span><span class="p">((</span><span class="n">y1</span><span class="p">,</span> <span class="n">x1</span><span class="p">),</span> <span class="n">eps</span><span class="p">)</span>
+      <span class="n">permittivity_resampled</span> <span class="o">=</span> <span class="n">perm_interp</span><span class="p">((</span><span class="n">Y2</span><span class="p">,</span> <span class="n">X2</span><span class="p">))</span>
+      <span class="c1"># Normalize permittivity and convert to grayscale RGB</span>
+      <span class="n">perm_norm</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+      <span class="n">perm_gray</span> <span class="o">=</span> <span class="n">perm_norm</span><span class="p">(</span><span class="n">permittivity_resampled</span><span class="p">)</span>
+      <span class="n">perm_rgb</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">perm_gray</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+  <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">ni</span><span class="p">):</span>
+      <span class="n">Z</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">ii</span><span class="p">,:,:]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+      <span class="n">interp</span> <span class="o">=</span> <span class="n">RegularGridInterpolator</span><span class="p">((</span><span class="n">y1</span><span class="p">,</span> <span class="n">x1</span><span class="p">),</span> <span class="n">Z</span><span class="p">)</span>
+      <span class="n">array_2d</span> <span class="o">=</span> <span class="n">interp</span><span class="p">((</span><span class="n">Y2</span><span class="p">,</span> <span class="n">X2</span><span class="p">))</span>
+      <span class="n">norm</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+      <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;turbo&#39;</span><span class="p">)</span>
+      <span class="c1"># Apply the colormap to the normalized array</span>
+      <span class="n">rgb_image</span> <span class="o">=</span> <span class="n">cmap</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">array_2d</span><span class="p">))</span>
+      <span class="c1"># Remove the alpha channel</span>
+      <span class="n">rgb_image</span> <span class="o">=</span> <span class="p">(</span><span class="n">rgb_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">eps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># Blend</span>
+          <span class="n">blend</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">perm_rgb</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">rgb_image</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+      <span class="k">else</span><span class="p">:</span>
+          <span class="n">blend</span> <span class="o">=</span> <span class="n">rgb_image</span>
+      <span class="n">frames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">blend</span><span class="p">)</span>
+
+  <span class="c1"># Convert each frame to an image</span>
+  <span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span> <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">frames</span><span class="p">]</span>
+
+  <span class="c1"># Save as a GIF</span>
+  <span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">save_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">append_images</span><span class="o">=</span><span class="n">images</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">duration</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Load the Results</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">FDTDSimResults</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">loadHDF5</span><span class="p">(</span><span class="s1">&#39;results/sbend.hdf5&#39;</span><span class="p">)</span>
+<span class="c1"># Get The field Data</span>
+<span class="n">field</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">runs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">timemonitors</span><span class="p">[</span><span class="s2">&quot;MyTimeMonitor1&quot;</span><span class="p">]</span>
+<span class="n">field</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;Hz&#39;</span><span class="p">))</span>
+<span class="c1"># Get the Raw permitivity and average it out along Y</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">permittivity</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s2">&quot;EPS_Z&quot;</span><span class="p">)</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">eps</span><span class="p">)[:,:,</span><span class="mi">38</span><span class="p">]</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="p">(</span><span class="n">eps</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:]</span><span class="o">+</span><span class="n">eps</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+<span class="c1"># Create the gif</span>
+<span class="n">GenerateGif</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;Hz.gif&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details><p>The results is shown as follows:</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Main Mode Component Propagation</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/sbend_hz.gif"><img alt="../_images/sbend_hz.gif" src="../_images/sbend_hz.gif" style="width: 85%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="splitter-field-over-device-strucutre-outline">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Splitter - Field over Device Strucutre Outline</a><a class="headerlink" href="#splitter-field-over-device-strucutre-outline" title="Link to this heading"></a></h3>
+<p>For this example we are going to simulate a splitter (<a class="reference download internal" download="" href="../_downloads/058584e8d9515b7a05ede64fd382d179/splitter.gds"><code class="xref download docutils literal notranslate"><span class="pre">splitter.gds</span></code></a>) and
+then create an image with a DFT monitored field overlapping with the device structure outline.</p>
+<a class="reference internal image-reference" href="../_images/splitter.svg"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../_images/splitter.svg" style="width: 60%;" />
+</a>
+<p>In this particular example we make use of the <strong>DFT Monitor</strong> to monitor the frequency content of the fields, so
+we can plot a particular component and wavelength over the device structure outline.
+The python script for this simulation is presented in the following code snipet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.pyFDTDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyFDTDSolver</span>
+
+<span class="c1"># Define Materials</span>
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
+
+<span class="c1"># Creates the Layer Stack</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                    <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+<span class="c1"># Defines the Device Geometry</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetSettings</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">geometry_type</span><span class="o">=</span><span class="s2">&quot;Fixed&quot;</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="s1">&#39;splitter.gds&#39;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">buffer</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># General Simulation Settings and Simulation Run</span>
+<span class="n">lmin</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">lmax</span> <span class="o">=</span> <span class="mf">1.6</span>
+<span class="n">lcen</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="n">lmin</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">npts</span><span class="o">=</span><span class="mi">21</span>
+<span class="n">tfinal</span> <span class="o">=</span> <span class="mi">350</span>
+
+<span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">mode_indices</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;1x2&#39;</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span><span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="mf">0.11</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
+                                                      <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span>
+                                                      <span class="n">save_hz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">results_filename</span><span class="o">=</span><span class="s1">&#39;splitter&#39;</span><span class="p">,</span>
+                                                      <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span><span class="n">auto_shutoff_limit</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Once the simulation is over we can then use a post processing script to read the results, get the DFT Monitor data
+and then plot that with the outline of the device structure.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Post Processing Code</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.axes_grid1</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_axes_locatable</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gdstk</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.SimResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDTDSimResults</span>
+
+<span class="c1"># Loading the Results</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">FDTDSimResults</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">loadHDF5</span><span class="p">(</span><span class="s1">&#39;results/splitter.hdf5&#39;</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">runs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dftmonitors</span><span class="p">[</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">]</span>
+<span class="n">x_ax</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;x_axis&#39;</span><span class="p">)</span>
+<span class="n">y_ax</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;y_axis&#39;</span><span class="p">)</span>
+
+<span class="n">lib</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">read_gds</span><span class="p">(</span><span class="s1">&#39;splitter.gds&#39;</span><span class="p">)</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">polygons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="n">ymin</span><span class="p">),(</span><span class="n">xmax</span><span class="p">,</span><span class="n">ymax</span><span class="p">)</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">bounding_box</span><span class="p">()</span>
+
+<span class="n">hz_field</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;Hz&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plotting the real part of the field</span>
+<span class="n">hz_real</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">hz_field</span><span class="p">)</span>
+<span class="n">hz_real</span> <span class="o">=</span> <span class="n">hz_real</span><span class="p">[</span><span class="mi">5</span><span class="p">,:,:]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">hz_real</span> <span class="o">=</span> <span class="n">hz_real</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">hz_real</span><span class="p">)</span>
+<span class="n">hz_real</span> <span class="o">=</span> <span class="n">hz_real</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">hz_real</span><span class="p">)</span>
+<span class="n">hz_real</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">hz_real</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">x_ax</span><span class="p">,</span><span class="n">y_ax</span><span class="p">,</span><span class="n">hz_real</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;seismic&#39;</span><span class="p">,</span><span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">xmin</span><span class="p">,</span><span class="n">xmax</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">ymin</span><span class="p">,</span><span class="n">ymax</span><span class="p">])</span>
+<span class="n">polygon</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">points</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">polygon</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">divider</span> <span class="o">=</span> <span class="n">make_axes_locatable</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">cax</span> <span class="o">=</span> <span class="n">divider</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s1">&#39;5%&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">cax</span><span class="o">=</span><span class="n">cax</span> <span class="p">,</span><span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x (um)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;y (um)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Re</span><span class="si">{Hz}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;splitter_hz_outline.svg&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;svg&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details><div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Real Part of the Hz</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/splitter_hz_outline.svg"><img alt="../_images/splitter_hz_outline.svg" src="../_images/splitter_hz_outline.svg" style="width: 85%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="polarization-converter-using-a-tapered-silicon-ridge-waveguide">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Polarization Converter Using a Tapered Silicon Ridge Waveguide</a><a class="headerlink" href="#polarization-converter-using-a-tapered-silicon-ridge-waveguide" title="Link to this heading"></a></h3>
+<nav class="contents local" id="id1">
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id16">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#simulation-setup" id="id17">Simulation Setup</a></p></li>
+<li><p><a class="reference internal" href="#results" id="id18">Results</a></p></li>
+<li><p><a class="reference internal" href="#conclusion" id="id19">Conclusion</a></p></li>
+<li><p><a class="reference internal" href="#references" id="id20">References</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<h4><a class="toc-backref" href="#id16" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading"></a></h4>
+<p>Tapered waveguides with an adiabatic change in the propagation direction are useful for enhancing the
+coupling efficiency between two waveguides with different widths. Mode hybridization can occur in asymmetrical
+silicon-on-insulator (SOI) waveguides for certain waveguide widths, where the effective indices of two guided
+modes match [1-2]. Consequently, the field components of TE and TM modes become comparable, enabling polarization
+conversion. In this study, pyFDTD is used to analyze a polarization converter (TM0 to TE1) using an SOI taper
+waveguide connecting two SOI waveguides with different widths [1]. We use this example to demonstate the ability to
+individualy set the modes we are exciting in each port.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Rendered View of the Ridge Tapered WG</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/polarization_geometry.png"><img alt="../_images/polarization_geometry.png" src="../_images/polarization_geometry.png" style="width: 65%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulation-setup">
+<h4><a class="toc-backref" href="#id17" role="doc-backlink">Simulation Setup</a><a class="headerlink" href="#simulation-setup" title="Link to this heading"></a></h4>
+<p>The ridge waveguide setup code is found below. The mode indices are set to [2,2]. So, we purposefully
+select the modes we are converting: TM0 to TE1. The GDS II file of the design can be found here:
+<a class="reference download internal" download="" href="../_downloads/37a1e004d7b03c1ece888c71ddaca7f5/Ridge_Taper_WG_pol_converter.gds"><code class="xref download docutils literal notranslate"><span class="pre">Ridge_Taper_WG_pol_converter.gds</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.pyFDTDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyFDTDSolver</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###         Material Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">SiO2_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.445</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.455</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###       Layer Stack Settings         ###</span>
+<span class="c1">##########################################</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L0&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">Si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">Si_mat</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">Si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">SiO2_mat</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###   Device Geometry/Port Settings    ###</span>
+<span class="c1">##########################################</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetSettings</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">geometry_type</span><span class="o">=</span><span class="s2">&quot;Fixed&quot;</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Ridge_Taper_WG_pol_converter.gds&quot;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span>
+    <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">buffer</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mf">8.5</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">Show</span><span class="p">()</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###          FDTD Settings             ###</span>
+<span class="c1">##########################################</span>
+<span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="mf">1.45</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="mf">1.55</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="n">mode_indices</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span><span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
+                          <span class="n">lmin</span><span class="o">=</span><span class="mf">1.45</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="mf">1.55</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                          <span class="n">save_ex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.050</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span>
+                          <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span> <span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_modes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># ##########################################</span>
+<span class="c1"># ###      Run and Post Processing       ###</span>
+<span class="c1"># ##########################################</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="results">
+<h4><a class="toc-backref" href="#id18" role="doc-backlink">Results</a><a class="headerlink" href="#results" title="Link to this heading"></a></h4>
+<p>The corresponding refractive indices for the input and output waveguides using the VFD Mode Solver are:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Input Waveguide</p></td>
+<td><p>Effective Index</p></td>
+<td><p>Output Waveguide</p></td>
+<td><p>Effective Index</p></td>
+</tr>
+<tr class="row-even"><td><p>TE0</p></td>
+<td><p>3.129</p></td>
+<td><p>TE0</p></td>
+<td><p>3.058</p></td>
+</tr>
+<tr class="row-odd"><td><p>TE1</p></td>
+<td><p>3.026</p></td>
+<td><p>TM0</p></td>
+<td><p>2.853</p></td>
+</tr>
+<tr class="row-even"><td><p>TM0</p></td>
+<td><p>2.912</p></td>
+<td><p>TE1</p></td>
+<td><p>2.761</p></td>
+</tr>
+</tbody>
+</table>
+<p>The mode profiles for the first three modes of the input and output waveguides (TE0, TE1, and TM0) are shown
+in the original article figures.
+The simulated mode results can be seen in the following panels:</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Input Waveguide - TM0 - Ez</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/polarization_example_TM0.png"><img alt="../_images/polarization_example_TM0.png" src="../_images/polarization_example_TM0.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Output Waveguide - TE1 - Ey</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/polarization_example_TE1.png"><img alt="../_images/polarization_example_TE1.png" src="../_images/polarization_example_TE1.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion">
+<h4><a class="toc-backref" href="#id19" role="doc-backlink">Conclusion</a><a class="headerlink" href="#conclusion" title="Link to this heading"></a></h4>
+<p>The simulation demonstrates successful polarization conversion from TM0 to TE1 using a tapered SOI ridge waveguide. This design can be applied in integrated photonic circuits for polarization control and mode conversion applications.</p>
+</section>
+<section id="references">
+<h4><a class="toc-backref" href="#id20" role="doc-backlink">References</a><a class="headerlink" href="#references" title="Link to this heading"></a></h4>
+<ol class="arabic simple">
+<li><ol class="upperalpha simple" start="4">
+<li><p>Dai, Y. Tang, and J. E. Bowers. <em>Mode conversion in tapered submicron silicon ridge optical waveguides</em>, Optics Express, Vol. 20, No. 12, pp. 13425–13439, 2012.</p></li>
+</ol>
+</li>
+<li><ol class="upperalpha simple" start="4">
+<li><p>Vermeulen et al. <em>Efficient tapering to the fundamental quasi-TM mode in asymmetrical waveguides</em>, In 15th European Conference on Integrated Optics (ECIO), 2010.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</section>
+<section id="waveguide-crossing-using-port-symmetry">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Waveguide Crossing - Using Port Symmetry</a><a class="headerlink" href="#waveguide-crossing-using-port-symmetry" title="Link to this heading"></a></h3>
+<p>To accelerate simulation pyFDTD supports the specification of port symmetries.</p>
+<p>For this example we are going to use a waveguide crossing (<a class="reference download internal" download="" href="../_downloads/e59355d468ee6dff90efc82cd6e42104/etchedCrossing.gds"><code class="xref download docutils literal notranslate"><span class="pre">etchedCrossing</span></code></a>).
+Due to its symmetries only one port needs to be excited and all the s-parameters can be inferred from that single run.</p>
+<p>The device geometry and its symmetry can be viewed in the following image:</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Device Geometry View</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/etchedCrossing.svg"><img alt="../_images/etchedCrossing.svg" src="../_images/etchedCrossing.svg" style="width: 65%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Therefore we specifying <code class="docutils literal notranslate"><span class="pre">symmetries</span></code> in the <code class="docutils literal notranslate"><span class="pre">SetPorts()</span></code> method to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">symmetries</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;1_2&quot;</span><span class="p">:</span><span class="s2">&quot;2_1&quot;</span><span class="p">,</span><span class="s2">&quot;2_2&quot;</span><span class="p">:</span><span class="s2">&quot;1_1&quot;</span><span class="p">,</span><span class="s2">&quot;3_2&quot;</span><span class="p">:</span><span class="s2">&quot;4_1&quot;</span><span class="p">,</span><span class="s2">&quot;4_2&quot;</span><span class="p">:</span><span class="s2">&quot;3_1&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;1_3&quot;</span><span class="p">:</span><span class="s2">&quot;3_1&quot;</span><span class="p">,</span><span class="s2">&quot;2_3&quot;</span><span class="p">:</span><span class="s2">&quot;3_1&quot;</span><span class="p">,</span><span class="s2">&quot;3_3&quot;</span><span class="p">:</span><span class="s2">&quot;1_1&quot;</span><span class="p">,</span><span class="s2">&quot;4_3&quot;</span><span class="p">:</span><span class="s2">&quot;2_1&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;1_4&quot;</span><span class="p">:</span><span class="s2">&quot;4_1&quot;</span><span class="p">,</span><span class="s2">&quot;2_4&quot;</span><span class="p">:</span><span class="s2">&quot;4_1&quot;</span><span class="p">,</span><span class="s2">&quot;3_4&quot;</span><span class="p">:</span><span class="s2">&quot;2_1&quot;</span><span class="p">,</span><span class="s2">&quot;4_4&quot;</span><span class="p">:</span><span class="s2">&quot;1_1&quot;</span><span class="p">,}</span>
+</pre></div>
+</div>
+<p>The logic is that each s-parameter is defined by a string <code class="docutils literal notranslate"><span class="pre">i_j</span></code> where <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">j</span></code> are port numbers.
+By convention <code class="docutils literal notranslate"><span class="pre">i</span></code> is the monitored port, <code class="docutils literal notranslate"><span class="pre">j</span></code> is the excited port.
+Following a python <code class="docutils literal notranslate"><span class="pre">dictionary</span></code>, the <code class="docutils literal notranslate"><span class="pre">key</span></code> is the s-s-parameter reference that will receive the
+s-parameter results from the <code class="docutils literal notranslate"><span class="pre">value</span></code>. For example, the first item: <code class="docutils literal notranslate"><span class="pre">&quot;1_2&quot;:&quot;2_1&quot;</span></code> indicates that
+the s-parameter S12 is equal to S21. Closer look at the combinations, will see that all <code class="docutils literal notranslate"><span class="pre">j</span></code> in the <code class="docutils literal notranslate"><span class="pre">value</span></code>’s
+are equal to <code class="docutils literal notranslate"><span class="pre">1</span></code>. Thus, only port <code class="docutils literal notranslate"><span class="pre">1</span></code> will be excited.</p>
+<p>Alternatively predefined symmetry options can be used. For example waveguide crossing symmetry can be defined by setting symmetries=’4x’ instead of defining individual port combinations.
+Predefined symmetry options can be found in the <a class="reference internal" href="library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetPorts" title="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetPorts"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SetPorts</span></code></a> method.</p>
+<p>The full simulation setup is presented in the follow code snipet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.pyFDTDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyFDTDSolver</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###         Material Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">myindex1p45</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;myindex1p45&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">myindex3p5</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;myindex3p5&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###       Layer Stack Settings         ###</span>
+<span class="c1">##########################################</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">myindex3p5</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###   Device Geometry/Port Settings    ###</span>
+<span class="c1">##########################################</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetSettings</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">geometry_type</span><span class="o">=</span><span class="s2">&quot;Fixed&quot;</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;etchedCrossing.gds&quot;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span>
+    <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">buffer</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###          FDTD Settings             ###</span>
+<span class="c1">##########################################</span>
+<span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="mf">1.55</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="n">mode_indices</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">symmetries</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;1_2&quot;</span><span class="p">:</span><span class="s2">&quot;2_1&quot;</span><span class="p">,</span><span class="s2">&quot;2_2&quot;</span><span class="p">:</span><span class="s2">&quot;1_1&quot;</span><span class="p">,</span><span class="s2">&quot;3_2&quot;</span><span class="p">:</span><span class="s2">&quot;4_1&quot;</span><span class="p">,</span><span class="s2">&quot;4_2&quot;</span><span class="p">:</span><span class="s2">&quot;3_1&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;1_3&quot;</span><span class="p">:</span><span class="s2">&quot;3_1&quot;</span><span class="p">,</span><span class="s2">&quot;2_3&quot;</span><span class="p">:</span><span class="s2">&quot;3_1&quot;</span><span class="p">,</span><span class="s2">&quot;3_3&quot;</span><span class="p">:</span><span class="s2">&quot;1_1&quot;</span><span class="p">,</span><span class="s2">&quot;4_3&quot;</span><span class="p">:</span><span class="s2">&quot;2_1&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;1_4&quot;</span><span class="p">:</span><span class="s2">&quot;4_1&quot;</span><span class="p">,</span><span class="s2">&quot;2_4&quot;</span><span class="p">:</span><span class="s2">&quot;4_1&quot;</span><span class="p">,</span><span class="s2">&quot;3_4&quot;</span><span class="p">:</span><span class="s2">&quot;2_1&quot;</span><span class="p">,</span><span class="s2">&quot;4_4&quot;</span><span class="p">:</span><span class="s2">&quot;1_1&quot;</span><span class="p">,})</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span><span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="mf">0.125</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
+                          <span class="n">lmin</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+                          <span class="n">save_ex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ez</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">save_hx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_hy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_hz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.050</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span>
+                          <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span> <span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###      Run and Post Processing       ###</span>
+<span class="c1">##########################################</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">snp</span><span class="o">=</span><span class="s1">&#39;ALL&#39;</span><span class="p">,</span><span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;power&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">snp</span><span class="o">=</span><span class="s1">&#39;ALL&#39;</span><span class="p">,</span><span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The resulting S-Parameters can be observed in the final plotting:</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Magnitude (Squared)</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/etchedCrossing_sparams_mag.png"><img alt="../_images/etchedCrossing_sparams_mag.png" src="../_images/etchedCrossing_sparams_mag.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Phase (Deg)</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/etchedCrossing_sparams_phase.png"><img alt="../_images/etchedCrossing_sparams_phase.png" src="../_images/etchedCrossing_sparams_phase.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">API Documentation</a><a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver" title="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyFDTDKernel.pyFDTDSolver.pyFDTDSolver</span></code></a>()</p></td>
+<td><p>Interface for running simulations in pyFDTD.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="library/pyOptiShared.SimResults.FDTDSimResults.html#pyOptiShared.SimResults.FDTDSimResults" title="pyOptiShared.SimResults.FDTDSimResults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyOptiShared.SimResults.FDTDSimResults</span></code></a>()</p></td>
+<td><p>FDTD Results class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="library/pyOptiShared.SimResults.FDTDModeData.html#pyOptiShared.SimResults.FDTDModeData" title="pyOptiShared.SimResults.FDTDModeData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyOptiShared.SimResults.FDTDModeData</span></code></a>()</p></td>
+<td><p>FDTD Mode Source Data class.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="library/pyOptiShared.SimResults.FDTDSimRun.html#pyOptiShared.SimResults.FDTDSimRun" title="pyOptiShared.SimResults.FDTDSimRun"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyOptiShared.SimResults.FDTDSimRun</span></code></a>()</p></td>
+<td><p>FDTD Simulation run results class.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../pyModeSolver/library/pyOptiShared.SimResults.BaseSimResults.html" class="btn btn-neutral float-left" title="pyOptiShared.SimResults.BaseSimResults" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html" class="btn btn-neutral float-right" title="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,571 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyOptiShared.LayerInfo.LayerStack &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyOptiShared.LayerInfo.LayerInfo" href="pyOptiShared.LayerInfo.LayerInfo.html" />
+    <link rel="prev" title="Layer Stack" href="../LayerStack.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Optiwaves's Python EM Modules
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../SharedLibraries.html">Shared Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../MaterialLib.html">Material Library</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../LayerStack.html">Layer Stack</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../LayerStack.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LayerStack.html#layer-stack-and-layer-info-considerations">Layer Stack and Layer Info Considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LayerStack.html#examples">Examples</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../LayerStack.html#api-documentation">API Documentation</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pyOptiShared.LayerInfo.LayerStack</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack"><code class="docutils literal notranslate"><span class="pre">LayerStack</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetLayer"><code class="docutils literal notranslate"><span class="pre">LayerStack.GetLayer()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetLayerOffsetFunc"><code class="docutils literal notranslate"><span class="pre">LayerStack.GetLayerOffsetFunc()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetLayerThickness"><code class="docutils literal notranslate"><span class="pre">LayerStack.GetLayerThickness()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetLayerZmin"><code class="docutils literal notranslate"><span class="pre">LayerStack.GetLayerZmin()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetLayersWithTol"><code class="docutils literal notranslate"><span class="pre">LayerStack.GetLayersWithTol()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetMinZmin"><code class="docutils literal notranslate"><span class="pre">LayerStack.GetMinZmin()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetTotalThickness"><code class="docutils literal notranslate"><span class="pre">LayerStack.GetTotalThickness()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetZBounds"><code class="docutils literal notranslate"><span class="pre">LayerStack.GetZBounds()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.Show"><code class="docutils literal notranslate"><span class="pre">LayerStack.Show()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.addLayer"><code class="docutils literal notranslate"><span class="pre">LayerStack.addLayer()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.addMaterial"><code class="docutils literal notranslate"><span class="pre">LayerStack.addMaterial()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.addMaterialLayer"><code class="docutils literal notranslate"><span class="pre">LayerStack.addMaterialLayer()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.getLayerCladMatNum"><code class="docutils literal notranslate"><span class="pre">LayerStack.getLayerCladMatNum()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.getLayerCladMatObj"><code class="docutils literal notranslate"><span class="pre">LayerStack.getLayerCladMatObj()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.getLayerMaterialNum"><code class="docutils literal notranslate"><span class="pre">LayerStack.getLayerMaterialNum()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.getLayerMaterialObj"><code class="docutils literal notranslate"><span class="pre">LayerStack.getLayerMaterialObj()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.getMaterialMap"><code class="docutils literal notranslate"><span class="pre">LayerStack.getMaterialMap()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.loadFromFolder"><code class="docutils literal notranslate"><span class="pre">LayerStack.loadFromFolder()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.setBGandSub"><code class="docutils literal notranslate"><span class="pre">LayerStack.setBGandSub()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.background"><code class="docutils literal notranslate"><span class="pre">LayerStack.background</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.substrate"><code class="docutils literal notranslate"><span class="pre">LayerStack.substrate</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="pyOptiShared.LayerInfo.LayerInfo.html">pyOptiShared.LayerInfo.LayerInfo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../DeviceGeometry.html">Device Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NXdata.html"><em>NXData</em> Data Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../SharedLibraries.html">Shared Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../LayerStack.html">Layer Stack</a></li>
+      <li class="breadcrumb-item active">pyOptiShared.LayerInfo.LayerStack</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyoptishared-layerinfo-layerstack">
+<h1>pyOptiShared.LayerInfo.LayerStack<a class="headerlink" href="#pyoptishared-layerinfo-layerstack" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyOptiShared.LayerInfo.</span></span><span class="sig-name descname"><span class="pre">LayerStack</span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A class to manage a list of layers and material objects.</p>
+<p>It contains a layer property that corresponds to a dictionary of
+<a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerInfo</span></code></a>
+objects, where the keys are the internal layer numbers.</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetLayer" title="pyOptiShared.LayerInfo.LayerStack.GetLayer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetLayer</span></code></a>(layer_num)</p></td>
+<td><p>Return a <cite>LayerInfo()</cite> object corresponding to the layer number <cite>layr_num</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetLayerOffsetFunc" title="pyOptiShared.LayerInfo.LayerStack.GetLayerOffsetFunc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetLayerOffsetFunc</span></code></a>(layer_number)</p></td>
+<td><p>Returns the side wall offset function of a particular layer number in the layer stack.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetLayerThickness" title="pyOptiShared.LayerInfo.LayerStack.GetLayerThickness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetLayerThickness</span></code></a>(layer_number)</p></td>
+<td><p>Returns the thickness of a particular layer number in the layer stack.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetLayerZmin" title="pyOptiShared.LayerInfo.LayerStack.GetLayerZmin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetLayerZmin</span></code></a>(layer_number)</p></td>
+<td><p>Finds the layer_number and return its Zmin.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetLayersWithTol" title="pyOptiShared.LayerInfo.LayerStack.GetLayersWithTol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetLayersWithTol</span></code></a>()</p></td>
+<td><p>This method returns a list of layer numbers where <cite>numpts</cite> is larger than 1.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetMinZmin" title="pyOptiShared.LayerInfo.LayerStack.GetMinZmin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetMinZmin</span></code></a>()</p></td>
+<td><p>Returns the minimum value of Zmin within all layers in the layer stack.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetTotalThickness" title="pyOptiShared.LayerInfo.LayerStack.GetTotalThickness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetTotalThickness</span></code></a>()</p></td>
+<td><p>Returns the total thickness of the layer stack</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.GetZBounds" title="pyOptiShared.LayerInfo.LayerStack.GetZBounds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetZBounds</span></code></a>()</p></td>
+<td><p>Returns the minimum and maximum z values of the layer stack</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.Show" title="pyOptiShared.LayerInfo.LayerStack.Show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Show</span></code></a>([filename, width, height])</p></td>
+<td><p>Displays the layer stack configuration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.addLayer" title="pyOptiShared.LayerInfo.LayerStack.addLayer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">addLayer</span></code></a>(number, material, cladding, ...[, ...])</p></td>
+<td><p>Adds a new layer to the list.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.addMaterial" title="pyOptiShared.LayerInfo.LayerStack.addMaterial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">addMaterial</span></code></a>(material)</p></td>
+<td><p>Adds a new material to the list of materials</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.addMaterialLayer" title="pyOptiShared.LayerInfo.LayerStack.addMaterialLayer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">addMaterialLayer</span></code></a>(zmin, thicknes, material)</p></td>
+<td><p>Add a material layer with uniform thickness</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.getLayerCladMatNum" title="pyOptiShared.LayerInfo.LayerStack.getLayerCladMatNum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getLayerCladMatNum</span></code></a>(layer_num)</p></td>
+<td><p>Returns cladding material number for the layer number.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.getLayerCladMatObj" title="pyOptiShared.LayerInfo.LayerStack.getLayerCladMatObj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getLayerCladMatObj</span></code></a>(layer_num)</p></td>
+<td><p>Returns cladding material object for the layer number.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.getLayerMaterialNum" title="pyOptiShared.LayerInfo.LayerStack.getLayerMaterialNum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getLayerMaterialNum</span></code></a>(layer_num)</p></td>
+<td><p>Returns material number for the layer number.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.getLayerMaterialObj" title="pyOptiShared.LayerInfo.LayerStack.getLayerMaterialObj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getLayerMaterialObj</span></code></a>(layer_num)</p></td>
+<td><p>Returns material object for the layer number.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.getMaterialMap" title="pyOptiShared.LayerInfo.LayerStack.getMaterialMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getMaterialMap</span></code></a>()</p></td>
+<td><p>Returns the material dictionary</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.loadFromFolder" title="pyOptiShared.LayerInfo.LayerStack.loadFromFolder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loadFromFolder</span></code></a>(material_folder)</p></td>
+<td><p>Loads materials from folder</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.setBGandSub" title="pyOptiShared.LayerInfo.LayerStack.setBGandSub"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setBGandSub</span></code></a>(background, substrate)</p></td>
+<td><p>Sets the background and substrate materials.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.background" title="pyOptiShared.LayerInfo.LayerStack.background"><code class="xref py py-obj docutils literal notranslate"><span class="pre">background</span></code></a></p></td>
+<td><p>The background material for the region above the substrate.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerStack.substrate" title="pyOptiShared.LayerInfo.LayerStack.substrate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">substrate</span></code></a></p></td>
+<td><p>The substrate material.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.GetLayer">
+<span class="sig-name descname"><span class="pre">GetLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo" title="pyOptiShared.LayerInfo.LayerInfo"><span class="pre">LayerInfo</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.GetLayer" title="Link to this definition"></a></dt>
+<dd><p>Return a <cite>LayerInfo()</cite> object corresponding to the layer number
+<cite>layr_num</cite>. If the layer is not found it raises a <cite>ValueError</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>layer_num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Number of the layer of interest.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – Raised if no layer is found with the same <cite>layer_num</cite>.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The <cite>LayerInfo()</cite> object with layer number <cite>layer_num</cite>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo" title="pyOptiShared.LayerInfo.LayerInfo">LayerInfo</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.GetLayerOffsetFunc">
+<span class="sig-name descname"><span class="pre">GetLayerOffsetFunc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.GetLayerOffsetFunc" title="Link to this definition"></a></dt>
+<dd><p>Returns the side wall offset function of a particular layer number in the
+layer stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>znLayerNum</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Layer number in the layer stack.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – In case the layer_number is not found in the LayerStack.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sidewall offset calculation method.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>sw_func (Callable)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.GetLayerThickness">
+<span class="sig-name descname"><span class="pre">GetLayerThickness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.GetLayerThickness" title="Link to this definition"></a></dt>
+<dd><p>Returns the thickness of a particular layer number in the
+layer stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>znLayerNum</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Layer number in the layer stack.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – In case the layer_number is not found in the LayerStack.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Thickness of the layer.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>layer_thickness (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.GetLayerZmin">
+<span class="sig-name descname"><span class="pre">GetLayerZmin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int64</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.GetLayerZmin" title="Link to this definition"></a></dt>
+<dd><p>Finds the layer_number and return its Zmin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>layer_number</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Layer number in the layer stack.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – In case the layer_number is not found in the LayerStack.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Value where the layer thickness start.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>zmin (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.GetLayersWithTol">
+<span class="sig-name descname"><span class="pre">GetLayersWithTol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.GetLayersWithTol" title="Link to this definition"></a></dt>
+<dd><p>This method returns a list of layer numbers where
+<cite>numpts</cite> is larger than 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of layer numbers with more than 1 <cite>numpts</cite>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.GetMinZmin">
+<span class="sig-name descname"><span class="pre">GetMinZmin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.GetMinZmin" title="Link to this definition"></a></dt>
+<dd><p>Returns the minimum value of Zmin within all layers
+in the layer stack.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.GetTotalThickness">
+<span class="sig-name descname"><span class="pre">GetTotalThickness</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.GetTotalThickness" title="Link to this definition"></a></dt>
+<dd><p>Returns the total thickness of the layer stack</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Total thickness of the layer stac</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.GetZBounds">
+<span class="sig-name descname"><span class="pre">GetZBounds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.GetZBounds" title="Link to this definition"></a></dt>
+<dd><p>Returns the minimum and maximum z values of the layer stack</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Minimum and maximum z values of the layer stack</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.Show">
+<span class="sig-name descname"><span class="pre">Show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.Show" title="Link to this definition"></a></dt>
+<dd><p>Displays the layer stack configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Enables image export to formats supported by matplotlib. For more information, visit the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html">matplotlib documentation</a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.addLayer">
+<span class="sig-name descname"><span class="pre">addLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cladding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sideWallAng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sideWallFunct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fabtol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numpts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.addLayer" title="Link to this definition"></a></dt>
+<dd><p>Adds a new layer to the list. This function will throw an error if the layer number is already in use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Layer name</p></li>
+<li><p><strong>number</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Unique layer number.</p></li>
+<li><p><strong>material</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><em>Material</em></a>) – Material name or material object</p></li>
+<li><p><strong>cladding</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><em>Material</em></a>) – Material name or material object for cladding</p></li>
+<li><p><strong>thickness</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Layer thickness (um)</p></li>
+<li><p><strong>zmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Starting point of the layer</p></li>
+<li><p><strong>sideWallAng</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Sidewall angle in degrees. Defaults to 0.</p></li>
+<li><p><strong>sideWallFunct</strong> (<em>Callable</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Sidewall function. Defaults to None.</p></li>
+<li><p><strong>fabtol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Fabrication tolerence. Defaults to 0.1.</p></li>
+<li><p><strong>numpts</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Number of points. Defaults to 1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.addMaterial">
+<span class="sig-name descname"><span class="pre">addMaterial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.addMaterial" title="Link to this definition"></a></dt>
+<dd><p>Adds a new material to the list of materials</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>material</strong> (<a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><em>Material</em></a>) – Material object. It can be ConstMaterial,
+ExperimentalMaterial or SellmeierMaterial.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.addMaterialLayer">
+<span class="sig-name descname"><span class="pre">addMaterialLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">thicknes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">material</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.addMaterialLayer" title="Link to this definition"></a></dt>
+<dd><p>Add a material layer with uniform thickness</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Layer start position</p></li>
+<li><p><strong>thicknes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Layer thickness</p></li>
+<li><p><strong>material</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><em>Material</em></a>) – Layer Material</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.getLayerCladMatNum">
+<span class="sig-name descname"><span class="pre">getLayerCladMatNum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.getLayerCladMatNum" title="Link to this definition"></a></dt>
+<dd><p>Returns cladding material number for the layer number. Returns none if the layer number does not exist</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>layer_num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Layer number</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cladding material number</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a>|None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.getLayerCladMatObj">
+<span class="sig-name descname"><span class="pre">getLayerCladMatObj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.getLayerCladMatObj" title="Link to this definition"></a></dt>
+<dd><p>Returns cladding material object for the layer number. Returns none if the layer number does not exist</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>layer_num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Layer number</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Cladding material object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material">Material</a>|None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.getLayerMaterialNum">
+<span class="sig-name descname"><span class="pre">getLayerMaterialNum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.getLayerMaterialNum" title="Link to this definition"></a></dt>
+<dd><p>Returns material number for the layer number. Returns none if the layer number does not exist</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>layer_num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Layer number</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Material number</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a>|None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.getLayerMaterialObj">
+<span class="sig-name descname"><span class="pre">getLayerMaterialObj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.getLayerMaterialObj" title="Link to this definition"></a></dt>
+<dd><p>Returns material object for the layer number. Returns none if the layer number does not exist</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>layer_num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Layer number</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Material object</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material">Material</a>|None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.getMaterialMap">
+<span class="sig-name descname"><span class="pre">getMaterialMap</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.getMaterialMap" title="Link to this definition"></a></dt>
+<dd><p>Returns the material dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Material dictionary</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a>,<a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material">Material</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.loadFromFolder">
+<span class="sig-name descname"><span class="pre">loadFromFolder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.loadFromFolder" title="Link to this definition"></a></dt>
+<dd><p>Loads materials from folder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>material_folder</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Path to older including material definitions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.setBGandSub">
+<span class="sig-name descname"><span class="pre">setBGandSub</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">background</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">substrate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.setBGandSub" title="Link to this definition"></a></dt>
+<dd><p>Sets the background and substrate materials. If material names are used, the material must already exist in the library</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>background</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><em>Material</em></a>) – Bacground material name or a material object</p></li>
+<li><p><strong>substrate</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><em>Material</em></a>) – Substrate material name or a material object</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.background">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">background</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a></em><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.background" title="Link to this definition"></a></dt>
+<dd><p>The background material for the region above the substrate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The background material object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material">Material</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerStack.substrate">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">substrate</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a></em><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerStack.substrate" title="Link to this definition"></a></dt>
+<dd><p>The substrate material.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The substrate material object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material">Material</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../LayerStack.html" class="btn btn-neutral float-left" title="Layer Stack" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pyOptiShared.LayerInfo.LayerInfo.html" class="btn btn-neutral float-right" title="pyOptiShared.LayerInfo.LayerInfo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

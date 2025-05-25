@@ -1,0 +1,31 @@
+﻿pyOptiShared.SimResults.FDTDSimRun
+==================================
+
+.. currentmodule:: pyOptiShared.SimResults
+
+.. autoclass:: FDTDSimRun
+   :members:
+   :show-inheritance:
+   :class-doc-from: init
+   :member-order: groupwise
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FDTDSimRun.dftmonitors
+      ~FDTDSimRun.timemonitors
+   
+   

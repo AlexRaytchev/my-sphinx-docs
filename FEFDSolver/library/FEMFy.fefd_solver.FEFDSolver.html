@@ -1,0 +1,195 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FEMFy.fefd_solver.FEFDSolver &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Optiwaves's Python EM Modules
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyOptiShared/SharedLibraries.html">Shared Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">FEMFy.fefd_solver.FEFDSolver</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/FEFDSolver/library/FEMFy.fefd_solver.FEFDSolver.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="femfy-fefd-solver-fefdsolver">
+<h1>FEMFy.fefd_solver.FEFDSolver<a class="headerlink" href="#femfy-fefd-solver-fefdsolver" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="FEMFy.fefd_solver.FEFDSolver">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">FEMFy.fefd_solver.</span></span><span class="sig-name descname"><span class="pre">FEFDSolver</span></span><a class="headerlink" href="#FEMFy.fefd_solver.FEFDSolver" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">simulator</span></code></p>
+<p>Finite Element Frequency Domain</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">element_layers</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_core_simulator</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_geom</span></code>(dev_geo)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#FEMFy.fefd_solver.FEFDSolver.set_boundaries" title="FEMFy.fefd_solver.FEFDSolver.set_boundaries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_boundaries</span></code></a>([min_x_bc, max_x_bc, ...])</p></td>
+<td><p>Set the boundary condition for the mode solver.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#FEMFy.fefd_solver.FEFDSolver.set_sim_settings" title="FEMFy.fefd_solver.FEFDSolver.set_sim_settings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_sim_settings</span></code></a>(device_geometry[, ...])</p></td>
+<td><p>This method set the higher level simulation settings.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.fefd_solver.FEFDSolver.set_boundaries">
+<span class="sig-name descname"><span class="pre">set_boundaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_x_bc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pmc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_x_bc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pmc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_y_bc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pmc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_y_bc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pmc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PML_Params</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#FEMFy.fefd_solver.FEFDSolver.set_boundaries" title="Link to this definition"></a></dt>
+<dd><p>Set the boundary condition for the mode solver. Supported boundaries are:
+<code class="docutils literal notranslate"><span class="pre">&quot;pmc&quot;</span></code>: perfect magnetic conductor, <cite>“asy”</cite> For anti-symmetric boundary and
+<code class="docutils literal notranslate"><span class="pre">&quot;sym&quot;</span></code> for symmetric boundary.
+Anti-symmetric is related to an odd symmetry of the H-fields at the boundary.
+Symmetric is related to an even symmetry of the H-fileds at the boundary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>optional</em>) – A dict with the choice of for x_min face. Defaults to {“bc”:”pmc”}.</p></li>
+<li><p><strong>max_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>optional</em>) – A dict with the choice of for x_max face.. Defaults to {“bc”:”pmc”}.</p></li>
+<li><p><strong>min_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>optional</em>) – A dict with the choice of for y_min face.. Defaults to {“bc”:”pmc”}.</p></li>
+<li><p><strong>max_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>optional</em>) – A dict with the choice of for y_max face.. Defaults to {“bc”:”pmc”}.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.fefd_solver.FEFDSolver.set_sim_settings">
+<span class="sig-name descname"><span class="pre">set_sim_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_geometry:</span> <span class="pre">~pyOptiShared.DeviceGeometry.DeviceGeometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulation_type:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'nportsparam'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength:</span> <span class="pre">~pyOptiShared.Simulator.WavelengthInfo</span> <span class="pre">=</span> <span class="pre">&lt;pyOptiShared.Simulator.WavelengthInfo</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh:</span> <span class="pre">~pyOptiShared.Simulator.Mesh</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'direct'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results_path:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stability:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polarization:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'TE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjoint_info:</span> <span class="pre">~pyOptiShared.Simulator.AdjointInfo</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#FEMFy.fefd_solver.FEFDSolver.set_sim_settings" title="Link to this definition"></a></dt>
+<dd><p>This method set the higher level simulation settings.
+Check <cite>GetGlobalUnits()</cite> methods for units.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sim_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Type of simulation. Defaults to “nportsparam”.
+PS: Currently supported is <cite>nportsparam</cite>, only.</p></li>
+<li><p><strong>sim_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Simulation time. Defaults to 10_000.</p></li>
+<li><p><strong>sim_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – The dimension of the simulation region.
+Defaults to [10, 10, 3]. Usualy this is overriden by the <cite>DeviceGeometry()</cite> object.</p></li>
+<li><p><strong>space_step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Space step. Uniform for X, Y and Z. Defaults to 0.025 (25nm).</p></li>
+<li><p><strong>kernel_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Defines the type of kernel. Either “cuda” or “numpy”. Defaults to “cuda”.</p></li>
+<li><p><strong>auto_shutoff_flag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If <cite>True</cite> will end the simulation using autoshutoff.
+Defaults to True. Autoshutoff triggers when the total simulation power gets below its maximum
+by a factor of <cite>auto_shutoff_limit</cite>.</p></li>
+<li><p><strong>auto_shutoff_limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – The relative threshold to trigger autoshutoff. Defaults to 1e-4.</p></li>
+<li><p><strong>export_mat_grid</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If <cite>True</cite> exports the material grid to the results file. Defaults to False.</p></li>
+<li><p><strong>round_buffers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If <cite>True</cite> it rounds the buffers of the DeviceGeometry() to multiples of the <cite>space_step</cite>.
+Defaults to True.</p></li>
+<li><p><strong>subpixel_level</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Dielectric material averaging level. Defaults to 2.
+PS: It oversamples the geometry by this many folds and then averages out the permittivity profile.</p></li>
+<li><p><strong>save_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – A path to save the results file (.hdf5 and .snp). Defaults to None.
+If not provided it will save directly in the current working directory.</p></li>
+<li><p><strong>results_filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – If None the solver will use information in the Device Geometry, date and time to create a filename.</p></li>
+<li><p><strong>show_modes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Displays the modes before running the simulation. Defaults to False.</p></li>
+<li><p><strong>show_permittivity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Displays the permittivity profile before running the simulation. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

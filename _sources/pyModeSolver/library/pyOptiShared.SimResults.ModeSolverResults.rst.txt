@@ -1,0 +1,54 @@
+﻿pyOptiShared.SimResults.ModeSolverResults
+=========================================
+
+.. currentmodule:: pyOptiShared.SimResults
+
+.. autoclass:: ModeSolverResults
+   :members:
+   :show-inheritance:
+   :class-doc-from: init
+   :member-order: groupwise
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+         ~ModeSolverResults.ExportAsF3DFile
+      
+      
+         ~ModeSolverResults.ExportNeff
+      
+      
+         ~ModeSolverResults.ExportNg
+      
+      
+         ~ModeSolverResults.PlotIndex
+      
+      
+         ~ModeSolverResults.PlotMode
+      
+      
+         ~ModeSolverResults.PlotPermittivity
+      
+      
+      
+         ~ModeSolverResults.loadHDF5
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ModeSolverResults.fields
+      ~ModeSolverResults.material_grid
+      ~ModeSolverResults.neff
+      ~ModeSolverResults.ng
+   
+   

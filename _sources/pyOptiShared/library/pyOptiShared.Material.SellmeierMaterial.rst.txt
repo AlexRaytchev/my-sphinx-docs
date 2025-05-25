@@ -1,0 +1,49 @@
+﻿pyOptiShared.Material.SellmeierMaterial
+=======================================
+
+.. currentmodule:: pyOptiShared.Material
+
+.. autoclass:: SellmeierMaterial
+   :members:
+   :show-inheritance:
+   :class-doc-from: init
+   :member-order: groupwise
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~SellmeierMaterial.eps
+      
+      
+         ~SellmeierMaterial.eps_imag
+      
+      
+         ~SellmeierMaterial.eps_real
+      
+      
+         ~SellmeierMaterial.index
+      
+      
+         ~SellmeierMaterial.index_imag
+      
+      
+         ~SellmeierMaterial.index_real
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SellmeierMaterial.color
+      ~SellmeierMaterial.name
+   
+   

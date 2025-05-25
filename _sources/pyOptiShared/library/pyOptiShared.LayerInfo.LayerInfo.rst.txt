@@ -1,0 +1,48 @@
+﻿pyOptiShared.LayerInfo.LayerInfo
+================================
+
+.. currentmodule:: pyOptiShared.LayerInfo
+
+.. autoclass:: LayerInfo
+   :members:
+   :show-inheritance:
+   :class-doc-from: init
+   :member-order: groupwise
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+         ~LayerInfo.GetOffset
+      
+      
+         ~LayerInfo.GetOffsetAng
+      
+      
+         ~LayerInfo.GetTolInfo
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LayerInfo.cladd_material
+      ~LayerInfo.cladd_name
+      ~LayerInfo.layer_number
+      ~LayerInfo.layer_thickness
+      ~LayerInfo.material
+      ~LayerInfo.material_name
+      ~LayerInfo.sw_ang
+      ~LayerInfo.sw_func
+      ~LayerInfo.z_max
+      ~LayerInfo.z_min
+   
+   

@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyOptiShared.SimResults.ModeSolverResults &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyOptiShared.SimResults.BaseSimResults" href="pyOptiShared.SimResults.BaseSimResults.html" />
+    <link rel="prev" title="pyModeSolver.py_mode_solver.VFDModeSolver" href="pyModeSolver.py_mode_solver.VFDModeSolver.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Optiwaves's Python EM Modules
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../pyOptiShared/SharedLibraries.html">Shared Libraries</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#mathematical-method">Mathematical Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#applications">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#examples">Examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../pyModeSolver.html#api-documentation">API Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pyModeSolver.py_mode_solver.VFDModeSolver.html">pyModeSolver.py_mode_solver.VFDModeSolver</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pyOptiShared.SimResults.ModeSolverResults</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults"><code class="docutils literal notranslate"><span class="pre">ModeSolverResults</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.ExportAsF3DFile"><code class="docutils literal notranslate"><span class="pre">ModeSolverResults.ExportAsF3DFile()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.ExportNeff"><code class="docutils literal notranslate"><span class="pre">ModeSolverResults.ExportNeff()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.ExportNg"><code class="docutils literal notranslate"><span class="pre">ModeSolverResults.ExportNg()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.PlotIndex"><code class="docutils literal notranslate"><span class="pre">ModeSolverResults.PlotIndex()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.PlotMode"><code class="docutils literal notranslate"><span class="pre">ModeSolverResults.PlotMode()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.PlotPermittivity"><code class="docutils literal notranslate"><span class="pre">ModeSolverResults.PlotPermittivity()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.fields"><code class="docutils literal notranslate"><span class="pre">ModeSolverResults.fields</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.material_grid"><code class="docutils literal notranslate"><span class="pre">ModeSolverResults.material_grid</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.neff"><code class="docutils literal notranslate"><span class="pre">ModeSolverResults.neff</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.ng"><code class="docutils literal notranslate"><span class="pre">ModeSolverResults.ng</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyOptiShared.SimResults.BaseSimResults.html">pyOptiShared.SimResults.BaseSimResults</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+      <li class="breadcrumb-item active">pyOptiShared.SimResults.ModeSolverResults</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/pyModeSolver/library/pyOptiShared.SimResults.ModeSolverResults.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyoptishared-simresults-modesolverresults">
+<h1>pyOptiShared.SimResults.ModeSolverResults<a class="headerlink" href="#pyoptishared-simresults-modesolverresults" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.ModeSolverResults">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyOptiShared.SimResults.</span></span><span class="sig-name descname"><span class="pre">ModeSolverResults</span></span><a class="headerlink" href="#pyOptiShared.SimResults.ModeSolverResults" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyOptiShared.SimResults.BaseSimResults.html#pyOptiShared.SimResults.BaseSimResults" title="pyOptiShared.SimResults.BaseSimResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSimResults</span></code></a></p>
+<p>Mode Solver Results class.</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.ExportAsF3DFile" title="pyOptiShared.SimResults.ModeSolverResults.ExportAsF3DFile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExportAsF3DFile</span></code></a>([filename, field, lam_idx, mode])</p></td>
+<td><p>Exports Hx, Hy, Hz, Ex, Ey, Ez for all the wavelengths and modes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.ExportNeff" title="pyOptiShared.SimResults.ModeSolverResults.ExportNeff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExportNeff</span></code></a>([filename, mode])</p></td>
+<td><p>Exports the effective index for the specified mode to a text file determined by filename.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.ExportNg" title="pyOptiShared.SimResults.ModeSolverResults.ExportNg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExportNg</span></code></a>([filename, mode])</p></td>
+<td><p>Exports the group index for the specified mode to a text file determined by filename.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.PlotIndex" title="pyOptiShared.SimResults.ModeSolverResults.PlotIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlotIndex</span></code></a>([index_type, modes, show_imag, ...])</p></td>
+<td><p>Plots effective or group index at a given mode</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.PlotMode" title="pyOptiShared.SimResults.ModeSolverResults.PlotMode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlotMode</span></code></a>([field, lam, mode, plot_type, ...])</p></td>
+<td><p>Plots the field component for a given mode at a given wavelength</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.PlotPermittivity" title="pyOptiShared.SimResults.ModeSolverResults.PlotPermittivity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlotPermittivity</span></code></a>([profile, lam, plot_type, ...])</p></td>
+<td><p>Plots permittivity distribution for x, y or z at a given cross section</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">loadHDF5</span></code>(filename)</p></td>
+<td><p>This method loads results from an HDF5 file.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.fields" title="pyOptiShared.SimResults.ModeSolverResults.fields"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fields</span></code></a></p></td>
+<td><p>The modal fields.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.material_grid" title="pyOptiShared.SimResults.ModeSolverResults.material_grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">material_grid</span></code></a></p></td>
+<td><p>The permittivity grid in the cross section.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.neff" title="pyOptiShared.SimResults.ModeSolverResults.neff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">neff</span></code></a></p></td>
+<td><p>The modal effective refractive index.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.ModeSolverResults.ng" title="pyOptiShared.SimResults.ModeSolverResults.ng"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ng</span></code></a></p></td>
+<td><p>The group effective index.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.ModeSolverResults.ExportAsF3DFile">
+<span class="sig-name descname"><span class="pre">ExportAsF3DFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'./field'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lam_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.SimResults.ModeSolverResults.ExportAsF3DFile" title="Link to this definition"></a></dt>
+<dd><p>Exports Hx, Hy, Hz, Ex, Ey, Ez for all the wavelengths and modes.
+Support to selected fields, wavelength and modes is pending.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Export file name without extension. Defaults to ‘./field’.</p></li>
+<li><p><strong>field</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – Fields to be exported. Defaults to ‘all’.</p></li>
+<li><p><strong>lam_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Wavelengths to be exported. Defaults to ‘all’.</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Modes to be exported. Defaults to ‘all’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.ModeSolverResults.ExportNeff">
+<span class="sig-name descname"><span class="pre">ExportNeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'./neff'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.SimResults.ModeSolverResults.ExportNeff" title="Link to this definition"></a></dt>
+<dd><p>Exports the effective index for the specified mode to a text file
+determined by filename.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Filename without extention. Defaults to “./neff”.</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Mode index to be exported. Defaults to -1, the mode
+with the highest real neff. “all” export all modes. An integer select that particular mode
+starting from 0. A list of ints, select multiple modes. Otherwise: -1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.ModeSolverResults.ExportNg">
+<span class="sig-name descname"><span class="pre">ExportNg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'./neff.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.SimResults.ModeSolverResults.ExportNg" title="Link to this definition"></a></dt>
+<dd><p>Exports the group index for the specified mode to a text file
+determined by filename.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Filename without extention. Defaults to “./neff”.</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Mode index to be exported. Defaults to -1, the mode
+with the highest real neff. “all” export all modes. An integer select that particular mode
+starting from 0. A list of ints, select multiple modes. Otherwise: -1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.ModeSolverResults.PlotIndex">
+<span class="sig-name descname"><span class="pre">PlotIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'neff'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'ng'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'neff'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_imag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.SimResults.ModeSolverResults.PlotIndex" title="Link to this definition"></a></dt>
+<dd><p>Plots effective or group index at a given mode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index_type</strong> (<em>Literal</em><em>[</em><em>'neff'</em><em>,</em><em>'ng'</em><em>]</em><em>, </em><em>optional</em>) – Effective or group index. Defaults to ‘neff’.</p></li>
+<li><p><strong>modes</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>, </em><em>optional</em>) – Mode numbers to plot. Defaults to [0].</p></li>
+<li><p><strong>show_imag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Enables imaginary plot for the index. Defaults to True.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Width of the plot. Defaults to 6.</p></li>
+<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Height of the plot. Defaults to 3.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.ModeSolverResults.PlotMode">
+<span class="sig-name descname"><span class="pre">PlotMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Ex'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Ey'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Ez'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Hx'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Hy'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Hz'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Hx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lam</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.55</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'real'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'imag'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'mag'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'phase'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'power'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'polar'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'cartesian'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mag'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.SimResults.ModeSolverResults.PlotMode" title="Link to this definition"></a></dt>
+<dd><p>Plots the field component for a given mode at a given wavelength</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> (<em>Literal</em><em>[</em><em>'Ex'</em><em>,</em><em>'Ey'</em><em>,</em><em>'Ez'</em><em>,</em><em>'Hx'</em><em>,</em><em>'Hy'</em><em>,</em><em>'Hz'</em><em>]</em>) – Field component to plot. Defaults to Hx.</p></li>
+<li><p><strong>lam</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Wavelength in um. Defaults to 1.55.</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Mode Number. Defaults to 0.</p></li>
+<li><p><strong>plot_type</strong> (<em>Literal</em><em>[</em><em>'real'</em><em>,</em><em>'imag'</em><em>,</em><em>'mag'</em><em>,</em><em>'phase'</em><em>,</em><em>'power'</em><em>,</em><em>'polar'</em><em>,</em><em>'cartesian'</em><em>]</em><em>, </em><em>optional</em>) – Plot type. Defaults to ‘mag’.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Width of the plot. Defaults to 4.</p></li>
+<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Height of the plot. Defaults to 4.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.ModeSolverResults.PlotPermittivity">
+<span class="sig-name descname"><span class="pre">PlotPermittivity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'EPS_X'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'EPS_Y'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'EPS_Z'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'EPS_X'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lam</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.55</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'real'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'imag'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'mag'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'phase'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'power'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'polar'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'cartesian'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'real'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.SimResults.ModeSolverResults.PlotPermittivity" title="Link to this definition"></a></dt>
+<dd><p>Plots permittivity distribution for x, y or z at a given cross section</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>profile</strong> (<em>Literal</em><em>[</em><em>'EPS_X'</em><em>,</em><em>'EPS_Y'</em><em>,</em><em>'EPS_Z'</em><em>]</em><em>, </em><em>optional</em>) – Profile to plot. Defaults to ‘EPS_X’.</p></li>
+<li><p><strong>lam</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Cut position. Defaults to 1.55 um. The value will be rounded to the closest position</p></li>
+<li><p><strong>plot_type</strong> (<em>Literal</em><em>[</em><em>'real'</em><em>,</em><em>'imag'</em><em>,</em><em>'mag'</em><em>,</em><em>'phase'</em><em>,</em><em>'power'</em><em>,</em><em>'polar'</em><em>,</em><em>'cartesian'</em><em>]</em><em>, </em><em>optional</em>) – Plot type. Defaults to ‘real’.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Width of the plot. Defaults to 4.</p></li>
+<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Height of the plot. Defaults to 4.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If cut type is not x,y or z</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.ModeSolverResults.fields">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.PlotTools.NXdata"><span class="pre">NXdata</span></a></em><a class="headerlink" href="#pyOptiShared.SimResults.ModeSolverResults.fields" title="Link to this definition"></a></dt>
+<dd><p>The modal fields.</p>
+<p>The data is ecapsulated using an NXdata object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata">NXdata</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.ModeSolverResults.material_grid">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">material_grid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.PlotTools.NXdata"><span class="pre">NXdata</span></a></em><a class="headerlink" href="#pyOptiShared.SimResults.ModeSolverResults.material_grid" title="Link to this definition"></a></dt>
+<dd><p>The permittivity grid in the cross section.</p>
+<p>Its data is ecapsulated using an NXdata object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata">NXdata</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.ModeSolverResults.neff">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">neff</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.PlotTools.NXdata"><span class="pre">NXdata</span></a></em><a class="headerlink" href="#pyOptiShared.SimResults.ModeSolverResults.neff" title="Link to this definition"></a></dt>
+<dd><p>The modal effective refractive index.</p>
+<p>Its data is ecapsulated using an NXdata object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata">NXdata</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.ModeSolverResults.ng">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ng</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.PlotTools.NXdata"><span class="pre">NXdata</span></a></em><a class="headerlink" href="#pyOptiShared.SimResults.ModeSolverResults.ng" title="Link to this definition"></a></dt>
+<dd><p>The group effective index.</p>
+<p>Its data is ecapsulated using an NXdata object.
+Available only if multiple frequencies were solved.
+Otherwise, None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata">NXdata</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pyModeSolver.py_mode_solver.VFDModeSolver.html" class="btn btn-neutral float-left" title="pyModeSolver.py_mode_solver.VFDModeSolver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pyOptiShared.SimResults.BaseSimResults.html" class="btn btn-neutral float-right" title="pyOptiShared.SimResults.BaseSimResults" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

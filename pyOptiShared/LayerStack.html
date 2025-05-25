@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layer Stack &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyOptiShared.LayerInfo.LayerStack" href="library/pyOptiShared.LayerInfo.LayerStack.html" />
+    <link rel="prev" title="pyOptiShared.Material.ExperimentalMaterial" href="library/pyOptiShared.Material.ExperimentalMaterial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Optiwaves's Python EM Modules
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="SharedLibraries.html">Shared Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="MaterialLib.html">Material Library</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Layer Stack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#layer-stack-and-layer-info-considerations">Layer Stack and Layer Info Considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#defining-material-objects">Defining Material Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-side-wall-angle-functions">Defining Side Wall Angle Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-layers-to-a-layerstack">Adding Layers to a LayerStack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setting-background-and-substrate-materials">Setting Background and Substrate Materials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualizing-the-layer-stack">Visualizing the Layer Stack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-complete-layer-stack-setup">A Complete Layer Stack Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API Documentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html">pyOptiShared.LayerInfo.LayerStack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html">pyOptiShared.LayerInfo.LayerInfo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DeviceGeometry.html">Device Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NXdata.html"><em>NXData</em> Data Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="SharedLibraries.html">Shared Libraries</a></li>
+      <li class="breadcrumb-item active">Layer Stack</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pyOptiShared/LayerStack.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="layer-stack">
+<span id="id1"></span><h1>Layer Stack<a class="headerlink" href="#layer-stack" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#layer-stack-and-layer-info-considerations" id="id3">Layer Stack and Layer Info Considerations</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id4">Examples</a></p>
+<ul>
+<li><p><a class="reference internal" href="#defining-material-objects" id="id5">Defining Material Objects</a></p></li>
+<li><p><a class="reference internal" href="#defining-side-wall-angle-functions" id="id6">Defining Side Wall Angle Functions</a></p></li>
+<li><p><a class="reference internal" href="#adding-layers-to-a-layerstack" id="id7">Adding Layers to a LayerStack</a></p></li>
+<li><p><a class="reference internal" href="#setting-background-and-substrate-materials" id="id8">Setting Background and Substrate Materials</a></p></li>
+<li><p><a class="reference internal" href="#visualizing-the-layer-stack" id="id9">Visualizing the Layer Stack</a></p></li>
+<li><p><a class="reference internal" href="#a-complete-layer-stack-setup" id="id10">A Complete Layer Stack Setup</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id11">API Documentation</a></p></li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>A <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code></a> is a class that is used to handle a series of
+<a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo" title="pyOptiShared.LayerInfo.LayerInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerInfo</span></code></a> objects. It contains a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> that uses
+<strong>unique user-defined</strong> <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.layer_number" title="pyOptiShared.LayerInfo.LayerInfo.layer_number"><code class="xref py py-attr docutils literal notranslate"><span class="pre">layer_number</span></code></a>
+as <code class="docutils literal notranslate"><span class="pre">key</span></code> for its respective <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo" title="pyOptiShared.LayerInfo.LayerInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerInfo</span></code></a> <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
+<p>In summary, each layer in your fabrication process corresponds to a <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo" title="pyOptiShared.LayerInfo.LayerInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerInfo</span></code></a>
+object. In a general form a layer stack can be repsented with the following diagram:</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Layer Stack Organization</div>
+<a class="reference internal image-reference" href="../_images/layers.svg" id="layerstack-config"><img alt="A graphical representation of a generic layer stack." class="align-center" id="layerstack-config" src="../_images/layers.svg" style="width: 100%;" />
+</a>
+<ul class="simple">
+<li><p class="sd-card-text">Space below the minimum <code class="docutils literal notranslate"><span class="pre">z_min</span></code> is considered <strong>substrate</strong>.</p></li>
+<li><p class="sd-card-text">Space above the maximum <code class="docutils literal notranslate"><span class="pre">z_max</span></code> is considered <strong>background</strong>.</p></li>
+<li><p class="sd-card-text">If <strong>cladding material</strong> is not specified it <strong>defaults to background</strong>.</p></li>
+<li><p class="sd-card-text">By default <strong>substrate</strong> and <strong>background</strong> defaults to <code class="docutils literal notranslate"><span class="pre">Air_default</span></code>.</p></li>
+<li><p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">z_min</span></code> determines the order in which the layers are stacked.</p></li>
+<li><p class="sd-card-text"><strong>Layer number</strong> must match those in the <code class="docutils literal notranslate"><span class="pre">.gds</span></code> file.</p></li>
+<li><p class="sd-card-text"><strong>Cladding</strong> will be used for <strong>empty spaces inside the layer</strong> as well, not just at the edges.</p></li>
+<li><p class="sd-card-text">Every material in a particular layer must derive from the <a class="reference internal" href="library/pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><code class="xref py py-class docutils literal notranslate"><span class="pre">Material</span></code></a> object.</p></li>
+<li><p class="sd-card-text">Care should be taken to <strong>avoid overlapping layers</strong>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="layer-stack-and-layer-info-considerations">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Layer Stack and Layer Info Considerations</a><a class="headerlink" href="#layer-stack-and-layer-info-considerations" title="Link to this heading"></a></h2>
+<p>Following are a few considerations to take into account when adding layers to the layer stack.</p>
+<ul class="simple">
+<li><p>Each layer must have a unique layer number;</p></li>
+<li><p>Care should be taken so that <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.z_min" title="pyOptiShared.LayerInfo.LayerInfo.z_min"><code class="xref py py-attr docutils literal notranslate"><span class="pre">z_min</span></code></a> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">thickness</span></code> attributes of multiple <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo" title="pyOptiShared.LayerInfo.LayerInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerInfo</span></code></a> dont end up overalping;</p></li>
+<li><p>If a <strong>cladding material</strong> is <strong>not defined</strong> when instantiating or adding a layer to the layer stack, it will be <strong>considered as background</strong>, and the default <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.background" title="pyOptiShared.LayerInfo.LayerStack.background"><code class="xref py py-attr docutils literal notranslate"><span class="pre">background</span></code></a> material of the layer stack will be used.</p></li>
+<li><p>Materials are automatically an uniquely added to an internal <code class="xref py py-class docutils literal notranslate"><span class="pre">MaterialLibrary</span></code> inside the <code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code> instance;</p></li>
+<li><p>By default <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.background" title="pyOptiShared.LayerInfo.LayerStack.background"><code class="xref py py-attr docutils literal notranslate"><span class="pre">background</span></code></a> and <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.substrate" title="pyOptiShared.LayerInfo.LayerStack.substrate"><code class="xref py py-attr docutils literal notranslate"><span class="pre">substrate</span></code></a> are set to Air.</p></li>
+</ul>
+</section>
+<section id="examples">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>The following examples will cover some specific settings of the <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code></a>
+and at the end it aggregates all the example snipets into a complete setup.
+For more deatails please check the <a class="reference internal" href="#layer-stack-api"><span class="std std-ref">API documentation</span></a>.</p>
+<section id="defining-material-objects">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Defining Material Objects</a><a class="headerlink" href="#defining-material-objects" title="Link to this heading"></a></h3>
+<p>This is example is just a reminder on how to define <a class="reference internal" href="MaterialLib.html#material-library"><span class="std std-ref">material objects</span></a> to
+be used by layers in a simulation script. Such material will be used in subsequent examples for
+creating <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo" title="pyOptiShared.LayerInfo.LayerInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerInfo</span></code></a> and <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code></a>
+objects.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+
+<span class="n">myindex1p45</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;myindex1p45&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">myindex3p5</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;myindex3p5&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="defining-side-wall-angle-functions">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Defining Side Wall Angle Functions</a><a class="headerlink" href="#defining-side-wall-angle-functions" title="Link to this heading"></a></h3>
+<p>The side wall functions must follow the python signature of the method defined by the
+<a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.GetOffset" title="pyOptiShared.LayerInfo.LayerInfo.GetOffset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GetOffset</span></code></a> method. This guarantees the correct
+evaluation of the side wall offset at a given <code class="docutils literal notranslate"><span class="pre">z</span></code> height at a particular layer. A negative
+offset <strong>erodes</strong> the wall, while a positive one <strong>dilates</strong> it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">offset_erode</span><span class="p">(</span><span class="n">z</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmin</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmax</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">layer</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">datatype</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">zmin</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">zmax</span><span class="o">-</span><span class="n">zmin</span><span class="p">))</span> <span class="c1"># Half sinusoid profile - Erode (-ve offset)</span>
+    <span class="k">return</span> <span class="n">offset</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">offset_dilate</span><span class="p">(</span><span class="n">z</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmin</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmax</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">layer</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">datatype</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">zmin</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">zmax</span><span class="o">-</span><span class="n">zmin</span><span class="p">))</span> <span class="c1"># Half sinusoid profile - Dilation (+ve offset)</span>
+    <span class="k">return</span> <span class="n">offset</span>
+</pre></div>
+</div>
+<p>Once this methods are defined they can be passed as the argument for <code class="docutils literal notranslate"><span class="pre">sideWallFunct</span></code> in the
+<a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.addLayer" title="pyOptiShared.LayerInfo.LayerStack.addLayer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addLayer</span></code></a>, as will be demonstrated in
+the next example.</p>
+</section>
+<section id="adding-layers-to-a-layerstack">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Adding Layers to a LayerStack</a><a class="headerlink" href="#adding-layers-to-a-layerstack" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">myindex3p5</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">,</span>
+                    <span class="n">sideWallFunct</span><span class="o">=</span><span class="n">offset_erode</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L2&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">myindex3p5</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">,</span>
+                    <span class="n">sideWallFunct</span><span class="o">=</span><span class="n">offset_dilate</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="setting-background-and-substrate-materials">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Setting Background and Substrate Materials</a><a class="headerlink" href="#setting-background-and-substrate-materials" title="Link to this heading"></a></h3>
+<p>Once the <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code></a> is defined, we can set the
+appropriate background and substrate material using the <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.setBGandSub" title="pyOptiShared.LayerInfo.LayerStack.setBGandSub"><code class="xref py py-meth docutils literal notranslate"><span class="pre">setBGandSub</span></code></a>
+method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="visualizing-the-layer-stack">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Visualizing the Layer Stack</a><a class="headerlink" href="#visualizing-the-layer-stack" title="Link to this heading"></a></h3>
+<p>The layer stack can be visualized using the <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.Show" title="pyOptiShared.LayerInfo.LayerStack.Show"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Show</span></code></a> method.
+It also allows exporting the stack to a file if <code class="docutils literal notranslate"><span class="pre">filename</span></code> is specified along with the <code class="docutils literal notranslate"><span class="pre">.svg</span></code> extension, for example.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+
+<span class="c1">#Specifying Materials and Colors</span>
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
+
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                    <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L2&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                    <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">Show</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;layerstack_example.svg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/layerstack_example.svg"><img alt="../_images/layerstack_example.svg" src="../_images/layerstack_example.svg" style="width: 90%;" />
+</a>
+</figure>
+</section>
+<section id="a-complete-layer-stack-setup">
+<span id="layer-stack-examples"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink">A Complete Layer Stack Setup</a><a class="headerlink" href="#a-complete-layer-stack-setup" title="Link to this heading"></a></h3>
+<p>This example uses the information provided in the previous examples to construct a
+full instantiation and setup of a <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###         Material Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">myindex1p45</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;myindex1p45&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">myindex3p5</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;myindex3p5&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###       Layer Stack Settings         ###</span>
+<span class="c1">##########################################</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">offset_erode</span><span class="p">(</span><span class="n">z</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmin</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmax</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">layer</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">datatype</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">zmin</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">zmax</span><span class="o">-</span><span class="n">zmin</span><span class="p">))</span> <span class="c1"># Half sinusoid profile - Erode (-ve offset)</span>
+    <span class="k">return</span> <span class="n">offset</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">offset_dilate</span><span class="p">(</span><span class="n">z</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmin</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmax</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">layer</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">datatype</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">zmin</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">zmax</span><span class="o">-</span><span class="n">zmin</span><span class="p">))</span> <span class="c1"># Half sinusoid profile - Dilation (+ve offset)</span>
+    <span class="k">return</span> <span class="n">offset</span>
+
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">myindex3p5</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">,</span>
+                    <span class="n">sideWallFunct</span><span class="o">=</span><span class="n">offset_erode</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L2&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">myindex3p5</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">,</span>
+                    <span class="n">sideWallFunct</span><span class="o">=</span><span class="n">offset_dilate</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="api-documentation">
+<span id="layer-stack-api"></span><h2><a class="toc-backref" href="#contents" role="doc-backlink">API Documentation</a><a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyOptiShared.LayerInfo.LayerStack</span></code></a>()</p></td>
+<td><p>A class to manage a list of layers and material objects.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo" title="pyOptiShared.LayerInfo.LayerInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyOptiShared.LayerInfo.LayerInfo</span></code></a>()</p></td>
+<td><p>This class defines a layer.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="library/pyOptiShared.Material.ExperimentalMaterial.html" class="btn btn-neutral float-left" title="pyOptiShared.Material.ExperimentalMaterial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="library/pyOptiShared.LayerInfo.LayerStack.html" class="btn btn-neutral float-right" title="pyOptiShared.LayerInfo.LayerStack" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

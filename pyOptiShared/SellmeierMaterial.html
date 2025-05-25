@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sellmeier Material Model &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Experimental Material Model" href="ExperimentalMaterial.html" />
+    <link rel="prev" title="Constant Material Model" href="ConstMaterial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Optiwaves's Python EM Modules
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="SharedLibraries.html">Shared Libraries</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="MaterialLib.html">Material Library</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="MaterialLib.html#overview">Overview</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="MaterialLib.html#material-models">Material Models</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="BaseMaterial.html">Material Base Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ConstMaterial.html">Constant Material Model</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Sellmeier Material Model</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#typical-use-case">Typical Use Case</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="ExperimentalMaterial.html">Experimental Material Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="MaterialLib.html#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MaterialLib.html#api-documentation">API Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="LayerStack.html">Layer Stack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeviceGeometry.html">Device Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NXdata.html"><em>NXData</em> Data Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="SharedLibraries.html">Shared Libraries</a></li>
+          <li class="breadcrumb-item"><a href="MaterialLib.html">Material Library</a></li>
+      <li class="breadcrumb-item active">Sellmeier Material Model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pyOptiShared/SellmeierMaterial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sellmeier-material-model">
+<span id="sellmeier-material"></span><h1>Sellmeier Material Model<a class="headerlink" href="#sellmeier-material-model" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id1">Overview</a></p></li>
+<li><p><a class="reference internal" href="#typical-use-case" id="id2">Typical Use Case</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id3">Examples</a></p></li>
+</ul>
+</nav>
+<p>The <a class="reference internal" href="library/pyOptiShared.Material.SellmeierMaterial.html#pyOptiShared.Material.SellmeierMaterial" title="pyOptiShared.Material.SellmeierMaterial"><code class="xref py py-class docutils literal notranslate"><span class="pre">SellmeierMaterial</span></code></a> class describes the frequency-dependent refractive index of a dielectric material using the Sellmeier equation. This model is widely used in optical and electromagnetic simulations to accurately account for material dispersion effects.</p>
+<section id="overview">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The Sellmeier equation expresses the square of the refractive index <span class="math notranslate nohighlight">\(n(\lambda)\)</span> as a function of the wavelength <span class="math notranslate nohighlight">\(\lambda\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[n^2(\lambda) = 1 + \sum_{i=1}^{N} \frac{B_i \lambda^2}{\lambda^2 - C_i}\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(( B_i )\)</span>, <span class="math notranslate nohighlight">\(( C_i )\)</span> are the Sellmeier coefficients.</p></li>
+<li><p><span class="math notranslate nohighlight">\(( \lambda )\)</span> is the wavelength, typically in micrometers (<span class="math notranslate nohighlight">\(\mu\text{m}\)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(( n )\)</span> is the refractive index.</p></li>
+</ul>
+<p>This formulation is suitable for modeling transparent materials such as glasses, crystals, and polymers in the visible and near-infrared spectral ranges.</p>
+</section>
+<section id="typical-use-case">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Typical Use Case</a><a class="headerlink" href="#typical-use-case" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="library/pyOptiShared.Material.SellmeierMaterial.html#pyOptiShared.Material.SellmeierMaterial" title="pyOptiShared.Material.SellmeierMaterial"><code class="xref py py-class docutils literal notranslate"><span class="pre">SellmeierMaterial</span></code></a> is used in electromagnetic simulations to model how light propagates through dispersive media.
+You instantiate the material with its Sellmeier coefficients, then use the model to compute refractive index
+or permittivity as a function of wavelength. Most of the cases this materials will be used in a <code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code> to
+define the materials of a particular layer.</p>
+</section>
+<section id="examples">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p><strong>Instantiating a Sellmeier Material Object:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">SellmeierMaterial</span>
+
+<span class="c1"># Example coefficients for BK7 glass</span>
+<span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.03961212</span><span class="p">,</span> <span class="mf">0.231792344</span><span class="p">,</span> <span class="mf">1.01046945</span><span class="p">]</span>
+<span class="n">C</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.00600069867</span><span class="p">,</span> <span class="mf">0.0200179144</span><span class="p">,</span> <span class="mf">103.560653</span><span class="p">]</span>
+
+<span class="c1"># Instantiates the Sellmeier Material object</span>
+<span class="n">material</span> <span class="o">=</span> <span class="n">SellmeierMaterial</span><span class="p">(</span><span class="s2">&quot;BK7Glass&quot;</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="n">material</span><span class="o">.</span><span class="n">eps</span><span class="p">(</span><span class="mf">0.55</span><span class="p">)</span>  <span class="c1"># Compute permittivity at 550 nm</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">material</span><span class="o">.</span><span class="n">index</span><span class="p">([</span><span class="mf">0.55</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">])</span>  <span class="c1"># Compute index at 550 nm and 650nm</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ConstMaterial.html" class="btn btn-neutral float-left" title="Constant Material Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ExperimentalMaterial.html" class="btn btn-neutral float-right" title="Experimental Material Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+.. _experimental-material:
+
+Experimental Material Model
+=============================
+
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: top
+
+Overview
+---------
+
+The :class:`ExperimentalMaterial <pyOptiShared.Material.ExperimentalMaterial>` describes the frequency-dependent refractive index of a material using experimental data. 
+This model relies on the user input of measurement data that can be done by:
+
+- Passing an array of *values* and *wavelengths* when instantiating the class.
+- Reading from a text file with columns (wl, n, k) or (wl, eps_real, eps_imag)
+- Importing from `RefractiveIndex.info <https://refractiveindex.info/>`_ based on *shelf/book/page* values.
+
+
+
+
+Examples
+---------
+
+Instantiating from Permittivity Array Data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In this case the values are by default **permittivity** values.
+
+.. code-block:: python
+
+    from pyOptiShared.Material import ExperimentalMaterial
+
+    wavelength = [1500, 1550, 1600]
+    values = [1.3, 1.31, 1.32]
+
+    material = ExperimentalMaterial("my_material", wavelength, values)
+
+    wavelength = [1515, 1560, 1590]
+    print(material.eps(wavelength))
+    print(np.square(material.index(wavelength)))
+
+Instantiating from Permittivity Text File
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In this case the values are by default **permittivity** values defined in a text file.
+
+Content of the ``my_material.txt``:
+::
+
+    wl  epsr    epsi
+    1500    1.2 0.0001
+    1510    1.21 0.00011
+    1520    1.22 0.00012
+    1530    1.23 0.00013
+    1540    1.24 0.00014
+    1550    1.25 0.00015
+    
+
+.. code-block:: python
+
+    import numpy as np
+    from pyOptiShared.Material import ExperimentalMaterial
+
+    material = ExperimentalMaterial("my_material")
+
+    material.LoadText("my_material")
+
+    wavelength = [1510, 1520, 1550]
+    print(material.eps(wavelength))
+    print(np.square(material.index(wavelength)))
+
+Instantiating from RefractiveIndex.info
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This examples shows how load the information from `RefractiveIndex.info <https://refractiveindex.info/>`_
+to set the permittivity values of material defined by *shelf/book/page* values. This values can be consulted
+directly on `RefractiveIndex.info <https://refractiveindex.info/>`_ webpage.
+
+.. code-block:: python
+
+    import numpy as np
+    from pyOptiShared.Material import ExperimentalMaterial
+
+    material = ExperimentalMaterial("my_material")
+
+    material.SetFromRefDotInfo(shelf="main", book="SiO2", page="Malitson", wavelength_unit=1e-9)
+
+    print(material.eps([1500, 1550, 1600]))
+    print(np.square(material.index([1500, 1550, 1600])))

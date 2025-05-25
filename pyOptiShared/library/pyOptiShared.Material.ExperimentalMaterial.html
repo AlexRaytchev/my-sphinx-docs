@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyOptiShared.Material.ExperimentalMaterial &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Layer Stack" href="../LayerStack.html" />
+    <link rel="prev" title="pyOptiShared.Material.SellmeierMaterial" href="pyOptiShared.Material.SellmeierMaterial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Optiwaves's Python EM Modules
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../SharedLibraries.html">Shared Libraries</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../MaterialLib.html">Material Library</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../MaterialLib.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MaterialLib.html#material-models">Material Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MaterialLib.html#example">Example</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../MaterialLib.html#api-documentation">API Documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pyOptiShared.Material.MaterialLibrary.html">pyOptiShared.Material.MaterialLibrary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyOptiShared.Material.Material.html">pyOptiShared.Material.Material</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyOptiShared.Material.ConstMaterial.html">pyOptiShared.Material.ConstMaterial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyOptiShared.Material.SellmeierMaterial.html">pyOptiShared.Material.SellmeierMaterial</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pyOptiShared.Material.ExperimentalMaterial</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.Material.ExperimentalMaterial"><code class="docutils literal notranslate"><span class="pre">ExperimentalMaterial</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.Material.ExperimentalMaterial.LoadText"><code class="docutils literal notranslate"><span class="pre">ExperimentalMaterial.LoadText()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.Material.ExperimentalMaterial.SetFromRefDotInfo"><code class="docutils literal notranslate"><span class="pre">ExperimentalMaterial.SetFromRefDotInfo()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.Material.ExperimentalMaterial.eps"><code class="docutils literal notranslate"><span class="pre">ExperimentalMaterial.eps()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.Material.ExperimentalMaterial.index"><code class="docutils literal notranslate"><span class="pre">ExperimentalMaterial.index()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../LayerStack.html">Layer Stack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DeviceGeometry.html">Device Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NXdata.html"><em>NXData</em> Data Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../SharedLibraries.html">Shared Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../MaterialLib.html">Material Library</a></li>
+      <li class="breadcrumb-item active">pyOptiShared.Material.ExperimentalMaterial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/pyOptiShared/library/pyOptiShared.Material.ExperimentalMaterial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyoptishared-material-experimentalmaterial">
+<h1>pyOptiShared.Material.ExperimentalMaterial<a class="headerlink" href="#pyoptishared-material-experimentalmaterial" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyOptiShared.Material.ExperimentalMaterial">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyOptiShared.Material.</span></span><span class="sig-name descname"><span class="pre">ExperimentalMaterial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mat_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">lamb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#complex" title="(in Python v3.13)"><span class="pre">complex</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zbEps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.Material.ExperimentalMaterial" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><code class="xref py py-class docutils literal notranslate"><span class="pre">Material</span></code></a></p>
+<p>A material defined by experimental data, a list of wavelength
+permittivity/index values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mat_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Material name.</p></li>
+<li><p><strong>values</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>] </em><em>| </em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – Permittivity or Ref. Index values.</p></li>
+<li><p><strong>lamb</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>] </em><em>| </em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – Wavelength values.</p></li>
+<li><p><strong>zbEps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – If <cite>True</cite> idicates permittivity values. Otherwise, ref. index values.
+Defaults to <cite>True</cite>, permittivity values.</p></li>
+<li><p><strong>color</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Material color to display</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.Material.ExperimentalMaterial.LoadText" title="pyOptiShared.Material.ExperimentalMaterial.LoadText"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LoadText</span></code></a>(filename)</p></td>
+<td><p>This method loads experimental data from a text file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.Material.ExperimentalMaterial.SetFromRefDotInfo" title="pyOptiShared.Material.ExperimentalMaterial.SetFromRefDotInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetFromRefDotInfo</span></code></a>(shelf, book, page[, ...])</p></td>
+<td><p>Sets the material properties according to <a class="reference external" href="https://refractiveindex.info/">refractiveindex.info</a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.Material.ExperimentalMaterial.eps" title="pyOptiShared.Material.ExperimentalMaterial.eps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eps</span></code></a>(wavelength)</p></td>
+<td><p>This method returns the permittivity at particular wavelengths.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eps_imag</span></code>(wavelength)</p></td>
+<td><p>Returns the real part of the permmittivity values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eps_real</span></code>(wavelength)</p></td>
+<td><p>Returns the real part of the permmittivity values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.Material.ExperimentalMaterial.index" title="pyOptiShared.Material.ExperimentalMaterial.index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code></a>(wavelength)</p></td>
+<td><p>This method returns the refractive index at particular wavelengths.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">index_imag</span></code>(wavelength)</p></td>
+<td><p>Return the imaginary part of the index of refraction at a given wavelengths.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">index_real</span></code>(wavelength)</p></td>
+<td><p>Return the real part of the index of refraction at a given wavelengths.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">color</span></code></p></td>
+<td><p>The color of the material for eventual visualization purposes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">mIntrpImag</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">mIntrpReal</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">mstrMode</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p>Material name.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.Material.ExperimentalMaterial.LoadText">
+<span class="sig-name descname"><span class="pre">LoadText</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.Material.ExperimentalMaterial.LoadText" title="Link to this definition"></a></dt>
+<dd><p>This method loads experimental data from a text file.</p>
+<dl class="simple">
+<dt>The text file contains a header for two or three tab saparated columns:</dt><dd><ul class="simple">
+<li><p>Two Columns: first column is wavelength (wl) second is either real index or real permittivity.</p></li>
+<li><p>Three Columns: first column is wavelength (wl) second is real index (n) or permittivity and third is imaginary index (k) or permittivity.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Remember to set <code class="docutils literal notranslate"><span class="pre">zbEps</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> during instantiation if the material object data
+will be defined in terms of the refractive index. Otherwise, the default <code class="docutils literal notranslate"><span class="pre">True</span></code>
+indicates the data corresponds to permittivity data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Filename for a .txt file. If missing extention it append
+.txt.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – Unsupported file extension.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If less then two or three headers in the file.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If data line has length different than the header.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.Material.ExperimentalMaterial.SetFromRefDotInfo">
+<span class="sig-name descname"><span class="pre">SetFromRefDotInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shelf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">book</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength_unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#pyOptiShared.Material.ExperimentalMaterial.SetFromRefDotInfo" title="Link to this definition"></a></dt>
+<dd><p>Sets the material properties according to <a class="reference external" href="https://refractiveindex.info/">refractiveindex.info</a>.</p>
+<p>This method is based on the <a class="reference external" href="https://github.com/toftul/refractiveindex">Python interface</a>
+to RefractiveIndex database.</p>
+<p>By default the wavelength units are microns (um).
+This method checks if the extinction coefficient of the material is <cite>None</cite>. Then,
+it prints a message to report that no loss is modeled by this <cite>shelf</cite>/<cite>book</cite>/<cite>page</cite> material.
+Hence, reporting only a real permittivity or refractive index. Otherwise it is a complex
+array of elements.</p>
+<p>In summary this method will replace the <a class="reference internal" href="#pyOptiShared.Material.ExperimentalMaterial.eps" title="pyOptiShared.Material.ExperimentalMaterial.eps"><code class="xref py py-class docutils literal notranslate"><span class="pre">eps()</span></code></a>
+and <a class="reference internal" href="#pyOptiShared.Material.ExperimentalMaterial.index" title="pyOptiShared.Material.ExperimentalMaterial.index"><code class="xref py py-class docutils literal notranslate"><span class="pre">index()</span></code></a> methods by those available
+in the <code class="docutils literal notranslate"><span class="pre">RefractiveIndexMaterial</span></code> object from the <code class="docutils literal notranslate"><span class="pre">refractiveindex</span></code> module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shelf</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – refractiveindex.info’s shelf string.</p></li>
+<li><p><strong>book</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – refractiveindex.info’s book string.</p></li>
+<li><p><strong>page</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – refractiveindex.info’s page string.</p></li>
+<li><p><strong>wavelength_unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – The wavelength units. Defaults to 1e-6 (microns).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.Material.ExperimentalMaterial.eps">
+<span class="sig-name descname"><span class="pre">eps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></span><a class="headerlink" href="#pyOptiShared.Material.ExperimentalMaterial.eps" title="Link to this definition"></a></dt>
+<dd><p>This method returns the permittivity at particular wavelengths.</p>
+<p>The units are those defined by either the raw data arrays, external text file
+or those set when using RefractiveIndex.info wrapper.</p>
+<p>When using the <a class="reference internal" href="#pyOptiShared.Material.ExperimentalMaterial.SetFromRefDotInfo" title="pyOptiShared.Material.ExperimentalMaterial.SetFromRefDotInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">SetFromRefDotInfo()</span></code></a>
+this method is overloaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>wavelength</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>] </em><em>| </em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – A set of wavelength values
+to calculate the permittivity.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If wavelength is outside the range of the experimental data.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Permittivity array for requested wavelength values.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)">numpy.ndarray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.Material.ExperimentalMaterial.index">
+<span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><span class="pre">ndarray</span></a></span></span><a class="headerlink" href="#pyOptiShared.Material.ExperimentalMaterial.index" title="Link to this definition"></a></dt>
+<dd><p>This method returns the refractive index at particular wavelengths.</p>
+<p>The units are those defined by either the raw data arrays, external text file
+or those set when using RefractiveIndex.info wrapper.</p>
+<p>When using the <a class="reference internal" href="#pyOptiShared.Material.ExperimentalMaterial.SetFromRefDotInfo" title="pyOptiShared.Material.ExperimentalMaterial.SetFromRefDotInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">SetFromRefDotInfo()</span></code></a>
+this method is overloaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>wavelength</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>] </em><em>| </em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – A set of wavelength values
+to calculate the ref. index.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If wavelength is outside the range of the experimental data.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Refractive index array for requested wavelength values.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)">numpy.ndarray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pyOptiShared.Material.SellmeierMaterial.html" class="btn btn-neutral float-left" title="pyOptiShared.Material.SellmeierMaterial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../LayerStack.html" class="btn btn-neutral float-right" title="Layer Stack" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

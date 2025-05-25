@@ -1,0 +1,336 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyOptiShared.SimResults.FDTDSimResults &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyOptiShared.SimResults.FDTDModeData" href="pyOptiShared.SimResults.FDTDModeData.html" />
+    <link rel="prev" title="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver" href="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Optiwaves's Python EM Modules
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../pyOptiShared/SharedLibraries.html">Shared Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../pyFDTD.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyFDTD.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyFDTD.html#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyFDTD.html#boundary-conditions">Boundary Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyFDTD.html#applications">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyFDTD.html#file-output">File Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyFDTD.html#examples">Examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../pyFDTD.html#api-documentation">API Documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html">pyFDTDKernel.pyFDTDSolver.pyFDTDSolver</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pyOptiShared.SimResults.FDTDSimResults</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults"><code class="docutils literal notranslate"><span class="pre">FDTDSimResults</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.PlotDFTMonitor"><code class="docutils literal notranslate"><span class="pre">FDTDSimResults.PlotDFTMonitor()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.PlotPermittivity"><code class="docutils literal notranslate"><span class="pre">FDTDSimResults.PlotPermittivity()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.PlotSParameters"><code class="docutils literal notranslate"><span class="pre">FDTDSimResults.PlotSParameters()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.PlotTimeMonitor"><code class="docutils literal notranslate"><span class="pre">FDTDSimResults.PlotTimeMonitor()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.mode_sources"><code class="docutils literal notranslate"><span class="pre">FDTDSimResults.mode_sources</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.permeability"><code class="docutils literal notranslate"><span class="pre">FDTDSimResults.permeability</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.permittivity"><code class="docutils literal notranslate"><span class="pre">FDTDSimResults.permittivity</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.runs"><code class="docutils literal notranslate"><span class="pre">FDTDSimResults.runs</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.sparameters"><code class="docutils literal notranslate"><span class="pre">FDTDSimResults.sparameters</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyOptiShared.SimResults.FDTDModeData.html">pyOptiShared.SimResults.FDTDModeData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyOptiShared.SimResults.FDTDSimRun.html">pyOptiShared.SimResults.FDTDSimRun</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+      <li class="breadcrumb-item active">pyOptiShared.SimResults.FDTDSimResults</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/pyFDTD/library/pyOptiShared.SimResults.FDTDSimResults.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyoptishared-simresults-fdtdsimresults">
+<h1>pyOptiShared.SimResults.FDTDSimResults<a class="headerlink" href="#pyoptishared-simresults-fdtdsimresults" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.FDTDSimResults">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyOptiShared.SimResults.</span></span><span class="sig-name descname"><span class="pre">FDTDSimResults</span></span><a class="headerlink" href="#pyOptiShared.SimResults.FDTDSimResults" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../../pyModeSolver/library/pyOptiShared.SimResults.BaseSimResults.html#pyOptiShared.SimResults.BaseSimResults" title="pyOptiShared.SimResults.BaseSimResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSimResults</span></code></a></p>
+<p>FDTD Results class.</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetSPArray</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.PlotDFTMonitor" title="pyOptiShared.SimResults.FDTDSimResults.PlotDFTMonitor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlotDFTMonitor</span></code></a>(mon_name[, run_num, field, ...])</p></td>
+<td><p>Plots the field distribtuin at a given frequency</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.PlotPermittivity" title="pyOptiShared.SimResults.FDTDSimResults.PlotPermittivity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlotPermittivity</span></code></a>([profile, cut, position, ...])</p></td>
+<td><p>Plots permittivity distribution for x, y or z at a given cross section</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.PlotSParameters" title="pyOptiShared.SimResults.FDTDSimResults.PlotSParameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlotSParameters</span></code></a>([snp, plot_type, ...])</p></td>
+<td><p>Plots s-parameter values</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.PlotTimeMonitor" title="pyOptiShared.SimResults.FDTDSimResults.PlotTimeMonitor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlotTimeMonitor</span></code></a>(mon_name[, run_num, field, ...])</p></td>
+<td><p>Plots the field component of a time monitor at a given time</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">loadHDF5</span></code>(filename)</p></td>
+<td><p>This method loads results from an HDF5 file.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.mode_sources" title="pyOptiShared.SimResults.FDTDSimResults.mode_sources"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mode_sources</span></code></a></p></td>
+<td><p>A dictionary of mode source data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.permeability" title="pyOptiShared.SimResults.FDTDSimResults.permeability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">permeability</span></code></a></p></td>
+<td><p>The permeability material grid.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.permittivity" title="pyOptiShared.SimResults.FDTDSimResults.permittivity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">permittivity</span></code></a></p></td>
+<td><p>The permittivity material grid.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.runs" title="pyOptiShared.SimResults.FDTDSimResults.runs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">runs</span></code></a></p></td>
+<td><p>A list that stores each run's results.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.SimResults.FDTDSimResults.sparameters" title="pyOptiShared.SimResults.FDTDSimResults.sparameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparameters</span></code></a></p></td>
+<td><p>A dictionary with scattering parameter results.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.FDTDSimResults.PlotDFTMonitor">
+<span class="sig-name descname"><span class="pre">PlotDFTMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mon_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Ex'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Ey'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Ez'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Hx'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Hy'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Hz'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Ex'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">192.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'real'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'imag'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'mag'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'phase'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'power'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'polar'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'cartesian'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mag'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.SimResults.FDTDSimResults.PlotDFTMonitor" title="Link to this definition"></a></dt>
+<dd><p>Plots the field distribtuin at a given frequency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mon_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of the monitor</p></li>
+<li><p><strong>run_num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Number of the excitation port. Defaults to 0.</p></li>
+<li><p><strong>field</strong> (<em>Literal</em><em>[</em><em>'Ex'</em><em>,</em><em>'Ey'</em><em>,</em><em>'Ez'</em><em>,</em><em>'Hx'</em><em>,</em><em>'Hy'</em><em>,</em><em>'Hz'</em><em>]</em><em>, </em><em>optional</em>) – Field component to plot. Defaults to ‘Ex’.</p></li>
+<li><p><strong>frequency</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Frequency in THz. Defaults to 192.1.</p></li>
+<li><p><strong>plot_type</strong> (<em>Literal</em><em>[</em><em>'real'</em><em>,</em><em>'imag'</em><em>,</em><em>'mag'</em><em>,</em><em>'phase'</em><em>,</em><em>'power'</em><em>,</em><em>'polar'</em><em>,</em><em>'cartesian'</em><em>]</em><em>, </em><em>optional</em>) – Plot type. Defaults to ‘mag’.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Width of the plot. Defaults to 6.</p></li>
+<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Height of the plot. Defaults to 4.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.FDTDSimResults.PlotPermittivity">
+<span class="sig-name descname"><span class="pre">PlotPermittivity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'EPS_X'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'EPS_Y'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'EPS_Z'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'EPS_X'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cut</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'x'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'y'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'z'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'z'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'real'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'imag'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'mag'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'phase'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'power'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'polar'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'cartesian'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'real'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.SimResults.FDTDSimResults.PlotPermittivity" title="Link to this definition"></a></dt>
+<dd><p>Plots permittivity distribution for x, y or z at a given cross section</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>profile</strong> (<em>Literal</em><em>[</em><em>'EPS_X'</em><em>,</em><em>'EPS_Y'</em><em>,</em><em>'EPS_Z'</em><em>]</em><em>, </em><em>optional</em>) – Profile to plot. Defaults to ‘EPS_X’.</p></li>
+<li><p><strong>cut</strong> (<em>Literal</em><em>[</em><em>'x'</em><em>,</em><em>'y'</em><em>,</em><em>'z'</em><em>]</em><em>, </em><em>optional</em>) – Cut dimension. Defaults to ‘z’.</p></li>
+<li><p><strong>position</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Cut position. Defaults to 0 um. The value will be rounded to the closest position</p></li>
+<li><p><strong>plot_type</strong> (<em>Literal</em><em>[</em><em>'real'</em><em>,</em><em>'imag'</em><em>,</em><em>'mag'</em><em>,</em><em>'phase'</em><em>,</em><em>'power'</em><em>,</em><em>'polar'</em><em>,</em><em>'cartesian'</em><em>]</em><em>, </em><em>optional</em>) – Plot type. Defaults to ‘real’.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Width of the plot. Defaults to 6.</p></li>
+<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Height of the plot. Defaults to 4.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If cut type is not x,y or z</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.FDTDSimResults.PlotSParameters">
+<span class="sig-name descname"><span class="pre">PlotSParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['S11',</span> <span class="pre">'S21']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'real'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'imag'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'mag'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'phase'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'power'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'polar'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'cartesian'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mag'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unwrap_phase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.SimResults.FDTDSimResults.PlotSParameters" title="Link to this definition"></a></dt>
+<dd><p>Plots s-parameter values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>snp</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>]</em><em>, </em><em>optional</em>) – It can be a single s-parameter or a list of s-parameter values. The format is Sij where i and j are rows and coluns of the s-parameter.Defaults to ‘S21’.</p></li>
+<li><p><strong>plot_type</strong> (<em>Literal</em><em>[</em><em>'real'</em><em>,</em><em>'imag'</em><em>,</em><em>'mag'</em><em>,</em><em>'phase'</em><em>,</em><em>'power'</em><em>,</em><em>'polar'</em><em>,</em><em>'cartesian'</em><em>]</em><em>, </em><em>optional</em>) – Plot type. Defaults to ‘mag’.</p></li>
+<li><p><strong>unwrap_phase</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a><em>, </em><em>optional</em>) – Unwraps phase if the plot thpe is polar or phase. Defaults to True.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Width of the plot. Defaults to 6.</p></li>
+<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Height of the plot. Defaults to 3.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.FDTDSimResults.PlotTimeMonitor">
+<span class="sig-name descname"><span class="pre">PlotTimeMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mon_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'Ex'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Ey'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Ez'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Hx'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Hy'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Hz'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Ex'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'real'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'imag'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'mag'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'phase'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'power'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'polar'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'cartesian'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mag'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.SimResults.FDTDSimResults.PlotTimeMonitor" title="Link to this definition"></a></dt>
+<dd><p>Plots the field component of a time monitor at a given time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mon_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Name of the time monitor</p></li>
+<li><p><strong>run_num</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Number of the excitation port. Defaults to 0.</p></li>
+<li><p><strong>field</strong> (<em>Literal</em><em>[</em><em>'Ex'</em><em>,</em><em>'Ey'</em><em>,</em><em>'Ez'</em><em>,</em><em>'Hx'</em><em>,</em><em>'Hy'</em><em>,</em><em>'Hz'</em><em>]</em><em>, </em><em>optional</em>) – Field component to plot. Defaults to ‘Ex’.</p></li>
+<li><p><strong>time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Time to plot. Defaults to 1 fs. The value will be rounded to the closest position</p></li>
+<li><p><strong>plot_type</strong> (<em>Literal</em><em>[</em><em>'real'</em><em>,</em><em>'imag'</em><em>,</em><em>'mag'</em><em>,</em><em>'phase'</em><em>,</em><em>'power'</em><em>,</em><em>'polar'</em><em>,</em><em>'cartesian'</em><em>]</em><em>, </em><em>optional</em>) – Plot type. Defaults to ‘mag’.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Width of the plot. Defaults to 6.</p></li>
+<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – Height of the plot. Defaults to 3.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.FDTDSimResults.mode_sources">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mode_sources</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="pyOptiShared.SimResults.FDTDModeData.html#pyOptiShared.SimResults.FDTDModeData" title="pyOptiShared.SimResults.FDTDModeData"><span class="pre">FDTDModeData</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyOptiShared.SimResults.FDTDSimResults.mode_sources" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of mode source data.</p>
+<p>The keys are <code class="docutils literal notranslate"><span class="pre">Mode</span> <span class="pre">Source</span> <span class="pre">o#</span></code> where # is the port number
+starting from 1. The values are FDTDModeData objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>, <a class="reference internal" href="pyOptiShared.SimResults.FDTDModeData.html#pyOptiShared.SimResults.FDTDModeData" title="pyOptiShared.SimResults.FDTDModeData">FDTDModeData</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.FDTDSimResults.permeability">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">permeability</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.PlotTools.NXdata"><span class="pre">NXdata</span></a></em><a class="headerlink" href="#pyOptiShared.SimResults.FDTDSimResults.permeability" title="Link to this definition"></a></dt>
+<dd><p>The permeability material grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata">NXdata</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.FDTDSimResults.permittivity">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">permittivity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.PlotTools.NXdata"><span class="pre">NXdata</span></a></em><a class="headerlink" href="#pyOptiShared.SimResults.FDTDSimResults.permittivity" title="Link to this definition"></a></dt>
+<dd><p>The permittivity material grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata">NXdata</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.FDTDSimResults.runs">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">runs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="pyOptiShared.SimResults.FDTDSimRun.html#pyOptiShared.SimResults.FDTDSimRun" title="pyOptiShared.SimResults.FDTDSimRun"><span class="pre">FDTDSimRun</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyOptiShared.SimResults.FDTDSimResults.runs" title="Link to this definition"></a></dt>
+<dd><p>A list that stores each run’s results.</p>
+<p>The results are stored as FDTDSimRun.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of FDTD run results.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a>[<a class="reference internal" href="pyOptiShared.SimResults.FDTDSimRun.html#pyOptiShared.SimResults.FDTDSimRun" title="pyOptiShared.SimResults.FDTDSimRun">FDTDSimRun</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyOptiShared.SimResults.FDTDSimResults.sparameters">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sparameters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.PlotTools.NXdata"><span class="pre">NXdata</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pyOptiShared.SimResults.FDTDSimResults.sparameters" title="Link to this definition"></a></dt>
+<dd><p>A dictionary with scattering parameter results.</p>
+<p>The keys are either <code class="docutils literal notranslate"><span class="pre">&quot;ALL&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;SNM&quot;</span></code>, where
+<strong>N</strong> and <strong>M</strong> are port numbers, starting from 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>, <a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata">NXdata</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html" class="btn btn-neutral float-left" title="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pyOptiShared.SimResults.FDTDModeData.html" class="btn btn-neutral float-right" title="pyOptiShared.SimResults.FDTDModeData" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

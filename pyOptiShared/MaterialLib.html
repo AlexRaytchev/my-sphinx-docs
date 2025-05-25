@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Material Library &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Material Base Class" href="BaseMaterial.html" />
+    <link rel="prev" title="Shared Libraries" href="SharedLibraries.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Optiwaves's Python EM Modules
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="SharedLibraries.html">Shared Libraries</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Material Library</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#material-models">Material Models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="BaseMaterial.html">Material Base Class</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ConstMaterial.html">Constant Material Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="SellmeierMaterial.html">Sellmeier Material Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ExperimentalMaterial.html">Experimental Material Model</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API Documentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="library/pyOptiShared.Material.MaterialLibrary.html">pyOptiShared.Material.MaterialLibrary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="library/pyOptiShared.Material.Material.html">pyOptiShared.Material.Material</a></li>
+<li class="toctree-l4"><a class="reference internal" href="library/pyOptiShared.Material.ConstMaterial.html">pyOptiShared.Material.ConstMaterial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="library/pyOptiShared.Material.SellmeierMaterial.html">pyOptiShared.Material.SellmeierMaterial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="library/pyOptiShared.Material.ExperimentalMaterial.html">pyOptiShared.Material.ExperimentalMaterial</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="LayerStack.html">Layer Stack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeviceGeometry.html">Device Geometry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NXdata.html"><em>NXData</em> Data Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="SharedLibraries.html">Shared Libraries</a></li>
+      <li class="breadcrumb-item active">Material Library</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pyOptiShared/MaterialLib.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="material-library">
+<span id="id1"></span><h1>Material Library<a class="headerlink" href="#material-library" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#material-models" id="id3">Material Models</a></p></li>
+<li><p><a class="reference internal" href="#example" id="id4">Example</a></p></li>
+<li><p><a class="reference internal" href="#api-documentation" id="id5">API Documentation</a></p></li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The <strong>material library</strong> is an object that holds a dictionary of <a class="reference internal" href="library/pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><code class="xref py py-class docutils literal notranslate"><span class="pre">Material</span></code></a>
+objects. Internaly, each material is stored using a unique material number that gets assigned whenever a material is
+instantiated.</p>
+<p>This library is stored internaly in a <code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code> to be usedby multiple
+<code class="xref py py-class docutils literal notranslate"><span class="pre">LayerInfo</span></code> objects when determining properties of substrate, background, base and cladding materials.</p>
+<p>Alternatively the user can use this object to collect and organize multiple material objects. You can check examples down below on how to add and retrieve the material
+objects. However, most solvers will rely on a <code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code> object that itself controls its own instance of the
+<a class="reference internal" href="library/pyOptiShared.Material.MaterialLibrary.html#pyOptiShared.Material.MaterialLibrary" title="pyOptiShared.Material.MaterialLibrary"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaterialLibrary</span></code></a>.</p>
+</section>
+<section id="material-models">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Material Models</a><a class="headerlink" href="#material-models" title="Link to this heading"></a></h2>
+<p>Following is a list of <strong>material models</strong> that can be used to define <strong>material properties</strong>.
+Cehck them out for details and usage examples.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="BaseMaterial.html">Material Base Class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="BaseMaterial.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="BaseMaterial.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ConstMaterial.html">Constant Material Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ConstMaterial.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ConstMaterial.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ConstMaterial.html#usage-notes">Usage Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SellmeierMaterial.html">Sellmeier Material Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SellmeierMaterial.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SellmeierMaterial.html#typical-use-case">Typical Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SellmeierMaterial.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ExperimentalMaterial.html">Experimental Material Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ExperimentalMaterial.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ExperimentalMaterial.html#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="example">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Example</a><a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<p>This main example covers the instantiation of a library plus ways of adding and getting
+material from it. for more deatail please check the <a class="reference internal" href="#material-library-api"><span class="std std-ref">API documentation</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaterialLibrary</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+
+<span class="c1"># Instantiates the Library</span>
+<span class="n">library</span> <span class="o">=</span> <span class="n">MaterialLibrary</span><span class="p">()</span>
+
+<span class="c1"># Creates a constant material</span>
+<span class="n">material</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="s2">&quot;my_material&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.45</span><span class="p">,</span> <span class="n">epsImag</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+
+<span class="c1"># Adds the material to the library</span>
+<span class="n">library</span><span class="o">.</span><span class="n">addMaterial</span><span class="p">(</span><span class="n">material</span><span class="p">)</span>
+
+<span class="c1"># Get the material library as a dictionary</span>
+<span class="n">mat_dict</span> <span class="o">=</span> <span class="n">library</span><span class="o">.</span><span class="n">getMatDict</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mat_dict</span><span class="p">)</span>
+
+<span class="c1"># Get &#39;my_material&#39; from the library</span>
+<span class="n">my_material</span> <span class="o">=</span> <span class="n">library</span><span class="o">.</span><span class="n">getMaterialFromName</span><span class="p">(</span><span class="s2">&quot;my_material&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get &#39;Air&#39; a default const material number 2 from the library</span>
+<span class="n">air_material</span> <span class="o">=</span> <span class="n">library</span><span class="o">.</span><span class="n">getMaterialFromNum</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="api-documentation">
+<span id="material-library-api"></span><h2><a class="toc-backref" href="#contents" role="doc-backlink">API Documentation</a><a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="library/pyOptiShared.Material.MaterialLibrary.html#pyOptiShared.Material.MaterialLibrary" title="pyOptiShared.Material.MaterialLibrary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyOptiShared.Material.MaterialLibrary</span></code></a>()</p></td>
+<td><p>Material library class holds a list of materials</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="library/pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyOptiShared.Material.Material</span></code></a>(mat_name)</p></td>
+<td><p>Material base class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="library/pyOptiShared.Material.ConstMaterial.html#pyOptiShared.Material.ConstMaterial" title="pyOptiShared.Material.ConstMaterial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyOptiShared.Material.ConstMaterial</span></code></a>(mat_name)</p></td>
+<td><p>Material object for constant permittivity.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="library/pyOptiShared.Material.SellmeierMaterial.html#pyOptiShared.Material.SellmeierMaterial" title="pyOptiShared.Material.SellmeierMaterial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyOptiShared.Material.SellmeierMaterial</span></code></a>(mat_name)</p></td>
+<td><p>A Sellmeier material class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="library/pyOptiShared.Material.ExperimentalMaterial.html#pyOptiShared.Material.ExperimentalMaterial" title="pyOptiShared.Material.ExperimentalMaterial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyOptiShared.Material.ExperimentalMaterial</span></code></a>(...)</p></td>
+<td><p>A material defined by experimental data.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SharedLibraries.html" class="btn btn-neutral float-left" title="Shared Libraries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="BaseMaterial.html" class="btn btn-neutral float-right" title="Material Base Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

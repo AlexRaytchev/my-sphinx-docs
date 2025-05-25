@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Device Geometry &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyOptiShared.DeviceGeometry.DeviceGeometry" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html" />
+    <link rel="prev" title="pyOptiShared.LayerInfo.LayerInfo" href="library/pyOptiShared.LayerInfo.LayerInfo.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Optiwaves's Python EM Modules
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="SharedLibraries.html">Shared Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="MaterialLib.html">Material Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LayerStack.html">Layer Stack</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Device Geometry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#considerations">Considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#device-and-port-buffers">Device and Port Buffers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#auto-port-detection-and-port-numbering">Auto Port Detection and Port Numbering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initial-setup-without-port-detection">Initial Setup Without Port detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uniform-grid-from-the-geometry-bounding-box">Uniform Grid from the Geometry Bounding Box</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#obtaining-a-material-mesh-permittivity-from-a-cloud-of-points">Obtaining a Material Mesh/Permittivity from a Cloud of points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-auto-port-settings">Defining Auto Port Settings:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualizing-the-geometry-setup">Visualizing the Geometry Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-complete-device-geometry-setup">A Complete Device Geometry Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API Documentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html">pyOptiShared.DeviceGeometry.DeviceGeometry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="NXdata.html"><em>NXData</em> Data Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="SharedLibraries.html">Shared Libraries</a></li>
+      <li class="breadcrumb-item active">Device Geometry</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pyOptiShared/DeviceGeometry.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="device-geometry">
+<span id="id1"></span><h1>Device Geometry<a class="headerlink" href="#device-geometry" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#considerations" id="id3">Considerations</a></p></li>
+<li><p><a class="reference internal" href="#device-and-port-buffers" id="id4">Device and Port Buffers</a></p></li>
+<li><p><a class="reference internal" href="#auto-port-detection-and-port-numbering" id="id5">Auto Port Detection and Port Numbering</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id6">Examples</a></p>
+<ul>
+<li><p><a class="reference internal" href="#initial-setup-without-port-detection" id="id7">Initial Setup Without Port detection</a></p></li>
+<li><p><a class="reference internal" href="#uniform-grid-from-the-geometry-bounding-box" id="id8">Uniform Grid from the Geometry Bounding Box</a></p></li>
+<li><p><a class="reference internal" href="#obtaining-a-material-mesh-permittivity-from-a-cloud-of-points" id="id9">Obtaining a Material Mesh/Permittivity from a Cloud of points</a></p></li>
+<li><p><a class="reference internal" href="#defining-auto-port-settings" id="id10">Defining Auto Port Settings:</a></p></li>
+<li><p><a class="reference internal" href="#visualizing-the-geometry-setup" id="id11">Visualizing the Geometry Setup</a></p></li>
+<li><p><a class="reference internal" href="#a-complete-device-geometry-setup" id="id12">A Complete Device Geometry Setup</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id13">API Documentation</a></p></li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry" title="pyOptiShared.DeviceGeometry.DeviceGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceGeometry</span></code></a> class is the instance that will handle the device
+physical charachteristics. Currently it handles <code class="docutils literal notranslate"><span class="pre">.gds</span></code> files, only. It is capable of extending the 2D GDSII description of the
+device into a 3D structure that includes handling slanted walls defined in the <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code></a>.
+It is also the piece of code that handles material meshing given a cloud of points.</p>
+<p>It is the last step in the simulation setup prior to configuring the solver settings. It relies mainly on a
+<a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code></a> object, a <code class="docutils literal notranslate"><span class="pre">.gds</span></code> file and port detection settings.</p>
+</section>
+<section id="considerations">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Considerations</a><a class="headerlink" href="#considerations" title="Link to this heading"></a></h2>
+<p>Following are a few considerations to take into account when configuring the device geometry.</p>
+<ul class="simple">
+<li><p>The <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.SetSettings" title="pyOptiShared.DeviceGeometry.DeviceGeometry.SetSettings"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SetSettings</span></code></a> is the main method for setting up the device geometry;</p></li>
+<li><p>The <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.SetAutoPortSettings" title="pyOptiShared.DeviceGeometry.DeviceGeometry.SetAutoPortSettings"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SetAutoPortSettings</span></code></a> is the method for setting up the auto port detection settings;</p></li>
+<li><p>It currently support <code class="docutils literal notranslate"><span class="pre">.gds</span></code> files, only. But future support to <code class="docutils literal notranslate"><span class="pre">.stl</span></code> files is in order for a future release;</p></li>
+<li><p>It relies on a single <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code></a> and its internal <a class="reference internal" href="library/pyOptiShared.Material.MaterialLibrary.html#pyOptiShared.Material.MaterialLibrary" title="pyOptiShared.Material.MaterialLibrary"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaterialLibrary</span></code></a> to define the properties of the nodes in the simulation region.</p></li>
+</ul>
+</section>
+<section id="device-and-port-buffers">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Device and Port Buffers</a><a class="headerlink" href="#device-and-port-buffers" title="Link to this heading"></a></h2>
+<p>When setting up a <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry" title="pyOptiShared.DeviceGeometry.DeviceGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceGeometry</span></code></a> instance, the user should care
+with the device and port buffer definitions. Consider the following figures:</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Top View</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/port_ext.svg"><img alt="../_images/port_ext.svg" src="../_images/port_ext.svg" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Cross Section</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/port_xsection.svg"><img alt="../_images/port_xsection.svg" src="../_images/port_xsection.svg" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The <strong>Top View</strong> displays the <strong>Mask Layout</strong> defined in the raw <code class="docutils literal notranslate"><span class="pre">.gds</span></code> file. The edges touching the <strong>GDSII Border</strong>
+can be detected as ports, for example, the one on the left. A port will consist of two elementes: a monitor and a source.
+The <strong>Port Monitor</strong> is place precisely at the GDSII Border, while the source for <strong>Mode Injection</strong> is place half way through the
+<a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.buffers" title="pyOptiShared.DeviceGeometry.DeviceGeometry.buffers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">buffers</span></code></a> dimension.</p>
+<p>The <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.buffers" title="pyOptiShared.DeviceGeometry.DeviceGeometry.buffers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">buffers</span></code></a> property specify how much empty space will be added/padded
+around the <strong>Mask Layout</strong> to avoid direct touching of the layout with the solver boundary conditions.</p>
+<p>The <strong>Cross Section</strong> view, display a cross section of the port, it includes the other two <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.buffers" title="pyOptiShared.DeviceGeometry.DeviceGeometry.buffers"><code class="xref py py-meth docutils literal notranslate"><span class="pre">buffers</span></code></a>
+as <strong>Simulation Domain Buffers</strong>. To be flexible in terms of mode calculation, each port detection direction, can contain its own <code class="docutils literal notranslate"><span class="pre">buffer</span></code> (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>) values.
+The <strong>Port Buffers</strong> are used to extend the port size the regular waveguide dimension, allowing that the calculated modes are zero at the perimeter defined by the
+<strong>Port Border</strong>. If the <strong>Port Border</strong> will never exceed the <strong>Simulation Domain Border</strong>.</p>
+<p>You can check the <a class="reference internal" href="#complete-deg-example"><span class="std std-ref">complete device geometry example</span></a> for more details on the <strong>Simulation Domain Buffer</strong> and the <strong>Port Buffer</strong>.</p>
+</section>
+<section id="auto-port-detection-and-port-numbering">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Auto Port Detection and Port Numbering</a><a class="headerlink" href="#auto-port-detection-and-port-numbering" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry" title="pyOptiShared.DeviceGeometry.DeviceGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceGeometry</span></code></a> uses an auxiliary GDS tool to detect ports automatically.
+This tool relies on finding two consecutive points that are touching the boundaries of the GDSII file. This detection relies on spifying
+the minimum and maximum width of the ports, as well as wich edges to detect (e.g., <code class="docutils literal notranslate"><span class="pre">'X'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Y'</span></code>). Once the ports are detected, they follow
+the numbering order provided in the follwoing diagram, plus, there is the addition of the the <code class="docutils literal notranslate"><span class="pre">'o'</span></code> letter to it.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Port Numbering Rule</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/port_numbering.svg"><img alt="../_images/port_numbering.svg" src="../_images/port_numbering.svg" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="examples">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>The following examples will cover some specific settings of the <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry" title="pyOptiShared.DeviceGeometry.DeviceGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceGeometry</span></code></a>
+and at the end it aggregates some of the example snipets into a more elaborate setup. That can be used prior instancing a specific EM solver.
+For more deatails please check the <a class="reference internal" href="#device-geometry-api"><span class="std std-ref">API documentation</span></a>.</p>
+<section id="initial-setup-without-port-detection">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Initial Setup Without Port detection</a><a class="headerlink" href="#initial-setup-without-port-detection" title="Link to this heading"></a></h3>
+<p>By default there is no need to detect ports, for example, when using the <a class="reference internal" href="../pyModeSolver/pyModeSolver.html#vfd-intro"><span class="std std-ref">VFD Mode Solver</span></a>.
+So in this example we present how to instantiate a <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry" title="pyOptiShared.DeviceGeometry.DeviceGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceGeometry</span></code></a>
+and then add a <a class="reference download internal" download="" href="../_downloads/c4c19fd1317377f0568b5ba69982ec42/wg.gds"><code class="xref download docutils literal notranslate"><span class="pre">wg.gds</span></code></a> GDSII file to specify the geometry type.</p>
+<p>In this example we are padding the simulation in all directions by 1.5 microns, to add some empty space between the
+waveguide and the edges of the simulation region. The <code class="docutils literal notranslate"><span class="pre">geometry_type=&quot;Fixed&quot;</span></code> indicates that the geometry speficiations
+is done via a static GDSII file (non-parametric structure). The <code class="docutils literal notranslate"><span class="pre">layer_stack</span></code> argument can be define as presented in the
+<a class="reference internal" href="LayerStack.html#layer-stack-examples"><span class="std std-ref">LayerStack examples</span></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetSettings</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">geometry_type</span><span class="o">=</span><span class="s2">&quot;Fixed&quot;</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;wg.gds&quot;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="uniform-grid-from-the-geometry-bounding-box">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Uniform Grid from the Geometry Bounding Box</a><a class="headerlink" href="#uniform-grid-from-the-geometry-bounding-box" title="Link to this heading"></a></h3>
+<p>Considering the previous waveguide example, we can then extract the bounding box of the device geometry
+and construct an array of linearly spaced points that we can later identify to which materials they are
+defined from.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetSettings</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">geometry_type</span><span class="o">=</span><span class="s2">&quot;Fixed&quot;</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;wg.gds&quot;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">bbox</span> <span class="o">=</span> <span class="n">dev_geom</span><span class="o">.</span><span class="n">GetBoundingBox</span><span class="p">(</span><span class="n">zbWithBuffer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">),</span> <span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">),</span> <span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">)</span> <span class="o">=</span> <span class="n">bbox</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">nx</span><span class="o">*</span><span class="n">kk</span><span class="p">))</span>
+<span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">ny</span><span class="o">*</span><span class="n">kk</span><span class="p">))</span>
+<span class="n">zz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">nz</span><span class="o">*</span><span class="n">kk</span><span class="p">))</span>
+
+<span class="n">XX</span><span class="p">,</span> <span class="n">YY</span><span class="p">,</span> <span class="n">ZZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">XX</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">YY</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">ZZ</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+</pre></div>
+</div>
+</section>
+<section id="obtaining-a-material-mesh-permittivity-from-a-cloud-of-points">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Obtaining a Material Mesh/Permittivity from a Cloud of points</a><a class="headerlink" href="#obtaining-a-material-mesh-permittivity-from-a-cloud-of-points" title="Link to this heading"></a></h3>
+<p>Once the points are determined from device geometry bounding box, we can then retrieve the
+material mesh by calling the <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.GetMaterialMesh" title="pyOptiShared.DeviceGeometry.DeviceGeometry.GetMaterialMesh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GetMaterialMesh</span></code></a> method.
+This mesh contains an array of material numbers, that can be converted to their rescpective permittivity values at a particular
+wavelength using the <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.GetPermittivityMesh" title="pyOptiShared.DeviceGeometry.DeviceGeometry.GetPermittivityMesh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GetPermittivityMesh</span></code></a> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+
+<span class="n">lamb</span> <span class="o">=</span> <span class="mf">1.55</span> <span class="c1"># um</span>
+
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetSettings</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">geometry_type</span><span class="o">=</span><span class="s2">&quot;Fixed&quot;</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;wg.gds&quot;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">bbox</span> <span class="o">=</span> <span class="n">dev_geom</span><span class="o">.</span><span class="n">GetBoundingBox</span><span class="p">(</span><span class="n">zbWithBuffer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">),</span> <span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">),</span> <span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">)</span> <span class="o">=</span> <span class="n">bbox</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">nx</span><span class="o">*</span><span class="n">kk</span><span class="p">))</span>
+<span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">ny</span><span class="o">*</span><span class="n">kk</span><span class="p">))</span>
+<span class="n">zz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">nz</span><span class="o">*</span><span class="n">kk</span><span class="p">))</span>
+
+<span class="c1"># Crete the mesh arrays and linearize the points</span>
+<span class="n">XX</span><span class="p">,</span> <span class="n">YY</span><span class="p">,</span> <span class="n">ZZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">XX</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">YY</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">ZZ</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+
+<span class="c1"># Get the material and permittivity meshes</span>
+<span class="n">material_mesh</span> <span class="o">=</span> <span class="n">dev_geom</span><span class="o">.</span><span class="n">GetMaterialMesh</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="n">dev_geom</span><span class="o">.</span><span class="n">GetPermittivityMesh</span><span class="p">(</span><span class="n">material_mesh</span><span class="p">,</span> <span class="n">lamb</span><span class="p">)</span>
+
+<span class="c1"># Get back a 3D array of the linear points</span>
+<span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="n">kk</span><span class="p">,</span> <span class="n">kk</span><span class="p">,</span>
+                <span class="n">yy</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="n">kk</span><span class="p">,</span> <span class="n">kk</span><span class="p">,</span>
+                <span class="n">zz</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="n">kk</span><span class="p">,</span> <span class="n">kk</span><span class="p">)</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="n">eps</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="defining-auto-port-settings">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Defining Auto Port Settings:</a><a class="headerlink" href="#defining-auto-port-settings" title="Link to this heading"></a></h3>
+<p>Auto port settings are used in auto port detection of ports in GDSII files.
+For that we use the <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.SetAutoPortSettings" title="pyOptiShared.DeviceGeometry.DeviceGeometry.SetAutoPortSettings"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SetAutoPortSettings</span></code></a> method.
+Since it relies on a particular GDSII file, we have to <strong>call it after</strong> the <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.SetSettings" title="pyOptiShared.DeviceGeometry.DeviceGeometry.SetSettings"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SetSettings</span></code></a> method.</p>
+<p>There are for arguments:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">direction</span></code> that can be <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> or <code class="docutils literal notranslate"><span class="pre">both</span></code>. It indicates in which of the Top View bounds the ports should be detected.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code>, the determine the minimun/maximun port widths to be detected. This can be either a single <code class="docutils literal notranslate"><span class="pre">float</span></code> (used for both x and y), a <code class="docutils literal notranslate"><span class="pre">list[float,</span> <span class="pre">float]</span></code> (x and y independently).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">buffer</span></code>, that determines how much empty space will be added around the port cross section to properly accomodate mode profiles.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>It can be a single <code class="docutils literal notranslate"><span class="pre">float</span></code>, that will be used for both <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> ports extending by the same quantity both <em>width</em> and <em>height</em>;</p></li>
+<li><p>It can be a <code class="docutils literal notranslate"><span class="pre">list[float,</span> <span class="pre">float]</span></code> that will be used for both <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> ports extending by the <em>width</em> and <em>height</em> independently; or</p></li>
+<li><p>A more complex <code class="docutils literal notranslate"><span class="pre">list[float,</span> <span class="pre">float]</span></code> that controls independently width and height for each bounds.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Please, refer to <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.SetAutoPortSettings" title="pyOptiShared.DeviceGeometry.DeviceGeometry.SetAutoPortSettings"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SetAutoPortSettings</span></code></a> for more details on the auto port detection settings.</p>
+<p>Following is a  more complete example, that will be used to detect ports on all sides, with idendependent <em>width</em> and <em>height</em> buffers.
+The GDSII file corresponds to a waveguide crossing (<a class="reference download internal" download="" href="../_downloads/dbb17afad2ec5b96a262b536a60d630a/wgcrossing.gds"><code class="xref download docutils literal notranslate"><span class="pre">wgcrossing.gds</span></code></a>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###         Material Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">myindex1p45</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;myindex1p45&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">myindex3p5</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;myindex3p5&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###       Layer Stack Settings         ###</span>
+<span class="c1">##########################################</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">myindex3p5</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L2&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">myindex3p5</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###   Device Geometry/Port Settings    ###</span>
+<span class="c1">##########################################</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetSettings</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">geometry_type</span><span class="o">=</span><span class="s2">&quot;Fixed&quot;</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;wgcrossing.gds&quot;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span>
+    <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">buffer</span><span class="o">=</span><span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">]],</span> <span class="c1"># [[x_width, x_height],[y_width, y_height]]</span>
+    <span class="nb">min</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.21</span><span class="p">],</span> <span class="c1"># [x_min, y_min]</span>
+    <span class="nb">max</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.49</span><span class="p">],</span> <span class="c1"># [x_max, y_max]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="visualizing-the-geometry-setup">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Visualizing the Geometry Setup</a><a class="headerlink" href="#visualizing-the-geometry-setup" title="Link to this heading"></a></h3>
+<p>The following example shows a complete setup with visualization of thed evice
+geometry using the <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.Show" title="pyOptiShared.DeviceGeometry.DeviceGeometry.Show"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Show</span></code></a> method.
+The GDSII file corresponds to a waveguide crossing (<a class="reference download internal" download="" href="../_downloads/dbb17afad2ec5b96a262b536a60d630a/wgcrossing.gds"><code class="xref download docutils literal notranslate"><span class="pre">wgcrossing.gds</span></code></a>)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                    <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L2&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                    <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetSettings</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">geometry_type</span><span class="o">=</span><span class="s2">&quot;Fixed&quot;</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="s1">&#39;wgcrossing.gds&#39;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span>
+    <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span>
+    <span class="n">buffer</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">Show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/dev_geometry_crossing_show_example.svg"><img alt="../_images/dev_geometry_crossing_show_example.svg" src="../_images/dev_geometry_crossing_show_example.svg" style="width: 80%;" />
+</a>
+</figure>
+</section>
+<section id="a-complete-device-geometry-setup">
+<span id="complete-deg-example"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink">A Complete Device Geometry Setup</a><a class="headerlink" href="#a-complete-device-geometry-setup" title="Link to this heading"></a></h3>
+<p>This example uses the information provided in the previous examples to construct a
+full instantiation and setup of a <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code></a>.
+This is example is usefull for simulations using the <a class="reference internal" href="../pyFDTD/pyFDTD.html#fdtd-intro"><span class="std std-ref">pyFDTD Solver</span></a> or
+the <a class="reference internal" href="../pyModeSolver/pyModeSolver.html#vfd-intro"><span class="std std-ref">VFD Mode Solver</span></a>. It starts by configuring some materials, creating the layer stack
+and finaly setting up the <a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry" title="pyOptiShared.DeviceGeometry.DeviceGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceGeometry</span></code></a>. The device
+under charachterization is a dielectric waveguide (<a class="reference download internal" download="" href="../_downloads/c4c19fd1317377f0568b5ba69982ec42/wg.gds"><code class="xref download docutils literal notranslate"><span class="pre">wg.gds</span></code></a>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###         Material Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">myindex1p45</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;myindex1p45&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">myindex3p5</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;myindex3p5&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###       Layer Stack Settings         ###</span>
+<span class="c1">##########################################</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">myindex3p5</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L2&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">myindex3p5</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">myindex1p45</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###   Device Geometry/Port Settings    ###</span>
+<span class="c1">##########################################</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetSettings</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">geometry_type</span><span class="o">=</span><span class="s2">&quot;Fixed&quot;</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;wg.gds&quot;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span>
+    <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">buffer</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="api-documentation">
+<span id="device-geometry-api"></span><h2><a class="toc-backref" href="#contents" role="doc-backlink">API Documentation</a><a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry" title="pyOptiShared.DeviceGeometry.DeviceGeometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyOptiShared.DeviceGeometry.DeviceGeometry</span></code></a>()</p></td>
+<td><p>This class handles the geometry of the device under simulation.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="library/pyOptiShared.LayerInfo.LayerInfo.html" class="btn btn-neutral float-left" title="pyOptiShared.LayerInfo.LayerInfo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html" class="btn btn-neutral float-right" title="pyOptiShared.DeviceGeometry.DeviceGeometry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

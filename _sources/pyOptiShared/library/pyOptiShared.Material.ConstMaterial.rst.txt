@@ -1,0 +1,49 @@
+﻿pyOptiShared.Material.ConstMaterial
+===================================
+
+.. currentmodule:: pyOptiShared.Material
+
+.. autoclass:: ConstMaterial
+   :members:
+   :show-inheritance:
+   :class-doc-from: init
+   :member-order: groupwise
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+      
+         ~ConstMaterial.eps
+      
+      
+         ~ConstMaterial.eps_imag
+      
+      
+         ~ConstMaterial.eps_real
+      
+      
+         ~ConstMaterial.index
+      
+      
+         ~ConstMaterial.index_imag
+      
+      
+         ~ConstMaterial.index_real
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ConstMaterial.color
+      ~ConstMaterial.name
+   
+   

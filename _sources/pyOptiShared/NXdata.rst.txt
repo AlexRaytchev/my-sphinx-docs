@@ -1,0 +1,152 @@
+.. _nxdata-res:
+
+*NXData* Data Class
+===================================
+
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: top
+
+Overview
+--------------------------
+
+In order to store simulation results we provide them in the ``.hdf5`` format. Which a versatile and efficient way to
+organize and store data and metadata. To improve data visualition, we whent further and provided initial support to the 
+`NeXus format <https://manual.nexusformat.org/classes/base_classes/NXdata>`_, that allows to organize data even further, including metadata and better support to results visualization.
+
+The :class:`NXdata <pyOptiShared.SimResults.NXdata>` dataclass is the object that is used to store our solver restults.
+In general you can access data based on the NeXus format (``signal``, ``auxiliary_signals``, ``axes``, etc), and to facilitated its visualization we provide the 
+:meth:`Plot <pyOptiShared.SimResults.NXdata.Plot>` method to easily provide a data visualization interface for the user.
+
+Examples
+------------------------
+
+Visualization of FDTD Results
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This example relies on the :class:`FDTD Solver <pyFDTDKernel.pyFDTDSolver.pyFDTDSolver>` and the :class:`FDTDSimResults <pyOptiShared.SimResults.FDTDSimResults>`.
+The ``.hdf5`` with the results can be downloaded here: :download:`wg_results_fdtd.hdf5 <../_static/wg_results_fdtd.hdf5>`.
+The results shown are the permittivity profile, mode profile on ``Mode Source o1``, DFT field progile of ``MyFDTMonitor1`` and ``ALL`` the scattering parameters.
+
+.. raw:: html
+
+    <iframe src="../_static/wg_view.html"
+            width="100%"
+            height="300px"
+            frameborder="0px">
+    </iframe>
+
+.. code-block:: python
+
+	from pyOptiShared.SimResults import FDTDSimResults
+	import sys 
+
+	filename=r"wg_results_fdtd.hdf5"
+	results = FDTDSimResults()
+	results.loadHDF5(filename)
+
+	#Python is not running in ipykernel. Desktop plotting tools can be used with NXDATA
+	if 'ipykernel' not in sys.modules:
+		results.permittivity.Plot()
+		results.mode_sources["Mode Source o1"].fields.Plot()
+		results.runs[0].dftmonitors["MyDFTMonitor1"].Plot()
+		results.sparameters["ALL"].Plot()
+	else: #Otherwise fall back to using basic matplotlib
+		results.PlotPermittivity(cut='x',position=0.5)
+		results.PlotDFTMonitor('Mode Monitor o1',run_num=0,field='Hy')
+		results.PlotDFTMonitor('MyDFTMonitor1',run_num=0,field='Hy')
+		results.PlotSParameters('ALL')
+
+.. grid:: 4
+
+    .. grid-item-card::  FDTD Permittivity Cross Section
+
+        .. figure:: ../_static/nxdata_fdtd_results1.png
+           :width: 100%
+           :align: center
+
+    .. grid-item-card::  Mode Profile 'Mode Source o1'
+
+        .. figure:: ../_static/nxdata_fdtd_results2.png
+           :width: 100%
+           :align: center
+
+    .. grid-item-card::  DFT Monitor Field View
+
+        .. figure:: ../_static/nxdata_fdtd_results3.png
+           :width: 100%
+           :align: center
+
+    .. grid-item-card::  Scattering Parameter Results
+
+        .. figure:: ../_static/nxdata_fdtd_results4.png
+           :width: 100%
+           :align: center
+
+Visualization of Mode Solver Results
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This example relies on the :class:`Mode Solver <pyFDTDKernel.pyModeSolver.py_mode_solver.VFDModeSolver>` and the 
+:class:`ModeSolverResults <pyOptiShared.SimResults.ModeSolverResults>` classes.
+The ``.hdf5`` with the results can be downloaded here: :download:`wg_results_mode.hdf5 <../_static/wg_results_mode.hdf5>`.
+The data we are showing is the mode profile of Hy for the fundamental mode (index equals 0) for the same dielectric waveguide example as
+the one in the previous example.
+
+.. code-block:: python
+
+	from pyOptiShared.SimResults import ModeSolverResults
+	import sys
+	
+	filename=r"wg_results_mode.hdf5"
+	results = ModeSolverResults()
+	results.loadHDF5(filename)
+	
+	#Python is not running in ipykernel. Desktop plotting tools can be used with NXDATA
+	if 'ipykernel' not in sys.modules:
+		results.fields.Plot()
+		results.material_grid.Plot()
+		results.neff.Plot()
+		results.ng.Plot()
+	else: #Otherwise fall back to using basic matplotlib
+		results.PlotMode() # Fundamental Mode Profile
+		results.PlotPermittivity()  # Material Profile
+		results.PlotIndex('neff',modes=[0,1,2,3]) # Effective Refractive Index
+		results.PlotIndex('ng',modes=[0,1,2,3]) # Effective Group Index
+
+.. grid:: 4
+
+    .. grid-item-card::  Fundamental Mode Profile
+
+        .. figure:: ../_static/nxdata_modesolver1.png
+           :width: 100%
+           :align: center
+
+    .. grid-item-card::  Material Profile
+
+        .. figure:: ../_static/nxdata_modesolver2.png
+           :width: 100%
+           :align: center
+
+
+    .. grid-item-card::  Effective Refractive Index
+
+        .. figure:: ../_static/nxdata_modesolver3.png
+           :width: 100%
+           :align: center
+
+
+    .. grid-item-card::  Effective Group Index
+
+        .. figure:: ../_static/nxdata_modesolver4.png
+           :width: 100%
+           :align: center
+
+API Documentation
+--------------------
+
+.. autosummary::
+   :toctree: library
+   :template: members.rst
+   
+   pyOptiShared.SimResults.NXdata

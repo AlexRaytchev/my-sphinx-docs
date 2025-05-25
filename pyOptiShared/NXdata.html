@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NXData Data Class &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pyOptiShared.SimResults.NXdata" href="library/pyOptiShared.SimResults.NXdata.html" />
+    <link rel="prev" title="pyOptiShared.DeviceGeometry.DeviceGeometry" href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Optiwaves's Python EM Modules
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="SharedLibraries.html">Shared Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="MaterialLib.html">Material Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LayerStack.html">Layer Stack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeviceGeometry.html">Device Geometry</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><em>NXData</em> Data Class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#visualization-of-fdtd-results">Visualization of FDTD Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visualization-of-mode-solver-results">Visualization of Mode Solver Results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API Documentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="library/pyOptiShared.SimResults.NXdata.html">pyOptiShared.SimResults.NXdata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="SharedLibraries.html">Shared Libraries</a></li>
+      <li class="breadcrumb-item active"><em>NXData</em> Data Class</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pyOptiShared/NXdata.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nxdata-data-class">
+<span id="nxdata-res"></span><h1><em>NXData</em> Data Class<a class="headerlink" href="#nxdata-data-class" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id1">Overview</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id2">Examples</a></p>
+<ul>
+<li><p><a class="reference internal" href="#visualization-of-fdtd-results" id="id3">Visualization of FDTD Results</a></p></li>
+<li><p><a class="reference internal" href="#visualization-of-mode-solver-results" id="id4">Visualization of Mode Solver Results</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#api-documentation" id="id5">API Documentation</a></p></li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>In order to store simulation results we provide them in the <code class="docutils literal notranslate"><span class="pre">.hdf5</span></code> format. Which a versatile and efficient way to
+organize and store data and metadata. To improve data visualition, we whent further and provided initial support to the
+<a class="reference external" href="https://manual.nexusformat.org/classes/base_classes/NXdata">NeXus format</a>, that allows to organize data even further, including metadata and better support to results visualization.</p>
+<p>The <a class="reference internal" href="library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata"><code class="xref py py-class docutils literal notranslate"><span class="pre">NXdata</span></code></a> dataclass is the object that is used to store our solver restults.
+In general you can access data based on the NeXus format (<code class="docutils literal notranslate"><span class="pre">signal</span></code>, <code class="docutils literal notranslate"><span class="pre">auxiliary_signals</span></code>, <code class="docutils literal notranslate"><span class="pre">axes</span></code>, etc), and to facilitated its visualization we provide the
+<a class="reference internal" href="library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata.Plot" title="pyOptiShared.SimResults.NXdata.Plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot</span></code></a> method to easily provide a data visualization interface for the user.</p>
+</section>
+<section id="examples">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<section id="visualization-of-fdtd-results">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Visualization of FDTD Results</a><a class="headerlink" href="#visualization-of-fdtd-results" title="Link to this heading"></a></h3>
+<p>This example relies on the <a class="reference internal" href="../pyFDTD/library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver" title="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">FDTD</span> <span class="pre">Solver</span></code></a> and the <a class="reference internal" href="../pyFDTD/library/pyOptiShared.SimResults.FDTDSimResults.html#pyOptiShared.SimResults.FDTDSimResults" title="pyOptiShared.SimResults.FDTDSimResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">FDTDSimResults</span></code></a>.
+The <code class="docutils literal notranslate"><span class="pre">.hdf5</span></code> with the results can be downloaded here: <a class="reference download internal" download="" href="../_downloads/6651240d4c1a5d4cd7879781e7b5f01a/wg_results_fdtd.hdf5"><code class="xref download docutils literal notranslate"><span class="pre">wg_results_fdtd.hdf5</span></code></a>.
+The results shown are the permittivity profile, mode profile on <code class="docutils literal notranslate"><span class="pre">Mode</span> <span class="pre">Source</span> <span class="pre">o1</span></code>, DFT field progile of <code class="docutils literal notranslate"><span class="pre">MyFDTMonitor1</span></code> and <code class="docutils literal notranslate"><span class="pre">ALL</span></code> the scattering parameters.</p>
+<iframe src="../_static/wg_view.html"
+        width="100%"
+        height="300px"
+        frameborder="0px">
+</iframe><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.SimResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDTDSimResults</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="n">filename</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;wg_results_fdtd.hdf5&quot;</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">FDTDSimResults</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">loadHDF5</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="c1">#Python is not running in ipykernel. Desktop plotting tools can be used with NXDATA</span>
+<span class="k">if</span> <span class="s1">&#39;ipykernel&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">permittivity</span><span class="o">.</span><span class="n">Plot</span><span class="p">()</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">mode_sources</span><span class="p">[</span><span class="s2">&quot;Mode Source o1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">Plot</span><span class="p">()</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">runs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dftmonitors</span><span class="p">[</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">Plot</span><span class="p">()</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">sparameters</span><span class="p">[</span><span class="s2">&quot;ALL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">Plot</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span> <span class="c1">#Otherwise fall back to using basic matplotlib</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">PlotPermittivity</span><span class="p">(</span><span class="n">cut</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">position</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">PlotDFTMonitor</span><span class="p">(</span><span class="s1">&#39;Mode Monitor o1&#39;</span><span class="p">,</span><span class="n">run_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">field</span><span class="o">=</span><span class="s1">&#39;Hy&#39;</span><span class="p">)</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">PlotDFTMonitor</span><span class="p">(</span><span class="s1">&#39;MyDFTMonitor1&#39;</span><span class="p">,</span><span class="n">run_num</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">field</span><span class="o">=</span><span class="s1">&#39;Hy&#39;</span><span class="p">)</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="s1">&#39;ALL&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-4 sd-row-cols-xs-4 sd-row-cols-sm-4 sd-row-cols-md-4 sd-row-cols-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+FDTD Permittivity Cross Section</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/nxdata_fdtd_results1.png"><img alt="../_images/nxdata_fdtd_results1.png" src="../_images/nxdata_fdtd_results1.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Mode Profile ‘Mode Source o1’</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/nxdata_fdtd_results2.png"><img alt="../_images/nxdata_fdtd_results2.png" src="../_images/nxdata_fdtd_results2.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+DFT Monitor Field View</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/nxdata_fdtd_results3.png"><img alt="../_images/nxdata_fdtd_results3.png" src="../_images/nxdata_fdtd_results3.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Scattering Parameter Results</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/nxdata_fdtd_results4.png"><img alt="../_images/nxdata_fdtd_results4.png" src="../_images/nxdata_fdtd_results4.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualization-of-mode-solver-results">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Visualization of Mode Solver Results</a><a class="headerlink" href="#visualization-of-mode-solver-results" title="Link to this heading"></a></h3>
+<p>This example relies on the <code class="xref py py-class docutils literal notranslate"><span class="pre">Mode</span> <span class="pre">Solver</span></code> and the
+<a class="reference internal" href="../pyModeSolver/library/pyOptiShared.SimResults.ModeSolverResults.html#pyOptiShared.SimResults.ModeSolverResults" title="pyOptiShared.SimResults.ModeSolverResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModeSolverResults</span></code></a> classes.
+The <code class="docutils literal notranslate"><span class="pre">.hdf5</span></code> with the results can be downloaded here: <a class="reference download internal" download="" href="../_downloads/c409636c4c0725cc832f7c64a527d9ff/wg_results_mode.hdf5"><code class="xref download docutils literal notranslate"><span class="pre">wg_results_mode.hdf5</span></code></a>.
+The data we are showing is the mode profile of Hy for the fundamental mode (index equals 0) for the same dielectric waveguide example as
+the one in the previous example.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.SimResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModeSolverResults</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="n">filename</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;wg_results_mode.hdf5&quot;</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">ModeSolverResults</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">loadHDF5</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="c1">#Python is not running in ipykernel. Desktop plotting tools can be used with NXDATA</span>
+<span class="k">if</span> <span class="s1">&#39;ipykernel&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">Plot</span><span class="p">()</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">material_grid</span><span class="o">.</span><span class="n">Plot</span><span class="p">()</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">neff</span><span class="o">.</span><span class="n">Plot</span><span class="p">()</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">ng</span><span class="o">.</span><span class="n">Plot</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span> <span class="c1">#Otherwise fall back to using basic matplotlib</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">PlotMode</span><span class="p">()</span> <span class="c1"># Fundamental Mode Profile</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">PlotPermittivity</span><span class="p">()</span>  <span class="c1"># Material Profile</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;neff&#39;</span><span class="p">,</span><span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># Effective Refractive Index</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;ng&#39;</span><span class="p">,</span><span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># Effective Group Index</span>
+</pre></div>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-4 sd-row-cols-xs-4 sd-row-cols-sm-4 sd-row-cols-md-4 sd-row-cols-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Fundamental Mode Profile</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/nxdata_modesolver1.png"><img alt="../_images/nxdata_modesolver1.png" src="../_images/nxdata_modesolver1.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Material Profile</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/nxdata_modesolver2.png"><img alt="../_images/nxdata_modesolver2.png" src="../_images/nxdata_modesolver2.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Effective Refractive Index</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/nxdata_modesolver3.png"><img alt="../_images/nxdata_modesolver3.png" src="../_images/nxdata_modesolver3.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Effective Group Index</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/nxdata_modesolver4.png"><img alt="../_images/nxdata_modesolver4.png" src="../_images/nxdata_modesolver4.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="api-documentation">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">API Documentation</a><a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyOptiShared.SimResults.NXdata</span></code></a>()</p></td>
+<td><p>A class that supports the Nexus format for data and metada storage/handling.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="library/pyOptiShared.DeviceGeometry.DeviceGeometry.html" class="btn btn-neutral float-left" title="pyOptiShared.DeviceGeometry.DeviceGeometry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="library/pyOptiShared.SimResults.NXdata.html" class="btn btn-neutral float-right" title="pyOptiShared.SimResults.NXdata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

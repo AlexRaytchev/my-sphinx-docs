@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyModeSolver.py_mode_solver.VFDModeSolver &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="pyOptiShared.SimResults.ModeSolverResults" href="pyOptiShared.SimResults.ModeSolverResults.html" />
+    <link rel="prev" title="Vector Finite Difference (VFD) Mode Solver" href="../pyModeSolver.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Optiwaves's Python EM Modules
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../pyOptiShared/SharedLibraries.html">Shared Libraries</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#mathematical-method">Mathematical Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#applications">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#examples">Examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../pyModeSolver.html#api-documentation">API Documentation</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">pyModeSolver.py_mode_solver.VFDModeSolver</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyModeSolver.py_mode_solver.VFDModeSolver"><code class="docutils literal notranslate"><span class="pre">VFDModeSolver</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#pyModeSolver.py_mode_solver.VFDModeSolver.Run"><code class="docutils literal notranslate"><span class="pre">VFDModeSolver.Run()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyModeSolver.py_mode_solver.VFDModeSolver.SetBoundaries"><code class="docutils literal notranslate"><span class="pre">VFDModeSolver.SetBoundaries()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#pyModeSolver.py_mode_solver.VFDModeSolver.SetSimSettings"><code class="docutils literal notranslate"><span class="pre">VFDModeSolver.SetSimSettings()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pyOptiShared.SimResults.ModeSolverResults.html">pyOptiShared.SimResults.ModeSolverResults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyOptiShared.SimResults.BaseSimResults.html">pyOptiShared.SimResults.BaseSimResults</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+      <li class="breadcrumb-item active">pyModeSolver.py_mode_solver.VFDModeSolver</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/pyModeSolver/library/pyModeSolver.py_mode_solver.VFDModeSolver.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pymodesolver-py-mode-solver-vfdmodesolver">
+<h1>pyModeSolver.py_mode_solver.VFDModeSolver<a class="headerlink" href="#pymodesolver-py-mode-solver-vfdmodesolver" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyModeSolver.py_mode_solver.VFDModeSolver">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyModeSolver.py_mode_solver.</span></span><span class="sig-name descname"><span class="pre">VFDModeSolver</span></span><a class="headerlink" href="#pyModeSolver.py_mode_solver.VFDModeSolver" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">simulator</span></code></p>
+<p>Vector Finite-Difference Mode Solver</p>
+<dl class="simple">
+<dt>Reference:</dt><dd><ul class="simple">
+<li><ol class="upperalpha simple">
+<li><ol class="upperalpha simple" start="2">
+<li><p>Fallahkhair, K. S. Li and T. E. Murphy, “Vector Finite Difference Modesolver for Anisotropic Dielectric Waveguides”, J. Lightw. Technol. 26(11) 1423-1431 (2008).</p></li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyModeSolver.py_mode_solver.VFDModeSolver.Run" title="pyModeSolver.py_mode_solver.VFDModeSolver.Run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Run</span></code></a>()</p></td>
+<td><p>This method runs the mode solver simulations.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyModeSolver.py_mode_solver.VFDModeSolver.SetBoundaries" title="pyModeSolver.py_mode_solver.VFDModeSolver.SetBoundaries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetBoundaries</span></code></a>([min_x, max_x, min_y, max_y])</p></td>
+<td><p>Set the boundary condition for the mode solver.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyModeSolver.py_mode_solver.VFDModeSolver.SetSimSettings" title="pyModeSolver.py_mode_solver.VFDModeSolver.SetSimSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetSimSettings</span></code></a>(device_geometry[, nmodes, ...])</p></td>
+<td><p>This method sets the Mode Solver simulation settings.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_core_simulator</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_boundaries</span></code>([min_x_bc, max_x_bc, ...])</p></td>
+<td><p>Set the boundary condition for the mode solver.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_sim_settings</span></code>([device_geometry])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyModeSolver.py_mode_solver.VFDModeSolver.Run">
+<span class="sig-name descname"><span class="pre">Run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyOptiShared.SimResults.ModeSolverResults.html#pyOptiShared.SimResults.ModeSolverResults" title="pyOptiShared.SimResults.ModeSolverResults"><span class="pre">ModeSolverResults</span></a></span></span><a class="headerlink" href="#pyModeSolver.py_mode_solver.VFDModeSolver.Run" title="Link to this definition"></a></dt>
+<dd><p>This method runs the mode solver simulations. It returns
+the results as a <cite>ModeSolverResults()</cite> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An object containing the mode solver results.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="pyOptiShared.SimResults.ModeSolverResults.html#pyOptiShared.SimResults.ModeSolverResults" title="pyOptiShared.SimResults.ModeSolverResults">ModeSolverResults</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyModeSolver.py_mode_solver.VFDModeSolver.SetBoundaries">
+<span class="sig-name descname"><span class="pre">SetBoundaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'bc':</span> <span class="pre">'pmc'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'bc':</span> <span class="pre">'pmc'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'bc':</span> <span class="pre">'pmc'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'bc':</span> <span class="pre">'pmc'}</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#pyModeSolver.py_mode_solver.VFDModeSolver.SetBoundaries" title="Link to this definition"></a></dt>
+<dd><p>Set the boundary condition for the mode solver. Supported boundaries are:
+<cite>“pmc”</cite>: perfect magnetic conductor, <cite>“asy”</cite> For anti-symmetric boundary and
+<cite>“sym”</cite> for symmetric boundary.
+Anti-symmetric is related to an odd symmetry of the H-fields at the boundary.
+Symmetric is related to an even symmetry of the H-fileds at the boundary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>optional</em>) – A dict with the choice of for x_min face. Defaults to {“bc”:”pmc”}.</p></li>
+<li><p><strong>max_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>optional</em>) – A dict with the choice of for x_max face.. Defaults to {“bc”:”pmc”}.</p></li>
+<li><p><strong>min_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>optional</em>) – A dict with the choice of for y_min face.. Defaults to {“bc”:”pmc”}.</p></li>
+<li><p><strong>max_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>, </em><em>optional</em>) – A dict with the choice of for y_max face.. Defaults to {“bc”:”pmc”}.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyModeSolver.py_mode_solver.VFDModeSolver.SetSimSettings">
+<span class="sig-name descname"><span class="pre">SetSimSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry" title="pyOptiShared.DeviceGeometry.DeviceGeometry"><span class="pre">DeviceGeometry</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nguess</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#complex" title="(in Python v3.13)"><span class="pre">complex</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3.4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'dx':</span> <span class="pre">0.025,</span> <span class="pre">'dy':</span> <span class="pre">0.025,</span> <span class="pre">'dz':</span> <span class="pre">0.025}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'max':</span> <span class="pre">1.6,</span> <span class="pre">'min':</span> <span class="pre">1.5,</span> <span class="pre">'npts':</span> <span class="pre">5}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cut_plane</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'XY'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'YZ'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'XZ'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'YZ'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cut_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-08</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#pyModeSolver.py_mode_solver.VFDModeSolver.SetSimSettings" title="Link to this definition"></a></dt>
+<dd><p>This method sets the Mode Solver simulation settings. It does not set the boudnary conditions,
+for that you should use the <cite>SetBoundaries()</cite> method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device_geometry</strong> (<a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry" title="pyOptiShared.DeviceGeometry.DeviceGeometry"><em>DeviceGeometry</em></a>) – A DeviceGeometry object with the geometry specs of the device.</p></li>
+<li><p><strong>nmodes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em>, </em><em>optional</em>) – Number of modes to analyse. Defaults to 4.</p></li>
+<li><p><strong>nguess</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#complex" title="(in Python v3.13)"><em>complex</em></a><em>, </em><em>optional</em>) – Initial guess for the mode index of refraction. Defaults to 3.4.</p></li>
+<li><p><strong>mesh</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>,</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – A dictionary specifying the cross section mesh sapce steps.
+Defaults to {“dx”: 0.025,”dy”: 0.025, “dz”: 0.025}.</p></li>
+<li><p><strong>wavelength</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>,</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – A dictionary specifying the wavelength sweep properties.
+Defaults to {“min”:1.5,”max”:1.6,”npts”: 5}.</p></li>
+<li><p><strong>cut_plane</strong> (<em>Literal</em><em>[</em><em>'XY'</em><em>, </em><em>'YZ'</em><em>, </em><em>'XZ'</em><em>]</em><em>, </em><em>optional</em>) – The plane of the cross section. Defaults to “YZ”.</p></li>
+<li><p><strong>cut_location</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – The location of the cross section plane along the plane normal axis.
+Defaults to 0.0.</p></li>
+<li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>, </em><em>optional</em>) – A tolerance for the eigensolver. Defaults to 1e-8.</p></li>
+<li><p><strong>savepath</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – A path to save the results. Defaults to None.
+If None, saves in the current working directory.</p></li>
+<li><p><strong>res_filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em>, </em><em>optional</em>) – Results file name witout extension. Defaults to None.
+If None, name the file as “mode_results_&lt;YYYY_mm_dd_HH_MM_SS’&gt;”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../pyModeSolver.html" class="btn btn-neutral float-left" title="Vector Finite Difference (VFD) Mode Solver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pyOptiShared.SimResults.ModeSolverResults.html" class="btn btn-neutral float-right" title="pyOptiShared.SimResults.ModeSolverResults" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
