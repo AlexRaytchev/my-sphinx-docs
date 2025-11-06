@@ -1,0 +1,24 @@
+==================================================
+Product Interworking
+==================================================
+
+OptiOmega allows the software interworking internally with other Optiwave simulation tools such as:
+
+| OptiSystem: https://optiwave.com/optisystem-overview/
+| OptiSPICE: https://optiwave.com/optispice-overview/ 
+
+It also has interoperability with external EDA tools via GDSII and STL file exchange and python scripting.
+
+.. It also has the interoperability with external EDA tools such as:
+
+.. | Luceda IPKISS: https://www.lucedaphotonics.com/luceda-photonics-design-platform 
+.. | GDSFactory: https://gdsfactory.com/
+.. | SIEMENS EDA: https://eda.sw.siemens.com/en-US/ic/ic-custom/ams/.
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   Internal
+   External

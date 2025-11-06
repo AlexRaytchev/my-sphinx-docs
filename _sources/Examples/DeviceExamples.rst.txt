@@ -1,0 +1,117 @@
+======================
+Device Optimization
+======================
+
+Flexible Device Library
+---------------------------
+
+A collection of ready to use designs of the most common photonic devices. These devices can be used together with optimization libraries to build GDS masks and compact models for any material platform.
+
+
+Flexible Taper
+^^^^^^^^^^^^^^^^
+
+This example shows how to use the flexible taper function :meth:`flex_taper <pyOptiShared.Designs.flex_taper>`. 
+
+.. literalinclude:: ../_static/examples/DeviceOptimization/FlexTaper_example.py
+   :language: python
+
+This code should generate a taper with randomly varying sections similar to the following image.
+
+.. image:: ../_static/flex_taper.png
+  :alt: A graphical representation of a flexible taper.
+  :width: 40%
+  :align: center
+
+
+
+Flexible 90 degrees bend
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This example shows how to use the flexible 90 degrees bend function  :meth:`flex_90bend <pyOptiShared.Designs.flex_90bend>`. 
+
+
+This example shows how to use the flexible taper function :meth:`flex_taper <pyOptiShared.Designs.flex_taper>`. 
+
+.. literalinclude:: ../_static/examples/DeviceOptimization/Flex90bend_example.py
+   :language: python
+
+This code should generate a 90 degrees bend with randomly varying sections similar to the following image.
+
+.. image:: ../_static/flex_90bend.png
+  :alt: A graphical representation of a flexible 90 degrees bend.
+  :width: 40%
+  :align: center
+
+
+
+Flexible Splitter
+^^^^^^^^^^^^^^^^^^^^
+
+This example shows how to use the flexible splitter function  :meth:`flex_splitter <pyOptiShared.Designs.flex_splitter>`. 
+
+.. literalinclude:: ../_static/examples/DeviceOptimization/FlexSplitter_example.py
+   :language: python
+
+This code should generate a splitter with randomly varying middle sections similar to the following image.
+
+.. image:: ../_static/flex_splitter.png
+  :alt: A graphical representation of a flexible splitter.
+  :width: 40%
+  :align: center
+
+
+
+Flexible Waveguide Crossing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This example shows how to use the flexible waveguide crossing function  :meth:`flex_crossing <pyOptiShared.Designs.flex_crossing>`. 
+
+
+
+.. literalinclude:: ../_static/examples/DeviceOptimization/FlexWgCrossing_example.py
+   :language: python
+
+This code should generate a waveguide crossing with randomly varying sections similar to the following image.
+
+.. image:: ../_static/flex_wgcrossing.png
+  :alt: A graphical representation of a flexible taper.
+  :width: 40%
+  :align: center
+
+
+Please see the full documentation for further details on individual functions :ref:`flex_devices`.
+
+Optimization Examples
+---------------------------
+
+Splitter Design - Particle Swarm Optimization
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../_static/examples/DeviceOptimization/ParticleSwarm_Splitter.py
+   :language: python
+
+
+.. grid:: 1
+
+    .. grid-item-card::  GDSII Mask of a Splitter
+
+      .. figure:: ../_static/particle_swarm_optimized_GDS.png
+          :width: 100%
+          :align: center
+
+    .. grid-item-card::  Field Distribution
+
+      .. figure:: ../_static/particle_swarm_splitter_field.png
+          :width: 100%
+          :align: center
+
+    .. grid-item-card::  Cost Function
+
+      .. figure:: ../_static/particle_swarm_splitter_cost.png
+          :width: 100%
+          :align: center
+
+
+
+

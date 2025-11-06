@@ -1,0 +1,81 @@
+Application Examples
+------------------------
+
+Polarization Converter Using a Tapered Silicon Ridge Waveguide
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. contents::
+   :depth: 2
+   :local:
+
+Introduction
+~~~~~~~~~~~~
+Tapered waveguides with an adiabatic change in the propagation direction are useful for enhancing the 
+coupling efficiency between two waveguides with different widths. Mode hybridization can occur in asymmetrical 
+silicon-on-insulator (SOI) waveguides for certain waveguide widths, where the effective indices of two guided 
+modes match [1-2]. Consequently, the field components of TE and TM modes become comparable, enabling polarization 
+conversion. In this study, pyFDTD is used to analyze a polarization converter (TM0 to TE1) using an SOI taper 
+waveguide connecting two SOI waveguides with different widths [1]. We use this example to demonstate the ability to
+individualy set the modes we are exciting in each port.
+
+.. grid:: 1
+
+    .. grid-item-card::  Rendered View of the Ridge Tapered WG
+
+        .. figure:: ../_static/polarization_geometry.png
+           :width: 65%
+           :align: center
+
+
+Simulation Setup
+~~~~~~~~~~~~~~~~
+The ridge waveguide setup code is found below. The mode indices are set to [2,2]. So, we purposefully
+select the modes we are converting: TM0 to TE1. The GDS II file of the design can be found here: 
+:download:`Ridge_Taper_WG_pol_converter.gds <../_static/Ridge_Taper_WG_pol_converter.gds>`.
+
+.. literalinclude:: ../_static/examples/ApplicationExamples/FDTD_Polarization_Converter.py
+    :language: python
+
+
+Results
+~~~~~~~
+The corresponding refractive indices for the input and output waveguides using the VFD Mode Solver are:
+
++------------------+-----------------+------------------+-----------------+
+| Input Waveguide  | Effective Index | Output Waveguide | Effective Index |
++------------------+-----------------+------------------+-----------------+
+| TE0              | 3.129           | TE0              | 3.058           |
++------------------+-----------------+------------------+-----------------+
+| TE1              | 3.026           | TM0              | 2.853           |
++------------------+-----------------+------------------+-----------------+
+| TM0              | 2.912           | TE1              | 2.761           |
++------------------+-----------------+------------------+-----------------+
+
+The mode profiles for the first three modes of the input and output waveguides (TE0, TE1, and TM0) are shown 
+in the original article figures.
+The simulated mode results can be seen in the following panels:
+
+.. grid:: 1
+
+    .. grid-item-card::  Input Waveguide - TM0 - Ez
+
+        .. figure:: ../_static/polarization_example_TM0.png
+           :width: 100%
+           :align: center
+
+    .. grid-item-card::  Output Waveguide - TE1 - Ey
+
+        .. figure:: ../_static/polarization_example_TE1.png
+           :width: 100%
+           :align: center
+
+Conclusion
+~~~~~~~~~~
+The simulation demonstrates successful polarization conversion from TM0 to TE1 using a tapered SOI ridge waveguide. This design can be applied in integrated photonic circuits for polarization control and mode conversion applications.
+
+References
+~~~~~~~~~~
+1. D. Dai, Y. Tang, and J. E. Bowers. *Mode conversion in tapered submicron silicon ridge optical waveguides*, Optics Express, Vol. 20, No. 12, pp. 13425–13439, 2012.
+
+2. D. Vermeulen et al. *Efficient tapering to the fundamental quasi-TM mode in asymmetrical waveguides*, In 15th European Conference on Integrated Optics (ECIO), 2010.
+ 

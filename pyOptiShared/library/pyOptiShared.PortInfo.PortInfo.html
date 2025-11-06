@@ -1,0 +1,238 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyOptiShared.PortInfo.PortInfo &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="NXData Data Class" href="../NXdata.html" />
+    <link rel="prev" title="pyOptiShared.DeviceGeometry.DeviceGeometry" href="pyOptiShared.DeviceGeometry.DeviceGeometry.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo-traced.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../APIDocumentation/APIDocumentation.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../SharedLibraries.html">Shared Libraries</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../MaterialLib.html">Material Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LayerStack.html">Layer Stack</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../DeviceGeometry.html">Device Geometry</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../DeviceGeometry.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../DeviceGeometry.html#considerations">Considerations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../DeviceGeometry.html#device-and-port-buffers">Device and Port Buffers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../DeviceGeometry.html#auto-port-detection-and-port-numbering">Auto Port Detection and Port Numbering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../DeviceGeometry.html#examples">Examples</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../DeviceGeometry.html#device-geometry-api">Device Geometry</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="pyOptiShared.DeviceGeometry.DeviceGeometry.html">pyOptiShared.DeviceGeometry.DeviceGeometry</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">pyOptiShared.PortInfo.PortInfo</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.PortInfo.PortInfo"><code class="docutils literal notranslate"><span class="pre">PortInfo</span></code></a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.PortInfo.PortInfo.GetPointsList"><code class="docutils literal notranslate"><span class="pre">PortInfo.GetPointsList()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.PortInfo.PortInfo.GetPortsRecord"><code class="docutils literal notranslate"><span class="pre">PortInfo.GetPortsRecord()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.PortInfo.PortInfo.update"><code class="docutils literal notranslate"><span class="pre">PortInfo.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../NXdata.html"><em>NXData</em> Data Class</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyModeSolver/pyModeSolver.html">Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">FDTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Designs.html">Flex Device Library</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
+          <li class="breadcrumb-item"><a href="../SharedLibraries.html">Shared Libraries</a></li>
+          <li class="breadcrumb-item"><a href="../DeviceGeometry.html">Device Geometry</a></li>
+      <li class="breadcrumb-item active">pyOptiShared.PortInfo.PortInfo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/pyOptiShared/library/pyOptiShared.PortInfo.PortInfo.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyoptishared-portinfo-portinfo">
+<h1>pyOptiShared.PortInfo.PortInfo<a class="headerlink" href="#pyoptishared-portinfo-portinfo" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyOptiShared.PortInfo.PortInfo">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyOptiShared.PortInfo.</span></span><span class="sig-name descname"><span class="pre">PortInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orientation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[0.0,</span> <span class="pre">0.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[0.0,</span> <span class="pre">0.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zminmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">1000.0)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'o#'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.PortInfo.PortInfo" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This class is used to define all the information related to a single port.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lines</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a>) – A list of cut points defined as tuple (x,y) for GDS files or (x,y,z) for STL files. These points define the location of a port in a layout.</p></li>
+<li><p><strong>layer_number</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – The number of the layer where the port exists. Defaults to 1.</p></li>
+<li><p><strong>orientation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – The orientation of the port [180,0,90,270]. Defaults to 0.</p></li>
+<li><p><strong>mode_number</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – The index of the mode excited through the port. Defaults to 0.</p></li>
+<li><p><strong>buffer</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – Defines the buffers around the port (regions inside the cladd) so the mode solver sees what surrounds the cut. Defaults to [0.0,0.0].</p></li>
+<li><p><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – defines the offsets of the port in x and y as a list. Defaults to [0.0,0.0].</p></li>
+<li><p><strong>zminmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>, </em><em>optional</em>) – Defines the minimum and maximum z that the port spans. Defaults to (0.0,1000.0).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.PortInfo.PortInfo.GetPointsList" title="pyOptiShared.PortInfo.PortInfo.GetPointsList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetPointsList</span></code></a>()</p></td>
+<td><p>Gets the list of points that constructs the port cuts.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.PortInfo.PortInfo.GetPortsRecord" title="pyOptiShared.PortInfo.PortInfo.GetPortsRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetPortsRecord</span></code></a>()</p></td>
+<td><p>Returns a dictionary of the port layer number and the coressponding cut points in this layer.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetZminMax</span></code>([zminmax])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.PortInfo.PortInfo.update" title="pyOptiShared.PortInfo.PortInfo.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(lines[, layer_number, offsets, zminmax])</p></td>
+<td><p>Use to update the definition of a port.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.PortInfo.PortInfo.GetPointsList">
+<span class="sig-name descname"><span class="pre">GetPointsList</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyOptiShared.PortInfo.PortInfo.GetPointsList" title="Link to this definition"></a></dt>
+<dd><p>Gets the list of points that constructs the port cuts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of points that constructs the port cuts.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.PortInfo.PortInfo.GetPortsRecord">
+<span class="sig-name descname"><span class="pre">GetPortsRecord</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyOptiShared.PortInfo.PortInfo.GetPortsRecord" title="Link to this definition"></a></dt>
+<dd><p>Returns a dictionary of the port layer number and the coressponding cut points in this layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary of the port layer number and the coressponding cut points in this layer.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a>,<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)">list</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.PortInfo.PortInfo.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offsets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.0,</span> <span class="pre">0.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zminmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.0,</span> <span class="pre">1000.0)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.PortInfo.PortInfo.update" title="Link to this definition"></a></dt>
+<dd><p>Use to update the definition of a port.
+Useful to add another cut on the same layer or on another layer if the port spans multiple layers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lines</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a>) – A list of cut points defined as tuple (x,y) for GDS files or (x,y,z) for STL files. These points define the location of a port in a layout.</p></li>
+<li><p><strong>layer_number</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – The number of the layer where the port exists. Defaults to 1.</p></li>
+<li><p><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – defines the offsets of the port in x and y as a list. Defaults to [0.0,0.0].</p></li>
+<li><p><strong>zminmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>, </em><em>optional</em>) – Defines the minimum and maximum z that the port spans. Defaults to (0.0,1000.0).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pyOptiShared.DeviceGeometry.DeviceGeometry.html" class="btn btn-neutral float-left" title="pyOptiShared.DeviceGeometry.DeviceGeometry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../NXdata.html" class="btn btn-neutral float-right" title="NXData Data Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

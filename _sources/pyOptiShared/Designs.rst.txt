@@ -1,0 +1,26 @@
+.. _flex_devices:
+
+Flex Device Library
+-----------------------------
+
+
+API Documentation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^	
+		   
+.. autosummary::
+   :toctree: library
+
+   pyOptiShared.Designs.flex_crossing
+   pyOptiShared.Designs.flex_taper
+   pyOptiShared.Designs.flex_splitter
+   pyOptiShared.Designs.flex_bend90
+   pyOptiShared.Designs.rotate_curve
+
+
+
+.. automodule:: pyOptiShared.Designs
+   :members:
+   :undoc-members:
+   :no-index:
+
+

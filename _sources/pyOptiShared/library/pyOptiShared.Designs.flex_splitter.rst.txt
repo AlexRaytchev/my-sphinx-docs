@@ -1,0 +1,6 @@
+﻿pyOptiShared.Designs.flex\_splitter
+===================================
+
+.. currentmodule:: pyOptiShared.Designs
+
+.. autofunction:: flex_splitter

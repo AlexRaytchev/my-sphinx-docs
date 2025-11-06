@@ -1,0 +1,6 @@
+﻿pyOptiShared.Designs.rotate\_curve
+==================================
+
+.. currentmodule:: pyOptiShared.Designs
+
+.. autofunction:: rotate_curve

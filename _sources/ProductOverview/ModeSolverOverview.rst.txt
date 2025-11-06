@@ -1,0 +1,76 @@
+.. _vfd-intro:
+
+Vector Finite Difference (VFD) Mode Solver
+==========================================
+
+
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: top
+
+**Based on:**
+
+A. B. Fallahkhair, K. S. Li, and T. E. Murphy,  
+*"Vector Finite Difference Modesolver for Anisotropic Dielectric Waveguides"*,  
+**Journal of Lightwave Technology**, Vol. 26, No. 11, pp. 1423–1431, 2008.  
+`DOI: 10.1109/JLT.2008.923643 <https://doi.org/10.1109/JLT.2008.923643>`_
+
+Introduction
+--------------
+
+This solver implements a **full-vector finite-difference mode-solving algorithm** for analyzing dielectric waveguides, based on the method presented by Fallahkhair et al. It is designed to compute the **guided modes** of **anisotropic, lossy, and inhomogeneous dielectric structures** in two dimensions (2D), making it ideal for modeling complex photonic components such as:
+
+- Integrated optical waveguides
+- Photonic crystal fibers
+- Nanophotonic waveguides
+
+Unlike scalar or semi-vectorial approximations, this solver fully resolves the **vectorial coupling** of the electromagnetic field, supporting anisotropic dielectric permittivity and complex materials with loss.
+
+Key Features
+------------
+
+- **Full-vector field computation**: Solves for all components (Ex, Ey, Ez) of the electric field.
+- **Anisotropic permittivity support**: Handles diagonal tensor permittivity (ε\ :sub:`x`\, ε\ :sub:`y`\, ε\ :sub:`z`\).
+- **Complex eigenvalues**: Supports lossy materials and leaky modes.
+- **Finite difference discretization**: Uses central-difference schemes on structured Cartesian grids.
+- **TE, TM, and hybrid modes**: Accurately identifies all types of guided modes.
+
+Mathematical Method
+-------------------
+
+The method solves the frequency-domain *curl-curl* Maxwell equation:
+
+.. math::
+
+   \nabla \times \left( \frac{1}{\mu} \nabla \times \mathbf{E} \right) = \omega^2 \varepsilon \mathbf{E}
+
+Using finite difference discretization, this becomes a large, sparse generalized eigenvalue problem of the form:
+
+.. math::
+
+   \mathbf{A} \mathbf{E} = \beta^2 \mathbf{B} \mathbf{E}
+
+Where:
+
+- :math:`\mathbf{E}` is the electric field eigenvector,
+- :math:`\beta` is the complex propagation constant,
+- :math:`\mathbf{A}` and :math:`\mathbf{B}` are sparse matrices representing the differential operators.
+
+The eigenvalues :math:`\beta^2` are used to extract the effective refractive index:
+
+.. math::
+
+   n_{\text{eff}} = \frac{\beta}{k_0}
+
+Applications
+------------
+
+- Silicon photonics and integrated optical waveguides
+- Photonic crystal fibers and birefringent fiber design
+- Electro-optic and magneto-optic materials
+- Design of structures with material loss or gain
+- Analysis of hybrid modes in high-index-contrast devices
+
+
+

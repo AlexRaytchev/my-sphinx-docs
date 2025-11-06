@@ -1,0 +1,6 @@
+﻿pyOptiShared.Designs.flex\_crossing
+===================================
+
+.. currentmodule:: pyOptiShared.Designs
+
+.. autofunction:: flex_crossing

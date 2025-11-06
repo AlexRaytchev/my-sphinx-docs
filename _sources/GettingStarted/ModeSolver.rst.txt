@@ -1,0 +1,266 @@
+VFD Mode Solver
+==========================================
+
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: top
+   
+The Vector Finite Difference (VFD) Mode Solver is a powerful tool for analyzing electromagnetic modes in dielectric waveguides. This guide will walk you through the essential steps to set up and run your first mode analysis.
+
+Basic Workflow
+--------------
+
+Every mode solver simulation follows these steps:
+
+1. **Define materials** with their optical properties
+2. **Create layer stack** describing the vertical structure
+3. **Set up device geometry** from a GDS layout file
+4. **Configure solver settings** including mesh, wavelength range, and boundaries
+5. **Run simulation** and visualize results
+
+Example 1: Rectangular Dielectric Waveguide
+--------------------------------------------
+
+Let's start with a simple rectangular waveguide to understand the core concepts.
+
+Step 1: Import Required Modules
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   from pyModeSolver.py_mode_solver import VFDModeSolver
+   from pyOptiShared.LayerInfo import LayerStack
+   from pyOptiShared.DeviceGeometry import DeviceGeometry
+   from pyOptiShared.Material import ConstMaterial
+   import gdstk
+
+Step 2: Define Materials
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Create materials with constant refractive indices:
+
+.. code-block:: python
+
+   # Low-index material (n=1.444) for substrate
+   substrate_mat = ConstMaterial("SiO2", epsReal=1.444**2, epsImag=0.0)
+
+   # High-index material (n=3.48) for waveguide core
+   core_mat = ConstMaterial("Si", epsReal=3.48**2, epsImag=0.0)
+
+**Note**: The dielectric constant (epsilon) is the square of the refractive index: ε = n\ :sup:`2`
+
+Step 3: Build the Layer Stack
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The layer stack defines your device's vertical structure:
+
+.. code-block:: python
+
+   layer_stack = LayerStack()
+
+   # Add first layer: 250nm thick at z=0
+   layer_stack.addLayer(number=1, material=core_mat, thickness=0.22, 
+                        zmin=0, sideWallAng=0, cladding="Air_default")
+
+   # Add second layer: 250nm thick at z=0.25μm
+   layer_stack.addLayer(number=2, material=core_mat, thickness=0.09, 
+                        zmin=0, sideWallAng=0, cladding="Air_default")
+
+   # Set background (above structure) and substrate (below structure)
+   layer_stack.setBGandSub(background="Air_default", substrate=substrate_mat)
+
+Step 4: Create Device Geometry from GDS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Load your waveguide layout and add padding around it:
+
+.. code-block:: python
+
+   #Create GDS mask for the device
+   filename = "wg.gds"
+
+   length = 10
+   width1 = 0.5
+   width2 = 2
+
+   lib = gdstk.Library()
+
+   strt_wg = lib.new_cell("Straight_WG")
+   vertices1 = [(0, -width1/2), (length, -width1/2), (length, width1/2), (0, width1/2)]
+   vertices2 = [(0, -width2/2), (length, -width2/2), (length, width2/2), (0, width2/2)]
+
+   strt_wg.add(gdstk.Polygon(vertices1, layer=1))
+   strt_wg.add(gdstk.Polygon(vertices2, layer=2))
+
+   lib.write_gds(filename)
+
+   device_geometry = DeviceGeometry()
+   device_geometry.SetFromGDS(
+       layer_stack=layer_stack,
+       gds_file="wg.gds",
+       buffers={'x': 1, 'y': 1, 'z': 1}  # 1 μm padding on all sides
+   )
+
+Step 5: Configure the Mode Solver
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Set up boundary conditions and simulation parameters:
+
+.. code-block:: python
+
+   mode_solver = VFDModeSolver()
+
+   # Set boundary conditions (PMC = Perfect Magnetic Conductor)
+   mode_solver.SetBoundaries(
+       min_x={"bc": "pmc"}, max_x={"bc": "pmc"},
+       min_y={"bc": "pmc"}, max_y={"bc": "pmc"}
+   )
+
+   # Configure simulation settings
+   mode_solver.SetSimSettings(
+       device_geometry=device_geometry,
+       mesh={"dx": 0.025, "dy": 0.025, "dz": 0.025},  # 25nm mesh resolution
+       wavelength={"min": 1.5, "max": 1.6, "npts": 5},  # 1.5-1.6 μm range
+       nguess=2.1,              # Initial guess for effective index
+       nmodes=4,                # Find first 4 modes
+       cut_plane="YZ",          # Cross-section plane (propagation along X)
+       cut_location=0.0,        # Position along X-axis
+       tol=1e-8,                # Convergence tolerance
+       savepath="./ModeResults",
+       res_filename="my_results"
+   )
+
+**Key Parameters Explained:**
+
+- **cut_plane**: The plane perpendicular to propagation direction (YZ for X-propagation)
+- **nguess**: Starting estimate for n_eff (helps solver converge faster)
+- **nmodes**: Number of modes to find (solver returns modes sorted by effective index)
+- **tol**: Solver accuracy (smaller = more accurate but slower)
+
+Step 6: Run and Visualize Results
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   # Run the simulation
+   results = mode_solver.Run()
+
+   # Visualize results
+   results.PlotMode(field='Hy')               # Field profile of the fundamental mode
+   results.PlotPermittivity()                 # Material cross-section
+   results.PlotIndex('neff', modes=[0,1,2,3]) # Effective index vs wavelength
+   results.PlotIndex('ng', modes=[0,1,2,3])   # Group index vs wavelength
+
+Complete Example Code
+^^^^^^^^^^^^^^^^^^^^^
+
+Here is the complete code you can copy and run (:download:`ModeSolver_getting_started_1.py <../_static/examples/GettingStarted/ModeSolver_getting_started_1.py>`):
+
+.. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_1.py
+   :language: python
+
+
+
+Example 2: Optical Fiber with Programmatic GDS Creation
+--------------------------------------------------------
+
+This example shows how to create geometry programmatically and use an XY cross-section. 
+The entire polygon in the GDSII file is used as a cross-section, enabling 2D geometries with arbitrarty shapes.
+
+Creating Geometry with gdstk
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   import gdstk
+
+   # Create circular fiber core
+   filename = "fiber.gds"
+   lib = gdstk.Library()
+   cell = lib.new_cell("fiber")
+   circle = gdstk.ellipse((0, 0), 7.5, layer=1)  # 7.5 μm radius
+   cell.add(circle)
+   lib.write_gds(filename)
+
+Using Experimental Materials
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For realistic material properties, use the refractive index database:
+
+.. code-block:: python
+
+   from pyOptiShared.Material import ConstMaterial, ExperimentalMaterial
+
+   air_mat = ConstMaterial("air", epsReal=1, epsImag=0.0)
+
+   # Load silica data from refractiveindex.info database
+   sio2_mat = ExperimentalMaterial("my_material")
+   sio2_mat.SetFromRefDotInfo(
+       shelf="main", 
+       book="SiO2", 
+       page="Malitson", 
+       wavelength_unit=1e-6
+   )
+
+XY Cross-Section Configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For propagation along Z (fiber axis):
+
+.. code-block:: python
+
+   mode_solver.SetSimSettings(
+       device_geometry=device_geometry,
+       mesh={"dx": 0.5, "dy": 0.5, "dz": 0.5},
+       wavelength={"min": 1.5, "max": 1.6, "npts": 11},
+       nguess=3.4,
+       nmodes=1,
+       cut_plane="XY",      # Cross-section for Z-propagation
+       cut_location=0.0,
+       tol=1e-8,
+       savepath="./ModeResults",
+       res_filename="fiber_results"
+   )
+
+Complete Example Code
+^^^^^^^^^^^^^^^^^^^^^
+Here is the complete code you can copy and run (:download:`ModeSolver_getting_started_2.py <../_static/examples/GettingStarted/ModeSolver_getting_started_2.py>`):
+
+.. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_2.py
+   :language: python
+
+
+
+Understanding the Results
+-------------------------
+
+The solver returns a ``ModeSolverResults`` object with several useful methods:
+
+- ``PlotMode()``: Shows electric field intensity (\|E\|\ :sup:`2`) for each mode
+- ``PlotPermittivity()``: Displays the refractive index profile of your structure
+- ``PlotIndex('neff')``: Effective index dispersion (how n_eff varies with wavelength)
+- ``PlotIndex('ng')``: Group index dispersion (important for pulse propagation)
+
+**Mode Ordering**: Modes are numbered starting from 0, sorted by effective index (highest first). Mode 0 is the fundamental mode.
+
+Tips for Success
+----------------
+
+1. **Choose appropriate nguess**: Set it between the substrate and core refractive indices
+2. **Mesh resolution**: Balance between accuracy (small mesh) and speed (large mesh)
+3. **Boundary conditions**: PMC boundaries enforce zero tangential H-field at edges
+4. **Wavelength sampling**: More points give smoother dispersion curves but take longer
+5. **Convergence**: If solver fails, try adjusting nguess or increasing mesh resolution
+
+Next Steps
+----------
+
+Now that you understand the basics, you can:
+
+- Analyze your own waveguide designs
+- Study dispersion properties for different geometries
+- Optimize structures for specific mode characteristics
+- Export field profiles for further analysis
+
+For advanced features and troubleshooting, consult the full API documentation :ref:`mode_solver_api`.

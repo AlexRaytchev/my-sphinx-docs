@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finite-Difference Time-Domain (FDTD) Electromagnetic Solver &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css?v=7f9a90b1" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation Guide" href="../Installation/Installation.html" />
+    <link rel="prev" title="Vector Finite Difference (VFD) Mode Solver" href="ModeSolverOverview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-traced.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ProductOverview.html">Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ModeSolverOverview.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#key-features">Key Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#boundary-conditions">Boundary Conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#applications">Applications</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="ProductOverview.html">Overview</a></li>
+      <li class="breadcrumb-item active">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/ProductOverview/FDTDOverview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="finite-difference-time-domain-fdtd-electromagnetic-solver">
+<span id="fdtd-intro"></span><h1>Finite-Difference Time-Domain (FDTD) Electromagnetic Solver<a class="headerlink" href="#finite-difference-time-domain-fdtd-electromagnetic-solver" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#key-features" id="id2">Key Features</a></p></li>
+<li><p><a class="reference internal" href="#mathematical-foundation" id="id3">Mathematical Foundation</a></p></li>
+<li><p><a class="reference internal" href="#boundary-conditions" id="id4">Boundary Conditions</a></p></li>
+<li><p><a class="reference internal" href="#applications" id="id5">Applications</a></p></li>
+</ul>
+</nav>
+<p><strong>Based on:</strong></p>
+<p>A. Z. Elsherbeni, V. Demir,
+<em>“The Finite-Difference Time-Domain Method for Electromagnetics with MATLAB® Simulations”</em>, 2nd Edition,
+SciTech Publishing, 2015. ISBN: 9781613531754</p>
+<p>Susan C. Hagness, Allen Taflove,
+<em>“Computational Electrodynamics: The Finite-Difference Time-Domain Method”</em>, 3rd Edition,
+Artech House, 2005. ISBN: 9781580538329</p>
+<section id="introduction">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This solver implements the <strong>Finite-Difference Time-Domain (FDTD)</strong> method for solving Maxwell’s equations in time and space, specifically optimized for the simulation of <strong>integrated photonic devices</strong>. The implementation is grounded in the foundational works by Taflove, Hagness, Elsherbeni, and Demir, and adapts their rigorous mathematical formulation to a highly automated and scalable simulation environment.</p>
+<p>It supports <strong>linear, isotropic, non-dispersive</strong> materials and provides advanced features tailored to photonic circuit design, such as <strong>automatic mode injection</strong>, <strong>port detection</strong>, and <strong>S-parameter extraction</strong>.</p>
+</section>
+<section id="key-features">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Key Features</a><a class="headerlink" href="#key-features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Time-domain Maxwell solver</strong> using second-order central difference in both time and space.</p></li>
+<li><p><strong>Perfectly Matched Layer (CPML)</strong> boundary conditions for accurate open-region simulations (as per Elsherbeni and Demir).</p></li>
+<li><p><strong>GDSII/STL Import</strong>: Reads standard GDSII or STL layout files to define device geometry.</p></li>
+<li><p><strong>Port Identification &amp; Mode Matching</strong>:
+- Automatic port detection and classification.
+- Single-mode excitation using computed eigenmodes.
+- Mode solver integration for accurate injection and extraction.</p></li>
+<li><p><strong>S-Parameter Computation</strong>:
+- Computes scattering parameters (S-matrix) from time-domain data.
+- Automatically exports results in standard <cite>.snp</cite> format.</p></li>
+<li><p><strong>HDF5 Output</strong>:
+- All simulation data, field snapshots, and metadata are stored in <cite>.h5</cite> format for efficient post-processing.</p></li>
+</ul>
+</section>
+<section id="mathematical-foundation">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Mathematical Foundation</a><a class="headerlink" href="#mathematical-foundation" title="Link to this heading"></a></h2>
+<p>The FDTD method discretizes Maxwell’s curl equations using a <strong>Yee grid</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\frac{\partial \mathbf{B}}{\partial t} &amp;= -\nabla \times \mathbf{E} \\
+\frac{\partial \mathbf{D}}{\partial t} &amp;= \nabla \times \mathbf{H}
+\end{align}\end{split}\]</div>
+<p>In linear, non-dispersive, and isotropic media, we use:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{D} = \varepsilon \mathbf{E}, \quad \mathbf{B} = \mu \mathbf{H}\]</div>
+<p>Time stepping is performed using a leapfrog scheme:</p>
+<ul class="simple">
+<li><p>Update magnetic field <span class="math notranslate nohighlight">\(\mathbf{H}\)</span> at half-integer time steps.</p></li>
+<li><p>Update electric field <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> at integer time steps.</p></li>
+</ul>
+</section>
+<section id="boundary-conditions">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Boundary Conditions</a><a class="headerlink" href="#boundary-conditions" title="Link to this heading"></a></h2>
+<p>This solver supports <strong>Convolutional Perfectly Matched Layer (CPML)</strong> absorbing boundary conditions, as described in Chapter 8 of Elsherbeni &amp; Demir. CPML is used to prevent artificial reflections at simulation domain boundaries.</p>
+</section>
+<section id="applications">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Applications</a><a class="headerlink" href="#applications" title="Link to this heading"></a></h2>
+<p>This solver is particularly suited for:</p>
+<ul class="simple">
+<li><p>Silicon photonics and integrated optical circuits</p></li>
+<li><p>Passive photonic devices (e.g., splitters, multiplexers, filters)</p></li>
+<li><p>Waveguide tapering, crossings, and junctions</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ModeSolverOverview.html" class="btn btn-neutral float-left" title="Vector Finite Difference (VFD) Mode Solver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Installation/Installation.html" class="btn btn-neutral float-right" title="Installation Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

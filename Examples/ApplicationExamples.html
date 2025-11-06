@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application Examples &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Device Optimization" href="DeviceExamples.html" />
+    <link rel="prev" title="FDTD" href="FDTDExamples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-traced.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ModeSolverExamples.html">Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FDTDExamples.html">FDTD</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Application Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#polarization-converter-using-a-tapered-silicon-ridge-waveguide">Polarization Converter Using a Tapered Silicon Ridge Waveguide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulation-setup">Simulation Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#results">Results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DeviceExamples.html">Device Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Application Examples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Examples/ApplicationExamples.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="application-examples">
+<h1>Application Examples<a class="headerlink" href="#application-examples" title="Link to this heading"></a></h1>
+<section id="polarization-converter-using-a-tapered-silicon-ridge-waveguide">
+<h2>Polarization Converter Using a Tapered Silicon Ridge Waveguide<a class="headerlink" href="#polarization-converter-using-a-tapered-silicon-ridge-waveguide" title="Link to this heading"></a></h2>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#simulation-setup" id="id2">Simulation Setup</a></p></li>
+<li><p><a class="reference internal" href="#results" id="id3">Results</a></p></li>
+<li><p><a class="reference internal" href="#conclusion" id="id4">Conclusion</a></p></li>
+<li><p><a class="reference internal" href="#references" id="id5">References</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<h3><a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading"></a></h3>
+<p>Tapered waveguides with an adiabatic change in the propagation direction are useful for enhancing the
+coupling efficiency between two waveguides with different widths. Mode hybridization can occur in asymmetrical
+silicon-on-insulator (SOI) waveguides for certain waveguide widths, where the effective indices of two guided
+modes match [1-2]. Consequently, the field components of TE and TM modes become comparable, enabling polarization
+conversion. In this study, pyFDTD is used to analyze a polarization converter (TM0 to TE1) using an SOI taper
+waveguide connecting two SOI waveguides with different widths [1]. We use this example to demonstate the ability to
+individualy set the modes we are exciting in each port.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Rendered View of the Ridge Tapered WG</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/polarization_geometry.png"><img alt="../_images/polarization_geometry.png" src="../_images/polarization_geometry.png" style="width: 65%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="simulation-setup">
+<h3><a class="toc-backref" href="#id2" role="doc-backlink">Simulation Setup</a><a class="headerlink" href="#simulation-setup" title="Link to this heading"></a></h3>
+<p>The ridge waveguide setup code is found below. The mode indices are set to [2,2]. So, we purposefully
+select the modes we are converting: TM0 to TE1. The GDS II file of the design can be found here:
+<a class="reference download internal" download="" href="../_downloads/37a1e004d7b03c1ece888c71ddaca7f5/Ridge_Taper_WG_pol_converter.gds"><code class="xref download docutils literal notranslate"><span class="pre">Ridge_Taper_WG_pol_converter.gds</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.pyFDTDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyFDTDSolver</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###         Material Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">SiO2_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.445</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.455</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###       Layer Stack Settings         ###</span>
+<span class="c1">##########################################</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L0&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">Si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">Si_mat</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">Si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">SiO2_mat</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###   Device Geometry/Port Settings    ###</span>
+<span class="c1">##########################################</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromGDS</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Ridge_Taper_WG_pol_converter.gds&quot;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span>
+    <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">port_buffer</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="nb">min</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="nb">max</span><span class="o">=</span><span class="mf">8.5</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1">##########################################</span>
+<span class="c1">###          FDTD Settings             ###</span>
+<span class="c1">##########################################</span>
+<span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="mf">1.45</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="mf">1.55</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="n">mode_indices</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span><span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
+                          <span class="n">lmin</span><span class="o">=</span><span class="mf">1.45</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="mf">1.55</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                          <span class="n">save_ex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.050</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span>
+                          <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span> <span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_modes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># ##########################################</span>
+<span class="c1"># ###      Run and Post Processing       ###</span>
+<span class="c1"># ##########################################</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="results">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">Results</a><a class="headerlink" href="#results" title="Link to this heading"></a></h3>
+<p>The corresponding refractive indices for the input and output waveguides using the VFD Mode Solver are:</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Input Waveguide</p></td>
+<td><p>Effective Index</p></td>
+<td><p>Output Waveguide</p></td>
+<td><p>Effective Index</p></td>
+</tr>
+<tr class="row-even"><td><p>TE0</p></td>
+<td><p>3.129</p></td>
+<td><p>TE0</p></td>
+<td><p>3.058</p></td>
+</tr>
+<tr class="row-odd"><td><p>TE1</p></td>
+<td><p>3.026</p></td>
+<td><p>TM0</p></td>
+<td><p>2.853</p></td>
+</tr>
+<tr class="row-even"><td><p>TM0</p></td>
+<td><p>2.912</p></td>
+<td><p>TE1</p></td>
+<td><p>2.761</p></td>
+</tr>
+</tbody>
+</table>
+<p>The mode profiles for the first three modes of the input and output waveguides (TE0, TE1, and TM0) are shown
+in the original article figures.
+The simulated mode results can be seen in the following panels:</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Input Waveguide - TM0 - Ez</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/polarization_example_TM0.png"><img alt="../_images/polarization_example_TM0.png" src="../_images/polarization_example_TM0.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Output Waveguide - TE1 - Ey</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/polarization_example_TE1.png"><img alt="../_images/polarization_example_TE1.png" src="../_images/polarization_example_TE1.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Conclusion</a><a class="headerlink" href="#conclusion" title="Link to this heading"></a></h3>
+<p>The simulation demonstrates successful polarization conversion from TM0 to TE1 using a tapered SOI ridge waveguide. This design can be applied in integrated photonic circuits for polarization control and mode conversion applications.</p>
+</section>
+<section id="references">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">References</a><a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><ol class="upperalpha simple" start="4">
+<li><p>Dai, Y. Tang, and J. E. Bowers. <em>Mode conversion in tapered submicron silicon ridge optical waveguides</em>, Optics Express, Vol. 20, No. 12, pp. 13425–13439, 2012.</p></li>
+</ol>
+</li>
+<li><ol class="upperalpha simple" start="4">
+<li><p>Vermeulen et al. <em>Efficient tapering to the fundamental quasi-TM mode in asymmetrical waveguides</em>, In 15th European Conference on Integrated Optics (ECIO), 2010.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="FDTDExamples.html" class="btn btn-neutral float-left" title="FDTD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DeviceExamples.html" class="btn btn-neutral float-right" title="Device Optimization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

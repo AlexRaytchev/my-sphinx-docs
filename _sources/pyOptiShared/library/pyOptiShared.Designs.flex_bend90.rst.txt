@@ -1,0 +1,6 @@
+﻿pyOptiShared.Designs.flex\_bend90
+=================================
+
+.. currentmodule:: pyOptiShared.Designs
+
+.. autofunction:: flex_bend90

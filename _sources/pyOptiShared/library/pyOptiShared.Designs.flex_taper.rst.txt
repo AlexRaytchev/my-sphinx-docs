@@ -1,0 +1,6 @@
+﻿pyOptiShared.Designs.flex\_taper
+================================
+
+.. currentmodule:: pyOptiShared.Designs
+
+.. autofunction:: flex_taper

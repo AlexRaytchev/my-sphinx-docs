@@ -1,0 +1,388 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Device Optimization &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Product Interworking" href="../ProductInterworking/ProductInterworking.html" />
+    <link rel="prev" title="Application Examples" href="ApplicationExamples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-traced.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ModeSolverExamples.html">Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FDTDExamples.html">FDTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ApplicationExamples.html">Application Examples</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Device Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#flexible-device-library">Flexible Device Library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#flexible-taper">Flexible Taper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flexible-90-degrees-bend">Flexible 90 degrees bend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flexible-splitter">Flexible Splitter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flexible-waveguide-crossing">Flexible Waveguide Crossing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#optimization-examples">Optimization Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#splitter-design-particle-swarm-optimization">Splitter Design - Particle Swarm Optimization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optiwaves's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Device Optimization</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Examples/DeviceExamples.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="device-optimization">
+<h1>Device Optimization<a class="headerlink" href="#device-optimization" title="Link to this heading"></a></h1>
+<section id="flexible-device-library">
+<h2>Flexible Device Library<a class="headerlink" href="#flexible-device-library" title="Link to this heading"></a></h2>
+<p>A collection of ready to use designs of the most common photonic devices. These devices can be used together with optimization libraries to build GDS masks and compact models for any material platform.</p>
+<section id="flexible-taper">
+<h3>Flexible Taper<a class="headerlink" href="#flexible-taper" title="Link to this heading"></a></h3>
+<p>This example shows how to use the flexible taper function <a class="reference internal" href="../pyOptiShared/library/pyOptiShared.Designs.flex_taper.html#pyOptiShared.Designs.flex_taper" title="pyOptiShared.Designs.flex_taper"><code class="xref py py-meth docutils literal notranslate"><span class="pre">flex_taper</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Designs</span><span class="w"> </span><span class="kn">import</span> <span class="n">flex_taper</span>
+
+<span class="c1"># Generate the array of random widths</span>
+<span class="n">min_width</span><span class="p">,</span> <span class="n">max_width</span><span class="p">,</span> <span class="n">num_widths</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">2.2</span><span class="p">,</span><span class="mi">8</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">min_width</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">max_width</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_widths</span><span class="p">)</span>
+
+<span class="n">lib</span><span class="o">=</span><span class="n">flex_taper</span><span class="p">(</span><span class="n">widths</span><span class="o">=</span><span class="n">w</span><span class="p">,</span><span class="n">taper_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code should generate a taper with randomly varying sections similar to the following image.</p>
+<a class="reference internal image-reference" href="../_images/flex_taper.png"><img alt="A graphical representation of a flexible taper." class="align-center" src="../_images/flex_taper.png" style="width: 40%;" />
+</a>
+</section>
+<section id="flexible-90-degrees-bend">
+<h3>Flexible 90 degrees bend<a class="headerlink" href="#flexible-90-degrees-bend" title="Link to this heading"></a></h3>
+<p>This example shows how to use the flexible 90 degrees bend function  <code class="xref py py-meth docutils literal notranslate"><span class="pre">flex_90bend</span></code>.</p>
+<p>This example shows how to use the flexible taper function <a class="reference internal" href="../pyOptiShared/library/pyOptiShared.Designs.flex_taper.html#pyOptiShared.Designs.flex_taper" title="pyOptiShared.Designs.flex_taper"><code class="xref py py-meth docutils literal notranslate"><span class="pre">flex_taper</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Designs</span><span class="w"> </span><span class="kn">import</span> <span class="n">flex_bend90</span>
+
+<span class="c1"># Generate the array of random widths</span>
+<span class="n">min_width</span><span class="p">,</span> <span class="n">max_width</span><span class="p">,</span> <span class="n">num_widths</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">8</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">min_width</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">max_width</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_widths</span><span class="p">)</span>
+
+<span class="n">dr_in</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">min_width</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">max_width</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_widths</span><span class="p">)</span>
+<span class="n">dr_out</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">min_width</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">max_width</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_widths</span><span class="p">)</span>
+
+<span class="n">lib</span><span class="o">=</span><span class="n">flex_bend90</span><span class="p">(</span><span class="n">dr_in</span><span class="o">=</span><span class="n">dr_in</span><span class="p">,</span><span class="n">dr_out</span><span class="o">=</span><span class="n">dr_out</span><span class="p">,</span><span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code should generate a 90 degrees bend with randomly varying sections similar to the following image.</p>
+<a class="reference internal image-reference" href="../_images/flex_90bend.png"><img alt="A graphical representation of a flexible 90 degrees bend." class="align-center" src="../_images/flex_90bend.png" style="width: 40%;" />
+</a>
+</section>
+<section id="flexible-splitter">
+<h3>Flexible Splitter<a class="headerlink" href="#flexible-splitter" title="Link to this heading"></a></h3>
+<p>This example shows how to use the flexible splitter function  <a class="reference internal" href="../pyOptiShared/library/pyOptiShared.Designs.flex_splitter.html#pyOptiShared.Designs.flex_splitter" title="pyOptiShared.Designs.flex_splitter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">flex_splitter</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Designs</span><span class="w"> </span><span class="kn">import</span> <span class="n">flex_splitter</span>
+
+<span class="c1"># Generate the array of random widths</span>
+<span class="n">min_width</span><span class="p">,</span> <span class="n">max_width</span><span class="p">,</span> <span class="n">num_widths</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mf">3.2</span><span class="p">,</span><span class="mi">8</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">min_width</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">max_width</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_widths</span><span class="p">)</span>
+
+<span class="n">lib</span><span class="o">=</span><span class="n">flex_splitter</span><span class="p">(</span><span class="n">widths</span><span class="o">=</span><span class="n">w</span><span class="p">,</span><span class="n">length</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">taper_length</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This code should generate a splitter with randomly varying middle sections similar to the following image.</p>
+<a class="reference internal image-reference" href="../_images/flex_splitter.png"><img alt="A graphical representation of a flexible splitter." class="align-center" src="../_images/flex_splitter.png" style="width: 40%;" />
+</a>
+</section>
+<section id="flexible-waveguide-crossing">
+<h3>Flexible Waveguide Crossing<a class="headerlink" href="#flexible-waveguide-crossing" title="Link to this heading"></a></h3>
+<p>This example shows how to use the flexible waveguide crossing function  <a class="reference internal" href="../pyOptiShared/library/pyOptiShared.Designs.flex_crossing.html#pyOptiShared.Designs.flex_crossing" title="pyOptiShared.Designs.flex_crossing"><code class="xref py py-meth docutils literal notranslate"><span class="pre">flex_crossing</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Designs</span><span class="w"> </span><span class="kn">import</span> <span class="n">flex_crossing</span>
+
+<span class="c1"># Generate the array of random widths</span>
+<span class="n">min_width</span><span class="p">,</span> <span class="n">max_width</span><span class="p">,</span> <span class="n">num_widths</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">8</span>
+<span class="n">cross_dw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">min_width</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">max_width</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_widths</span><span class="p">)</span>
+
+<span class="n">flex_crossing</span><span class="p">(</span><span class="n">cross_dw</span><span class="o">=</span><span class="n">cross_dw</span><span class="p">,</span><span class="n">dsep</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>This code should generate a waveguide crossing with randomly varying sections similar to the following image.</p>
+<a class="reference internal image-reference" href="../_images/flex_wgcrossing.png"><img alt="A graphical representation of a flexible taper." class="align-center" src="../_images/flex_wgcrossing.png" style="width: 40%;" />
+</a>
+<p>Please see the full documentation for further details on individual functions <a class="reference internal" href="../pyOptiShared/Designs.html#flex-devices"><span class="std std-ref">Flex Device Library</span></a>.</p>
+</section>
+</section>
+<section id="optimization-examples">
+<h2>Optimization Examples<a class="headerlink" href="#optimization-examples" title="Link to this heading"></a></h2>
+<section id="splitter-design-particle-swarm-optimization">
+<h3>Splitter Design - Particle Swarm Optimization<a class="headerlink" href="#splitter-design-particle-swarm-optimization" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span> 
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.pyFDTDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyFDTDSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.SimResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDTDSimResults</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.OptimizeVerse</span><span class="w"> </span><span class="kn">import</span> <span class="n">PSO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Designs</span><span class="w"> </span><span class="kn">import</span> <span class="n">flex_splitter</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">RunSimulation</span><span class="p">(</span><span class="n">layer_stack</span><span class="p">:</span><span class="n">LayerStack</span><span class="p">,</span><span class="n">gds_file</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+                  <span class="n">lmin</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span><span class="n">lmax</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span><span class="n">npts</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+                  <span class="n">space_step</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                  <span class="n">port_dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span><span class="n">wgmin</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">wgmax</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">symmetries</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">subpixel_level</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                  <span class="n">mode_indices</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                  <span class="n">mon_z</span><span class="o">=</span><span class="mf">0.11</span><span class="p">,</span>
+                  <span class="n">auto_shutoff_limit</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">FDTDSimResults</span><span class="p">:</span>
+    
+    <span class="c1"># Defines the Device Geometry</span>
+    <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+    <span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromGDS</span><span class="p">(</span>
+        <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+        <span class="n">gds_file</span><span class="o">=</span><span class="n">gds_file</span><span class="p">,</span>
+        <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">0.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">0.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="n">results_filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">gds_file</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">wgmin</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">wgmax</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span> 
+        <span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="n">port_dir</span><span class="p">,</span><span class="n">port_buffer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="nb">min</span><span class="o">=</span><span class="n">wgmin</span><span class="p">,</span><span class="nb">max</span><span class="o">=</span><span class="n">wgmax</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">wgmin</span><span class="o">==</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">wgmax</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
+        <span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="n">port_dir</span><span class="p">,</span><span class="n">port_buffer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="nb">max</span><span class="o">=</span><span class="n">wgmax</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">wgmin</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">wgmax</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+        <span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="n">port_dir</span><span class="p">,</span><span class="n">port_buffer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="nb">min</span><span class="o">=</span><span class="n">wgmin</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="n">port_dir</span><span class="p">)</span>        
+        
+    <span class="c1">#device_geometry.Show()</span>
+    
+    <span class="c1"># General Simulation Settings and Simulation Run</span>
+    <span class="n">lmin</span> <span class="o">=</span> <span class="n">lmin</span>
+    <span class="n">lmax</span> <span class="o">=</span> <span class="n">lmax</span>
+    <span class="n">lcen</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="n">lmin</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">npts</span><span class="o">=</span><span class="n">npts</span>
+    <span class="n">tfinal</span> <span class="o">=</span> <span class="mi">35000</span>
+    
+    <span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
+    
+    <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">mode_indices</span> <span class="o">=</span> <span class="n">mode_indices</span> <span class="p">,</span><span class="n">symmetries</span><span class="o">=</span><span class="n">symmetries</span><span class="p">)</span>
+    
+    <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span><span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="n">mon_z</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
+                                                  <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span>
+                                                  <span class="n">save_hx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">save_hy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">save_hz</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                  <span class="n">save_ex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">save_ey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">save_ez</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="n">space_step</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="n">subpixel_level</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">results_filename</span><span class="o">=</span><span class="n">results_filename</span><span class="p">,</span>
+                                                  <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span><span class="n">auto_shutoff_limit</span><span class="o">=</span><span class="n">auto_shutoff_limit</span><span class="p">,</span><span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">verbosity</span><span class="o">=</span><span class="s1">&#39;ERROR&#39;</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">my_obj_fun</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+
+    <span class="n">widths</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">11</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">length</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">11</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">flex_splitter</span><span class="p">(</span><span class="n">widths</span><span class="p">,</span><span class="n">length</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">RunSimulation</span><span class="p">(</span><span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span><span class="n">gds_file</span><span class="o">=</span><span class="s1">&#39;flex_splitter.gds&#39;</span><span class="p">,</span>
+                    <span class="n">space_step</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+                    <span class="n">lmin</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">lmax</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span>
+                    <span class="n">port_dir</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">wgmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">wgmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;1x2&#39;</span><span class="p">,</span><span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">s21</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">sparameters</span><span class="p">[</span><span class="s1">&#39;S21&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+    <span class="c1">#s11 = results.sparameters[&#39;S11&#39;].Get(&#39;data&#39;)</span>
+    <span class="n">res</span><span class="o">=</span><span class="nb">abs</span><span class="p">((</span><span class="nb">abs</span><span class="p">(</span><span class="n">s21</span><span class="p">[</span><span class="mi">11</span><span class="p">]))</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">res</span>
+
+
+<span class="c1"># Define Materials</span>
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
+
+<span class="c1"># Creates the Layer Stack</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span>
+                    <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+<span class="n">lower_bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mf">0.4998</span><span class="p">,</span><span class="mf">0.55</span><span class="p">,</span><span class="mf">0.60</span><span class="p">,</span><span class="mf">0.60</span><span class="p">,</span><span class="mf">0.70</span><span class="p">,</span><span class="mf">0.75</span><span class="p">,</span><span class="mf">0.80</span><span class="p">,</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.95</span><span class="p">,</span><span class="mf">0.9998</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">upper_bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mf">0.5002</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.15</span><span class="p">,</span><span class="mf">1.002</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+
+
+<span class="c1"># ---------------Optimization parameters------------------------------------------</span>
+<span class="n">num_particles</span>        <span class="o">=</span> <span class="mi">5</span>                     <span class="c1"># Number of particles in the swarm</span>
+<span class="n">position_lower_bound</span> <span class="o">=</span> <span class="n">lower_bound</span>                    <span class="c1"># lower position bounds</span>
+<span class="n">position_upper_bound</span> <span class="o">=</span> <span class="n">upper_bound</span>                    <span class="c1"># upper position bounds</span>
+<span class="n">velocity_lower_bound</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span>                             <span class="c1"># lower velocity bounds</span>
+<span class="n">velocity_upper_bound</span> <span class="o">=</span> <span class="mf">0.1</span>                              <span class="c1"># upper velocity bounds</span>
+<span class="n">Niter</span>                    <span class="o">=</span> <span class="mi">5</span>                            <span class="c1"># Number of iterations</span>
+<span class="c1">#---------------------------------------------------------------------------------</span>
+<span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;c1&#39;</span><span class="p">:</span><span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;c2&#39;</span><span class="p">:</span><span class="mf">0.3</span><span class="p">,</span> <span class="s1">&#39;kappa&#39;</span><span class="p">:</span><span class="mf">0.9</span><span class="p">}</span>
+
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">PSO</span><span class="p">(</span><span class="n">my_obj_fun</span><span class="p">,</span>
+    <span class="n">position_lower_bound</span><span class="p">,</span><span class="n">position_upper_bound</span><span class="p">,</span>
+    <span class="n">velocity_lower_bound</span><span class="p">,</span><span class="n">velocity_upper_bound</span><span class="p">,</span>
+    <span class="n">pso_options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
+    <span class="n">num_particles</span><span class="o">=</span><span class="n">num_particles</span><span class="p">,</span><span class="n">Niter</span><span class="o">=</span><span class="n">Niter</span><span class="p">)</span>
+
+
+
+
+
+
+</pre></div>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+GDSII Mask of a Splitter</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/particle_swarm_optimized_GDS.png"><img alt="../_images/particle_swarm_optimized_GDS.png" src="../_images/particle_swarm_optimized_GDS.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Field Distribution</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/particle_swarm_splitter_field.png"><img alt="../_images/particle_swarm_splitter_field.png" src="../_images/particle_swarm_splitter_field.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Cost Function</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/particle_swarm_splitter_cost.png"><img alt="../_images/particle_swarm_splitter_cost.png" src="../_images/particle_swarm_splitter_cost.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ApplicationExamples.html" class="btn btn-neutral float-left" title="Application Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ProductInterworking/ProductInterworking.html" class="btn btn-neutral float-right" title="Product Interworking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
