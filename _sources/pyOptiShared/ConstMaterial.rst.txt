@@ -8,7 +8,7 @@ Constant Material Model
    :depth: 2
    :backlinks: top
 
-Overview
+Introduction
 ---------------
 
 The :class:`ConstMaterial <pyOptiShared.Material.ConstMaterial>` class represents a simple, non-dispersive material 

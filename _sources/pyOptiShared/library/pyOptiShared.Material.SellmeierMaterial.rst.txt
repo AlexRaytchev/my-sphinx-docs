@@ -17,6 +17,9 @@
    
       
       
+         ~SellmeierMaterial.dEpsT
+      
+      
          ~SellmeierMaterial.eps
       
       
@@ -44,6 +47,7 @@
    .. autosummary::
    
       ~SellmeierMaterial.color
+      ~SellmeierMaterial.material_number
       ~SellmeierMaterial.name
    
    

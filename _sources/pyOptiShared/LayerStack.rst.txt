@@ -8,7 +8,7 @@ Layer Stack
    :depth: 2
    :backlinks: top
 
-Overview
+Introduction
 --------------------------
 
 A :class:`LayerStack <pyOptiShared.LayerInfo.LayerStack>` is a class that is used to handle a series of 
@@ -78,17 +78,19 @@ Defining Side Wall Angle Functions
 The side wall functions must follow the python signature of the method defined by the 
 :meth:`GetOffset <pyOptiShared.LayerInfo.LayerInfo.GetOffset>` method. This guarantees the correct 
 evaluation of the side wall offset at a given ``z`` height at a particular layer. A negative 
-offset **erodes** the wall, while a positive one **dilates** it.
+offset **erodes** the wall, while a positive one **dilates** it. The z of this function is assumed 
+to be normalized to the minimum and maximum values of the layer thickness where z = 0 is the start of the Layer
+and z = 1 is the top of the layer
 
 .. code-block:: python
 
     import numpy as np
 
-    def offset_erode(z:float, zmin:float, zmax:float, layer:int, datatype:int) -> float:
-        offset = -0.1*np.sin(np.pi*(z-zmin)/(zmax-zmin)) # Half sinusoid profile - Erode (-ve offset)
+    def offset_erode(z:float) -> float:
+        offset = -0.1*np.sin(np.pi*z) # Half sinusoid profile - Erode (-ve offset)
         return offset
-    def offset_dilate(z:float, zmin:float, zmax:float, layer:int, datatype:int) -> float:
-        offset = 0.1*np.sin(np.pi*(z-zmin)/(zmax-zmin)) # Half sinusoid profile - Dilation (+ve offset)
+    def offset_dilate(z:float) -> float:
+        offset = 0.1*np.sin(np.pi*z) # Half sinusoid profile - Dilation (+ve offset)
         return offset
 
 Once this methods are defined they can be passed as the argument for ``sideWallFunct`` in the 
@@ -176,12 +178,12 @@ full instantiation and setup of a :class:`LayerStack <pyOptiShared.LayerInfo.Lay
     ##########################################
     ###       Layer Stack Settings         ###
     ##########################################
-    def offset_erode(z:float, zmin:float, zmax:float, layer:int, datatype:int) -> float:
-        offset = -0.1*np.sin(2*np.pi*(z-zmin)/(zmax-zmin)) # Half sinusoid profile - Erode (-ve offset)
+    def offset_erode(z:float) -> float:
+        offset = -0.1*np.sin(2*np.pi*z) # Half sinusoid profile - Erode (-ve offset)
         return offset
 
-    def offset_dilate(z:float, zmin:float, zmax:float, layer:int, datatype:int) -> float:
-        offset = 0.1*np.sin(np.pi*(z-zmin)/(zmax-zmin)) # Half sinusoid profile - Dilation (+ve offset)
+    def offset_dilate(z:float) -> float:
+        offset = 0.1*np.sin(np.pi*z) # Half sinusoid profile - Dilation (+ve offset)
         return offset
 
     layer_stack = LayerStack()
@@ -193,9 +195,10 @@ full instantiation and setup of a :class:`LayerStack <pyOptiShared.LayerInfo.Lay
                         sideWallFunct=offset_dilate)
     layer_stack.setBGandSub(background=myindex1p45, substrate=myindex1p45)
 
+
 .. _layer-stack-api:
 
-API Documentation
+Layer Stack
 --------------------
 
 .. autosummary::

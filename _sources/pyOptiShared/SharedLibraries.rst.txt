@@ -1,4 +1,3 @@
-.. _shared-libraries:
 
 Shared Libraries
 =============================

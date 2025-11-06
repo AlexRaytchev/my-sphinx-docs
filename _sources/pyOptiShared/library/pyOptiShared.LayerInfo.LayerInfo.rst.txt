@@ -40,8 +40,8 @@
       ~LayerInfo.layer_thickness
       ~LayerInfo.material
       ~LayerInfo.material_name
-      ~LayerInfo.sw_ang
-      ~LayerInfo.sw_func
+      ~LayerInfo.sidewall_angle
+      ~LayerInfo.sidewall_func
       ~LayerInfo.z_max
       ~LayerInfo.z_min
    

@@ -10,6 +10,7 @@
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
@@ -36,8 +37,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            Optiwaves's Python EM Modules
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo-traced.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -49,38 +51,47 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../SharedLibraries.html">Shared Libraries</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../MaterialLib.html">Material Library</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../MaterialLib.html#overview">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../MaterialLib.html#material-models">Material Models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../MaterialLib.html#example">Example</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../MaterialLib.html#api-documentation">API Documentation</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">pyOptiShared.Material.MaterialLibrary</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.Material.MaterialLibrary"><code class="docutils literal notranslate"><span class="pre">MaterialLibrary</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.Material.MaterialLibrary.LoadFromFolder"><code class="docutils literal notranslate"><span class="pre">MaterialLibrary.LoadFromFolder()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.Material.MaterialLibrary.addMaterial"><code class="docutils literal notranslate"><span class="pre">MaterialLibrary.addMaterial()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.Material.MaterialLibrary.getMatDict"><code class="docutils literal notranslate"><span class="pre">MaterialLibrary.getMatDict()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.Material.MaterialLibrary.getMaterialFromName"><code class="docutils literal notranslate"><span class="pre">MaterialLibrary.getMaterialFromName()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.Material.MaterialLibrary.getMaterialFromNum"><code class="docutils literal notranslate"><span class="pre">MaterialLibrary.getMaterialFromNum()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../APIDocumentation/APIDocumentation.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../SharedLibraries.html">Shared Libraries</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../MaterialLib.html">Material Library</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../MaterialLib.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../MaterialLib.html#material-models">Material Models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../MaterialLib.html#example">Example</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../MaterialLib.html#material-library-api">Material Library</a><ul class="current">
+<li class="toctree-l5 current"><a class="current reference internal" href="#">pyOptiShared.Material.MaterialLibrary</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.Material.MaterialLibrary"><code class="docutils literal notranslate"><span class="pre">MaterialLibrary</span></code></a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.Material.MaterialLibrary.LoadFromFolder"><code class="docutils literal notranslate"><span class="pre">MaterialLibrary.LoadFromFolder()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.Material.MaterialLibrary.addMaterial"><code class="docutils literal notranslate"><span class="pre">MaterialLibrary.addMaterial()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.Material.MaterialLibrary.getMatDict"><code class="docutils literal notranslate"><span class="pre">MaterialLibrary.getMatDict()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.Material.MaterialLibrary.getMaterialFromName"><code class="docutils literal notranslate"><span class="pre">MaterialLibrary.getMaterialFromName()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.Material.MaterialLibrary.getMaterialFromNum"><code class="docutils literal notranslate"><span class="pre">MaterialLibrary.getMaterialFromNum()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="pyOptiShared.Material.Material.html">pyOptiShared.Material.Material</a></li>
-<li class="toctree-l4"><a class="reference internal" href="pyOptiShared.Material.ConstMaterial.html">pyOptiShared.Material.ConstMaterial</a></li>
-<li class="toctree-l4"><a class="reference internal" href="pyOptiShared.Material.SellmeierMaterial.html">pyOptiShared.Material.SellmeierMaterial</a></li>
-<li class="toctree-l4"><a class="reference internal" href="pyOptiShared.Material.ExperimentalMaterial.html">pyOptiShared.Material.ExperimentalMaterial</a></li>
+<li class="toctree-l5"><a class="reference internal" href="pyOptiShared.Material.Material.html">pyOptiShared.Material.Material</a></li>
+<li class="toctree-l5"><a class="reference internal" href="pyOptiShared.Material.ConstMaterial.html">pyOptiShared.Material.ConstMaterial</a></li>
+<li class="toctree-l5"><a class="reference internal" href="pyOptiShared.Material.SellmeierMaterial.html">pyOptiShared.Material.SellmeierMaterial</a></li>
+<li class="toctree-l5"><a class="reference internal" href="pyOptiShared.Material.ExperimentalMaterial.html">pyOptiShared.Material.ExperimentalMaterial</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../LayerStack.html">Layer Stack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../DeviceGeometry.html">Device Geometry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../NXdata.html"><em>NXData</em> Data Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../LayerStack.html">Layer Stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DeviceGeometry.html">Device Geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../NXdata.html"><em>NXData</em> Data Class</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyModeSolver/pyModeSolver.html">Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">FDTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Designs.html">Flex Device Library</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -97,6 +108,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
           <li class="breadcrumb-item"><a href="../SharedLibraries.html">Shared Libraries</a></li>
           <li class="breadcrumb-item"><a href="../MaterialLib.html">Material Library</a></li>
       <li class="breadcrumb-item active">pyOptiShared.Material.MaterialLibrary</li>
@@ -114,7 +126,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pyOptiShared.Material.MaterialLibrary">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyOptiShared.Material.</span></span><span class="sig-name descname"><span class="pre">MaterialLibrary</span></span><a class="headerlink" href="#pyOptiShared.Material.MaterialLibrary" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Material library class holds a list of materials</p>
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
@@ -134,16 +146,27 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.Material.MaterialLibrary.getMaterialFromNum" title="pyOptiShared.Material.MaterialLibrary.getMaterialFromNum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getMaterialFromNum</span></code></a>(matnum)</p></td>
 <td><p>Returns the material object with the specified number</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">materialExists</span></code>(matname)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_material_number</span></code></p></td>
+<td><p></p></td>
+</tr>
 </tbody>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="pyOptiShared.Material.MaterialLibrary.LoadFromFolder">
-<span class="sig-name descname"><span class="pre">LoadFromFolder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_lib_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.Material.MaterialLibrary.LoadFromFolder" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">LoadFromFolder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_lib_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.Material.MaterialLibrary.LoadFromFolder" title="Link to this definition"></a></dt>
 <dd><p>Adds all the materials in the specified folder to the list of materials.
 The material files should have the .txt extension.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>material_lib_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Directory where the material files are stored</p>
+<dd class="field-odd"><p><strong>material_lib_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Directory where the material files are stored</p>
 </dd>
 </dl>
 </dd></dl>
@@ -163,28 +186,28 @@ to be added into the list</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pyOptiShared.Material.MaterialLibrary.getMatDict">
-<span class="sig-name descname"><span class="pre">getMatDict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyOptiShared.Material.MaterialLibrary.getMatDict" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">getMatDict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyOptiShared.Material.MaterialLibrary.getMatDict" title="Link to this definition"></a></dt>
 <dd><p>Returns a copy of the material dictionary</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Material dictionary</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a>,<a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material">Material</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a>,<a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material">Material</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pyOptiShared.Material.MaterialLibrary.getMaterialFromName">
-<span class="sig-name descname"><span class="pre">getMaterialFromName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a></span></span><a class="headerlink" href="#pyOptiShared.Material.MaterialLibrary.getMaterialFromName" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">getMaterialFromName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a></span></span><a class="headerlink" href="#pyOptiShared.Material.MaterialLibrary.getMaterialFromName" title="Link to this definition"></a></dt>
 <dd><p>Returns the material object with the specified name</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>matname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – Material name.</p>
+<dd class="field-odd"><p><strong>matname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Material name.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If material with <cite>matname</cite> is not found.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If material with <cite>matname</cite> is not found.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The material object with name <cite>matname</cite></p>
@@ -197,14 +220,14 @@ to be added into the list</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pyOptiShared.Material.MaterialLibrary.getMaterialFromNum">
-<span class="sig-name descname"><span class="pre">getMaterialFromNum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matnum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a></span></span><a class="headerlink" href="#pyOptiShared.Material.MaterialLibrary.getMaterialFromNum" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">getMaterialFromNum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matnum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyOptiShared.Material.Material.html#pyOptiShared.Material.Material" title="pyOptiShared.Material.Material"><span class="pre">Material</span></a></span></span><a class="headerlink" href="#pyOptiShared.Material.MaterialLibrary.getMaterialFromNum" title="Link to this definition"></a></dt>
 <dd><p>Returns the material object with the specified number</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>matnum</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Material number</p>
+<dd class="field-odd"><p><strong>matnum</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – Material number</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.13)"><strong>ValueError</strong></a> – If material number is not found.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If material number is not found.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The Material object with number <cite>matnumber</cite>.</p>

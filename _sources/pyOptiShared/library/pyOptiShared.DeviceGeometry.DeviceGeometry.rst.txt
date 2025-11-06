@@ -16,50 +16,44 @@
    .. autosummary::
    
       
-         ~DeviceGeometry.AddParameter
+         ~DeviceGeometry.AddPort
       
       
          ~DeviceGeometry.GetBoundingBox
       
       
-         ~DeviceGeometry.GetLayerStack
-      
-      
-         ~DeviceGeometry.GetMaterialMesh
-      
-      
-         ~DeviceGeometry.GetMaterialObj
-      
-      
-         ~DeviceGeometry.GetMaterialObjects
-      
-      
-         ~DeviceGeometry.GetParamLayerIndex
+         ~DeviceGeometry.GetMatVals
       
       
          ~DeviceGeometry.GetPermittivityMesh
       
       
-         ~DeviceGeometry.PlotMaterialMesh
+         ~DeviceGeometry.PlotGDS
       
       
-         ~DeviceGeometry.PlotPermittivityMesh
+         ~DeviceGeometry.PlotGDSXSection
+      
+      
+         ~DeviceGeometry.PlotSTL
+      
+      
+         ~DeviceGeometry.PrintPorts
       
       
          ~DeviceGeometry.SetAutoPortSettings
       
       
-         ~DeviceGeometry.SetCurrentVal
+         ~DeviceGeometry.SetFromFun
       
       
-         ~DeviceGeometry.SetSettings
+         ~DeviceGeometry.SetFromGDS
       
       
-         ~DeviceGeometry.Show
+         ~DeviceGeometry.SetFromSTL
       
       
+         ~DeviceGeometry.UpdateScriptParams
       
-         ~DeviceGeometry.pad_geometry
       
    
    
@@ -71,12 +65,9 @@
    .. autosummary::
    
       ~DeviceGeometry.background_material
-      ~DeviceGeometry.buffers
-      ~DeviceGeometry.device_materials
+      ~DeviceGeometry.domain_buffer
       ~DeviceGeometry.gds_wizard
       ~DeviceGeometry.layer_stack
-      ~DeviceGeometry.layers
-      ~DeviceGeometry.material_lib
-      ~DeviceGeometry.substrate_material
+      ~DeviceGeometry.ports
    
    

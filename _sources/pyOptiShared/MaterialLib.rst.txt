@@ -8,7 +8,7 @@ Material Library
    :depth: 2
    :backlinks: top
 
-Overview
+Introduction
 --------------------------
 
 The **material library** is an object that holds a dictionary of :class:`Material <pyOptiShared.Material.Material>`
@@ -69,8 +69,8 @@ material from it. for more deatail please check the :ref:`API documentation <mat
 
 .. _material-library-api:
 
-API Documentation
---------------------
+Material Library
+--------------------------------
 
 .. autosummary::
    :toctree: library

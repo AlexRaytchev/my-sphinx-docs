@@ -10,6 +10,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
@@ -37,8 +38,9 @@
 
           
           
-          <a href="../index.html" class="icon icon-home">
-            Optiwaves's Python EM Modules
+          <a href="../index.html">
+            
+              <img src="../_static/logo-traced.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -50,32 +52,41 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="SharedLibraries.html">Shared Libraries</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="MaterialLib.html">Material Library</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="MaterialLib.html#overview">Overview</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="MaterialLib.html#material-models">Material Models</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="BaseMaterial.html">Material Base Class</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ConstMaterial.html">Constant Material Model</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Sellmeier Material Model</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#typical-use-case">Typical Use Case</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../APIDocumentation/APIDocumentation.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="SharedLibraries.html">Shared Libraries</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="MaterialLib.html">Material Library</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="MaterialLib.html#introduction">Introduction</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="MaterialLib.html#material-models">Material Models</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="BaseMaterial.html">Material Base Class</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ConstMaterial.html">Constant Material Model</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">Sellmeier Material Model</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#typical-use-case">Typical Use Case</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="ExperimentalMaterial.html">Experimental Material Model</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ExperimentalMaterial.html">Experimental Material Model</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="MaterialLib.html#example">Example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="MaterialLib.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MaterialLib.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MaterialLib.html#material-library-api">Material Library</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="LayerStack.html">Layer Stack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="DeviceGeometry.html">Device Geometry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NXdata.html"><em>NXData</em> Data Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerStack.html">Layer Stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DeviceGeometry.html">Device Geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NXdata.html"><em>NXData</em> Data Class</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyFDTD/pyFDTD.html">FDTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Designs.html">Flex Device Library</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -92,6 +103,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
           <li class="breadcrumb-item"><a href="SharedLibraries.html">Shared Libraries</a></li>
           <li class="breadcrumb-item"><a href="MaterialLib.html">Material Library</a></li>
       <li class="breadcrumb-item active">Sellmeier Material Model</li>

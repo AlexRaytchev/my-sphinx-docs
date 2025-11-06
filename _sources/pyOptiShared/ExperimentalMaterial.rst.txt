@@ -8,8 +8,8 @@ Experimental Material Model
    :depth: 2
    :backlinks: top
 
-Overview
----------
+Introduciton
+----------------
 
 The :class:`ExperimentalMaterial <pyOptiShared.Material.ExperimentalMaterial>` describes the frequency-dependent refractive index of a material using experimental data. 
 This model relies on the user input of measurement data that can be done by:

@@ -10,6 +10,7 @@
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
@@ -36,8 +37,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            Optiwaves's Python EM Modules
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo-traced.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -49,29 +51,35 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../SharedLibraries.html">Shared Libraries</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../MaterialLib.html">Material Library</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../LayerStack.html">Layer Stack</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../LayerStack.html#overview">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../LayerStack.html#layer-stack-and-layer-info-considerations">Layer Stack and Layer Info Considerations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../LayerStack.html#examples">Examples</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../LayerStack.html#api-documentation">API Documentation</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="pyOptiShared.LayerInfo.LayerStack.html">pyOptiShared.LayerInfo.LayerStack</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">pyOptiShared.LayerInfo.LayerInfo</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo"><code class="docutils literal notranslate"><span class="pre">LayerInfo</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.GetOffset"><code class="docutils literal notranslate"><span class="pre">LayerInfo.GetOffset()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.GetOffsetAng"><code class="docutils literal notranslate"><span class="pre">LayerInfo.GetOffsetAng()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.GetTolInfo"><code class="docutils literal notranslate"><span class="pre">LayerInfo.GetTolInfo()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.cladd_material"><code class="docutils literal notranslate"><span class="pre">LayerInfo.cladd_material</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.cladd_name"><code class="docutils literal notranslate"><span class="pre">LayerInfo.cladd_name</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.layer_number"><code class="docutils literal notranslate"><span class="pre">LayerInfo.layer_number</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.layer_thickness"><code class="docutils literal notranslate"><span class="pre">LayerInfo.layer_thickness</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.material"><code class="docutils literal notranslate"><span class="pre">LayerInfo.material</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.material_name"><code class="docutils literal notranslate"><span class="pre">LayerInfo.material_name</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.sw_ang"><code class="docutils literal notranslate"><span class="pre">LayerInfo.sw_ang</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.sw_func"><code class="docutils literal notranslate"><span class="pre">LayerInfo.sw_func</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.z_max"><code class="docutils literal notranslate"><span class="pre">LayerInfo.z_max</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.z_min"><code class="docutils literal notranslate"><span class="pre">LayerInfo.z_min</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../APIDocumentation/APIDocumentation.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../SharedLibraries.html">Shared Libraries</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../MaterialLib.html">Material Library</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../LayerStack.html">Layer Stack</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../LayerStack.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../LayerStack.html#layer-stack-and-layer-info-considerations">Layer Stack and Layer Info Considerations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../LayerStack.html#examples">Examples</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../LayerStack.html#layer-stack-api">Layer Stack</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="pyOptiShared.LayerInfo.LayerStack.html">pyOptiShared.LayerInfo.LayerStack</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">pyOptiShared.LayerInfo.LayerInfo</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo"><code class="docutils literal notranslate"><span class="pre">LayerInfo</span></code></a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.GetOffset"><code class="docutils literal notranslate"><span class="pre">LayerInfo.GetOffset()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.GetOffsetAng"><code class="docutils literal notranslate"><span class="pre">LayerInfo.GetOffsetAng()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.GetTolInfo"><code class="docutils literal notranslate"><span class="pre">LayerInfo.GetTolInfo()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.cladd_material"><code class="docutils literal notranslate"><span class="pre">LayerInfo.cladd_material</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.cladd_name"><code class="docutils literal notranslate"><span class="pre">LayerInfo.cladd_name</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.layer_number"><code class="docutils literal notranslate"><span class="pre">LayerInfo.layer_number</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.layer_thickness"><code class="docutils literal notranslate"><span class="pre">LayerInfo.layer_thickness</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.material"><code class="docutils literal notranslate"><span class="pre">LayerInfo.material</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.material_name"><code class="docutils literal notranslate"><span class="pre">LayerInfo.material_name</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.sidewall_angle"><code class="docutils literal notranslate"><span class="pre">LayerInfo.sidewall_angle</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.sidewall_func"><code class="docutils literal notranslate"><span class="pre">LayerInfo.sidewall_func</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.z_max"><code class="docutils literal notranslate"><span class="pre">LayerInfo.z_max</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.z_min"><code class="docutils literal notranslate"><span class="pre">LayerInfo.z_min</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -80,12 +88,15 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../DeviceGeometry.html">Device Geometry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../NXdata.html"><em>NXData</em> Data Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../DeviceGeometry.html">Device Geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../NXdata.html"><em>NXData</em> Data Class</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyModeSolver/pyModeSolver.html">Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">FDTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Designs.html">Flex Device Library</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -102,6 +113,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
           <li class="breadcrumb-item"><a href="../SharedLibraries.html">Shared Libraries</a></li>
           <li class="breadcrumb-item"><a href="../LayerStack.html">Layer Stack</a></li>
       <li class="breadcrumb-item active">pyOptiShared.LayerInfo.LayerInfo</li>
@@ -119,7 +131,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerInfo">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyOptiShared.LayerInfo.</span></span><span class="sig-name descname"><span class="pre">LayerInfo</span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class defines a layer.
 Layers are used to construct layer stack and set
 the material properties of objects (geometries) definned
@@ -133,7 +145,7 @@ and a starting point, zmin, along the z-axis in which the object will extrude to
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.GetOffset" title="pyOptiShared.LayerInfo.LayerInfo.GetOffset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetOffset</span></code></a>(z, zmin, zmax, layer, datatype)</p></td>
 <td><p>This is the base offset calculating function.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.GetOffsetAng" title="pyOptiShared.LayerInfo.LayerInfo.GetOffsetAng"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetOffsetAng</span></code></a>(z, zmin, zmax, layer, datatype)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.GetOffsetAng" title="pyOptiShared.LayerInfo.LayerInfo.GetOffsetAng"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetOffsetAng</span></code></a>(zn)</p></td>
 <td><p>This is the method used to determine the straight offset whe <cite>sw_ang</cite> is different than zero.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.GetTolInfo" title="pyOptiShared.LayerInfo.LayerInfo.GetTolInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetTolInfo</span></code></a>()</p></td>
@@ -162,10 +174,10 @@ and a starting point, zmin, along the z-axis in which the object will extrude to
 <tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.material_name" title="pyOptiShared.LayerInfo.LayerInfo.material_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">material_name</span></code></a></p></td>
 <td><p>The name of the base material of the layer.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.sw_ang" title="pyOptiShared.LayerInfo.LayerInfo.sw_ang"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sw_ang</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.sidewall_angle" title="pyOptiShared.LayerInfo.LayerInfo.sidewall_angle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sidewall_angle</span></code></a></p></td>
 <td><p>Defines the tilt angle of the side wall linear profile.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.sw_func" title="pyOptiShared.LayerInfo.LayerInfo.sw_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sw_func</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.sidewall_func" title="pyOptiShared.LayerInfo.LayerInfo.sidewall_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sidewall_func</span></code></a></p></td>
 <td><p>The side wall function.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.z_max" title="pyOptiShared.LayerInfo.LayerInfo.z_max"><code class="xref py py-obj docutils literal notranslate"><span class="pre">z_max</span></code></a></p></td>
@@ -178,7 +190,7 @@ and a starting point, zmin, along the z-axis in which the object will extrude to
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerInfo.GetOffset">
-<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GetOffset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.GetOffset" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GetOffset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.GetOffset" title="Link to this definition"></a></dt>
 <dd><p>This is the base offset calculating function. This is used to determine the offset
 of a given polygon at a particlar z locaiton inside the layer. All user defined
 GetOffset functions passed as arguments for <cite>sw_func</cite> must follow this method’s signature.
@@ -187,49 +199,49 @@ A negative offset erodes the polygons (shrinks them), a positive offset dilates 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The current z value to determine the offset.</p></li>
-<li><p><strong>zmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Starting point of the layer along the z-axis.</p></li>
-<li><p><strong>zmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Ending point of the layer along the z-axis.</p></li>
-<li><p><strong>layer</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The layer number.</p></li>
-<li><p><strong>datatype</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The layer datatype.</p></li>
+<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The current z value to determine the offset.</p></li>
+<li><p><strong>zmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Starting point of the layer along the z-axis.</p></li>
+<li><p><strong>zmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Ending point of the layer along the z-axis.</p></li>
+<li><p><strong>layer</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The layer number.</p></li>
+<li><p><strong>datatype</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The layer datatype.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The offset value at z.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerInfo.GetOffsetAng">
-<span class="sig-name descname"><span class="pre">GetOffsetAng</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">datatype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.GetOffsetAng" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">GetOffsetAng</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.GetOffsetAng" title="Link to this definition"></a></dt>
 <dd><p>This is the method used to determine the straight offset whe <cite>sw_ang</cite> is different than
 zero. It follows the same signature as the <cite>GetOffset</cite> method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The current z value to determine the offset.</p></li>
-<li><p><strong>zmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Starting point of the layer along the z-axis.</p></li>
-<li><p><strong>zmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – Ending point of the layer along the z-axis.</p></li>
-<li><p><strong>layer</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The layer number.</p></li>
-<li><p><strong>datatype</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The layer datatype.</p></li>
+<li><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – The current z value to determine the offset.</p></li>
+<li><p><strong>zmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Starting point of the layer along the z-axis.</p></li>
+<li><p><strong>zmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – Ending point of the layer along the z-axis.</p></li>
+<li><p><strong>layer</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The layer number.</p></li>
+<li><p><strong>datatype</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a>) – The layer datatype.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The offset value at z.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerInfo.GetTolInfo">
-<span class="sig-name descname"><span class="pre">GetTolInfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.GetTolInfo" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">GetTolInfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.GetTolInfo" title="Link to this definition"></a></dt>
 <dd><dl class="simple">
 <dt>Return fabrication tolerance information:</dt><dd><p>A tuple containing the fabrication tolerance and
 the number of points to sweep.</p>
@@ -244,7 +256,7 @@ the number of points to sweep.</p>
 </p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -267,29 +279,29 @@ the background material properties inside the layer.</p>
 <dd><p>The name of the cladding material.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerInfo.layer_number">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer_number</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.layer_number" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer_number</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.layer_number" title="Link to this definition"></a></dt>
 <dd><p>Layer number.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerInfo.layer_thickness">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer_thickness</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.layer_thickness" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">layer_thickness</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></em><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.layer_thickness" title="Link to this definition"></a></dt>
 <dd><p>Layer thickness (along z).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -311,28 +323,28 @@ the background material properties inside the layer.</p>
 <dd><p>The name of the base material of the layer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerInfo.sw_ang">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sw_ang</span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.sw_ang" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerInfo.sidewall_angle">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sidewall_angle</span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.sidewall_angle" title="Link to this definition"></a></dt>
 <dd><p>Defines the tilt angle of the side wall linear profile.</p>
 <p>It is later used to define the side wall function that
 calculates a particular offset given inputs like z value, along the thickness
 of the layer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerInfo.sw_func">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sw_func</span></span><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.sw_func" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="pyOptiShared.LayerInfo.LayerInfo.sidewall_func">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sidewall_func</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#pyOptiShared.LayerInfo.LayerInfo.sidewall_func" title="Link to this definition"></a></dt>
 <dd><p>The side wall function. It has to follow the same signature
 as the <a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.GetOffset" title="pyOptiShared.LayerInfo.LayerInfo.GetOffset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GetOffset</span></code></a> static method.</p>
 <dl class="field-list simple">
@@ -351,7 +363,7 @@ as the <a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.Get
 <dd><p>The point in z where the layer ends.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -362,7 +374,7 @@ as the <a class="reference internal" href="#pyOptiShared.LayerInfo.LayerInfo.Get
 <dd><p>The point in z where the layer starts.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)">float</a></p>
 </dd>
 </dl>
 </dd></dl>

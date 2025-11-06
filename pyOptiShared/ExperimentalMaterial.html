@@ -10,6 +10,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
@@ -36,8 +37,9 @@
 
           
           
-          <a href="../index.html" class="icon icon-home">
-            Optiwaves's Python EM Modules
+          <a href="../index.html">
+            
+              <img src="../_static/logo-traced.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,36 +51,45 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="SharedLibraries.html">Shared Libraries</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="MaterialLib.html">Material Library</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="MaterialLib.html#overview">Overview</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="MaterialLib.html#material-models">Material Models</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="BaseMaterial.html">Material Base Class</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ConstMaterial.html">Constant Material Model</a></li>
-<li class="toctree-l4"><a class="reference internal" href="SellmeierMaterial.html">Sellmeier Material Model</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Experimental Material Model</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#examples">Examples</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#instantiating-from-permittivity-array-data">Instantiating from Permittivity Array Data</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#instantiating-from-permittivity-text-file">Instantiating from Permittivity Text File</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#instantiating-from-refractiveindex-info">Instantiating from RefractiveIndex.info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../APIDocumentation/APIDocumentation.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="SharedLibraries.html">Shared Libraries</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="MaterialLib.html">Material Library</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="MaterialLib.html#introduction">Introduction</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="MaterialLib.html#material-models">Material Models</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="BaseMaterial.html">Material Base Class</a></li>
+<li class="toctree-l5"><a class="reference internal" href="ConstMaterial.html">Constant Material Model</a></li>
+<li class="toctree-l5"><a class="reference internal" href="SellmeierMaterial.html">Sellmeier Material Model</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">Experimental Material Model</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#introduciton">Introduciton</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#instantiating-from-permittivity-array-data">Instantiating from Permittivity Array Data</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#instantiating-from-permittivity-text-file">Instantiating from Permittivity Text File</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#instantiating-from-refractiveindex-info">Instantiating from RefractiveIndex.info</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="MaterialLib.html#example">Example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="MaterialLib.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MaterialLib.html#example">Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="MaterialLib.html#material-library-api">Material Library</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="LayerStack.html">Layer Stack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="DeviceGeometry.html">Device Geometry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NXdata.html"><em>NXData</em> Data Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LayerStack.html">Layer Stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DeviceGeometry.html">Device Geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NXdata.html"><em>NXData</em> Data Class</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyFDTD/pyFDTD.html">FDTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Designs.html">Flex Device Library</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -95,6 +106,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
           <li class="breadcrumb-item"><a href="SharedLibraries.html">Shared Libraries</a></li>
           <li class="breadcrumb-item"><a href="MaterialLib.html">Material Library</a></li>
       <li class="breadcrumb-item active">Experimental Material Model</li>
@@ -111,7 +123,7 @@
 <span id="experimental-material"></span><h1>Experimental Material Model<a class="headerlink" href="#experimental-material-model" title="Link to this heading"></a></h1>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#overview" id="id3">Overview</a></p></li>
+<li><p><a class="reference internal" href="#introduciton" id="id3">Introduciton</a></p></li>
 <li><p><a class="reference internal" href="#examples" id="id4">Examples</a></p>
 <ul>
 <li><p><a class="reference internal" href="#instantiating-from-permittivity-array-data" id="id5">Instantiating from Permittivity Array Data</a></p></li>
@@ -121,8 +133,8 @@
 </li>
 </ul>
 </nav>
-<section id="overview">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<section id="introduciton">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Introduciton</a><a class="headerlink" href="#introduciton" title="Link to this heading"></a></h2>
 <p>The <a class="reference internal" href="library/pyOptiShared.Material.ExperimentalMaterial.html#pyOptiShared.Material.ExperimentalMaterial" title="pyOptiShared.Material.ExperimentalMaterial"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExperimentalMaterial</span></code></a> describes the frequency-dependent refractive index of a material using experimental data.
 This model relies on the user input of measurement data that can be done by:</p>
 <ul class="simple">

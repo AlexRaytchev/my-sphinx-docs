@@ -10,6 +10,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
@@ -36,8 +37,9 @@
 
           
           
-          <a href="../index.html" class="icon icon-home">
-            Optiwaves's Python EM Modules
+          <a href="../index.html">
+            
+              <img src="../_static/logo-traced.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,33 +51,42 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="SharedLibraries.html">Shared Libraries</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="MaterialLib.html">Material Library</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Layer Stack</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#layer-stack-and-layer-info-considerations">Layer Stack and Layer Info Considerations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#defining-material-objects">Defining Material Objects</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#defining-side-wall-angle-functions">Defining Side Wall Angle Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#adding-layers-to-a-layerstack">Adding Layers to a LayerStack</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#setting-background-and-substrate-materials">Setting Background and Substrate Materials</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#visualizing-the-layer-stack">Visualizing the Layer Stack</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#a-complete-layer-stack-setup">A Complete Layer Stack Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../APIDocumentation/APIDocumentation.html">API Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="SharedLibraries.html">Shared Libraries</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="MaterialLib.html">Material Library</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Layer Stack</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#layer-stack-and-layer-info-considerations">Layer Stack and Layer Info Considerations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#defining-material-objects">Defining Material Objects</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#defining-side-wall-angle-functions">Defining Side Wall Angle Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#adding-layers-to-a-layerstack">Adding Layers to a LayerStack</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#setting-background-and-substrate-materials">Setting Background and Substrate Materials</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#visualizing-the-layer-stack">Visualizing the Layer Stack</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#a-complete-layer-stack-setup">A Complete Layer Stack Setup</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API Documentation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html">pyOptiShared.LayerInfo.LayerStack</a></li>
-<li class="toctree-l4"><a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html">pyOptiShared.LayerInfo.LayerInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#layer-stack-api">Layer Stack</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html">pyOptiShared.LayerInfo.LayerStack</a></li>
+<li class="toctree-l5"><a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html">pyOptiShared.LayerInfo.LayerInfo</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="DeviceGeometry.html">Device Geometry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="NXdata.html"><em>NXData</em> Data Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DeviceGeometry.html">Device Geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NXdata.html"><em>NXData</em> Data Class</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pyFDTD/pyFDTD.html">FDTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Designs.html">Flex Device Library</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -92,6 +103,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
           <li class="breadcrumb-item"><a href="SharedLibraries.html">Shared Libraries</a></li>
       <li class="breadcrumb-item active">Layer Stack</li>
       <li class="wy-breadcrumbs-aside">
@@ -107,25 +119,25 @@
 <span id="id1"></span><h1>Layer Stack<a class="headerlink" href="#layer-stack" title="Link to this heading"></a></h1>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
-<li><p><a class="reference internal" href="#layer-stack-and-layer-info-considerations" id="id3">Layer Stack and Layer Info Considerations</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id4">Examples</a></p>
+<li><p><a class="reference internal" href="#introduction" id="id3">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#layer-stack-and-layer-info-considerations" id="id4">Layer Stack and Layer Info Considerations</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id5">Examples</a></p>
 <ul>
-<li><p><a class="reference internal" href="#defining-material-objects" id="id5">Defining Material Objects</a></p></li>
-<li><p><a class="reference internal" href="#defining-side-wall-angle-functions" id="id6">Defining Side Wall Angle Functions</a></p></li>
-<li><p><a class="reference internal" href="#adding-layers-to-a-layerstack" id="id7">Adding Layers to a LayerStack</a></p></li>
-<li><p><a class="reference internal" href="#setting-background-and-substrate-materials" id="id8">Setting Background and Substrate Materials</a></p></li>
-<li><p><a class="reference internal" href="#visualizing-the-layer-stack" id="id9">Visualizing the Layer Stack</a></p></li>
-<li><p><a class="reference internal" href="#a-complete-layer-stack-setup" id="id10">A Complete Layer Stack Setup</a></p></li>
+<li><p><a class="reference internal" href="#defining-material-objects" id="id6">Defining Material Objects</a></p></li>
+<li><p><a class="reference internal" href="#defining-side-wall-angle-functions" id="id7">Defining Side Wall Angle Functions</a></p></li>
+<li><p><a class="reference internal" href="#adding-layers-to-a-layerstack" id="id8">Adding Layers to a LayerStack</a></p></li>
+<li><p><a class="reference internal" href="#setting-background-and-substrate-materials" id="id9">Setting Background and Substrate Materials</a></p></li>
+<li><p><a class="reference internal" href="#visualizing-the-layer-stack" id="id10">Visualizing the Layer Stack</a></p></li>
+<li><p><a class="reference internal" href="#a-complete-layer-stack-setup" id="id11">A Complete Layer Stack Setup</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#api-documentation" id="id11">API Documentation</a></p></li>
+<li><p><a class="reference internal" href="#layer-stack-api" id="id12">Layer Stack</a></p></li>
 </ul>
 </nav>
-<section id="overview">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<section id="introduction">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
 <p>A <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerStack</span></code></a> is a class that is used to handle a series of
-<a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo" title="pyOptiShared.LayerInfo.LayerInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerInfo</span></code></a> objects. It contains a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> that uses
+<a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo" title="pyOptiShared.LayerInfo.LayerInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerInfo</span></code></a> objects. It contains a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> that uses
 <strong>unique user-defined</strong> <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.layer_number" title="pyOptiShared.LayerInfo.LayerInfo.layer_number"><code class="xref py py-attr docutils literal notranslate"><span class="pre">layer_number</span></code></a>
 as <code class="docutils literal notranslate"><span class="pre">key</span></code> for its respective <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo" title="pyOptiShared.LayerInfo.LayerInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerInfo</span></code></a> <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p>
 <p>In summary, each layer in your fabrication process corresponds to a <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo" title="pyOptiShared.LayerInfo.LayerInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">LayerInfo</span></code></a>
@@ -190,14 +202,16 @@ objects.</p>
 <p>The side wall functions must follow the python signature of the method defined by the
 <a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.GetOffset" title="pyOptiShared.LayerInfo.LayerInfo.GetOffset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GetOffset</span></code></a> method. This guarantees the correct
 evaluation of the side wall offset at a given <code class="docutils literal notranslate"><span class="pre">z</span></code> height at a particular layer. A negative
-offset <strong>erodes</strong> the wall, while a positive one <strong>dilates</strong> it.</p>
+offset <strong>erodes</strong> the wall, while a positive one <strong>dilates</strong> it. The z of this function is assumed
+to be normalized to the minimum and maximum values of the layer thickness where z = 0 is the start of the Layer
+and z = 1 is the top of the layer</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">offset_erode</span><span class="p">(</span><span class="n">z</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmin</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmax</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">layer</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">datatype</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="n">offset</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">zmin</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">zmax</span><span class="o">-</span><span class="n">zmin</span><span class="p">))</span> <span class="c1"># Half sinusoid profile - Erode (-ve offset)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">offset_erode</span><span class="p">(</span><span class="n">z</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">z</span><span class="p">)</span> <span class="c1"># Half sinusoid profile - Erode (-ve offset)</span>
     <span class="k">return</span> <span class="n">offset</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">offset_dilate</span><span class="p">(</span><span class="n">z</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmin</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmax</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">layer</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">datatype</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="n">offset</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">zmin</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">zmax</span><span class="o">-</span><span class="n">zmin</span><span class="p">))</span> <span class="c1"># Half sinusoid profile - Dilation (+ve offset)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">offset_dilate</span><span class="p">(</span><span class="n">z</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">z</span><span class="p">)</span> <span class="c1"># Half sinusoid profile - Dilation (+ve offset)</span>
     <span class="k">return</span> <span class="n">offset</span>
 </pre></div>
 </div>
@@ -276,12 +290,12 @@ full instantiation and setup of a <a class="reference internal" href="library/py
 <span class="c1">##########################################</span>
 <span class="c1">###       Layer Stack Settings         ###</span>
 <span class="c1">##########################################</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">offset_erode</span><span class="p">(</span><span class="n">z</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmin</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmax</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">layer</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">datatype</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="n">offset</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">zmin</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">zmax</span><span class="o">-</span><span class="n">zmin</span><span class="p">))</span> <span class="c1"># Half sinusoid profile - Erode (-ve offset)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">offset_erode</span><span class="p">(</span><span class="n">z</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">z</span><span class="p">)</span> <span class="c1"># Half sinusoid profile - Erode (-ve offset)</span>
     <span class="k">return</span> <span class="n">offset</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">offset_dilate</span><span class="p">(</span><span class="n">z</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmin</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">zmax</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">layer</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">datatype</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="n">offset</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">zmin</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">zmax</span><span class="o">-</span><span class="n">zmin</span><span class="p">))</span> <span class="c1"># Half sinusoid profile - Dilation (+ve offset)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">offset_dilate</span><span class="p">(</span><span class="n">z</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">z</span><span class="p">)</span> <span class="c1"># Half sinusoid profile - Dilation (+ve offset)</span>
     <span class="k">return</span> <span class="n">offset</span>
 
 <span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
@@ -296,8 +310,8 @@ full instantiation and setup of a <a class="reference internal" href="library/py
 </div>
 </section>
 </section>
-<section id="api-documentation">
-<span id="layer-stack-api"></span><h2><a class="toc-backref" href="#contents" role="doc-backlink">API Documentation</a><a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<section id="layer-stack-api">
+<span id="id2"></span><h2><a class="toc-backref" href="#contents" role="doc-backlink">Layer Stack</a><a class="headerlink" href="#layer-stack-api" title="Link to this heading"></a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyOptiShared.LayerInfo.LayerStack</span></code></a>()</p></td>

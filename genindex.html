@@ -9,6 +9,7 @@
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/plot_directive.css?v=7f9a90b1" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
 
   
@@ -33,8 +34,9 @@
 
           
           
-          <a href="index.html" class="icon icon-home">
-            Optiwaves's Python EM Modules
+          <a href="index.html">
+            
+              <img src="_static/logo-traced.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -46,9 +48,12 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="pyOptiShared/SharedLibraries.html">Shared Libraries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="APIDocumentation/APIDocumentation.html">API Documentation</a></li>
 </ul>
 
         </div>
@@ -93,6 +98,7 @@
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  | <a href="#Z"><strong>Z</strong></a>
  
@@ -114,7 +120,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.addMaterialLayer">addMaterialLayer() (pyOptiShared.LayerInfo.LayerStack method)</a>
 </li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.AddParameter">AddParameter() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
+      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.AddPort">AddPort() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
 </li>
       <li><a href="pyFDTD/library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.AddTimeMonitor">AddTimeMonitor() (pyFDTDKernel.pyFDTDSolver.pyFDTDSolver method)</a>
 </li>
@@ -126,13 +132,9 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.background">background (pyOptiShared.LayerInfo.LayerStack property)</a>
 </li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.background_material">background_material (pyOptiShared.DeviceGeometry.DeviceGeometry property)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyModeSolver/library/pyOptiShared.SimResults.BaseSimResults.html#pyOptiShared.SimResults.BaseSimResults">BaseSimResults (class in pyOptiShared.SimResults)</a>
-</li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.buffers">buffers (pyOptiShared.DeviceGeometry.DeviceGeometry property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -158,12 +160,10 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.device_materials">device_materials (pyOptiShared.DeviceGeometry.DeviceGeometry property)</a>
+      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry">DeviceGeometry (class in pyOptiShared.DeviceGeometry)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry">DeviceGeometry (class in pyOptiShared.DeviceGeometry)</a>
-</li>
       <li><a href="pyFDTD/library/pyOptiShared.SimResults.FDTDSimRun.html#pyOptiShared.SimResults.FDTDSimRun.dftmonitors">dftmonitors (pyOptiShared.SimResults.FDTDSimRun property)</a>
 </li>
   </ul></td>
@@ -206,12 +206,6 @@
 </li>
       <li><a href="pyFDTD/library/pyOptiShared.SimResults.FDTDSimRun.html#pyOptiShared.SimResults.FDTDSimRun">FDTDSimRun (class in pyOptiShared.SimResults)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="FEFDSolver/library/FEMFy.fefd_solver.FEFDSolver.html#FEMFy.fefd_solver.FEFDSolver">FEFDSolver (class in FEMFy.fefd_solver)</a>
-</li>
-      <li><a href="FEFDSolver/library/FEMFy.fefd_results.FEMFySolverResults.html#FEMFy.fefd_results.FEMFySolverResults">FEMFySolverResults (class in FEMFy.fefd_results)</a>
-</li>
       <li><a href="pyFDTD/library/pyOptiShared.SimResults.FDTDModeData.html#pyOptiShared.SimResults.FDTDModeData.fields">fields (pyOptiShared.SimResults.FDTDModeData property)</a>
 
       <ul>
@@ -219,16 +213,28 @@
 </li>
       </ul></li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pyOptiShared/library/pyOptiShared.Designs.flex_bend90.html#pyOptiShared.Designs.flex_bend90">flex_bend90() (in module pyOptiShared.Designs)</a>
+</li>
+      <li><a href="pyOptiShared/library/pyOptiShared.Designs.flex_crossing.html#pyOptiShared.Designs.flex_crossing">flex_crossing() (in module pyOptiShared.Designs)</a>
+</li>
+      <li><a href="pyOptiShared/library/pyOptiShared.Designs.flex_splitter.html#pyOptiShared.Designs.flex_splitter">flex_splitter() (in module pyOptiShared.Designs)</a>
+</li>
+      <li><a href="pyOptiShared/library/pyOptiShared.Designs.flex_taper.html#pyOptiShared.Designs.flex_taper">flex_taper() (in module pyOptiShared.Designs)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.gds_wizard">gds_wizard (pyOptiShared.DeviceGeometry.DeviceGeometry property)</a>
-</li>
       <li><a href="pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata.Get">Get() (pyOptiShared.SimResults.NXdata method)</a>
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata.GetAllData">GetAllData() (pyOptiShared.SimResults.NXdata method)</a>
+</li>
+      <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.getBGandSub">getBGandSub() (pyOptiShared.LayerInfo.LayerStack method)</a>
+</li>
+      <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.getBGandSubNums">getBGandSubNums() (pyOptiShared.LayerInfo.LayerStack method)</a>
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.GetBoundingBox">GetBoundingBox() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
 </li>
@@ -248,11 +254,11 @@
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.GetLayerOffsetFunc">GetLayerOffsetFunc() (pyOptiShared.LayerInfo.LayerStack method)</a>
 </li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.GetLayerStack">GetLayerStack() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
-</li>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.GetLayersWithTol">GetLayersWithTol() (pyOptiShared.LayerInfo.LayerStack method)</a>
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.GetLayerThickness">GetLayerThickness() (pyOptiShared.LayerInfo.LayerStack method)</a>
+</li>
+      <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.GetLayerZmax">GetLayerZmax() (pyOptiShared.LayerInfo.LayerStack method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -264,13 +270,11 @@
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.Material.MaterialLibrary.html#pyOptiShared.Material.MaterialLibrary.getMaterialFromNum">getMaterialFromNum() (pyOptiShared.Material.MaterialLibrary method)</a>
 </li>
+      <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.getMaterialLib">getMaterialLib() (pyOptiShared.LayerInfo.LayerStack method)</a>
+</li>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.getMaterialMap">getMaterialMap() (pyOptiShared.LayerInfo.LayerStack method)</a>
 </li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.GetMaterialMesh">GetMaterialMesh() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
-</li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.GetMaterialObj">GetMaterialObj() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
-</li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.GetMaterialObjects">GetMaterialObjects() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
+      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.GetMatVals">GetMatVals() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.GetMinZmin">GetMinZmin() (pyOptiShared.LayerInfo.LayerStack method)</a>
 </li>
@@ -278,9 +282,13 @@
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.GetOffsetAng">GetOffsetAng() (pyOptiShared.LayerInfo.LayerInfo method)</a>
 </li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.GetParamLayerIndex">GetParamLayerIndex() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
-</li>
       <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.GetPermittivityMesh">GetPermittivityMesh() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
+</li>
+      <li><a href="pyFDTD/library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.GetPoints">GetPoints() (pyFDTDKernel.pyFDTDSolver.pyFDTDSolver method)</a>
+</li>
+      <li><a href="pyOptiShared/library/pyOptiShared.PortInfo.PortInfo.html#pyOptiShared.PortInfo.PortInfo.GetPointsList">GetPointsList() (pyOptiShared.PortInfo.PortInfo method)</a>
+</li>
+      <li><a href="pyOptiShared/library/pyOptiShared.PortInfo.PortInfo.html#pyOptiShared.PortInfo.PortInfo.GetPortsRecord">GetPortsRecord() (pyOptiShared.PortInfo.PortInfo method)</a>
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.GetTolInfo">GetTolInfo() (pyOptiShared.LayerInfo.LayerInfo method)</a>
 </li>
@@ -316,18 +324,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.layer_number">layer_number (pyOptiShared.LayerInfo.LayerInfo property)</a>
 </li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.layer_stack">layer_stack (pyOptiShared.DeviceGeometry.DeviceGeometry property)</a>
-</li>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.layer_thickness">layer_thickness (pyOptiShared.LayerInfo.LayerInfo property)</a>
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo">LayerInfo (class in pyOptiShared.LayerInfo)</a>
 </li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.layers">layers (pyOptiShared.DeviceGeometry.DeviceGeometry property)</a>
+      <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack">LayerStack (class in pyOptiShared.LayerInfo)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack">LayerStack (class in pyOptiShared.LayerInfo)</a>
-</li>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.loadFromFolder">loadFromFolder() (pyOptiShared.LayerInfo.LayerStack method)</a>
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.Material.MaterialLibrary.html#pyOptiShared.Material.MaterialLibrary.LoadFromFolder">LoadFromFolder() (pyOptiShared.Material.MaterialLibrary method)</a>
@@ -348,11 +352,11 @@
 </li>
       <li><a href="pyModeSolver/library/pyOptiShared.SimResults.ModeSolverResults.html#pyOptiShared.SimResults.ModeSolverResults.material_grid">material_grid (pyOptiShared.SimResults.ModeSolverResults property)</a>
 </li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.material_lib">material_lib (pyOptiShared.DeviceGeometry.DeviceGeometry property)</a>
+      <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.material_name">material_name (pyOptiShared.LayerInfo.LayerInfo property)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.material_name">material_name (pyOptiShared.LayerInfo.LayerInfo property)</a>
+      <li><a href="pyOptiShared/library/pyOptiShared.Material.Material.html#pyOptiShared.Material.Material.material_number">material_number (pyOptiShared.Material.Material property)</a>
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.Material.MaterialLibrary.html#pyOptiShared.Material.MaterialLibrary">MaterialLibrary (class in pyOptiShared.Material)</a>
 </li>
@@ -390,8 +394,6 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.pad_geometry">pad_geometry() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
-</li>
       <li><a href="pyFDTD/library/pyOptiShared.SimResults.FDTDModeData.html#pyOptiShared.SimResults.FDTDModeData.permeability">permeability (pyOptiShared.SimResults.FDTDModeData property)</a>
 
       <ul>
@@ -408,9 +410,11 @@
 </li>
       <li><a href="pyFDTD/library/pyOptiShared.SimResults.FDTDSimResults.html#pyOptiShared.SimResults.FDTDSimResults.PlotDFTMonitor">PlotDFTMonitor() (pyOptiShared.SimResults.FDTDSimResults method)</a>
 </li>
-      <li><a href="pyModeSolver/library/pyOptiShared.SimResults.ModeSolverResults.html#pyOptiShared.SimResults.ModeSolverResults.PlotIndex">PlotIndex() (pyOptiShared.SimResults.ModeSolverResults method)</a>
+      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.PlotGDS">PlotGDS() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
 </li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.PlotMaterialMesh">PlotMaterialMesh() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
+      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.PlotGDSXSection">PlotGDSXSection() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
+</li>
+      <li><a href="pyModeSolver/library/pyOptiShared.SimResults.ModeSolverResults.html#pyOptiShared.SimResults.ModeSolverResults.PlotIndex">PlotIndex() (pyOptiShared.SimResults.ModeSolverResults method)</a>
 </li>
       <li><a href="pyModeSolver/library/pyOptiShared.SimResults.ModeSolverResults.html#pyOptiShared.SimResults.ModeSolverResults.PlotMode">PlotMode() (pyOptiShared.SimResults.ModeSolverResults method)</a>
 </li>
@@ -422,13 +426,17 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.PlotPermittivityMesh">PlotPermittivityMesh() (pyOptiShared.DeviceGeometry.DeviceGeometry static method)</a>
-</li>
       <li><a href="pyFDTD/library/pyOptiShared.SimResults.FDTDSimResults.html#pyOptiShared.SimResults.FDTDSimResults.PlotSParameters">PlotSParameters() (pyOptiShared.SimResults.FDTDSimResults method)</a>
+</li>
+      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.PlotSTL">PlotSTL() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
 </li>
       <li><a href="pyFDTD/library/pyOptiShared.SimResults.FDTDSimResults.html#pyOptiShared.SimResults.FDTDSimResults.PlotTimeMonitor">PlotTimeMonitor() (pyOptiShared.SimResults.FDTDSimResults method)</a>
 </li>
+      <li><a href="pyOptiShared/library/pyOptiShared.PortInfo.PortInfo.html#pyOptiShared.PortInfo.PortInfo">PortInfo (class in pyOptiShared.PortInfo)</a>
+</li>
       <li><a href="pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata.PrintDataNames">PrintDataNames() (pyOptiShared.SimResults.NXdata method)</a>
+</li>
+      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.PrintPorts">PrintPorts() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
 </li>
       <li><a href="pyFDTD/library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver">pyFDTDSolver (class in pyFDTDKernel.pyFDTDSolver)</a>
 </li>
@@ -450,10 +458,12 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pyModeSolver/library/pyModeSolver.py_mode_solver.VFDModeSolver.html#pyModeSolver.py_mode_solver.VFDModeSolver.Run">Run() (pyModeSolver.py_mode_solver.VFDModeSolver method)</a>
+      <li><a href="pyOptiShared/library/pyOptiShared.Designs.rotate_curve.html#pyOptiShared.Designs.rotate_curve">rotate_curve() (in module pyOptiShared.Designs)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pyModeSolver/library/pyModeSolver.py_mode_solver.VFDModeSolver.html#pyModeSolver.py_mode_solver.VFDModeSolver.Run">Run() (pyModeSolver.py_mode_solver.VFDModeSolver method)</a>
+</li>
       <li><a href="pyFDTD/library/pyOptiShared.SimResults.FDTDSimResults.html#pyOptiShared.SimResults.FDTDSimResults.runs">runs (pyOptiShared.SimResults.FDTDSimResults property)</a>
 </li>
   </ul></td>
@@ -463,10 +473,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyOptiShared/library/pyOptiShared.Material.SellmeierMaterial.html#pyOptiShared.Material.SellmeierMaterial">SellmeierMaterial (class in pyOptiShared.Material)</a>
-</li>
-      <li><a href="FEFDSolver/library/FEMFy.fefd_solver.FEFDSolver.html#FEMFy.fefd_solver.FEFDSolver.set_boundaries">set_boundaries() (FEMFy.fefd_solver.FEFDSolver method)</a>
-</li>
-      <li><a href="FEFDSolver/library/FEMFy.fefd_solver.FEFDSolver.html#FEMFy.fefd_solver.FEFDSolver.set_sim_settings">set_sim_settings() (FEMFy.fefd_solver.FEFDSolver method)</a>
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.SetAutoPortSettings">SetAutoPortSettings() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
 </li>
@@ -478,15 +484,17 @@
         <li><a href="pyModeSolver/library/pyModeSolver.py_mode_solver.VFDModeSolver.html#pyModeSolver.py_mode_solver.VFDModeSolver.SetBoundaries">(pyModeSolver.py_mode_solver.VFDModeSolver method)</a>
 </li>
       </ul></li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.SetCurrentVal">SetCurrentVal() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
+      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.SetFromFun">SetFromFun() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
+</li>
+      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.SetFromGDS">SetFromGDS() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.Material.ExperimentalMaterial.html#pyOptiShared.Material.ExperimentalMaterial.SetFromRefDotInfo">SetFromRefDotInfo() (pyOptiShared.Material.ExperimentalMaterial method)</a>
 </li>
-      <li><a href="pyFDTD/library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetPorts">SetPorts() (pyFDTDKernel.pyFDTDSolver.pyFDTDSolver method)</a>
+      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.SetFromSTL">SetFromSTL() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.SetSettings">SetSettings() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
+      <li><a href="pyFDTD/library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetPorts">SetPorts() (pyFDTDKernel.pyFDTDSolver.pyFDTDSolver method)</a>
 </li>
       <li><a href="pyFDTD/library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetSimSettings">SetSimSettings() (pyFDTDKernel.pyFDTDSolver.pyFDTDSolver method)</a>
 
@@ -494,21 +502,17 @@
         <li><a href="pyModeSolver/library/pyModeSolver.py_mode_solver.VFDModeSolver.html#pyModeSolver.py_mode_solver.VFDModeSolver.SetSimSettings">(pyModeSolver.py_mode_solver.VFDModeSolver method)</a>
 </li>
       </ul></li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.Show">Show() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
-
-      <ul>
-        <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.Show">(pyOptiShared.LayerInfo.LayerStack method)</a>
+      <li><a href="pyFDTD/library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetThermalDistribution">SetThermalDistribution() (pyFDTDKernel.pyFDTDSolver.pyFDTDSolver method)</a>
 </li>
-      </ul></li>
+      <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.Show">Show() (pyOptiShared.LayerInfo.LayerStack method)</a>
+</li>
+      <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.sidewall_angle">sidewall_angle (pyOptiShared.LayerInfo.LayerInfo property)</a>
+</li>
+      <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.sidewall_func">sidewall_func (pyOptiShared.LayerInfo.LayerInfo property)</a>
+</li>
       <li><a href="pyFDTD/library/pyOptiShared.SimResults.FDTDSimResults.html#pyOptiShared.SimResults.FDTDSimResults.sparameters">sparameters (pyOptiShared.SimResults.FDTDSimResults property)</a>
 </li>
       <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack.substrate">substrate (pyOptiShared.LayerInfo.LayerStack property)</a>
-</li>
-      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.substrate_material">substrate_material (pyOptiShared.DeviceGeometry.DeviceGeometry property)</a>
-</li>
-      <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.sw_ang">sw_ang (pyOptiShared.LayerInfo.LayerInfo property)</a>
-</li>
-      <li><a href="pyOptiShared/library/pyOptiShared.LayerInfo.LayerInfo.html#pyOptiShared.LayerInfo.LayerInfo.sw_func">sw_func (pyOptiShared.LayerInfo.LayerInfo property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -517,6 +521,18 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyFDTD/library/pyOptiShared.SimResults.FDTDSimRun.html#pyOptiShared.SimResults.FDTDSimRun.timemonitors">timemonitors (pyOptiShared.SimResults.FDTDSimRun property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pyOptiShared/library/pyOptiShared.PortInfo.PortInfo.html#pyOptiShared.PortInfo.PortInfo.update">update() (pyOptiShared.PortInfo.PortInfo method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.UpdateScriptParams">UpdateScriptParams() (pyOptiShared.DeviceGeometry.DeviceGeometry method)</a>
 </li>
   </ul></td>
 </tr></table>

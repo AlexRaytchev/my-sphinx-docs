@@ -10,6 +10,7 @@
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
 
   
@@ -24,7 +25,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Finite-Difference Time-Domain (FDTD) Electromagnetic Solver" href="../../pyFDTD/pyFDTD.html" />
+    <link rel="next" title="FDTD" href="../../pyFDTD/pyFDTD.html" />
     <link rel="prev" title="pyOptiShared.SimResults.ModeSolverResults" href="pyOptiShared.SimResults.ModeSolverResults.html" /> 
 </head>
 
@@ -36,8 +37,9 @@
 
           
           
-          <a href="../../index.html" class="icon icon-home">
-            Optiwaves's Python EM Modules
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo-traced.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -49,28 +51,34 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../pyOptiShared/SharedLibraries.html">Shared Libraries</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#key-features">Key Features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#mathematical-method">Mathematical Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#applications">Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pyModeSolver.html#examples">Examples</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../pyModeSolver.html#api-documentation">API Documentation</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="pyModeSolver.py_mode_solver.VFDModeSolver.html">pyModeSolver.py_mode_solver.VFDModeSolver</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pyOptiShared.SimResults.ModeSolverResults.html">pyOptiShared.SimResults.ModeSolverResults</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">pyOptiShared.SimResults.BaseSimResults</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#pyOptiShared.SimResults.BaseSimResults"><code class="docutils literal notranslate"><span class="pre">BaseSimResults</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.BaseSimResults.loadHDF5"><code class="docutils literal notranslate"><span class="pre">BaseSimResults.loadHDF5()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../APIDocumentation/APIDocumentation.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../pyOptiShared/SharedLibraries.html">Shared Libraries</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../pyModeSolver.html">Mode Solver</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../pyModeSolver.html#api-documentation">API Documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="pyModeSolver.py_mode_solver.VFDModeSolver.html">pyModeSolver.py_mode_solver.VFDModeSolver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pyOptiShared.SimResults.ModeSolverResults.html">pyOptiShared.SimResults.ModeSolverResults</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">pyOptiShared.SimResults.BaseSimResults</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#pyOptiShared.SimResults.BaseSimResults"><code class="docutils literal notranslate"><span class="pre">BaseSimResults</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#pyOptiShared.SimResults.BaseSimResults.loadHDF5"><code class="docutils literal notranslate"><span class="pre">BaseSimResults.loadHDF5()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../pyModeSolver.html#dielectric-waveguide-mode-analysis">Dielectric Waveguide Mode Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pyModeSolver.html#fiber-xy-cut-mode-analysis">Fiber - XY Cut Mode Analysis</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">FDTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyOptiShared/Designs.html">Flex Device Library</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -87,7 +95,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+          <li class="breadcrumb-item"><a href="../../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
+          <li class="breadcrumb-item"><a href="../pyModeSolver.html">Mode Solver</a></li>
       <li class="breadcrumb-item active">pyOptiShared.SimResults.BaseSimResults</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/pyModeSolver/library/pyOptiShared.SimResults.BaseSimResults.rst.txt" rel="nofollow"> View page source</a>
@@ -103,7 +112,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="pyOptiShared.SimResults.BaseSimResults">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyOptiShared.SimResults.</span></span><span class="sig-name descname"><span class="pre">BaseSimResults</span></span><a class="headerlink" href="#pyOptiShared.SimResults.BaseSimResults" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Base simulation results class.</p>
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
@@ -115,11 +124,11 @@
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="pyOptiShared.SimResults.BaseSimResults.loadHDF5">
-<span class="sig-name descname"><span class="pre">loadHDF5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.SimResults.BaseSimResults.loadHDF5" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">loadHDF5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.SimResults.BaseSimResults.loadHDF5" title="Link to this definition"></a></dt>
 <dd><p>This method loads results from an HDF5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – File path including extension.</p>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – File path including extension.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -133,7 +142,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="pyOptiShared.SimResults.ModeSolverResults.html" class="btn btn-neutral float-left" title="pyOptiShared.SimResults.ModeSolverResults" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../pyFDTD/pyFDTD.html" class="btn btn-neutral float-right" title="Finite-Difference Time-Domain (FDTD) Electromagnetic Solver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../pyFDTD/pyFDTD.html" class="btn btn-neutral float-right" title="FDTD" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

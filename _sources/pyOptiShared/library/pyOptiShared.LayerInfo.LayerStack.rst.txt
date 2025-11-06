@@ -25,6 +25,9 @@
          ~LayerStack.GetLayerThickness
       
       
+         ~LayerStack.GetLayerZmax
+      
+      
          ~LayerStack.GetLayerZmin
       
       
@@ -53,6 +56,12 @@
          ~LayerStack.addMaterialLayer
       
       
+         ~LayerStack.getBGandSub
+      
+      
+         ~LayerStack.getBGandSubNums
+      
+      
          ~LayerStack.getLayerCladMatNum
       
       
@@ -63,6 +72,12 @@
       
       
          ~LayerStack.getLayerMaterialObj
+      
+      
+         ~LayerStack.getLayerShapeInfo
+      
+      
+         ~LayerStack.getMaterialLib
       
       
          ~LayerStack.getMaterialMap
@@ -83,6 +98,9 @@
    .. autosummary::
    
       ~LayerStack.background
+      ~LayerStack.layers
+      ~LayerStack.layers_zminmax
       ~LayerStack.substrate
+      ~LayerStack.substrate_zmax
    
    

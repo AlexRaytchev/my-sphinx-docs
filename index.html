@@ -6,10 +6,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Optiwave’s Documentation for Python Electromagnetic Modules (PEM) &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+  <title>Documentation for OptiOmega - Optiwave Python Modules &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
 
   
@@ -24,7 +25,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Shared Libraries" href="pyOptiShared/SharedLibraries.html" /> 
+    <link rel="next" title="Overview" href="ProductOverview/ProductOverview.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -35,8 +36,9 @@
 
           
           
-          <a href="#" class="icon icon-home">
-            Optiwaves's Python EM Modules
+          <a href="#">
+            
+              <img src="_static/logo-traced.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -48,9 +50,12 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="pyOptiShared/SharedLibraries.html">Shared Libraries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="APIDocumentation/APIDocumentation.html">API Documentation</a></li>
 </ul>
 
         </div>
@@ -67,7 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Optiwave’s Documentation for Python Electromagnetic Modules (PEM)</li>
+      <li class="breadcrumb-item active">Documentation for OptiOmega - Optiwave Python Modules</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -77,39 +82,47 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="optiwave-s-documentation-for-python-electromagnetic-modules-pem">
-<h1>Optiwave’s Documentation for Python Electromagnetic Modules (PEM)<a class="headerlink" href="#optiwave-s-documentation-for-python-electromagnetic-modules-pem" title="Link to this heading"></a></h1>
-<p>Optiwave’s PEM is a collection of libraries used for electromagnetic <strong>charachterization and simulation</strong> of <strong>photonic integrated devices</strong>.
+  <section id="documentation-for-optiomega-optiwave-python-modules">
+<h1>Documentation for OptiOmega - Optiwave Python Modules<a class="headerlink" href="#documentation-for-optiomega-optiwave-python-modules" title="Link to this heading"></a></h1>
+<p>OptiOmega is a collection of python libraries used for electromagnetic <strong>characterization and simulation</strong> of <strong>photonic integrated devices</strong>.
 It can be used along standard Optiwave’s solver like <strong>OptiSystem</strong> and <strong>OptiSPICE</strong> for <strong>circuit and system level simulation</strong>
 of photonic integrated circuits.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="pyOptiShared/SharedLibraries.html">Shared Libraries</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pyOptiShared/MaterialLib.html">Material Library</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyOptiShared/LayerStack.html">Layer Stack</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyOptiShared/DeviceGeometry.html">Device Geometry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyOptiShared/NXdata.html"><em>NXData</em> Data Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ProductOverview/ProductOverview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ProductOverview/ModeSolverOverview.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProductOverview/FDTDOverview.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pyModeSolver/pyModeSolver.html">Vector Finite Difference (VFD) Mode Solver</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pyModeSolver/pyModeSolver.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyModeSolver/pyModeSolver.html#key-features">Key Features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyModeSolver/pyModeSolver.html#mathematical-method">Mathematical Method</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyModeSolver/pyModeSolver.html#applications">Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyModeSolver/pyModeSolver.html#examples">Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyModeSolver/pyModeSolver.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Installation/Installation.html">Installation Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Installation/Installation.html#about-this-guide">About This Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation/Installation.html#windows-installation">Windows Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation/Installation.html#linux-installation">Linux Installation</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pyFDTD/pyFDTD.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pyFDTD/pyFDTD.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyFDTD/pyFDTD.html#key-features">Key Features</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyFDTD/pyFDTD.html#mathematical-foundation">Mathematical Foundation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyFDTD/pyFDTD.html#boundary-conditions">Boundary Conditions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyFDTD/pyFDTD.html#applications">Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyFDTD/pyFDTD.html#file-output">File Output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyFDTD/pyFDTD.html#examples">Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pyFDTD/pyFDTD.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted/GettingStarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="GettingStarted/ModeSolver.html">VFD Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GettingStarted/FDTD.html">Finite Difference Time Domain Solver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Examples/Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Examples/ModeSolverExamples.html">Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/FDTDExamples.html">FDTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/ApplicationExamples.html">Application Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples/DeviceExamples.html">Device Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ProductInterworking/ProductInterworking.html">Product Interworking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ProductInterworking/Internal.html">Internal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ProductInterworking/External.html">External</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="APIDocumentation/APIDocumentation.html">API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyOptiShared/SharedLibraries.html">Shared Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyModeSolver/pyModeSolver.html">Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyFDTD/pyFDTD.html">FDTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyOptiShared/Designs.html">Flex Device Library</a></li>
 </ul>
 </li>
 </ul>
@@ -120,7 +133,7 @@ of photonic integrated circuits.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="pyOptiShared/SharedLibraries.html" class="btn btn-neutral float-right" title="Shared Libraries" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ProductOverview/ProductOverview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

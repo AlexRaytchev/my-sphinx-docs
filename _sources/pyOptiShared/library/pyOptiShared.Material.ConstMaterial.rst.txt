@@ -17,6 +17,9 @@
    
       
       
+         ~ConstMaterial.dEpsT
+      
+      
          ~ConstMaterial.eps
       
       
@@ -44,6 +47,7 @@
    .. autosummary::
    
       ~ConstMaterial.color
+      ~ConstMaterial.material_number
       ~ConstMaterial.name
    
    

@@ -31,9 +31,18 @@
       
          ~MaterialLibrary.getMaterialFromNum
       
+      
+         ~MaterialLibrary.materialExists
+      
    
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MaterialLibrary.last_material_number
    
    

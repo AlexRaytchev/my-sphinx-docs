@@ -25,6 +25,9 @@
          ~pyFDTDSolver.GetGlobalUnits
       
       
+         ~pyFDTDSolver.GetPoints
+      
+      
          ~pyFDTDSolver.Run
       
       
@@ -35,6 +38,9 @@
       
       
          ~pyFDTDSolver.SetSimSettings
+      
+      
+         ~pyFDTDSolver.SetThermalDistribution
       
       
    

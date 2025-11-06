@@ -16,9 +16,6 @@
    .. autosummary::
    
       
-         ~FDTDSimResults.GetSPArray
-      
-      
          ~FDTDSimResults.PlotDFTMonitor
       
       

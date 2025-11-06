@@ -23,6 +23,9 @@
       
       
       
+         ~ExperimentalMaterial.dEpsT
+      
+      
          ~ExperimentalMaterial.eps
       
       
@@ -52,6 +55,7 @@
       ~ExperimentalMaterial.color
       ~ExperimentalMaterial.mIntrpImag
       ~ExperimentalMaterial.mIntrpReal
+      ~ExperimentalMaterial.material_number
       ~ExperimentalMaterial.mstrMode
       ~ExperimentalMaterial.name
    

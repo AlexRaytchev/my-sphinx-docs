@@ -3,22 +3,24 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Optiwave's Documentation for Python Electromagnetic Modules (PEM)
+Documentation for OptiOmega - Optiwave Python Modules
 ======================================================================
 
-Optiwave's PEM is a collection of libraries used for electromagnetic **charachterization and simulation** of **photonic integrated devices**.
+OptiOmega is a collection of python libraries used for electromagnetic **characterization and simulation** of **photonic integrated devices**.
 It can be used along standard Optiwave's solver like **OptiSystem** and **OptiSPICE** for **circuit and system level simulation**
 of photonic integrated circuits.
-
 
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
-   pyOptiShared/SharedLibraries
-   pyModeSolver/pyModeSolver
-   pyFDTD/pyFDTD
+	
+   ProductOverview/ProductOverview
+   Installation/Installation
+   GettingStarted/GettingStarted
+   Examples/Examples
+   ProductInterworking/ProductInterworking
+   APIDocumentation/APIDocumentation
    
    
    
