@@ -19,6 +19,9 @@
          ~DeviceGeometry.AddPort
       
       
+         ~DeviceGeometry.GetADEMats
+      
+      
          ~DeviceGeometry.GetBoundingBox
       
       
@@ -26,6 +29,9 @@
       
       
          ~DeviceGeometry.GetPermittivityMesh
+      
+      
+         ~DeviceGeometry.PadGeometry
       
       
          ~DeviceGeometry.PlotGDS
@@ -55,6 +61,12 @@
          ~DeviceGeometry.UpdateScriptParams
       
       
+      
+         ~DeviceGeometry.ensure_file_exists
+      
+      
+         ~DeviceGeometry.group_indices
+      
    
    
 
@@ -64,7 +76,10 @@
 
    .. autosummary::
    
+      ~DeviceGeometry.ade_mats
       ~DeviceGeometry.background_material
+      ~DeviceGeometry.buffers
+      ~DeviceGeometry.device_name
       ~DeviceGeometry.domain_buffer
       ~DeviceGeometry.gds_wizard
       ~DeviceGeometry.layer_stack

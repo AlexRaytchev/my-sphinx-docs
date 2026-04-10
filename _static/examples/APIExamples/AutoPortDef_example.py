@@ -12,11 +12,11 @@ myindex3p5 = ConstMaterial(mat_name="myindex3p5", epsReal=3.5**2)
 ###       Layer Stack Settings         ###
 ##########################################
 layer_stack = LayerStack()
-layer_stack.addLayer(name="L1", number=1, thickness=0.25, zmin=0.0,
+layer_stack.AddLayer(name="L1", number=1, thickness=0.25, zmin=0.0,
                     material=myindex3p5,cladding=myindex1p45)
-layer_stack.addLayer(name="L2", number=2, thickness=0.25, zmin=0.25,
+layer_stack.AddLayer(name="L2", number=2, thickness=0.25, zmin=0.25,
                     material=myindex3p5,cladding=myindex1p45)
-layer_stack.setBGandSub(background=myindex1p45, substrate=myindex1p45)
+layer_stack.SetBGandSub(background=myindex1p45, substrate=myindex1p45)
 
 ##########################################
 ###   Device Geometry/Port Settings    ###

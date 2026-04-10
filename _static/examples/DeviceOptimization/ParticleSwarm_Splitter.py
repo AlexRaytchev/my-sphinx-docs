@@ -6,7 +6,7 @@ from pyOptiShared.Material import ConstMaterial
 from pyOptiShared.DeviceGeometry import DeviceGeometry
 from pyOptiShared.Material import ConstMaterial
 from pyFDTDKernel.pyFDTDSolver import pyFDTDSolver
-from pyOptiShared.SimResults import FDTDSimResults
+from pyFDTDKernel.FDTDResults import FDTDResults
 from pyOptiShared.OptimizeVerse import PSO
 from pyOptiShared.Designs import flex_splitter
 
@@ -18,7 +18,7 @@ def RunSimulation(layer_stack:LayerStack,gds_file:str,
                   subpixel_level:int=2,
                   mode_indices=0,
                   mon_z=0.11,
-                  auto_shutoff_limit=1e-3)->FDTDSimResults:
+                  auto_shutoff_limit=1e-3)->FDTDResults:
     
     # Defines the Device Geometry
     device_geometry = DeviceGeometry()
@@ -41,22 +41,21 @@ def RunSimulation(layer_stack:LayerStack,gds_file:str,
     #device_geometry.Show()
     
     # General Simulation Settings and Simulation Run
-    lmin = lmin
-    lmax = lmax
+
     lcen = (lmax+lmin)/2
     npts=npts
     tfinal = 35000
     
     fdtd_solver = pyFDTDSolver()
     
-    fdtd_solver.SetPorts(profile="gaussian-pw", lcenter=lcen, lmin=lmin, lmax=lmax, npts=npts, mode_indices = mode_indices ,symmetries=symmetries)
+    fdtd_solver.SetExcitation(profile="gaussian-pw", lcenter=lcen, lmin=lmin, lmax=lmax, npts=npts, mode_indices = mode_indices ,symmetries=symmetries)
     
     fdtd_solver.AddDFTMonitor(mon_type="2d-z-normal", z0=mon_z, name="MyDFTMonitor1",
                                                   lmin=lmin, lmax=lmax,npts=npts,
                                                   save_hx=True,save_hy=True,save_hz=True,
                                                   save_ex=True,save_ey=True,save_ez=True)
     
-    fdtd_solver.SetSimSettings(sim_time=tfinal, space_step=space_step, subpixel_level=subpixel_level, save_path=r"results",results_filename=results_filename,
+    fdtd_solver.SetSimSettings(sim_time=tfinal, space_step=space_step, subpixel_level=subpixel_level, results_path=r"results",device_name=results_filename,
                                                   device_geometry = device_geometry,auto_shutoff_limit=auto_shutoff_limit,export_mat_grid=True,verbosity='ERROR')
     results = fdtd_solver.Run()
 
@@ -87,11 +86,11 @@ air_mat = ConstMaterial(mat_name="Air", epsReal=1**2,color='lightyellow')
 
 # Creates the Layer Stack
 layer_stack = LayerStack()
-layer_stack.addLayer(name="L1", number=1, thickness=0.22, zmin=0.0,
+layer_stack.AddLayer(name="L1", number=1, thickness=0.22, zmin=0.0,
                     material=si_mat, cladding=air_mat,
                     sideWallAng=0)
 
-layer_stack.setBGandSub(background=air_mat, substrate=si02_mat)
+layer_stack.SetBGandSub(background=air_mat, substrate=si02_mat)
 
 lower_bound = np.asarray([0.4998,0.55,0.60,0.60,0.70,0.75,0.80,0.85,0.95,0.9998,2])
 upper_bound = np.asarray([0.5002,1.25,1.25,1.25,1.25,1.25,1.25,1.25,1.15,1.002,4])

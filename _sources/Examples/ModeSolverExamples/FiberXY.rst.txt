@@ -1,0 +1,35 @@
+:orphan:
+
+Fiber - XY Cut Mode Analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. literalinclude:: /_static/examples/ModeSolver/Mode_Solver_API_Ex2.py
+   :language: python
+
+.. grid:: 4
+
+    .. grid-item-card::  Fundamental Mode Profile
+
+        .. figure:: /_static/fiber_modesolver1.png
+           :width: 100%
+           :align: center
+
+    .. grid-item-card::  Material Profile
+
+        .. figure:: /_static/fiber_modesolver2.png
+           :width: 100%
+           :align: center
+
+
+    .. grid-item-card::  Effective Refractive Index
+
+        .. figure:: /_static/fiber_modesolver3.png
+           :width: 100%
+           :align: center
+
+
+    .. grid-item-card::  Effective Group Index
+
+        .. figure:: /_static/fiber_modesolver4.png
+           :width: 100%
+           :align: center

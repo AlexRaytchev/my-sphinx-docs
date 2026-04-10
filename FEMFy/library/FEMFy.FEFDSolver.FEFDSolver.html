@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FEMFy.FEFDSolver.FEFDSolver &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="FEMFy.FEFDResults.FEFDResults" href="FEMFy.FEFDResults.FEFDResults.html" />
+    <link rel="prev" title="FEFD" href="../FEMFy.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo-traced.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../APIDocumentation/APIDocumentation.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../pyOptiShared/SharedLibraries.html">Shared Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyModeSolver/pyModeSolver.html">Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">FDTD</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../FEMFy.html">FEFD</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../FEMFy.html#api-documentation">API Documentation</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">FEMFy.FEFDSolver.FEFDSolver</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver"><code class="docutils literal notranslate"><span class="pre">FEFDSolver</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.GetElementsEpsilons"><code class="docutils literal notranslate"><span class="pre">FEFDSolver.GetElementsEpsilons()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.GetElementsLayers"><code class="docutils literal notranslate"><span class="pre">FEFDSolver.GetElementsLayers()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.Run"><code class="docutils literal notranslate"><span class="pre">FEFDSolver.Run()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.RunEpsilon"><code class="docutils literal notranslate"><span class="pre">FEFDSolver.RunEpsilon()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.SetBoundaries"><code class="docutils literal notranslate"><span class="pre">FEFDSolver.SetBoundaries()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.SetExcitation"><code class="docutils literal notranslate"><span class="pre">FEFDSolver.SetExcitation()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.SetResultsPath"><code class="docutils literal notranslate"><span class="pre">FEFDSolver.SetResultsPath()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.SetSimSettings"><code class="docutils literal notranslate"><span class="pre">FEFDSolver.SetSimSettings()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="FEMFy.FEFDResults.FEFDResults.html">FEMFy.FEFDResults.FEFDResults</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#straight-waveguide">Straight Waveguide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#degree-bend">90 Degree Bend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#d-simulation-of-waveguide">2.5D simulation of Waveguide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#d-simulation-of-ring-resonator">2.5D simulation of Ring Resonator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#d-simulation-of-directional-coupler">2.5D simulation of Directional Coupler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#d-simulation-of-cosine-taper">2.5D simulation of Cosine Taper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#d-simulation-of-mmi-1x2">2.5D simulation of MMI 1x2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyOptiShared/Designs.html">Flex Device Library</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optiwave's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
+          <li class="breadcrumb-item"><a href="../FEMFy.html">FEFD</a></li>
+      <li class="breadcrumb-item active">FEMFy.FEFDSolver.FEFDSolver</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/FEMFy/library/FEMFy.FEFDSolver.FEFDSolver.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="femfy-fefdsolver-fefdsolver">
+<h1>FEMFy.FEFDSolver.FEFDSolver<a class="headerlink" href="#femfy-fefdsolver-fefdsolver" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="FEMFy.FEFDSolver.FEFDSolver">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">FEMFy.FEFDSolver.</span></span><span class="sig-name descname"><span class="pre">FEFDSolver</span></span><a class="headerlink" href="#FEMFy.FEFDSolver.FEFDSolver" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Interface for running simulations in FEFD.</p>
+<p>ATTENTION: All external TIME, SPACE, FREQUENCY and WAVELENGTH attributes
+should be passed in terms of global units!
+Check <cite>FEFDSolver()</cite>’s <cite>GetGlobalUnits()</cite> method for more details on the units.
+Internal to <cite>FEFDSolver()</cite> they are treated in SI units.</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.GetElementsEpsilons" title="FEMFy.FEFDSolver.FEFDSolver.GetElementsEpsilons"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetElementsEpsilons</span></code></a>()</p></td>
+<td><p>Gets the Epsilon value of each element in the mesh.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.GetElementsLayers" title="FEMFy.FEFDSolver.FEFDSolver.GetElementsLayers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetElementsLayers</span></code></a>()</p></td>
+<td><p>Gets the layers where each element cuts.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ParseSolver</span></code>(solver)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.Run" title="FEMFy.FEFDSolver.FEFDSolver.Run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Run</span></code></a>()</p></td>
+<td><p>Runs the FEFD solver based on the settings passed to SetSimSettings function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">RunDistribution</span></code>(elements_layers)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.RunEpsilon" title="FEMFy.FEFDSolver.FEFDSolver.RunEpsilon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RunEpsilon</span></code></a>(epsilons)</p></td>
+<td><p>Function that runs the FEFD on a specific epsilon distribution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SavePlot</span></code>(fig, fname[, extent])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.SetBoundaries" title="FEMFy.FEFDSolver.FEFDSolver.SetBoundaries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetBoundaries</span></code></a>([min_x, max_x, min_y, max_y, ...])</p></td>
+<td><p>Sets the boundary conditions (BCs) of the computational domain</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetConfigurations</span></code>(config)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetDeviceGeometry</span></code>(device_geometry)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.SetExcitation" title="FEMFy.FEFDSolver.FEFDSolver.SetExcitation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetExcitation</span></code></a>([profile, mode_indices, ...])</p></td>
+<td><p>Set the mode port settings.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.SetResultsPath" title="FEMFy.FEFDSolver.FEFDSolver.SetResultsPath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetResultsPath</span></code></a>(results_path)</p></td>
+<td><p>Set the path where the results will be saved.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#FEMFy.FEFDSolver.FEFDSolver.SetSimSettings" title="FEMFy.FEFDSolver.FEFDSolver.SetSimSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetSimSettings</span></code></a>(device_geometry[, ...])</p></td>
+<td><p>This method set the higher level simulation settings.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetSimulationParams</span></code>(pol, window)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">WeightAdjoint</span></code>(soli)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjoint_elements</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjoint_info</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjoint_solution</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">boundaries</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">current_epsilon</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dS_dE</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">elements_centroids</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fields</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_eps</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">interp_method</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">mesh</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">method</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">polarization</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ports_monitors</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">resolution</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">results_path</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">simulation_type</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">stability</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">wavelength_range</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">weighted_adjoint</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDSolver.FEFDSolver.GetElementsEpsilons">
+<span class="sig-name descname"><span class="pre">GetElementsEpsilons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a></span></span><a class="headerlink" href="#FEMFy.FEFDSolver.FEFDSolver.GetElementsEpsilons" title="Link to this definition"></a></dt>
+<dd><p>Gets the Epsilon value of each element in the mesh.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An array of epsilion values.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDSolver.FEFDSolver.GetElementsLayers">
+<span class="sig-name descname"><span class="pre">GetElementsLayers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a></span></span><a class="headerlink" href="#FEMFy.FEFDSolver.FEFDSolver.GetElementsLayers" title="Link to this definition"></a></dt>
+<dd><p>Gets the layers where each element cuts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An array of the layers under each element.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDSolver.FEFDSolver.Run">
+<span class="sig-name descname"><span class="pre">Run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="FEMFy.FEFDResults.FEFDResults.html#FEMFy.FEFDResults.FEFDResults" title="FEMFy.FEFDResults.FEFDResults"><span class="pre">FEFDResults</span></a></span></span><a class="headerlink" href="#FEMFy.FEFDSolver.FEFDSolver.Run" title="Link to this definition"></a></dt>
+<dd><p>Runs the FEFD solver based on the settings passed to SetSimSettings function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The results of the simulation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>FEFDSimResults</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDSolver.FEFDSolver.RunEpsilon">
+<span class="sig-name descname"><span class="pre">RunEpsilon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">epsilons</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEMFy.FEFDSolver.FEFDSolver.RunEpsilon" title="Link to this definition"></a></dt>
+<dd><p>Function that runs the FEFD on a specific epsilon distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>epsilons</strong> (<em>np.ndarray</em>) – An array that defines the epsilon value of each element.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDSolver.FEFDSolver.SetBoundaries">
+<span class="sig-name descname"><span class="pre">SetBoundaries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'pmc'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'pec'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'pml'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pmc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'pmc'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'pec'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'pml'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pmc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'pmc'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'pec'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'pml'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pmc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'pmc'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'pec'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'pml'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pmc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">PML_Params</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEMFy.FEFDSolver.FEFDSolver.SetBoundaries" title="Link to this definition"></a></dt>
+<dd><p>Sets the boundary conditions (BCs) of the computational domain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – type of the BC in the minimum x direction. Defaults to “pmc”.</p></li>
+<li><p><strong>max_x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – type of the BC in the maximum x direction. Defaults to “pmc”.</p></li>
+<li><p><strong>min_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – type of the BC in the minimum y direction. Defaults to “pmc”.</p></li>
+<li><p><strong>max_y</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – type of the BC in the maximum y direction. Defaults to “pmc”.</p></li>
+<li><p><strong>params</strong> (<em>PML_Params</em><em>, </em><em>optional</em>) – PML_params object that defines the PML coefficients in every direction. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDSolver.FEFDSolver.SetExcitation">
+<span class="sig-name descname"><span class="pre">SetExcitation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'mode'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode_indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reciprocity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'1x1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'1x2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'2x2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'4x'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">array([1.5,</span> <span class="pre">1.51,</span> <span class="pre">1.52,</span> <span class="pre">1.53,</span> <span class="pre">1.54,</span> <span class="pre">1.55,</span> <span class="pre">1.56,</span> <span class="pre">1.57,</span> <span class="pre">1.58,</span> <span class="pre">1.59,</span> <span class="pre">1.6])</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#FEMFy.FEFDSolver.FEFDSolver.SetExcitation" title="Link to this definition"></a></dt>
+<dd><p>Set the mode port settings. For proper units check <cite>GetGlobalUnits()</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>profile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – Defines profile of the source. Defaults to “mode”.</p></li>
+<li><p><strong>mode_indices</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>]</em><em>, </em><em>optional</em>) – Mode indices to be used in each port. Defaults to 0.
+If a single integer, it will be used for all ports. If a list it must match
+the number of ports in the device, otherwise it will append 0 (fundamental modes to the list).
+If the list is larger than the number of ports, then it will remove item until it matches the
+number of ports.</p></li>
+<li><p><strong>reciprocity</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><em>dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>,</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>]</em><em>|</em><em>literal</em><em>[</em><em>'1x1'</em><em>,</em><em>'1x2'</em><em>,</em><em>'2x2'</em><em>,</em><em>'4x'</em><em>]</em><em>, </em><em>optional</em>) – This tells the solver symmetries between ports.
+It is a dictionary where the keys are the S-parameters and the values their respective
+symmetric s_parameters. Key and Value should be strings contanin port numbers separated
+by an underscore (“i_j”, where i and j are port numbers) or strings can be used for predefined symmetries.
+1x1 - Straight, s-bend, 90 degree bend;
+1x2 - Splitter or 1x2 MMI;
+2x2 - Directional coupler, ring resonator;
+4x - Waveguide crossing.
+A symmetric dielectric waveguide with two ports can
+have the following reciprocity:
+1) reciprocity = {“1_2”:”2_1”,”2_2”:”1_1”}
+or
+2) reciprocity = {“2_1”:”1_2”,”1_1”:”2_2”}
+Case 1) excites only port 1 (because 2 never appears as j in the values.)
+Case 2) excites only port 2 (because 1 never appears as j in the values.)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDSolver.FEFDSolver.SetResultsPath">
+<span class="sig-name descname"><span class="pre">SetResultsPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEMFy.FEFDSolver.FEFDSolver.SetResultsPath" title="Link to this definition"></a></dt>
+<dd><p>Set the path where the results will be saved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>results_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – A file path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDSolver.FEFDSolver.SetSimSettings">
+<span class="sig-name descname"><span class="pre">SetSimSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_geometry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry" title="pyOptiShared.DeviceGeometry.DeviceGeometry"><span class="pre">DeviceGeometry</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulation_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'nportsparam'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mesh</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'direct'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'iterative'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'direct'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><span class="pre">Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'FEM'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stability</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polarization</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.14)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'TE'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'TM'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'TE2.5'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'TM2.5'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'TE'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjoint_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AdjointInfo</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#FEMFy.FEFDSolver.FEFDSolver.SetSimSettings" title="Link to this definition"></a></dt>
+<dd><p>This method set the higher level simulation settings.</p>
+<p>Args:
+device_geometry (DeviceGeometry): Geometry instance containing the physical structure and material properties.
+simulation_type (str, optional): Calculation mode for the solver (e.g., “nportsparam”). Defaults to “nportsparam”.
+order (int, optional): Polynomial order of the finite elements. Defaults to 1.
+wavelength (np.ndarray, optional): Array of wavelength points to be solved. Defaults to None.
+mesh (Mesh, optional): Pre-defined mesh instance. If None, a mesh may be generated automatically. Defaults to None.
+method (Literal[‘direct’, ‘iterative’], optional): Linear system solver type. ‘direct’ is exact; ‘iterative’ uses convergence tolerances. Defaults to ‘direct’.
+resolution (int, optional): Grid density for sampled and saved field data. Defaults to 200.
+results_path (str, optional): Directory path for saving output files. Defaults to ‘’.
+device_name (str, optional): Name of the device being simulated. Defaults to None.
+interpolation (str, optional): Method for mapping unstructured FEM data to a structured grid for visualization. Defaults to ‘nearest’.
+stability (float, optional): Scaling factor to stabilize iterative solvers against numerical amplification. Defaults to 1.00.
+polarization (Literal[‘TE’, ‘TM’, ‘TE2.5’, ‘TM2.5’], optional): Electromagnetic polarization mode. Defaults to ‘TE’.
+adjoint_info (AdjointInfo, optional): Parameters and objectives for adjoint-based sensitivity analysis. Defaults to None.
+number_iterations (int, optional): Iteration count for 2.5D simulations to minimize thickness integration error. Defaults to 1.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../FEMFy.html" class="btn btn-neutral float-left" title="FEFD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="FEMFy.FEFDResults.FEFDResults.html" class="btn btn-neutral float-right" title="FEMFy.FEFDResults.FEFDResults" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

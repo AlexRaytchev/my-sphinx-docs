@@ -1,8 +1,9 @@
 import gdstk
-from pyModeSolver.py_mode_solver import VFDModeSolver
+from pyModeSolver.pyModeSolver import VFDModeSolver
 from pyOptiShared.LayerInfo import LayerStack
 from pyOptiShared.DeviceGeometry import DeviceGeometry
 from pyOptiShared.Material import ConstMaterial, ExperimentalMaterial
+import numpy as np
 
 ##########################################
 ###      Create Fiber GDS File         ###
@@ -14,7 +15,7 @@ cell = lib.new_cell("fiber")
 circle = gdstk.ellipse((0, 0), 7.5, layer=1)  # 7.5 μm radius
 cell.add(circle)
 lib.write_gds(filename)
-
+### End Create Fiber
 ##########################################
 ###         Material Settings          ###
 ##########################################
@@ -28,15 +29,15 @@ sio2_mat.SetFromRefDotInfo(
     page="Malitson",
     wavelength_unit=1e-6
 )
-
+### End Material Settings
 ##########################################
 ###       Layer Stack Settings         ###
 ##########################################
 layer_stack = LayerStack()
-layer_stack.addLayer(number=1, material=sio2_mat, thickness=0.0,
+layer_stack.AddLayer(number=1, material=sio2_mat, thickness=0.0,
                      zmin=0, sideWallAng=0, cladding=air_mat)
-layer_stack.setBGandSub(background=air_mat, substrate=air_mat)
-
+layer_stack.SetBGandSub(background=air_mat, substrate=air_mat)
+### End Layer Stack
 ##########################################
 ###   Device Geometry/Port Settings    ###
 ##########################################
@@ -46,32 +47,29 @@ device_geometry.SetFromGDS(
     gds_file=filename,
     buffers={'x': 5, 'y': 5, 'z': 5}
 )
-
+### End Device Geometry
 ##########################################
 ###       ModeSolver Settings          ###
 ##########################################
 mode_solver = VFDModeSolver()
 
 # Set boundary conditions (PMC = Perfect Magnetic Conductor)
-mode_solver.SetBoundaries(
-    min_x={"bc": "pmc"}, max_x={"bc": "pmc"},
-    min_y={"bc": "pmc"}, max_y={"bc": "pmc"}
-)
+mode_solver.SetBoundaries(min_x = "pmc", max_x = "pmc",
+                        min_y = "pmc", max_y = "pmc")
 
+lams=np.linspace(1.5,1.6,11)
 # Configure simulation settings
 mode_solver.SetSimSettings(
     device_geometry=device_geometry,
     mesh={"dx": 0.5, "dy": 0.5, "dz": 0.5},
-    wavelength={"min": 1.5, "max": 1.6, "npts": 11},
+    wavelength=lams,
     nguess=3.4,
     nmodes=1,
     cut_plane="XY",      # Cross-section for Z-propagation
     cut_location=0.0,
-    tol=1e-8,
-    savepath="./ModeResults",
-    res_filename="fiber_results"
+    tol=1e-8
 )
-
+### End ModeSolver Settings
 ##########################################
 ###      Run and Post Processing       ###
 ##########################################
@@ -83,3 +81,5 @@ results.PlotMode()                    # Field profiles for all modes
 results.PlotPermittivity()            # Material cross-section
 results.PlotIndex('neff', modes=[0]) # Effective index vs wavelength
 results.PlotIndex('ng', modes=[0])   # Group index vs wavelength
+
+# End Run and Results

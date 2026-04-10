@@ -15,8 +15,8 @@ coupling efficiency between two waveguides with different widths. Mode hybridiza
 silicon-on-insulator (SOI) waveguides for certain waveguide widths, where the effective indices of two guided 
 modes match [1-2]. Consequently, the field components of TE and TM modes become comparable, enabling polarization 
 conversion. In this study, pyFDTD is used to analyze a polarization converter (TM0 to TE1) using an SOI taper 
-waveguide connecting two SOI waveguides with different widths [1]. We use this example to demonstate the ability to
-individualy set the modes we are exciting in each port.
+waveguide connecting two SOI waveguides with different widths [1]. We use this example to demonstrate the ability to
+individually set the modes we are exciting in each port.
 
 .. grid:: 1
 
@@ -31,7 +31,7 @@ Simulation Setup
 ~~~~~~~~~~~~~~~~
 The ridge waveguide setup code is found below. The mode indices are set to [2,2]. So, we purposefully
 select the modes we are converting: TM0 to TE1. The GDS II file of the design can be found here: 
-:download:`Ridge_Taper_WG_pol_converter.gds <../_static/Ridge_Taper_WG_pol_converter.gds>`.
+:download:`Ridge_Taper_WG_pol_converter.gds <../_static/examples/ApplicationExamples/Ridge_Taper_WG_pol_converter.gds>`.
 
 .. literalinclude:: ../_static/examples/ApplicationExamples/FDTD_Polarization_Converter.py
     :language: python

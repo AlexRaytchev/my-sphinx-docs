@@ -1,0 +1,248 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>90 Degree Bend &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo-traced.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optiwave's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">90 Degree Bend</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/Examples/FEFDExamples/90DegreeBend2.5.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="degree-bend">
+<h1>90 Degree Bend<a class="headerlink" href="#degree-bend" title="Link to this heading"></a></h1>
+<p>This example shows the effect using subpixel averaging on a 90 degree bend (<a class="reference download internal" download="" href="../../_downloads/c60c5e2fb5c8287e82cec89c0c3aaeb6/bend90.gds"><code class="xref download docutils literal notranslate"><span class="pre">bend90.gds</span></code></a>):</p>
+<a class="reference internal image-reference" href="../../_images/bend90.svg"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../../_images/bend90.svg" style="width: 40%;" />
+</a>
+<p>The simulation setup in the code snippet below. It sets four different simulation settings,
+by changing the space step from 50 nm to 25 nm while varying the subpixel_level from 1 (off) to 2.</p>
+<p>The post processing part consists of loading the HDF5 results file into the <code class="xref py py-class docutils literal notranslate"><span class="pre">FEFDResults</span></code>
+objects and then using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> for visualization of the data. The code is available in the following folded section.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Post Processing Code</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Dielectric Waveguide Example running on FEMFy</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span><span class="p">,</span> <span class="n">SellmeierMaterial</span><span class="p">,</span> <span class="n">ExperimentalMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DataStorage</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScatteredField2D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">FEMFy.FEFDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FEFDSolver</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Simulator</span><span class="w"> </span><span class="kn">import</span> <span class="n">PML_Params</span><span class="p">,</span><span class="n">Mesh</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###         Material Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">myindex1p00</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;myindex1p00&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.0</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">myindex1p5</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;myindex1p5&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.5</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mySellmeier</span> <span class="o">=</span> <span class="n">SellmeierMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;mySellmeier&quot;</span><span class="p">,</span> <span class="n">b_coeff</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">c_coeff</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">myExperimental</span> <span class="o">=</span> <span class="n">ExperimentalMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;myExperimental&quot;</span><span class="p">,</span> <span class="n">lamb</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="c1">##########################################</span>
+<span class="c1">###           Mesh Settings            ###</span>
+<span class="c1">##########################################</span>
+<span class="n">fem_mesh</span><span class="o">=</span><span class="n">Mesh</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span><span class="n">dy</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+<span class="n">fem_mesh</span><span class="o">.</span><span class="n">SetMeshOptions</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;quiet&#39;</span><span class="p">,</span><span class="n">gui</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">export</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddMaterial</span><span class="p">(</span><span class="n">mySellmeier</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddMaterial</span><span class="p">(</span><span class="n">myExperimental</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                     <span class="n">material</span><span class="o">=</span><span class="n">myindex1p5</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">myindex1p00</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">myindex1p00</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">myindex1p00</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###   Device Geometry/Port Settings    ###</span>
+<span class="c1">##########################################</span>
+
+<span class="n">dvc_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">dvc_geometry</span><span class="o">.</span><span class="n">SetFromGDS</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="s2">&quot;bend90.gds&quot;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">2.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">2.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
+<span class="p">)</span>
+<span class="n">dvc_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span><span class="nb">min</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="nb">max</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span><span class="n">port_buffer</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">##########################################</span>
+<span class="c1">###       FEFDSolver Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">fefd_solver</span> <span class="o">=</span> <span class="n">FEFDSolver</span><span class="p">()</span>
+
+<span class="n">pml</span><span class="o">=</span><span class="n">PML_Params</span><span class="p">()</span>
+
+
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span>  <span class="n">min_x</span> <span class="o">=</span> <span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                            <span class="n">max_x</span> <span class="o">=</span> <span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                            <span class="n">min_y</span> <span class="o">=</span> <span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                            <span class="n">max_y</span> <span class="o">=</span> <span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                            <span class="n">params</span><span class="o">=</span><span class="n">pml</span><span class="p">)</span>
+
+
+<span class="n">lams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+                          <span class="n">reciprocity</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span><span class="p">)</span>
+
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">device_geometry</span> <span class="o">=</span> <span class="n">dvc_geometry</span><span class="p">,</span>
+                           <span class="n">mesh</span><span class="o">=</span><span class="n">fem_mesh</span><span class="p">,</span>
+                           <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;direct&#39;</span><span class="p">,</span>
+                           <span class="n">polarization</span><span class="o">=</span><span class="s1">&#39;TE&#39;</span><span class="p">,</span>
+                           <span class="n">resolution</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+                           <span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">fefd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotPort</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotField</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotNeff</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">s_param</span><span class="o">=</span><span class="s2">&quot;S21&quot;</span><span class="p">)</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">s_param</span><span class="o">=</span><span class="s2">&quot;S11&quot;</span><span class="p">)</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotMaterial</span><span class="p">()</span>
+<span class="c1">#s21 = results.sparameters[&#39;S31&#39;].Get(&#39;data&#39;)</span>
+<span class="c1">#lam = results.sparameters[&#39;S31&#39;].Get(&#39;wavelength&#39;)</span>
+</pre></div>
+</div>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Field Profiles</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">In the full field plots, it is possible to see that a coarse mesh without subpixel averaging presents field
+leakage as the mode propagates through the bend. It gets reduced as we add the subpixel averaging. Increasing
+the subpixel averaging can provide similar results to those of almost halving the space step.</p>
+<a class="reference internal image-reference" href="../../_images/subpixel_Hz.svg"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../../_images/subpixel_Hz.svg" style="width: 100%;" />
+</a>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Zoomed Field Profiles:</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">It is more obvious the fields look smoother at a higher subpixel level. Usually, level two is enough, as higher levels might deteriorate the
+meshing process, without relevant increase in the results accuracy.</p>
+<a class="reference internal image-reference" href="../../_images/subpixel_Hz_zoomed.svg"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../../_images/subpixel_Hz_zoomed.svg" style="width: 100%;" />
+</a>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Transmittance:</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">It is clear that the 50nm mesh is not enough for properly capturing the reflection and transmission of the bend.
+Reducing the space-step improves the results while, increasing the subpixel average improves the accuracy of the results
+without sacrificing simulation time.</p>
+<iframe src="../_static/subpixel_example/subpixel_s21.html"
+        width="100%"
+        height="500px"
+        frameborder="0px">
+</iframe></div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Reflectance:</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Similar to the transmittance results, the reflectance gets improved with subpixel averaging, lowering the reflection and making them more accurate
+as the subpixel level gets increased to two.</p>
+<iframe src="../_static/subpixel_example/subpixel_s11.html"
+        width="100%"
+        height="500px"
+        frameborder="0px">
+</iframe></div>
+</details></section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

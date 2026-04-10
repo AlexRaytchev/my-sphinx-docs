@@ -1,71 +1,10 @@
 Mode Solver
 ------------------------
 
-Dielectric Waveguide Mode Analysis
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. literalinclude:: ../_static/examples/ModeSolver/Mode_Solver_API_Ex1.py
-   :language: python
 
+.. include:: ./ModeSolverExamples/DielectricWG.rst 
 
-.. grid:: 4
+.. include:: ./ModeSolverExamples/FiberXY.rst
 
-    .. grid-item-card::  Fundamental Mode Profile
+.. include:: ./ModeSolverExamples/CouplingLength.rst  
 
-        .. figure:: ../_static/nxdata_modesolver1.png
-           :width: 100%
-           :align: center
-
-    .. grid-item-card::  Material Profile
-
-        .. figure:: ../_static/nxdata_modesolver2.png
-           :width: 100%
-           :align: center
-
-
-    .. grid-item-card::  Effective Refractive Index
-
-        .. figure:: ../_static/nxdata_modesolver3.png
-           :width: 100%
-           :align: center
-
-
-    .. grid-item-card::  Effective Group Index
-
-        .. figure:: ../_static/nxdata_modesolver4.png
-           :width: 100%
-           :align: center
-
-
-Fiber - XY Cut Mode Analysis
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. literalinclude:: ../_static/examples/ModeSolver/Mode_Solver_API_Ex2.py
-   :language: python
-
-.. grid:: 4
-
-    .. grid-item-card::  Fundamental Mode Profile
-
-        .. figure:: ../_static/fiber_modesolver1.png
-           :width: 100%
-           :align: center
-
-    .. grid-item-card::  Material Profile
-
-        .. figure:: ../_static/fiber_modesolver2.png
-           :width: 100%
-           :align: center
-
-
-    .. grid-item-card::  Effective Refractive Index
-
-        .. figure:: ../_static/fiber_modesolver3.png
-           :width: 100%
-           :align: center
-
-
-    .. grid-item-card::  Effective Group Index
-
-        .. figure:: ../_static/fiber_modesolver4.png
-           :width: 100%
-           :align: center

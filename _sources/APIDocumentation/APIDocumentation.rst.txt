@@ -9,4 +9,5 @@ API Documentation
    ../pyOptiShared/SharedLibraries
    ../pyModeSolver/pyModeSolver
    ../pyFDTD/pyFDTD
+   ../FEMFy/FEMFy
    ../pyOptiShared/Designs

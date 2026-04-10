@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.5D simulation of Cosine Taper &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-traced.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optiwave's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">2.5D simulation of Cosine Taper</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/FEMFy/FEMFy_Cosine_Taper.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="d-simulation-of-cosine-taper">
+<h1>2.5D simulation of Cosine Taper<a class="headerlink" href="#d-simulation-of-cosine-taper" title="Link to this heading"></a></h1>
+<p>This examples shows how to use FEM 2.5 D capabilities in simulating Cosine Taper and get results close to the 3D models.
+For this example we use a gds file.</p>
+<p>The simulation setup in the code snippet below. In this example, TM polarization is used.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">FEMFy.FEFDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FEFDSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Simulator</span><span class="w"> </span><span class="kn">import</span> <span class="n">PML_Params</span><span class="p">,</span><span class="n">Mesh</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Designs</span><span class="w"> </span><span class="kn">import</span> <span class="n">cosine_taper</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">gdstk</span>
+<span class="n">input_length</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.8</span>
+<span class="n">in_width</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="n">out_width</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">max_width</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">taper_length</span><span class="o">=</span><span class="mf">5.00</span>
+<span class="n">resolution</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">40</span>
+
+
+<span class="n">taper_lib</span><span class="o">=</span><span class="n">cosine_taper</span><span class="p">(</span><span class="n">input_length</span><span class="p">,</span><span class="n">in_width</span><span class="p">,</span><span class="n">out_width</span><span class="p">,</span><span class="n">max_width</span><span class="p">,</span><span class="n">taper_length</span><span class="p">)</span>
+
+<span class="n">filename</span><span class="o">=</span><span class="s1">&#39;cosine_taper.gds&#39;</span>
+<span class="n">taper_lib</span><span class="o">.</span><span class="n">write_gds</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> 
+
+
+
+
+<span class="c1"># Define Materials</span>
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+
+<span class="c1"># Creates the Layer Stack</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                        <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+<span class="c1"># Defines the Device Geometry</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromGDS</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">2.0</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">2.0</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">port_buffer</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># General Simulation Settings and Simulation Run</span>
+<span class="n">lmin</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">lmax</span> <span class="o">=</span> <span class="mf">1.6</span>
+
+
+
+<span class="c1">##########################################</span>
+<span class="c1">###           Mesh Settings            ###</span>
+<span class="c1">##########################################</span>
+<span class="n">fem_mesh</span><span class="o">=</span><span class="n">Mesh</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span><span class="n">dy</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span><span class="n">dz</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+<span class="n">fem_mesh</span><span class="o">.</span><span class="n">SetMeshOptions</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;quiet&#39;</span><span class="p">,</span><span class="n">gui</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">export</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">##########################################</span>
+<span class="c1">###       FEFDSolver Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">fefd_solver</span> <span class="o">=</span> <span class="n">FEFDSolver</span><span class="p">()</span>
+
+<span class="n">pml</span><span class="o">=</span><span class="n">PML_Params</span><span class="p">()</span>
+
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span> <span class="n">min_x</span> <span class="o">=</span> <span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                            <span class="n">max_x</span> <span class="o">=</span> <span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                            <span class="n">min_y</span> <span class="o">=</span> <span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                            <span class="n">max_y</span> <span class="o">=</span> <span class="s2">&quot;pml&quot;</span><span class="p">,</span><span class="n">params</span><span class="o">=</span><span class="n">pml</span><span class="p">)</span>
+
+
+<span class="n">lams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+                          <span class="n">reciprocity</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span><span class="p">)</span>
+
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span>
+                           <span class="n">mesh</span><span class="o">=</span><span class="n">fem_mesh</span><span class="p">,</span>
+                           <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+                           <span class="n">resolution</span> <span class="o">=</span> <span class="mi">800</span><span class="p">,</span>
+                           <span class="n">interpolation</span> <span class="o">=</span> <span class="s2">&quot;FEM&quot;</span><span class="p">,</span>
+                           <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;direct&#39;</span><span class="p">,</span>
+                           <span class="n">polarization</span><span class="o">=</span><span class="s1">&#39;TM2.5&#39;</span><span class="p">,</span>
+                           <span class="n">number_iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                           <span class="n">results_path</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                           <span class="p">)</span>
+
+
+<span class="n">fefd_results</span> <span class="o">=</span> <span class="n">fefd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+<span class="n">fefd_results</span><span class="o">.</span><span class="n">PlotField</span><span class="p">(</span><span class="mf">1.55</span><span class="p">)</span>
+<span class="n">fefd_results</span><span class="o">.</span><span class="n">PlotPort</span><span class="p">()</span>
+<span class="n">fefd_results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">s_param</span><span class="o">=</span><span class="s2">&quot;S21&quot;</span><span class="p">)</span>
+
+
+</pre></div>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Cosine_Taper plot</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The code first starts by defining a waveguide from a gds and plot it which looks like this</p>
+<a class="reference internal image-reference" href="../_images/cosinetaper.png"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../_images/cosinetaper.png" style="width: 40%;" />
+</a>
+</div>
+</details><p>Then the code starts a mode solver instance to simulate the cross-section of the waveguide.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Field profile</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The code should produce a field profile at 1.5 that looks like</p>
+<a class="reference internal image-reference" href="../_images/field_profile.png"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../_images/field_profile.png" style="width: 40%;" />
+</a>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Port field</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The code also plots the 1D field profile of the input port.</p>
+<a class="reference internal image-reference" href="../_images/port_profile.png"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../_images/port_profile.png" style="width: 40%;" />
+</a>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">S21</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The code also plots the S21 transmission parameter that compared with full 3D simulation should look like.</p>
+<a class="reference internal image-reference" href="../_images/S211.png"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../_images/S211.png" style="width: 40%;" />
+</a>
+</div>
+</details></section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

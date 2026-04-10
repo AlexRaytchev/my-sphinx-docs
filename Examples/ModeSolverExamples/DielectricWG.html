@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dielectric Waveguide Mode Analysis &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo-traced.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optiwave's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Dielectric Waveguide Mode Analysis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/Examples/ModeSolverExamples/DielectricWG.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dielectric-waveguide-mode-analysis">
+<h1>Dielectric Waveguide Mode Analysis<a class="headerlink" href="#dielectric-waveguide-mode-analysis" title="Link to this heading"></a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyModeSolver.pyModeSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">VFDModeSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gdstk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="c1">##########################################</span>
+<span class="c1">###             WG GDS File            ###</span>
+<span class="c1">##########################################</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;wg.gds&quot;</span>
+
+<span class="n">length</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">width1</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">width2</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">lib</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
+
+<span class="n">strt_wg</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">new_cell</span><span class="p">(</span><span class="s2">&quot;Straight_WG&quot;</span><span class="p">)</span>
+<span class="n">vertices1</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">width1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="o">-</span><span class="n">width1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">width1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">width1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+<span class="n">vertices2</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">width2</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="o">-</span><span class="n">width2</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">width2</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">width2</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="n">strt_wg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gdstk</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">vertices1</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">strt_wg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gdstk</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">vertices2</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">lib</span><span class="o">.</span><span class="n">write_gds</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###         Material Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">substrate_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.444</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">epsImag</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="n">core_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.48</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">epsImag</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###       Layer Stack Settings         ###</span>
+<span class="c1">##########################################</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.09</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">substrate_mat</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###   Device Geometry/Port Settings    ###</span>
+<span class="c1">##########################################</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromGDS</span><span class="p">(</span><span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+                           <span class="n">gds_file</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
+                           <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###       ModeSolver Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">mode_solver</span> <span class="o">=</span> <span class="n">VFDModeSolver</span><span class="p">()</span>
+<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span><span class="n">min_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span>
+                        <span class="n">min_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">)</span>
+
+<span class="n">lams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span>
+                           <span class="n">mesh</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dx&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span><span class="s2">&quot;dy&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span> <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">},</span>
+                           <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+                           <span class="n">nguess</span> <span class="o">=</span> <span class="mf">2.1</span><span class="p">,</span>
+                           <span class="n">nmodes</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                           <span class="n">cut_plane</span> <span class="o">=</span> <span class="s2">&quot;YZ&quot;</span><span class="p">,</span>
+                           <span class="n">cut_location</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+                           <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-8</span><span class="p">,</span>
+                           <span class="n">results_path</span> <span class="o">=</span> <span class="s2">&quot;./ModeResults&quot;</span><span class="p">,</span>
+                           <span class="n">device_name</span> <span class="o">=</span> <span class="s2">&quot;my_results&quot;</span><span class="p">)</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###   Run and Results Visualization    ###</span>
+<span class="c1">##########################################</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">mode_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+
+
+<span class="n">results</span><span class="o">.</span><span class="n">PlotMode</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s1">&#39;Hy&#39;</span><span class="p">)</span> <span class="c1"># Fundamental Mode Profile</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotPermittivity</span><span class="p">()</span>  <span class="c1"># Material Profile</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;neff&#39;</span><span class="p">,</span><span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># Effective Refractive Index</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;ng&#39;</span><span class="p">,</span><span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># Effective Group Index</span>
+<span class="n">results</span><span class="o">.</span><span class="n">Polarity</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span> <span class="c1"># polarity of the modes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-4 sd-row-cols-xs-4 sd-row-cols-sm-4 sd-row-cols-md-4 sd-row-cols-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Fundamental Mode Profile</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/nxdata_modesolver1.png"><img alt="../../_images/nxdata_modesolver1.png" src="../../_images/nxdata_modesolver1.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Material Profile</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/nxdata_modesolver2.png"><img alt="../../_images/nxdata_modesolver2.png" src="../../_images/nxdata_modesolver2.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Effective Refractive Index</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/nxdata_modesolver3.png"><img alt="../../_images/nxdata_modesolver3.png" src="../../_images/nxdata_modesolver3.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Effective Group Index</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/nxdata_modesolver4.png"><img alt="../../_images/nxdata_modesolver4.png" src="../../_images/nxdata_modesolver4.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Finite Difference Time Domain Solver &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+  <title>Finite Difference Time Domain Solver &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -17,15 +17,15 @@
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=58fbf978"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../_static/copybutton.js?v=f281be69"></script>
       <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Examples" href="../Examples/Examples.html" />
+    <link rel="next" title="Finite Element Frequency Domain Solver" href="FEFD.html" />
     <link rel="prev" title="VFD Mode Solver" href="ModeSolver.html" /> 
 </head>
 
@@ -85,6 +85,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#next-steps">Next Steps</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="FEFD.html">Finite Element Frequency Domain Solver</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Examples/Examples.html">Examples</a></li>
@@ -98,7 +99,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Optiwaves's Python EM Modules</a>
+          <a href="../index.html">Optiwave's Python EM Modules</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -183,7 +184,8 @@
 <section id="step-2-define-materials">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Step 2: Define Materials</a><a class="headerlink" href="#step-2-define-materials" title="Link to this heading"></a></h3>
 <p>Create materials with constant refractive indices:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Silicon dioxide (n=1.444) for substrate and cladding</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##########################################</span>
+<span class="c1"># Silicon dioxide (n=1.444) for substrate and cladding</span>
 <span class="n">sio2_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.444</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
 
 <span class="c1"># Silicon (n=3.48) for waveguide core</span>
@@ -191,6 +193,8 @@
 
 <span class="c1"># Air (n=1.0) for background</span>
 <span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
+
+<span class="c1">### End Material Settings</span>
 </pre></div>
 </div>
 <p><strong>Note</strong>: The dielectric constant (epsilon) is the square of the refractive index: ε = n<sup>2</sup></p>
@@ -198,28 +202,36 @@
 <section id="step-3-build-the-layer-stack">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Step 3: Build the Layer Stack</a><a class="headerlink" href="#step-3-build-the-layer-stack" title="Link to this heading"></a></h3>
 <p>The layer stack defines your device’s vertical structure:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##########################################</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
 
 <span class="c1"># Add silicon layer: 220nm thick starting at z=0</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span>
-    <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span>
-    <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
-    <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span>
-    <span class="n">cladding</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span>
-    <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span>
+   <span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> 
+   <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+   <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> 
+   <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+   <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> 
+   <span class="n">cladding</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span>
+   <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span>
 <span class="p">)</span>
 
 <span class="c1"># Set background (above structure) and substrate (below structure)</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">sio2_mat</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">sio2_mat</span><span class="p">)</span>
+
+<span class="c1">### End Layer Stack</span>
 </pre></div>
 </div>
 </section>
 <section id="step-4-create-device-geometry">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Step 4: Create Device Geometry</a><a class="headerlink" href="#step-4-create-device-geometry" title="Link to this heading"></a></h3>
 <p>You can load geometry from a GDS file or define it programmatically. Here we’ll use gdstk to generate “waveguide.gds” file which will be used to define the geometry:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">length</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##########################################</span>
+
+
+
+<span class="c1">#Create GDS mask for the device</span>
+<span class="n">length</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">width</span> <span class="o">=</span> <span class="mf">0.5</span>
 <span class="n">layer_core</span> <span class="o">=</span> <span class="mi">1</span>
 
@@ -232,21 +244,23 @@
 
 <span class="n">lib</span><span class="o">.</span><span class="n">write_gds</span><span class="p">(</span><span class="n">output_filename</span><span class="p">)</span>
 
+
 <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
 <span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromGDS</span><span class="p">(</span>
-    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
-    <span class="n">gds_file</span><span class="o">=</span><span class="s1">&#39;waveguide.gds&#39;</span><span class="p">,</span>
-    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">}</span>  <span class="c1"># 1.5 μm padding on all sides</span>
+   <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+   <span class="n">gds_file</span><span class="o">=</span><span class="s1">&#39;waveguide.gds&#39;</span><span class="p">,</span>
+   <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">}</span>
 <span class="p">)</span>
 
 <span class="c1"># Automatically detect ports along the x-direction</span>
 <span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span>
-    <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
-    <span class="n">port_buffer</span><span class="o">=</span><span class="mf">1.0</span>
+   <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
+   <span class="n">port_buffer</span><span class="o">=</span><span class="mf">1.0</span>
 <span class="p">)</span>
 
 <span class="n">device_geometry</span><span class="o">.</span><span class="n">PlotGDS</span><span class="p">()</span>
 <span class="n">device_geometry</span><span class="o">.</span><span class="n">PlotGDSXSection</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">### End Device Geometry</span>
 </pre></div>
 </div>
 <p><strong>Port Detection</strong>: The solver automatically identifies waveguide ports at domain boundaries. It is also possible to define ports manually if auto port detection fails.</p>
@@ -282,7 +296,8 @@ Waveguide Cross Section</div>
 <section id="step-5-configure-the-fdtd-solver">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Step 5: Configure the FDTD Solver</a><a class="headerlink" href="#step-5-configure-the-fdtd-solver" title="Link to this heading"></a></h3>
 <p>Set up the solver with excitation and monitoring:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define wavelength range</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Define wavelength range</span>
 <span class="n">lmin</span> <span class="o">=</span> <span class="mf">1.5</span>   <span class="c1"># Minimum wavelength (μm)</span>
 <span class="n">lmax</span> <span class="o">=</span> <span class="mf">1.6</span>   <span class="c1"># Maximum wavelength (μm)</span>
 <span class="n">lcen</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmax</span> <span class="o">+</span> <span class="n">lmin</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># Center wavelength</span>
@@ -291,15 +306,17 @@ Waveguide Cross Section</div>
 <span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
 
 <span class="c1"># Configure port excitation with Gaussian pulse</span>
-<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span>
-    <span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span>      <span class="c1"># Gaussian pulse</span>
-    <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span>
-    <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span>
-    <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span>
-    <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span>
-    <span class="n">mode_indices</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>             <span class="c1"># Excite fundamental mode (TE0)</span>
-    <span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span>            <span class="c1"># Use symmetry for single port</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span>
+   <span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span>
+   <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span>
+   <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span>
+   <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span>
+   <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span>
+   <span class="n">mode_indices</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+   <span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span>
 <span class="p">)</span>
+
+<span class="c1">### End Configure the FDTD Solver</span>
 </pre></div>
 </div>
 <p><strong>Key Parameters</strong>:</p>
@@ -312,17 +329,21 @@ Waveguide Cross Section</div>
 <section id="step-6-add-monitors">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Step 6: Add Monitors</a><a class="headerlink" href="#step-6-add-monitors" title="Link to this heading"></a></h3>
 <p>Add a DFT (Discrete Fourier Transform) monitor to capture frequency-domain fields:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span>
-    <span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span>     <span class="c1"># 2D monitor in XY plane</span>
-    <span class="n">z0</span><span class="o">=</span><span class="mf">0.11</span><span class="p">,</span>                     <span class="c1"># Z-position (center of waveguide)</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
-    <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span>
-    <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span>
-    <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span>
-    <span class="n">save_ex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>                <span class="c1"># Save Ex field component</span>
-    <span class="n">save_ey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>                <span class="c1"># Save Ey field component</span>
-    <span class="n">save_hz</span><span class="o">=</span><span class="kc">True</span>                 <span class="c1"># Save Hz field component</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Add DFT monitor to capture frequency-domain fields</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span>
+   <span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span>
+   <span class="n">z0</span><span class="o">=</span><span class="mf">0.11</span><span class="p">,</span>
+   <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
+   <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span>
+   <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span>
+   <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span>
+   <span class="n">save_ex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+   <span class="n">save_ey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+   <span class="n">save_hz</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
+
+<span class="c1">### End Add Monitors</span>
 </pre></div>
 </div>
 <p><strong>Monitor Types</strong>:</p>
@@ -335,16 +356,20 @@ Waveguide Cross Section</div>
 <section id="step-7-set-simulation-parameters">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Step 7: Set Simulation Parameters</a><a class="headerlink" href="#step-7-set-simulation-parameters" title="Link to this heading"></a></h3>
 <p>Configure mesh resolution, simulation time, and output:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span>
-    <span class="n">sim_time</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span>                    <span class="c1"># Total simulation time (ps)</span>
-    <span class="n">space_step</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>                 <span class="c1"># Mesh size: 50nm</span>
-    <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>                <span class="c1"># Subpixel averaging level</span>
-    <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;./results&quot;</span><span class="p">,</span>
-    <span class="n">results_filename</span><span class="o">=</span><span class="s1">&#39;waveguide&#39;</span><span class="p">,</span>
-    <span class="n">device_geometry</span><span class="o">=</span><span class="n">device_geometry</span><span class="p">,</span>
-    <span class="n">auto_shutoff_limit</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span>         <span class="c1"># Auto-stop when fields decay</span>
-    <span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span>             <span class="c1"># Export permittivity grid</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Configure simulation parameters</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span>
+   <span class="n">sim_time</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span>
+   <span class="n">space_step</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+   <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+   <span class="n">results_path</span><span class="o">=</span><span class="s2">&quot;./results&quot;</span><span class="p">,</span>
+   <span class="n">device_name</span><span class="o">=</span><span class="s1">&#39;waveguide&#39;</span><span class="p">,</span>
+   <span class="n">device_geometry</span><span class="o">=</span><span class="n">device_geometry</span><span class="p">,</span>
+   <span class="n">auto_shutoff_limit</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span>
+   <span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
+
+<span class="c1">### End Set Simulation Parameters</span>
 </pre></div>
 </div>
 <p><strong>Critical Parameters</strong>:</p>
@@ -357,6 +382,17 @@ Waveguide Cross Section</div>
 </section>
 <section id="step-8-run-simulation">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Step 8: Run Simulation</a><a class="headerlink" href="#step-8-run-simulation" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##########################################</span>
+<span class="c1"># Run the simulation</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+
+<span class="c1"># Plot S-parameters</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">snp</span><span class="o">=</span><span class="s1">&#39;ALL&#39;</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;power&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">snp</span><span class="o">=</span><span class="s1">&#39;ALL&#39;</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">)</span>
+
+<span class="c1">### End Run and Post Processing</span>
+</pre></div>
+</div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the simulation</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
 
@@ -415,13 +451,15 @@ S-Parameters (Phase)</div>
 <span class="c1"># Air (n=1.0) for background</span>
 <span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
 
+<span class="c1">### End Material Settings</span>
+
 <span class="c1">##########################################</span>
 <span class="c1">###       Layer Stack Settings         ###</span>
 <span class="c1">##########################################</span>
 <span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
 
 <span class="c1"># Add silicon layer: 220nm thick starting at z=0</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span>
    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> 
    <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
    <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> 
@@ -432,7 +470,15 @@ S-Parameters (Phase)</div>
 <span class="p">)</span>
 
 <span class="c1"># Set background (above structure) and substrate (below structure)</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">sio2_mat</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">sio2_mat</span><span class="p">)</span>
+
+<span class="c1">### End Layer Stack</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###   Device Geometry/Port Settings    ###</span>
+<span class="c1">##########################################</span>
+
+
 
 <span class="c1">#Create GDS mask for the device</span>
 <span class="n">length</span> <span class="o">=</span> <span class="mi">10</span>
@@ -448,9 +494,7 @@ S-Parameters (Phase)</div>
 
 <span class="n">lib</span><span class="o">.</span><span class="n">write_gds</span><span class="p">(</span><span class="n">output_filename</span><span class="p">)</span>
 
-<span class="c1">##########################################</span>
-<span class="c1">###   Device Geometry/Port Settings    ###</span>
-<span class="c1">##########################################</span>
+
 <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
 <span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromGDS</span><span class="p">(</span>
    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
@@ -466,10 +510,14 @@ S-Parameters (Phase)</div>
 
 <span class="n">device_geometry</span><span class="o">.</span><span class="n">PlotGDS</span><span class="p">()</span>
 <span class="n">device_geometry</span><span class="o">.</span><span class="n">PlotGDSXSection</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">### End Device Geometry</span>
 
 <span class="c1">##########################################</span>
 <span class="c1">###          FDTD Settings             ###</span>
 <span class="c1">##########################################</span>
+
+<span class="c1">### Configure the FDTD Solver</span>
+
 <span class="c1"># Define wavelength range</span>
 <span class="n">lmin</span> <span class="o">=</span> <span class="mf">1.5</span>   <span class="c1"># Minimum wavelength (μm)</span>
 <span class="n">lmax</span> <span class="o">=</span> <span class="mf">1.6</span>   <span class="c1"># Maximum wavelength (μm)</span>
@@ -479,7 +527,7 @@ S-Parameters (Phase)</div>
 <span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
 
 <span class="c1"># Configure port excitation with Gaussian pulse</span>
-<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span>
    <span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span>
    <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span>
    <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span>
@@ -488,6 +536,9 @@ S-Parameters (Phase)</div>
    <span class="n">mode_indices</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
    <span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span>
 <span class="p">)</span>
+
+<span class="c1">### End Configure the FDTD Solver</span>
+<span class="c1">### Add Monitors</span>
 
 <span class="c1"># Add DFT monitor to capture frequency-domain fields</span>
 <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span>
@@ -502,17 +553,25 @@ S-Parameters (Phase)</div>
    <span class="n">save_hz</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 
+<span class="c1">### End Add Monitors</span>
+
+<span class="c1">###  Set Simulation Parameters</span>
+
 <span class="c1"># Configure simulation parameters</span>
 <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span>
    <span class="n">sim_time</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span>
    <span class="n">space_step</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
    <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-   <span class="n">save_path</span><span class="o">=</span><span class="s2">&quot;./results&quot;</span><span class="p">,</span>
-   <span class="n">results_filename</span><span class="o">=</span><span class="s1">&#39;waveguide&#39;</span><span class="p">,</span>
+   <span class="n">results_path</span><span class="o">=</span><span class="s2">&quot;./results&quot;</span><span class="p">,</span>
+   <span class="n">device_name</span><span class="o">=</span><span class="s1">&#39;waveguide&#39;</span><span class="p">,</span>
    <span class="n">device_geometry</span><span class="o">=</span><span class="n">device_geometry</span><span class="p">,</span>
    <span class="n">auto_shutoff_limit</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span>
    <span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
+
+<span class="c1">### End Set Simulation Parameters</span>
+
+<span class="c1">### End FDTD Settings</span>
 
 <span class="c1">##########################################</span>
 <span class="c1">###      Run and Post Processing       ###</span>
@@ -523,13 +582,15 @@ S-Parameters (Phase)</div>
 <span class="c1"># Plot S-parameters</span>
 <span class="n">results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">snp</span><span class="o">=</span><span class="s1">&#39;ALL&#39;</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;power&#39;</span><span class="p">)</span>
 <span class="n">results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">snp</span><span class="o">=</span><span class="s1">&#39;ALL&#39;</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">)</span>
+
+<span class="c1">### End Run and Post Processing</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="understanding-the-results">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Understanding the Results</a><a class="headerlink" href="#understanding-the-results" title="Link to this heading"></a></h2>
-<p>The FDTD solver returns an <code class="docutils literal notranslate"><span class="pre">FDTDSimResults</span></code> object with several useful components:</p>
+<p>The FDTD solver returns an <code class="docutils literal notranslate"><span class="pre">FDTDResults</span></code> object with several useful components:</p>
 <section id="s-parameters">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">S-Parameters</a><a class="headerlink" href="#s-parameters" title="Link to this heading"></a></h3>
 <p>S-parameters quantify how much power is transmitted and reflected:</p>
@@ -551,10 +612,10 @@ S-Parameters (Phase)</div>
 <section id="results-storage">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Results Storage</a><a class="headerlink" href="#results-storage" title="Link to this heading"></a></h3>
 <p>All data is saved in HDF5 format (<code class="docutils literal notranslate"><span class="pre">results/waveguide.hdf5</span></code>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.SimResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDTDSimResults</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.FDTDResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDTDResults</span>
 
 <span class="c1"># Load results from file</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">FDTDSimResults</span><span class="p">()</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">FDTDResults</span><span class="p">()</span>
 <span class="n">results</span><span class="o">.</span><span class="n">loadHDF5</span><span class="p">(</span><span class="s1">&#39;results/waveguide.hdf5&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -576,7 +637,7 @@ S-Parameters (Phase)</div>
 <section id="port-symmetries">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Port Symmetries</a><a class="headerlink" href="#port-symmetries" title="Link to this heading"></a></h3>
 <p>For symmetric devices (crossings, splitters), exploit symmetry to simulate only one port:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span>
     <span class="o">...</span><span class="p">,</span>
     <span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;4x&#39;</span>  <span class="c1"># Predefined 4-port crossing symmetry</span>
 <span class="p">)</span>
@@ -598,7 +659,7 @@ S-Parameters (Phase)</div>
 <section id="high-order-modes">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">High Order Modes</a><a class="headerlink" href="#high-order-modes" title="Link to this heading"></a></h3>
 <p>Excite specific modes in different ports:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span>
     <span class="o">...</span><span class="p">,</span>
     <span class="n">mode_indices</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>  <span class="c1"># Port 1: mode 0, Port 2: mode 2</span>
 <span class="p">)</span>
@@ -624,7 +685,7 @@ S-Parameters (Phase)</div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="ModeSolver.html" class="btn btn-neutral float-left" title="VFD Mode Solver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../Examples/Examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="FEFD.html" class="btn btn-neutral float-right" title="Finite Element Frequency Domain Solver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

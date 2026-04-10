@@ -4,7 +4,7 @@ from pyOptiShared.DeviceGeometry import DeviceGeometry
 from pyOptiShared.LayerInfo import LayerStack
 from pyOptiShared.Material import ConstMaterial
 from pyFDTDKernel.pyFDTDSolver import pyFDTDSolver
-from pyOptiShared.SimResults import FDTDSimResults
+from pyFDTDKernel.FDTDResults import FDTDResults
 from matplotlib.colors import Normalize
 import matplotlib.pyplot as plt
 from scipy.interpolate import RegularGridInterpolator
@@ -53,12 +53,12 @@ def GenerateGif(data:np.ndarray, eps:np.ndarray=None, filename:str='output.gif')
   images[0].save(filename, save_all=True, append_images=images[1:], duration=10, loop=0)
 
 # Load the Results
-results = FDTDSimResults()
+results = FDTDResults()
 results.loadHDF5('results/sbend.hdf5')
 # Get The field Data
 field = results.runs[0].timemonitors["MyTimeMonitor1"]
 field = np.abs(field.Get('Hz'))
-# Get the Raw permitivity and average it out along Y
+# Get the Raw permittivity and average it out along Y
 eps = results.permittivity.Get("EPS_Z")
 eps = np.real(eps)[:,:,38]
 eps = (eps[:,1:]+eps[:,0:-1])/2

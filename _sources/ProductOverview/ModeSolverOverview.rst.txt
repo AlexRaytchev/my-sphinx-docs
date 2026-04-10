@@ -35,6 +35,8 @@ Key Features
 - **Complex eigenvalues**: Supports lossy materials and leaky modes.
 - **Finite difference discretization**: Uses central-difference schemes on structured Cartesian grids.
 - **TE, TM, and hybrid modes**: Accurately identifies all types of guided modes.
+- **Bend Mode Analysis**: Accurately computes all types of bend modes via conformal mapping.
+- **Perfectly Matched Layer (PML)**: Implements absorbing boundary conditions to prevent artificial reflections.
 
 Mathematical Method
 -------------------
@@ -71,6 +73,7 @@ Applications
 - Electro-optic and magneto-optic materials
 - Design of structures with material loss or gain
 - Analysis of hybrid modes in high-index-contrast devices
+- Analysis of bend modes in waveguides with curvature
 
 
 

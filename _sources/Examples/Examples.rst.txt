@@ -9,6 +9,7 @@ Examples
 
    ModeSolverExamples
    FDTDExamples
+   FEFDExamples
    ApplicationExamples
    DeviceExamples
    

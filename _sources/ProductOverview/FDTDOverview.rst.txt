@@ -29,7 +29,7 @@ Key Features
 --------------
 
 - **Time-domain Maxwell solver** using second-order central difference in both time and space.
-- **Perfectly Matched Layer (CPML)** boundary conditions for accurate open-region simulations (as per Elsherbeni and Demir).
+- **Convolutional Perfectly Matched Layer (CPML)** boundary conditions for accurate open-region simulations (as per Elsherbeni and Demir).
 - **GDSII/STL Import**: Reads standard GDSII or STL layout files to define device geometry.
 - **Port Identification & Mode Matching**:
   - Automatic port detection and classification.

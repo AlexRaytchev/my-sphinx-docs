@@ -1,0 +1,161 @@
+.. _fefd_api:
+
+FEFD
+--------------------
+
+API Documentation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^		   
+.. autosummary::
+   :toctree: library
+   :template: members.rst
+   
+   
+   FEMFy.FEFDSolver.FEFDSolver
+   FEMFy.FEFDResults.FEFDResults
+
+
+
+Straight Waveguide 
+^^^^^^^^^^^^^^^^^^^
+
+Through this example we will show the basic functions used to start simulating using FEM. 
+This examples simulates a straight waveguide (:download:`straightWG.gds <../_static/examples/FEFD/straight_waveguide/straightWG.gds>`):
+
+.. image:: ../_static/examples/FEFD/straight_waveguide/images/straightWG.png
+  :alt: A graphical representation of a generic layer stack.
+  :width: 40%
+  :align: center
+
+The code used to simulate this waveguide is shown below.
+
+.. literalinclude:: ../_static/examples/FEFD/straight_waveguide/FEFD_straight_wg.py
+   :language: python
+
+The class :class:`Mesh <pyOptiShared.Simulator.Mesh>` controls the parameters used for the FEM mesher, including visualizing and exporting an image of the mesh.
+Gmesh GUI should pop up to show the mesh of the computational domain. It should look like this.
+
+
+.. image:: ../_static/examples/FEFD/straight_waveguide/images/FEFD_Mesh_straightWG.png
+  :alt: A graphical representation of a generic layer stack.
+  :width: 40%
+  :align: center
+
+The class :class:`Pml_Params <pyOptiShared.Simulator.Pml_Params>` controls the parameters used for the FEM PML.
+Dissimilar to a full 3D solver, FEM Frequency domain solver solves a 2D problem. Therefore, the two polarizations TE and TM become decoupled.
+Therefore, in the :func:`SetSimSettings <FEMFy.FEFDSolver.SetSimSettings>`, the polarization has to be specified.
+For this current development, the solver can handle TE, TM, TE2.5, and TM2.5. 
+The TE2.5 and TM2.5 take into account the thickness of the device by applying the variational in the depth direction.
+
+.. dropdown:: Field Profiles TE
+
+  For the TE solution, the field would look as shown below. The field would start decay efficiently in the PML as it can be observed.
+  If the PML is not sufficiently suppressing the outgoing waves, ripples will appear inside the computational domain.
+
+  .. image:: ../_static/examples/FEFD/straight_waveguide/images/straight_wg_fieldTE.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: Port Profiles TE
+
+  For the TE solution, the mode profile of the TE solution should look continuous because of the continuity boundary conditions.
+  For accurate results the port field should look decaying naturally with no ripples.
+
+  .. image:: ../_static/examples/FEFD/straight_waveguide/images/port_field_TE.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: Port Effective Index TE
+
+  The corresponding effective index of the port mode vs wavelength should decrease with the increase of the wavelength as the profile gets more outside the core at longer wavelength.
+
+  .. image:: ../_static/examples/FEFD/straight_waveguide/images/Neff_TE.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: S21 Transmission TE
+
+  The transmission component of the S-parameter should indicate perfect transmission ~1. The phase should be a linear function in the wavelength.
+
+  .. image:: ../_static/examples/FEFD/straight_waveguide/images/S21_TE.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+
+.. dropdown:: Field Profiles TM
+
+  For the TM solution, the field would look as shown below. The field would start decay efficiently in the PML as it can be observed.
+  If the PML is not sufficiently suppressing the outgoing waves, ripples will appear inside the computational domain.
+
+  .. image:: ../_static/examples/FEFD/straight_waveguide/images/straight_wg_fieldTM.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: Port Profiles TM
+
+  For the TM solution, the mode profile of the TM solution should look piece-wise continuous because of the discontinuity boundary conditions of the magnetic field derivative.
+  For accurate results the port field should look decaying naturally with no ripples.
+
+  .. image:: ../_static/examples/FEFD/straight_waveguide/images/port_field_TM.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: Port Effective Index TM
+
+  The corresponding effective index of the port mode vs wavelength should decrease with the increase of the wavelength as the profile gets more outside the core at longer wavelength.
+
+  .. image:: ../_static/examples/FEFD/straight_waveguide/images/Neff_TM.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: S21 Transmission TM
+
+  The transmission component of the S-parameter should indicate perfect transmission ~1. The phase should be a linear function in the wavelength.
+
+  .. image:: ../_static/examples/FEFD/straight_waveguide/images/S21_TM.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+
+
+
+
+
+
+
+
+.. include:: FEMFy_bend90.rst 
+
+
+.. include:: FEMFy_2.5DWaveguide.rst 
+
+
+.. include:: FEMFy_RingResonator.rst
+
+.. include:: FEMFy_DirectionalCoupler.rst 
+
+
+.. include:: FEMFy_Cosine_Taper.rst    
+
+
+.. include:: FEMFy_MMI1x2.rst   
+
+
+.. include:: FEMFy_ExperimentalData.rst        
+
+
+
+
+
+
+
+
+
+   

@@ -29,7 +29,7 @@ OptiOmega for Windows can be installed using the provided setup executable.
    **NVIDIA GPU drivers:** This product requires an Nvidia GPU with at least CUDA 12.0 support. Use the link below to check the CUDA capability of your GPU.
    https://developer.nvidia.com/cuda-gpus
    
-   Befor you begin installation of OptiOmega, please make sure appropriate GPU drivers are installed. You can follow the instructions on Nvidia's website from the link below how to set up the drivers if they are not already set up in your system.
+   Before you begin installation of OptiOmega, please make sure appropriate GPU drivers are installed. You can follow the instructions on Nvidia's website at the link below on how to set up the drivers if they are not already set up in your system.
    https://www.nvidia.com/en-us/drivers/
 
 Installation Steps
@@ -55,7 +55,7 @@ After installation completes, verify that OptiOmega has been installed successfu
 Setting Up Visual Studio Code
 -----------------------------------------------------
 
-OptiOmega includes pre-configured Visual Studio Code settings file to streamline your development workflow. VSCode is the recommended way to use OptiOmega but it supports other python IDE's as well.
+OptiOmega includes pre-configured Visual Studio Code settings file to streamline your development workflow. VSCode is the recommended way to use OptiOmega but it supports other Python IDEs as well.
 
 **Prerequisites**
 
@@ -78,7 +78,7 @@ Create a new folder for your OptiOmega project. For example, create a folder nam
 
 *Step 2: Copy VS Code Settings*
 
-Copy the ``.vscode`` folder from ``C:\Program Files\Optiwave Software\OptiOmega 1\VSCode`` to your ``MyProject`` folder. The ``.vscode/settings.json`` file contains the correct Python interpreter path and other project-specific settings.
+Copy the ``.vscode`` folder from ``C:\Program Files\Optiwave Software\OptiOmega 2\VSCode`` to your ``MyProject`` folder. The ``.vscode/settings.json`` file contains the correct Python interpreter path and other project-specific settings.
 
 *Step 3: Open Project in VS Code*
 
@@ -95,7 +95,7 @@ Open Visual Studio Code and use File → Open Folder to open your ``MyProject`` 
 4. Select the interpreter that shows **OptiOmegaEnv**
 5. If the interpreter **OptiOmegaEnv** is not visible, you can manually navigate to the expected interpreter path and choose it as the default interpreter.
 
-Expected interpreter path: ``C:\Users\UserName\OptiOmega1Python3.12.4\OptiOmegaEnv\Scripts\python.exe``. 
+Expected interpreter path: ``C:\Users\UserName\OptiOmega2Python3.12.7\OptiOmegaEnv\Scripts\python.exe``. 
 
 .. important::
    The Python interpreter selection menu at the bottom-right corner will only appear when you have a Python file (``.py``) open in the editor.
@@ -128,7 +128,7 @@ OptiOmega can be installed on Linux systems using either a scripted installation
    **NVIDIA GPU drivers:** This product requires an Nvidia GPU with at least CUDA 12.0 support. Use the link below to check the CUDA capability of your GPU.
    https://developer.nvidia.com/cuda-gpus
    
-   Befor you begin installation of OptiOmega, please make sure appropriate GPU drivers are installed. You can follow the instructions on Nvidia's website from the link below how to set up the drivers if they are not already set up in your system.
+   Before you begin installation of OptiOmega, please make sure appropriate GPU drivers are installed. You can follow the instructions on Nvidia's website at the link below on how to set up the drivers if they are not already set up in your system.
    https://docs.nvidia.com/datacenter/tesla/driver-installation-guide/
 
 Scripted Installation (Recommended)
@@ -143,7 +143,7 @@ The scripted installation automates the entire installation process, making it t
    
    * Ubuntu 22.04
    * Ubuntu 24.04
-   * Rocky Linux 9.6
+   * Rocky Linux 9.7
    
    For other Linux distributions, please use the Manual Installation method below.
 
@@ -161,7 +161,7 @@ Ensure you have the following files in your installation directory:
 * ``install_dependencies.sh`` - System dependencies installer
 * ``install_optiomega.sh`` - OptiOmega product installer script
 * ``install_licensing.sh`` - OptiOmega licensing installer script
-* ``Python-3.12.4.tgz`` - Python source tarball
+* ``Python-3.12.7.tgz`` - Python source tarball
 * ``requirements.txt`` - Python package dependencies
 * ``bin/`` - OptiOmega source files
 * ``dependencies/`` - Offline Python packages 
@@ -204,7 +204,7 @@ The installer will:
 7. Display an installation summary
 
 .. tip::
-   **Installation Complete!** If no errors were reported, OptiOmega has been successfully installed to: ``~/Optiwave/OptiOmega1``
+   **Installation Complete!** If no errors were reported, OptiOmega has been successfully installed to: ``~/Optiwave/OptiOmega2``
 
 **Step 3: Install Licensing Drivers**
 
@@ -226,7 +226,7 @@ After installation, activate the virtual environment:
 
 .. code-block:: bash
 
-   source ~/Optiwave/OptiOmega1/Python312/OptiOmegaEnv/bin/activate
+   source ~/Optiwave/OptiOmega2/Python312/OptiOmegaEnv/bin/activate
 
 Then run your OptiOmega scripts:
 
@@ -270,7 +270,7 @@ https://devguide.python.org/getting-started/setup-building/#compile-and-build
 Select the appropriate commands for your Linux distribution. Please refer to the links above for other Linux distributions:
 
 .. note::
-   Before starting the installation process it is recommended to update your system to make sure the latest packages installed. 
+   Before starting the installation process it is recommended to update your system to make sure the latest packages are installed. 
 
 **Ubuntu/Debian**
 
@@ -279,7 +279,7 @@ Select the appropriate commands for your Linux distribution. Please refer to the
    sudo apt update
    sudo apt install -y build-essential wget curl llvm make \
         libssl-dev zlib1g-dev libffi-dev libbz2-dev libreadline-dev \
-        libsqlite3-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev
+        libsqlite3-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev libomp5 libglu1-mesa
 
 **Rocky/RHEL/CentOS**
 
@@ -292,9 +292,9 @@ Select the appropriate commands for your Linux distribution. Please refer to the
    # Additional libraries
    sudo dnf install gdbm-devel tk-devel libX11-devel libXext-devel \
        libXrender-devel libXrandr-devel libXcursor-devel libuuid-devel \
-       ncurses-devel sqlite-devel readline-devel libnsl epel-release dkms
+       ncurses-devel sqlite-devel readline-devel libnsl epel-release dkms mesa-libGLU
 
-
+   sudo dnf install -y libomp && ln -s /usr/lib64/libomp.so /usr/lib64/libomp.so.5 && ldconfig
 
 Installation Steps
 ^^^^^^^^^^^^^^^^^^
@@ -305,7 +305,7 @@ Define the installation paths. You can adjust these to match your preferred dire
 
 .. code-block:: bash
 
-   export INSTALL_DIR="$HOME/Optiwave/OptiOmega1"
+   export INSTALL_DIR="$HOME/Optiwave/OptiOmega2"
    export PYTHON_VERSION="3.12.7"
    export PYTHON_PREFIX="$INSTALL_DIR/Python312"
    export VENV_FOLDER="$PYTHON_PREFIX/OptiOmegaEnv"
@@ -439,7 +439,7 @@ After installation, your directory structure will look like this:
 
 .. code-block:: text
 
-   ~/Optiwave/OptiOmega1/
+   ~/Optiwave/OptiOmega2/
    ├── Python312/
    │   ├── bin/
    │   │   └── python3.12
@@ -452,6 +452,7 @@ After installation, your directory structure will look like this:
    │       └── lib/
    │           └── python3.12/
    │               └── site-packages/
+                       ├── FEMFy/
    │                   ├── pyFDTDKernel/
    │                   ├── pyModeSolver/
    │                   └── pyOptiShared/
@@ -466,7 +467,7 @@ To completely remove OptiOmega from your system:
 
 .. code-block:: bash
 
-   rm -rf ~/Optiwave/OptiOmega1
+   rm -rf ~/Optiwave/OptiOmega2
 
 .. warning::
    This will permanently delete all OptiOmega files, including any custom scripts or data stored in the installation directory. Make sure to backup any important files before uninstalling.
@@ -481,7 +482,7 @@ Before using OptiOmega, you must activate the virtual environment:
 
 .. code-block:: bash
 
-   source ~/Optiwave/OptiOmega1/Python312/OptiOmegaEnv/bin/activate
+   source ~/Optiwave/OptiOmega2/Python312/OptiOmegaEnv/bin/activate
 
 Once activated, you can run your OptiOmega Python scripts:
 
@@ -492,7 +493,7 @@ Once activated, you can run your OptiOmega Python scripts:
 
 **Setting Up Visual Studio Code**
 
-OptiOmega includes pre-configured Visual Studio Code settings file to streamline your development workflow. VSCode is the recommended way to use OptiOmega but it supports other python IDE's as well.
+OptiOmega includes pre-configured Visual Studio Code settings file to streamline your development workflow. VSCode is the recommended way to use OptiOmega but it supports other Python IDEs as well.
 
 **Prerequisites**
 
@@ -524,7 +525,7 @@ Copy the ``.vscode`` folder from your OptiOmega installation to your project fol
 
 .. code-block:: bash
 
-   cp -r ~/Optiwave/OptiOmega1/VSCode/.vscode ~/OptiOmegaProjects/MyProject/.vscode
+   cp -r ~/Optiwave/OptiOmega2/VSCode/.vscode ~/OptiOmegaProjects/MyProject/.vscode
 
 The ``.vscode/settings.json`` file contains the correct Python interpreter path and other project-specific settings.
 
@@ -546,7 +547,7 @@ Or use File → Open Folder from the VS Code menu.
 4. Select the interpreter that shows **OptiOmegaEnv**
 5. If the interpreter **OptiOmegaEnv** is not visible, you can manually navigate to the expected interpreter path and choose it as the default interpreter.
 
-Expected interpreter path: ``~/Optiwave/OptiOmega1/Python312/OptiOmegaEnv/bin/python``
+Expected interpreter path: ``~/Optiwave/OptiOmega2/Python312/OptiOmegaEnv/bin/python``
 
 .. important::
    The Python interpreter selection menu at the bottom-right corner will only appear when you have a Python file (``.py``) open in the editor.
@@ -575,9 +576,9 @@ To verify everything is set up correctly:
 
 Below are some advantages of editing your code in the Visual Studio Code:
 
-1. When any of the following classes : ``pyFDTDSolver``, ``FDTDSimResults``, ``FDTDModeData``, etc., is used while defining your structure for simulation, defining your FDTD or Mode simulation settings, or extracting simulation results. 
+1. When any of the following classes : ``pyFDTDSolver``, ``FDTDResults``, ``FDTDModeData``, etc., is used while defining your structure for simulation, defining your FDTD or Mode simulation settings, or extracting simulation results. 
 The VSCode editor automatically shows the methods under these classes and allows the auto-completion of the code. This also guides the python beginners to write a simulation code with ease.
-The example of ``pyFDTDSolver`` class showing it's various methods can be seen in the following ``gif``:
+The example of ``pyFDTDSolver`` class showing its various methods can be seen in the following ``gif``:
 
 .. grid:: 1
 
@@ -601,7 +602,7 @@ The documentation for arguments of different methods of the ``pyFDTDSolver`` is 
 
 
 3. To visualize the results stored in the ``.HDF5`` files directly from the VSCode, ``H5Web`` extension must be installed in the VSCode editor under the ``EXTENSIONS`` tab. Hit ``Ctrl + Shift + X`` anywhere in the VSCode window to open the extension tab. 
-In the seacrh bar, enter ``H5Web`` and select install.
+In the search bar, enter ``H5Web`` and select install.
 
 **Troubleshooting**
 

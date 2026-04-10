@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NXData Data Class &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+  <title>NXData Data Class &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -17,8 +17,8 @@
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=58fbf978"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../_static/copybutton.js?v=f281be69"></script>
       <script src="../_static/design-tabs.js?v=f930bc37"></script>
@@ -78,6 +78,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../pyModeSolver/pyModeSolver.html">Mode Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pyFDTD/pyFDTD.html">FDTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FEMFy/FEMFy.html">FEFD</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Designs.html">Flex Device Library</a></li>
 </ul>
 </li>
@@ -89,7 +90,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Optiwaves's Python EM Modules</a>
+          <a href="../index.html">Optiwave's Python EM Modules</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -126,28 +127,28 @@
 <section id="introduction">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
 <p>In order to store simulation results we provide them in the <code class="docutils literal notranslate"><span class="pre">.hdf5</span></code> format. Which a versatile and efficient way to
-organize and store data and metadata. To improve data visualition, we whent further and provided initial support to the
+organize and store data and metadata. To improve data visualization, we went further and provided initial support to the
 <a class="reference external" href="https://manual.nexusformat.org/classes/base_classes/NXdata">NeXus format</a>, that allows to organize data even further, including metadata and better support to results visualization.</p>
-<p>The <a class="reference internal" href="library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata"><code class="xref py py-class docutils literal notranslate"><span class="pre">NXdata</span></code></a> dataclass is the object that is used to store our solver restults.
-In general you can access data based on the NeXus format (<code class="docutils literal notranslate"><span class="pre">signal</span></code>, <code class="docutils literal notranslate"><span class="pre">auxiliary_signals</span></code>, <code class="docutils literal notranslate"><span class="pre">axes</span></code>, etc), and to facilitated its visualization we provide the
+<p>The <a class="reference internal" href="library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata"><code class="xref py py-class docutils literal notranslate"><span class="pre">NXdata</span></code></a> dataclass is the object that is used to store our solver results.
+In general you can access data based on the NeXus format (<code class="docutils literal notranslate"><span class="pre">signal</span></code>, <code class="docutils literal notranslate"><span class="pre">auxiliary_signals</span></code>, <code class="docutils literal notranslate"><span class="pre">axes</span></code>, etc), and to facilitate its visualization we provide the
 <a class="reference internal" href="library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata.Plot" title="pyOptiShared.SimResults.NXdata.Plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot</span></code></a> method to easily provide a data visualization interface for the user.</p>
 </section>
 <section id="examples">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <section id="visualization-of-fdtd-results">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Visualization of FDTD Results</a><a class="headerlink" href="#visualization-of-fdtd-results" title="Link to this heading"></a></h3>
-<p>This example relies on the <a class="reference internal" href="../pyFDTD/library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver" title="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">FDTD</span> <span class="pre">Solver</span></code></a> and the <a class="reference internal" href="../pyFDTD/library/pyOptiShared.SimResults.FDTDSimResults.html#pyOptiShared.SimResults.FDTDSimResults" title="pyOptiShared.SimResults.FDTDSimResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">FDTDSimResults</span></code></a>.
+<p>This example relies on the <a class="reference internal" href="../pyFDTD/library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver" title="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">FDTD</span> <span class="pre">Solver</span></code></a> and the <a class="reference internal" href="../pyFDTD/library/pyFDTDKernel.FDTDResults.FDTDResults.html#pyFDTDKernel.FDTDResults.FDTDResults" title="pyFDTDKernel.FDTDResults.FDTDResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">FDTDResults</span></code></a>.
 The <code class="docutils literal notranslate"><span class="pre">.hdf5</span></code> with the results can be downloaded here: <a class="reference download internal" download="" href="../_downloads/6651240d4c1a5d4cd7879781e7b5f01a/wg_results_fdtd.hdf5"><code class="xref download docutils literal notranslate"><span class="pre">wg_results_fdtd.hdf5</span></code></a>.
-The results shown are the permittivity profile, mode profile on <code class="docutils literal notranslate"><span class="pre">Mode</span> <span class="pre">Source</span> <span class="pre">o1</span></code>, DFT field progile of <code class="docutils literal notranslate"><span class="pre">MyFDTMonitor1</span></code> and <code class="docutils literal notranslate"><span class="pre">ALL</span></code> the scattering parameters.</p>
+The results shown are the permittivity profile, mode profile on <code class="docutils literal notranslate"><span class="pre">Mode</span> <span class="pre">Source</span> <span class="pre">o1</span></code>, DFT field profile of <code class="docutils literal notranslate"><span class="pre">MyFDTMonitor1</span></code> and <code class="docutils literal notranslate"><span class="pre">ALL</span></code> the scattering parameters.</p>
 <iframe src="../_static/wg_view.html"
         width="100%"
         height="300px"
         frameborder="0px">
-</iframe><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.SimResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDTDSimResults</span>
+</iframe><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.FDTDResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDTDResults</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
 <span class="n">filename</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;wg_results_fdtd.hdf5&quot;</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">FDTDSimResults</span><span class="p">()</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">FDTDResults</span><span class="p">()</span>
 <span class="n">results</span><span class="o">.</span><span class="n">loadHDF5</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
 <span class="c1">#Python is not running in ipykernel. Desktop plotting tools can be used with NXDATA</span>
@@ -219,11 +220,11 @@ Scattering Parameter Results</div>
 <section id="visualization-of-mode-solver-results">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Visualization of Mode Solver Results</a><a class="headerlink" href="#visualization-of-mode-solver-results" title="Link to this heading"></a></h3>
 <p>This example relies on the <code class="xref py py-class docutils literal notranslate"><span class="pre">Mode</span> <span class="pre">Solver</span></code> and the
-<a class="reference internal" href="../pyModeSolver/library/pyOptiShared.SimResults.ModeSolverResults.html#pyOptiShared.SimResults.ModeSolverResults" title="pyOptiShared.SimResults.ModeSolverResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModeSolverResults</span></code></a> classes.
+<a class="reference internal" href="../pyModeSolver/library/pyModeSolver.ModeSolverResults.ModeSolverResults.html#pyModeSolver.ModeSolverResults.ModeSolverResults" title="pyModeSolver.ModeSolverResults.ModeSolverResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModeSolverResults</span></code></a> classes.
 The <code class="docutils literal notranslate"><span class="pre">.hdf5</span></code> with the results can be downloaded here: <a class="reference download internal" download="" href="../_downloads/c409636c4c0725cc832f7c64a527d9ff/wg_results_mode.hdf5"><code class="xref download docutils literal notranslate"><span class="pre">wg_results_mode.hdf5</span></code></a>.
 The data we are showing is the mode profile of Hy for the fundamental mode (index equals 0) for the same dielectric waveguide example as
 the one in the previous example.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.SimResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModeSolverResults</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyModeSolver.ModeSolverResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModeSolverResults</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
 <span class="n">filename</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;wg_results_mode.hdf5&quot;</span>

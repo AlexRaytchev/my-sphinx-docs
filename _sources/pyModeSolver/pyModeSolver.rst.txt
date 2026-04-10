@@ -10,9 +10,8 @@ API Documentation
    :toctree: library
    :template: members.rst
    
-   pyModeSolver.py_mode_solver.VFDModeSolver
-   pyOptiShared.SimResults.ModeSolverResults
-   pyOptiShared.SimResults.BaseSimResults
+   pyModeSolver.pyModeSolver.VFDModeSolver
+   pyModeSolver.ModeSolverResults.ModeSolverResults
 
 
 Dielectric Waveguide Mode Analysis
@@ -30,17 +29,17 @@ device geometry using the ``.gds`` file with 1 micron padding all around.
     </iframe>
 
 Finally the solver is instanced and the settings that follow are used to setup the proper cross section cut for mode analysis.
-The cut is set to the ``YZ`` plane as the propagation happens along ``X``. Then we set cut loation to ``0`` (along the x-axis) that
-according to the ``.gds`` file corresponds to the begining of the dielectric waveguide. The ``wavelength`` is set from 1.5-1.6 microns, the initial guess to 3.4
-and the number of modes (``nmodes``) to 4. the tolerance is set to ``1e-8`` (``0.0`` would mena machine precision).
+The cut is set to the ``YZ`` plane as the propagation happens along ``X``. Then we set cut location to ``0`` (along the x-axis) that
+according to the ``.gds`` file corresponds to the beginning of the dielectric waveguide. The ``wavelength`` is set from 1.5-1.6 microns, the initial guess to 3.4
+and the number of modes (``nmodes``) to 4. the tolerance is set to ``1e-8`` (``0.0`` would mean machine precision).
 
-The mode solver solves for the H-fields first. Setting the boundaries to PMC, enforces tangetial H-fields to the boundaries of the cross section to be zero.
-Other boundary options can be found in `SetSimSettings <pyModeSolver.py_mode_solver.VFDModeSolver.SetSimSettings>`.
+The mode solver solves for the H-fields first. Setting the boundaries to PMC, enforces tangential H-fields to the boundaries of the cross section to be zero.
+Other boundary options can be found in `SetSimSettings <pyModeSolver.pyModeSolver.VFDModeSolver.SetSimSettings>`.
 
 The results are set to be saved in the ``ModeResults`` folder with the name ``my_results``. If multiple simulations are run, and the ``res_filename``
 already exists, the solver will append date and time to make it unique.
 
-The ``Run`` command is called to start the simulation, that returns a `ModeSolverResults <pyOptiShared.SimResults.ModeSolverResults>` object.
+The ``Run`` command is called to start the simulation, that returns a `ModeSolverResults <pyModeSolver.ModeSolverResults.ModeSolverResults>` object.
 You can check it for detailed members and methods. Overall it provides an easy and pythonic way of navigating through the results.
 For example:
 
@@ -48,6 +47,7 @@ For example:
 - ``<results>.PlotPermittivity()`` will allow you to visualize the cross section permittivity profile.
 - ``<results>.PlotIndex('neff')`` will plot the modes effective refractive index for one or multiple modes.
 - ``<results>.PlotIndex('ng')`` will plot the modes effective group index for one or multiple modes.
+- ``<results>.Polarity()`` will print the polarity of the modes at the specified wavelength.
 
 .. literalinclude:: ../_static/examples/ModeSolver/Mode_Solver_API_Ex1.py
    :language: python

@@ -27,26 +27,23 @@ Let's start with a simple rectangular waveguide to understand the core concepts.
 Step 1: Import Required Modules
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: python
+.. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_1.py
+   :language: python
+   :start-at: ###           Import Modules           ###
+   :end-at: ### End Import Modules
 
-   from pyModeSolver.py_mode_solver import VFDModeSolver
-   from pyOptiShared.LayerInfo import LayerStack
-   from pyOptiShared.DeviceGeometry import DeviceGeometry
-   from pyOptiShared.Material import ConstMaterial
-   import gdstk
+
+
 
 Step 2: Define Materials
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Create materials with constant refractive indices:
 
-.. code-block:: python
-
-   # Low-index material (n=1.444) for substrate
-   substrate_mat = ConstMaterial("SiO2", epsReal=1.444**2, epsImag=0.0)
-
-   # High-index material (n=3.48) for waveguide core
-   core_mat = ConstMaterial("Si", epsReal=3.48**2, epsImag=0.0)
+.. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_1.py
+   :language: python
+   :start-at: ###         Material Settings          ###
+   :end-at: ### End Material Settings
 
 **Note**: The dielectric constant (epsilon) is the square of the refractive index: ε = n\ :sup:`2`
 
@@ -55,81 +52,30 @@ Step 3: Build the Layer Stack
 
 The layer stack defines your device's vertical structure:
 
-.. code-block:: python
-
-   layer_stack = LayerStack()
-
-   # Add first layer: 250nm thick at z=0
-   layer_stack.addLayer(number=1, material=core_mat, thickness=0.22, 
-                        zmin=0, sideWallAng=0, cladding="Air_default")
-
-   # Add second layer: 250nm thick at z=0.25μm
-   layer_stack.addLayer(number=2, material=core_mat, thickness=0.09, 
-                        zmin=0, sideWallAng=0, cladding="Air_default")
-
-   # Set background (above structure) and substrate (below structure)
-   layer_stack.setBGandSub(background="Air_default", substrate=substrate_mat)
+.. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_1.py
+   :language: python
+   :start-at: ###       Layer Stack Settings         ###
+   :end-at: ### End Layer Stack
 
 Step 4: Create Device Geometry from GDS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Load your waveguide layout and add padding around it:
 
-.. code-block:: python
-
-   #Create GDS mask for the device
-   filename = "wg.gds"
-
-   length = 10
-   width1 = 0.5
-   width2 = 2
-
-   lib = gdstk.Library()
-
-   strt_wg = lib.new_cell("Straight_WG")
-   vertices1 = [(0, -width1/2), (length, -width1/2), (length, width1/2), (0, width1/2)]
-   vertices2 = [(0, -width2/2), (length, -width2/2), (length, width2/2), (0, width2/2)]
-
-   strt_wg.add(gdstk.Polygon(vertices1, layer=1))
-   strt_wg.add(gdstk.Polygon(vertices2, layer=2))
-
-   lib.write_gds(filename)
-
-   device_geometry = DeviceGeometry()
-   device_geometry.SetFromGDS(
-       layer_stack=layer_stack,
-       gds_file="wg.gds",
-       buffers={'x': 1, 'y': 1, 'z': 1}  # 1 μm padding on all sides
-   )
+.. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_1.py
+   :language: python
+   :start-at: ###  Create GDS mask for the device  ###
+   :end-at: ### End GDS mask
 
 Step 5: Configure the Mode Solver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Set up boundary conditions and simulation parameters:
 
-.. code-block:: python
-
-   mode_solver = VFDModeSolver()
-
-   # Set boundary conditions (PMC = Perfect Magnetic Conductor)
-   mode_solver.SetBoundaries(
-       min_x={"bc": "pmc"}, max_x={"bc": "pmc"},
-       min_y={"bc": "pmc"}, max_y={"bc": "pmc"}
-   )
-
-   # Configure simulation settings
-   mode_solver.SetSimSettings(
-       device_geometry=device_geometry,
-       mesh={"dx": 0.025, "dy": 0.025, "dz": 0.025},  # 25nm mesh resolution
-       wavelength={"min": 1.5, "max": 1.6, "npts": 5},  # 1.5-1.6 μm range
-       nguess=2.1,              # Initial guess for effective index
-       nmodes=4,                # Find first 4 modes
-       cut_plane="YZ",          # Cross-section plane (propagation along X)
-       cut_location=0.0,        # Position along X-axis
-       tol=1e-8,                # Convergence tolerance
-       savepath="./ModeResults",
-       res_filename="my_results"
-   )
+.. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_1.py
+   :language: python
+   :start-at: ###       ModeSolver Settings          ###
+   :end-at: ### End ModeSolver Settings
 
 **Key Parameters Explained:**
 
@@ -141,16 +87,10 @@ Set up boundary conditions and simulation parameters:
 Step 6: Run and Visualize Results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: python
-
-   # Run the simulation
-   results = mode_solver.Run()
-
-   # Visualize results
-   results.PlotMode(field='Hy')               # Field profile of the fundamental mode
-   results.PlotPermittivity()                 # Material cross-section
-   results.PlotIndex('neff', modes=[0,1,2,3]) # Effective index vs wavelength
-   results.PlotIndex('ng', modes=[0,1,2,3])   # Group index vs wavelength
+.. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_1.py
+   :language: python
+   :start-at: ###   Run and Results Visualization    ###
+   :end-at: ### End Run and Results
 
 Complete Example Code
 ^^^^^^^^^^^^^^^^^^^^^
@@ -166,68 +106,83 @@ Example 2: Optical Fiber with Programmatic GDS Creation
 --------------------------------------------------------
 
 This example shows how to create geometry programmatically and use an XY cross-section. 
-The entire polygon in the GDSII file is used as a cross-section, enabling 2D geometries with arbitrarty shapes.
+The entire polygon in the GDSII file is used as a cross-section, enabling 2D geometries with arbitrary shapes.
 
 Creating Geometry with gdstk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. code-block:: python
-
-   import gdstk
-
-   # Create circular fiber core
-   filename = "fiber.gds"
-   lib = gdstk.Library()
-   cell = lib.new_cell("fiber")
-   circle = gdstk.ellipse((0, 0), 7.5, layer=1)  # 7.5 μm radius
-   cell.add(circle)
-   lib.write_gds(filename)
+.. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_2.py
+   :language: python
+   :start-at: ###      Create Fiber GDS File         ###
+   :end-at: ### End Create Fiber
 
 Using Experimental Materials
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For realistic material properties, use the refractive index database:
 
-.. code-block:: python
-
-   from pyOptiShared.Material import ConstMaterial, ExperimentalMaterial
-
-   air_mat = ConstMaterial("air", epsReal=1, epsImag=0.0)
-
-   # Load silica data from refractiveindex.info database
-   sio2_mat = ExperimentalMaterial("my_material")
-   sio2_mat.SetFromRefDotInfo(
-       shelf="main", 
-       book="SiO2", 
-       page="Malitson", 
-       wavelength_unit=1e-6
-   )
+.. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_2.py
+   :language: python
+   :start-at: ###         Material Settings          ###
+   :end-at: ### End Material Settings
 
 XY Cross-Section Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For propagation along Z (fiber axis):
 
-.. code-block:: python
+.. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_2.py
+   :language: python
+   :start-at: ###       ModeSolver Settings          ###
+   :end-at: ### End ModeSolver Settings
 
-   mode_solver.SetSimSettings(
-       device_geometry=device_geometry,
-       mesh={"dx": 0.5, "dy": 0.5, "dz": 0.5},
-       wavelength={"min": 1.5, "max": 1.6, "npts": 11},
-       nguess=3.4,
-       nmodes=1,
-       cut_plane="XY",      # Cross-section for Z-propagation
-       cut_location=0.0,
-       tol=1e-8,
-       savepath="./ModeResults",
-       res_filename="fiber_results"
-   )
 
 Complete Example Code
 ^^^^^^^^^^^^^^^^^^^^^
 Here is the complete code you can copy and run (:download:`ModeSolver_getting_started_2.py <../_static/examples/GettingStarted/ModeSolver_getting_started_2.py>`):
 
 .. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_2.py
+   :language: python
+
+
+
+Example 3: Bend Waveguide
+---------------------------
+This example shows how to use the mode solver to simulate bend modes. The solver uses conformal mapping to transform the bend geometry into a straight waveguide, allowing it to find modes in curved structures.
+The conformal mapping works by transforming the R axis by :
+
+.. math::
+
+   \begin{align}
+   x = R \ln(\rho / R) 
+   \end{align}
+
+
+
+And transform the material properties by :
+
+.. math::
+
+   n' = n_{\text{material}} \exp\left(\frac{x}{R}\right)
+
+
+Bend Radius Inclusion
+^^^^^^^^^^^^^^^^^^^^^^^
+To include the bend radius in the simulation, set the ``radius`` parameter in the mode solver settings to the desired bend radius. 
+
+
+.. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_3.py
+   :language: python
+   :start-at: ###       ModeSolver Settings          ###
+   :end-at: ### End ModeSolver Settings
+
+
+Complete Example Code
+^^^^^^^^^^^^^^^^^^^^^
+Here is the complete code you can copy and run (:download:`ModeSolver_getting_started_3.py <../_static/examples/GettingStarted/ModeSolver_getting_started_3.py>`):
+
+
+.. literalinclude:: ../_static/examples/GettingStarted/ModeSolver_getting_started_3.py
    :language: python
 
 

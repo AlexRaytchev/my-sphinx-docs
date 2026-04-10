@@ -1,0 +1,94 @@
+﻿FEMFy.FEFDSolver.FEFDSolver
+===========================
+
+.. currentmodule:: FEMFy.FEFDSolver
+
+.. autoclass:: FEFDSolver
+   :members:
+   :show-inheritance:
+   :class-doc-from: init
+   :member-order: groupwise
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+         ~FEFDSolver.GetElementsEpsilons
+      
+      
+         ~FEFDSolver.GetElementsLayers
+      
+      
+         ~FEFDSolver.ParseSolver
+      
+      
+         ~FEFDSolver.Run
+      
+      
+         ~FEFDSolver.RunDistribution
+      
+      
+         ~FEFDSolver.RunEpsilon
+      
+      
+         ~FEFDSolver.SavePlot
+      
+      
+         ~FEFDSolver.SetBoundaries
+      
+      
+         ~FEFDSolver.SetConfigurations
+      
+      
+         ~FEFDSolver.SetDeviceGeometry
+      
+      
+         ~FEFDSolver.SetExcitation
+      
+      
+         ~FEFDSolver.SetResultsPath
+      
+      
+         ~FEFDSolver.SetSimSettings
+      
+      
+         ~FEFDSolver.SetSimulationParams
+      
+      
+         ~FEFDSolver.WeightAdjoint
+      
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FEFDSolver.adjoint_elements
+      ~FEFDSolver.adjoint_info
+      ~FEFDSolver.adjoint_solution
+      ~FEFDSolver.boundaries
+      ~FEFDSolver.current_epsilon
+      ~FEFDSolver.dS_dE
+      ~FEFDSolver.elements_centroids
+      ~FEFDSolver.fields
+      ~FEFDSolver.init_eps
+      ~FEFDSolver.interp_method
+      ~FEFDSolver.mesh
+      ~FEFDSolver.method
+      ~FEFDSolver.polarization
+      ~FEFDSolver.ports_monitors
+      ~FEFDSolver.resolution
+      ~FEFDSolver.results_path
+      ~FEFDSolver.simulation_type
+      ~FEFDSolver.stability
+      ~FEFDSolver.wavelength_range
+      ~FEFDSolver.weighted_adjoint
+   
+   

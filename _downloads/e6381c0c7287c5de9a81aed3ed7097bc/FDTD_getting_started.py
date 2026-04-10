@@ -16,13 +16,15 @@ si_mat = ConstMaterial(mat_name="Si", epsReal=3.48**2, color='lightblue')
 # Air (n=1.0) for background
 air_mat = ConstMaterial(mat_name="Air", epsReal=1**2, color='lightyellow')
 
+### End Material Settings
+
 ##########################################
 ###       Layer Stack Settings         ###
 ##########################################
 layer_stack = LayerStack()
 
 # Add silicon layer: 220nm thick starting at z=0
-layer_stack.addLayer(
+layer_stack.AddLayer(
    name="L1", 
    number=1, 
    thickness=0.22, 
@@ -33,7 +35,15 @@ layer_stack.addLayer(
 )
 
 # Set background (above structure) and substrate (below structure)
-layer_stack.setBGandSub(background=air_mat, substrate=sio2_mat)
+layer_stack.SetBGandSub(background=air_mat, substrate=sio2_mat)
+
+### End Layer Stack
+
+##########################################
+###   Device Geometry/Port Settings    ###
+##########################################
+
+
 
 #Create GDS mask for the device
 length = 10
@@ -49,9 +59,7 @@ strt_wg.add(gdstk.Polygon(vertices, layer=layer_core))
 
 lib.write_gds(output_filename)
 
-##########################################
-###   Device Geometry/Port Settings    ###
-##########################################
+
 device_geometry = DeviceGeometry()
 device_geometry.SetFromGDS(
    layer_stack=layer_stack,
@@ -67,10 +75,14 @@ device_geometry.SetAutoPortSettings(
 
 device_geometry.PlotGDS()
 device_geometry.PlotGDSXSection(direction='y',pos=2)
+### End Device Geometry
 
 ##########################################
 ###          FDTD Settings             ###
 ##########################################
+
+### Configure the FDTD Solver
+
 # Define wavelength range
 lmin = 1.5   # Minimum wavelength (μm)
 lmax = 1.6   # Maximum wavelength (μm)
@@ -80,7 +92,7 @@ npts = 21    # Number of frequency points
 fdtd_solver = pyFDTDSolver()
 
 # Configure port excitation with Gaussian pulse
-fdtd_solver.SetPorts(
+fdtd_solver.SetExcitation(
    profile="gaussian-pw",
    lcenter=lcen,
    lmin=lmin,
@@ -89,6 +101,9 @@ fdtd_solver.SetPorts(
    mode_indices=0,
    symmetries='1x1'
 )
+
+### End Configure the FDTD Solver
+### Add Monitors
 
 # Add DFT monitor to capture frequency-domain fields
 fdtd_solver.AddDFTMonitor(
@@ -103,17 +118,25 @@ fdtd_solver.AddDFTMonitor(
    save_hz=True
 )
 
+### End Add Monitors
+
+###  Set Simulation Parameters
+
 # Configure simulation parameters
 fdtd_solver.SetSimSettings(
    sim_time=350,
    space_step=0.05,
    subpixel_level=2,
-   save_path="./results",
-   results_filename='waveguide',
+   results_path="./results",
+   device_name='waveguide',
    device_geometry=device_geometry,
    auto_shutoff_limit=1e-2,
    export_mat_grid=True
 )
+
+### End Set Simulation Parameters
+
+### End FDTD Settings
 
 ##########################################
 ###      Run and Post Processing       ###
@@ -124,3 +147,5 @@ results = fdtd_solver.Run()
 # Plot S-parameters
 results.PlotSParameters(snp='ALL', plot_type='power')
 results.PlotSParameters(snp='ALL', plot_type='phase')
+
+### End Run and Post Processing

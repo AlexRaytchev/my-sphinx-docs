@@ -49,5 +49,6 @@
       ~SellmeierMaterial.color
       ~SellmeierMaterial.material_number
       ~SellmeierMaterial.name
+      ~SellmeierMaterial.number
    
    

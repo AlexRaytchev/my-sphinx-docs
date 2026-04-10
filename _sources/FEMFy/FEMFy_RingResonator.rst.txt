@@ -1,0 +1,71 @@
+
+
+
+2.5D simulation of Ring Resonator
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This examples shows how to use FEM 2.5 D capabilities in simulating ring resonator and get results close to the 3D models.
+For this example we use a gds file.
+
+The simulation setup in the code snippet below. In this example, TM polarization is used. 
+
+.. literalinclude:: ../_static/examples/FEFD/ring_resonator2.5/ring_resonator2.5.py
+   :language: python
+
+
+.. dropdown:: Ring Resonator plot
+
+  The code first starts by defining a waveguide from a function and plot it which looks like this
+
+  .. image:: ../_static/examples/FEFD/ring_resonator2.5/images/ring_resonator.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+
+Then the code starts a mode solver instance to simulate the cross-section of the waveguide.
+
+
+.. dropdown:: Field profile 1
+
+  The code should produce a field profile at the resonance frequency
+
+
+  .. image:: ../_static/examples/FEFD/ring_resonator2.5/images/fieldProfile2.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+.. dropdown:: Field profile 2
+
+  The code should produce a field profile outside the frequency
+
+
+  .. image:: ../_static/examples/FEFD/ring_resonator2.5/images/fieldProfile.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+
+
+.. dropdown:: Port field  
+
+  The code also plots the 1D field profile of the input port.
+
+  .. image:: ../_static/examples/FEFD/ring_resonator2.5/images/Port_profile.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+.. dropdown:: Transmission S31 
+
+  The code also plots the S31 transmission parameter.
+
+  .. image:: ../_static/examples/FEFD/ring_resonator2.5/images/S31.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center

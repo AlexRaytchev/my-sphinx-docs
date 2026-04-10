@@ -49,5 +49,6 @@
       ~Material.color
       ~Material.material_number
       ~Material.name
+      ~Material.number
    
    

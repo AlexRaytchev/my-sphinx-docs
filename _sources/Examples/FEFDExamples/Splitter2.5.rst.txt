@@ -1,0 +1,49 @@
+:orphan:
+
+
+Splitter 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For this example we are going to simulate a splitter (:download:`splitter.gds </_static/examples/FDTD/splitter.gds>`) and
+then create an image with a DFT monitored field overlapping with the device structure outline.
+
+.. image:: /_static/splitter.svg
+  :alt: A graphical representation of a generic layer stack.
+  :width: 60%
+  :align: center
+
+In this particular example we make use of the **DFT Monitor** to monitor the frequency content of the fields, so
+we can plot a particular component and wavelength over the device structure outline.
+The python script for this simulation is presented in the following code snippet:
+
+.. literalinclude:: /_static/examples/FEFD/Splitter/Splitter2.5.py
+  :language: python
+
+
+
+.. grid:: 1
+
+    .. grid-item-card::  S31 Transmission
+
+        .. figure:: /_static/examples/FEFD/Splitter/images/S31.png
+           :width: 100%
+           :align: center
+
+
+
+.. grid:: 1
+
+    .. grid-item-card::  Field Profile
+
+        .. figure:: /_static/examples/FEFD/Splitter/images/FieldProfile.png
+           :width: 100%
+           :align: center
+
+
+.. grid:: 1
+
+    .. grid-item-card::  Port Field
+
+        .. figure:: /_static/examples/FEFD/Splitter/images/port_field.png
+           :width: 100%
+           :align: center

@@ -17,7 +17,7 @@ A :class:`LayerStack <pyOptiShared.LayerInfo.LayerStack>` is a class that is use
 as ``key`` for its respective :class:`LayerInfo <pyOptiShared.LayerInfo.LayerInfo>` ``value``. 
 
 In summary, each layer in your fabrication process corresponds to a :class:`LayerInfo <pyOptiShared.LayerInfo.LayerInfo>` 
-object. In a general form a layer stack can be repsented with the following diagram:
+object. In a general form a layer stack can be represented with the following diagram:
 
 .. grid:: 1
 
@@ -44,9 +44,9 @@ Layer Stack and Layer Info Considerations
 Following are a few considerations to take into account when adding layers to the layer stack.
 
 - Each layer must have a unique layer number;
-- Care should be taken so that :attr:`z_min <pyOptiShared.LayerInfo.LayerInfo.z_min>` and :attr:`thickness <pyOptiShared.LayerInfo.LayerInfo.thickness>` attributes of multiple :class:`LayerInfo <pyOptiShared.LayerInfo.LayerInfo>` dont end up overalping;
+- Care should be taken so that :attr:`z_min <pyOptiShared.LayerInfo.LayerInfo.z_min>` and :attr:`thickness <pyOptiShared.LayerInfo.LayerInfo.thickness>` attributes of multiple :class:`LayerInfo <pyOptiShared.LayerInfo.LayerInfo>` don't end up overlapping;
 - If a **cladding material** is **not defined** when instantiating or adding a layer to the layer stack, it will be **considered as background**, and the default :attr:`background <pyOptiShared.LayerInfo.LayerStack.background>` material of the layer stack will be used.
-- Materials are automatically an uniquely added to an internal :class:`MaterialLibrary` inside the :class:`LayerStack` instance;
+- Materials are automatically and uniquely added to an internal :class:`MaterialLibrary` inside the :class:`LayerStack` instance;
 - By default :attr:`background <pyOptiShared.LayerInfo.LayerStack.background>` and :attr:`substrate <pyOptiShared.LayerInfo.LayerStack.substrate>` are set to Air.
 
 
@@ -54,8 +54,8 @@ Examples
 --------------------
 
 The following examples will cover some specific settings of the :class:`LayerStack <pyOptiShared.LayerInfo.LayerStack>` 
-and at the end it aggregates all the example snipets into a complete setup.
-For more deatails please check the :ref:`API documentation <layer-stack-api>`.
+and at the end it aggregates all the example snippets into a complete setup.
+For more details, please check the :ref:`API documentation <layer-stack-api>`.
 
 Defining Material Objects
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -93,7 +93,7 @@ and z = 1 is the top of the layer
         offset = 0.1*np.sin(np.pi*z) # Half sinusoid profile - Dilation (+ve offset)
         return offset
 
-Once this methods are defined they can be passed as the argument for ``sideWallFunct`` in the 
+Once these methods are defined they can be passed as the argument for ``sideWallFunct`` in the 
 :meth:`addLayer <pyOptiShared.LayerInfo.LayerStack.addLayer>`, as will be demonstrated in 
 the next example.
 

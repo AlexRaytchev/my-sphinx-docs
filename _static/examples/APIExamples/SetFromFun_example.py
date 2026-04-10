@@ -13,12 +13,12 @@ air_mat = ConstMaterial(mat_name="Air", epsReal=1**2,color='lightyellow')
 
 layer_stack = LayerStack()
 
-layer_stack.addLayer(name="L1", number=1, thickness=0.22, zmin=0.0,
+layer_stack.AddLayer(name="L1", number=1, thickness=0.22, zmin=0.0,
                         material=si_mat, cladding=si02_mat,
                         sideWallAng=20)
 
 
-layer_stack.setBGandSub(background=air_mat, substrate=si02_mat)
+layer_stack.SetBGandSub(background=air_mat, substrate=si02_mat)
 
 device_geometry = DeviceGeometry()
     
@@ -60,11 +60,11 @@ lcen = (lmax+lmin)/2
 npts=21
 tfinal = 550
 fdtd_solver = pyFDTDSolver()
-fdtd_solver.SetPorts(profile="gaussian-pw", lcenter=lcen, lmin=lmin, lmax=lmax, npts=npts, mode_indices = 0,symmetries='1x1')
+fdtd_solver.SetExcitation(profile="gaussian-pw", lcenter=lcen, lmin=lmin, lmax=lmax, npts=npts, mode_indices = 0,symmetries='1x1')
 fdtd_solver.AddDFTMonitor(mon_type="2d-z-normal", z0=0.11, name="MyDFTMonitor1",
                                                       lmin=lmin, lmax=lmax,npts=npts,
                                                       save_hz=True)
-fdtd_solver.SetSimSettings(sim_time=tfinal, space_step=0.05, subpixel_level=2, save_path=r"results",results_filename='wg',
+fdtd_solver.SetSimSettings(sim_time=tfinal, space_step=0.05, subpixel_level=2, results_path=r"results",device_name='wg',
                                                       device_geometry = device_geometry,auto_shutoff_limit=1e-3,export_mat_grid=True)
 results = fdtd_solver.Run()
 results.PlotSParameters()

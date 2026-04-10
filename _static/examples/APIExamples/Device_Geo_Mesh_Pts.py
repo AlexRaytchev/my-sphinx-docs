@@ -14,9 +14,9 @@ core_mat = ConstMaterial("Si", epsReal=3.48**2, epsImag=0.0)
 ###       Layer Stack Settings         ###
 ##########################################
 layer_stack = LayerStack()
-layer_stack.addLayer(number=1,material=core_mat, thickness=0.22, zmin=0, sideWallAng=0, cladding="Air_default")
-layer_stack.addLayer(number=2,material=core_mat, thickness=0.09, zmin=0.0, sideWallAng=0, cladding="Air_default")
-layer_stack.setBGandSub(background="Air_default", substrate=substrate_mat)
+layer_stack.AddLayer(number=1,material=core_mat, thickness=0.22, zmin=0, sideWallAng=0, cladding="Air_default")
+layer_stack.AddLayer(number=2,material=core_mat, thickness=0.09, zmin=0.0, sideWallAng=0, cladding="Air_default")
+layer_stack.SetBGandSub(background="Air_default", substrate=substrate_mat)
 
 lam = 1.55 # um
 
@@ -43,7 +43,7 @@ points = np.asarray([XX.ravel(), YY.ravel(), ZZ.ravel()]).T
 
 # Get the material and permittivity meshes
 material_mesh = device_geometry.GetMatVals(points)
-eps = device_geometry.GetPermittivityMesh(points, lam)
+eps,_ = device_geometry.GetPermittivityMesh(points, lam)
 
 # Get back a 3D array of the linear points
 shape = (nx,ny,nz)

@@ -1,0 +1,133 @@
+.. _fefd-intro:
+
+Finite-Element Frequency-Domain (FEFD) Electromagnetic Solver
+==============================================================
+
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: top
+
+**Based on:**
+
+Jianming Jin,  
+*"The Finite Element Method in Electromagnetics"*, 3rd Edition,  
+Wiley Publishing, 2014. ISBN: 9781118571361
+
+
+Tsuji, Yasuhide, and Masanori Koshiba,
+*"Finite element method using port truncation by perfectly matched layer boundary conditions for optical waveguide discontinuity problems."*, 
+Journal of lightwave technology 20, no. 3 (2002): 463-468.
+
+
+Ivanova, R. Stoffer, and M. Hammer, 
+*"A dimensionality reduction technique for 2D scattering problems in photonics,"*
+J. Opt., vol. 12, no. 3, Art. no. 035502, Mar. 2010.
+
+
+Introduction
+---------------
+
+This solver implements the **Finite-Element Frequency-Domain (FEFD)** method for solving Maxwell’s equations in 2D space and frequency domain, specifically optimized for the simulation of **integrated photonic devices**.
+
+It supports **linear, isotropic, dispersive** materials and provides advanced features tailored to photonic circuit design, such as **automatic mode injection**, **port detection**, and **S-parameter extraction**.
+
+Key Features
+--------------
+
+- **Frequency-domain Maxwell solver** using triangular discretization in 2D space.
+- **Perfectly Matched Layer (PML)** boundary conditions for accurate open-region simulations.
+- **GDSII Import**: Reads standard GDSII layout files to define device geometry.
+- **Automatic Matching Mesh Generation**: Automatically generates a triangular mesh that precisely matches the passed geometry.
+- **First and Second Order Element** Support: Choose between linear and quadratic elements for improved accuracy. 
+- **2D and 2.5D simulation**: Simulate 2D geometries and collapse 3D ones into 2D with acceptable accuracy.
+- **Port Identification & Mode Matching**:
+  - Automatic port detection and classification.
+  - Single-mode excitation using computed eigenmodes.
+  - Mode solver integration for accurate injection and extraction.
+- **S-Parameter Computation**:
+  - Computes scattering parameters (S-matrix) from frequency-domain data.
+  - Automatically exports results in standard `.snp` format.
+- **HDF5 Output**:
+  - All simulation data, field snapshots, and metadata are stored in `.h5` format for efficient post-processing.
+
+Mathematical Foundation
+-----------------------
+
+The FEFD method relies on discretizing the 2D Helmholtz wave equation using triangular elements.
+
+.. math::
+
+   \begin{align}
+   \nabla^2 u(x,y) + k^2(x,y)\,u(x,y) = -s(x,y),
+   \end{align}
+
+Where :math:`s` is the source, :math:`u` is either :math:`E_z` or :math:`H_z` for either TE or TM, respectively.
+
+.. math::
+
+   \begin{align}
+   \nabla^2 = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2},
+   \end{align}
+
+and
+
+.. math::
+
+   \begin{align}
+   k(x,y) = \frac{\omega}{c}\, n(x,y) = \omega \sqrt{\mu(x,y)\,\varepsilon(x,y)}.
+   \end{align}
+
+The 2.5D formulation is based on the method reported in:
+"A dimensionality reduction technique for 2D scattering problems in photonics"
+
+In which the field :math:`u` is decomposed into two orthogonal components :math:`Z(z)` and :math:`v(x,y)`.
+Then, the variational formulation is applied in the :math:`z` direction by multiplying by a weight function :math:`Z'(z)`.
+Then the resulting wave equation is integrated in the :math:`z` direction, resulting in a wave equation in :math:`x` and :math:`y`. 
+
+Boundary Conditions
+-------------------
+
+This solver supports **Perfectly Matched Layer (PML)** absorbing boundary conditions, as described by Y. Tsuji and M. Koshiba in "Finite element method using port truncation by perfectly matched layer boundary conditions for optical waveguide discontinuity problems".
+PML is used to prevent artificial reflections at simulation domain boundaries.
+
+
+This is the core equation that defines the coordinate transformation in the frequency domain. For a coordinate direction :math:`i` (where :math:`i = x, y, \text{or } z`):
+
+.. math::
+      \begin{align}
+      s_i(i, \omega) = \kappa_i(i) + \frac{\sigma_i(i)}{\alpha_i(i) + j\omega\epsilon_0}
+      \end{align}
+      
+      
+Where:
+
+* :math:`\kappa_i` is the real coordinate stretching (usually :math:`\ge 1`).
+* :math:`\sigma_i`: Conductivity profile (attenuation).
+* :math:`\alpha_i`: Complex frequency shift (stability).
+* :math:`\epsilon_0`: Vacuum permittivity.
+
+
+
+Applications
+------------
+
+This solver is particularly suited for:
+
+- Silicon photonics and integrated optical circuits
+- Passive photonic devices (e.g., splitters, multiplexers, filters)
+- Waveguide tapering, crossings, and junctions
+- Irregularly shaped devices
+- Dispersive and lossy materials
+- Single frequency optimization
+- High index contrast problems (First order elements are recommended for :math:`\delta n < 2` and second order for :math:`\delta n > 2`)
+
+This solver is not suited for:
+
+- Devices of thin layers (:math:`< 20 nm`) in the :math:`z` direction.
+
+
+
+
+
+

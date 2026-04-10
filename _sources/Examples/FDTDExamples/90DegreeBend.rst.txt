@@ -1,0 +1,90 @@
+:orphan:
+
+90 Degree Bend - Subpixel Averaging
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This example shows the effect using subpixel averaging on a 90 degree bend (:download:`bend90.gds </_static/examples/FDTD/bend90.gds>`):
+
+.. image:: /_static/bend90.svg
+  :alt: A graphical representation of a generic layer stack.
+  :width: 40%
+  :align: center
+
+
+The simulation setup in the code snippet below. It sets four different simulation settings, 
+by changing the space step from 50 nm to 25 nm while varying the subpixel_level from 1 (off) to 2.
+
+
+
+
+The post processing part consists of loading the HDF5 results file into the :class:`FDTDResults <pyFDTDKernel.FDTDResults.FDTDResults>`
+objects and then using ``matplotlib`` for visualization of the data. The code is available in the following folded section.
+
+
+.. dropdown:: Post Processing Code
+
+  .. literalinclude:: /_static/examples/FDTD/FDTD_bend90_post_processing.py
+    :language: python
+
+
+
+.. dropdown:: Permittivity Profile
+
+  The permittivity plots show the averaging of the material properties, especially at curved locations. The subpixel
+  averaging allows better description of the material properties on those conditions, reducing the stair-casing of
+  the permittivity profile.
+
+  .. image:: /_static/subpixel_example/subpixel_epsx_zoomed.svg
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+
+.. dropdown:: Field Profiles
+
+  In the full field plots, it is possible to see that a coarse mesh without subpixel averaging presents field
+  leakage as the mode propagates through the bend. It gets reduced as we add the subpixel averaging. Increasing
+  the subpixel averaging can provide similar results to those of almost halving the space step.
+
+  .. image:: /_static/subpixel_example/subpixel_Hz.svg
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: Zoomed Field Profiles:
+
+  It is more obvious the fields look smoother at a higher subpixel level. Usually, level two is enough, as higher levels might deteriorate the 
+  meshing process, without relevant increase in the results accuracy.
+
+  .. image:: /_static/subpixel_example/subpixel_Hz_zoomed.svg
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: Transmittance:
+
+  It is clear that the 50nm mesh is not enough for properly capturing the reflection and transmission of the bend.
+  Reducing the space-step improves the results while, increasing the subpixel average improves the accuracy of the results
+  without sacrificing simulation time.
+
+  .. raw:: html
+
+    <iframe src="../_static/subpixel_example/subpixel_s21.html"
+            width="100%"
+            height="500px"
+            frameborder="0px">
+    </iframe>
+
+.. dropdown:: Reflectance:
+
+  Similar to the transmittance results, the reflectance gets improved with subpixel averaging, lowering the reflection and making them more accurate 
+  as the subpixel level gets increased to two.
+
+  .. raw:: html
+
+    <iframe src="../_static/subpixel_example/subpixel_s11.html"
+            width="100%"
+            height="500px"
+            frameborder="0px">
+    </iframe>
+

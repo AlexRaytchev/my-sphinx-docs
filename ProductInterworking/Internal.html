@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Internal &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+  <title>Internal &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -17,12 +17,12 @@
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=58fbf978"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../_static/copybutton.js?v=f281be69"></script>
       <script src="../_static/design-tabs.js?v=f930bc37"></script>
-      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -90,7 +90,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Optiwaves's Python EM Modules</a>
+          <a href="../index.html">Optiwave's Python EM Modules</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -114,8 +114,8 @@
 <section id="optispice">
 <h2>OptiSPICE<a class="headerlink" href="#optispice" title="Link to this heading"></a></h2>
 <p>OptiOmega can be used with Optiwave’s electro-optic circuit simulator named OptiSPICE which is based on the SPICE engine, that allows to carry out both frequency as well as time-domain simulations based on modified nodal analysis (MNA).</p>
-<p>OptiSPICE allows to run complex circuit simulations which is not feasible using full EM solvers like Finite Difference Time Domain (FDTD), Beam Propagtaion Method (BPM) and Eigen Mode Expansion (EME).
-It models each device based using compact models like s-matrix, modes effective/group index data and differential equations and use these devices to build and simulate Photonic Integrated Circuit (PIC).
+<p>OptiSPICE allows to run complex circuit simulations which is not feasible using full EM solvers like Finite Difference Time Domain (FDTD), Beam Propagation Method (BPM) and Eigen Mode Expansion (EME).
+It models each device based on compact models like s-matrix, modes effective/group index data and differential equations and use these devices to build and simulate Photonic Integrated Circuit (PIC).
 OptiSPICE produces self consistent solutions for optoelectronic circuits that contain feedback loops spanning both optical and electrical parts.
 OptiSPICE aids in modelling thermal and electrical effects of the devices, design electro-optic control loops, offer post-processing capabilities and convert optical-to-electrical S-parameters which is a standard requirement in electrical engineering world.</p>
 <section id="example-mach-zehnder-interferometer">
@@ -125,10 +125,11 @@ We also use the Finite-Difference Time-Domain (FDTD) solver to calculate the S-p
 <section id="step-1-simulate-a-straight-waveguide">
 <h4>Step 1: Simulate a Straight Waveguide<a class="headerlink" href="#step-1-simulate-a-straight-waveguide" title="Link to this heading"></a></h4>
 <p>We simulate a waveguide using mode solver and extract the effective refractive index data in a <code class="docutils literal notranslate"><span class="pre">.txt</span></code> format which will be used to model the waveguide in OptiSPICE.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyModeSolver.py_mode_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">VFDModeSolver</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyModeSolver.pyModeSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">VFDModeSolver</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">gdstk</span>
 
 <span class="c1">##########################################</span>
@@ -146,11 +147,11 @@ We also use the Finite-Difference Time-Domain (FDTD) solver to calculate the S-p
 <span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
 
 <span class="c1"># Add first layer: 250nm thick at z=0</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span>
                     <span class="n">zmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
 
 <span class="c1"># Set background (above structure) and substrate (below structure)</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">substrate_mat</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">substrate_mat</span><span class="p">)</span>
 
 <span class="c1">##########################################</span>
 <span class="c1">###   Device Geometry/Port Settings    ###</span>
@@ -180,23 +181,23 @@ We also use the Finite-Difference Time-Domain (FDTD) solver to calculate the S-p
 <span class="n">mode_solver</span> <span class="o">=</span> <span class="n">VFDModeSolver</span><span class="p">()</span>
 
 <span class="c1"># Set boundary conditions (PMC = Perfect Magnetic Conductor)</span>
-<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span>
-    <span class="n">min_x</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span> <span class="n">max_x</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span>
-    <span class="n">min_y</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span> <span class="n">max_y</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">}</span>
-<span class="p">)</span>
+<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span><span class="n">min_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span>
+                        <span class="n">min_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">)</span>
+
+<span class="n">lams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
 
 <span class="c1"># Configure simulation settings</span>
 <span class="n">mode_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span>
     <span class="n">device_geometry</span><span class="o">=</span><span class="n">device_geometry</span><span class="p">,</span>
     <span class="n">mesh</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dx&quot;</span><span class="p">:</span> <span class="mf">0.025</span><span class="p">,</span> <span class="s2">&quot;dy&quot;</span><span class="p">:</span> <span class="mf">0.025</span><span class="p">,</span> <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.025</span><span class="p">},</span>  <span class="c1"># 25nm mesh resolution</span>
-    <span class="n">wavelength</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">1.6</span><span class="p">,</span> <span class="s2">&quot;npts&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">},</span>  <span class="c1"># 1.5-1.6 μm range</span>
+    <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>         <span class="c1"># 1.5-1.6 μm range</span>
     <span class="n">nguess</span><span class="o">=</span><span class="mf">2.1</span><span class="p">,</span>              <span class="c1"># Initial guess for effective index</span>
-    <span class="n">nmodes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>                <span class="c1"># Find first 4 modes</span>
+    <span class="n">nmodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>                <span class="c1"># Find first mode</span>
     <span class="n">cut_plane</span><span class="o">=</span><span class="s2">&quot;YZ&quot;</span><span class="p">,</span>          <span class="c1"># Cross-section plane (propagation along X)</span>
     <span class="n">cut_location</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>        <span class="c1"># Position along X-axis</span>
     <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>                <span class="c1"># Convergence tolerance</span>
-    <span class="n">savepath</span><span class="o">=</span><span class="s2">&quot;./ModeResults&quot;</span><span class="p">,</span>
-    <span class="n">res_filename</span><span class="o">=</span><span class="s2">&quot;my_results&quot;</span>
+    <span class="n">results_path</span><span class="o">=</span><span class="s2">&quot;./ModeResults&quot;</span><span class="p">,</span>
+    <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;my_results&quot;</span>
 <span class="p">)</span>
 
 <span class="c1">##########################################</span>
@@ -206,10 +207,10 @@ We also use the Finite-Difference Time-Domain (FDTD) solver to calculate the S-p
 <span class="n">results</span> <span class="o">=</span> <span class="n">mode_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
 
 <span class="c1"># Visualize results</span>
-<span class="n">results</span><span class="o">.</span><span class="n">PlotMode</span><span class="p">()</span>                          <span class="c1"># Field profiles for all modes</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotMode</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s1">&#39;Hx&#39;</span><span class="p">)</span>                <span class="c1"># Field profiles</span>
 <span class="n">results</span><span class="o">.</span><span class="n">PlotPermittivity</span><span class="p">()</span>                  <span class="c1"># Material cross-section</span>
-<span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;neff&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># Effective index vs wavelength</span>
-<span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;ng&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>   <span class="c1"># Group index vs wavelength</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;neff&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># Effective index vs wavelength</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;ng&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>   <span class="c1"># Group index vs wavelength</span>
 <span class="n">results</span><span class="o">.</span><span class="n">ExportNeff</span><span class="p">(</span><span class="s2">&quot;StraightWG-neffData&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Exports effective index data in a .txt format</span>
 <span class="n">results</span><span class="o">.</span><span class="n">ExportNg</span><span class="p">(</span><span class="s2">&quot;StraightWG-ngData&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Exports group index data in a .txt format</span>
 </pre></div>
@@ -245,11 +246,11 @@ We also use the Finite-Difference Time-Domain (FDTD) solver to calculate the S-p
 
 <span class="c1"># Creates the Layer Stack</span>
 <span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
                     <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
                     <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
 
 <span class="c1"># Defines the Device Geometry</span>
 <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
@@ -268,11 +269,11 @@ We also use the Finite-Difference Time-Domain (FDTD) solver to calculate the S-p
 <span class="n">tfinal</span> <span class="o">=</span> <span class="mi">350</span>
 
 <span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
-<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">mode_indices</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;1x2&#39;</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">mode_indices</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;1x2&#39;</span><span class="p">)</span>
 <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span><span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="mf">0.11</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
                                                     <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span>
                                                     <span class="n">save_hz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">results_filename</span><span class="o">=</span><span class="s1">&#39;splitter&#39;</span><span class="p">,</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">results_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">device_name</span><span class="o">=</span><span class="s1">&#39;splitter&#39;</span><span class="p">,</span>
                                                     <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span><span class="n">auto_shutoff_limit</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
 
@@ -298,7 +299,7 @@ We also use the Finite-Difference Time-Domain (FDTD) solver to calculate the S-p
 </section>
 <section id="step-3-mzi-simulation-in-optispice">
 <h4>Step 3: MZI Simulation in OptiSPICE<a class="headerlink" href="#step-3-mzi-simulation-in-optispice" title="Link to this heading"></a></h4>
-<p>Next we use the S-parameters and the n<sub>eff</sub> extracted from the simulations and feed it in the OptiSPICE to simulate a MZI circuit and characterize it’s performance.
+<p>Next we use the S-parameters and the n<sub>eff</sub> extracted from the simulations and feed it in the OptiSPICE to simulate a MZI circuit and characterize its performance.
 We use the S-parameter device model from OptiSPICE device library to model the Y-splitter using the S-parameters and the waveguide device model to load the n<sub>eff</sub> data and model the waveguide.
 The  MZI simulation circuit is shown below:</p>
 <div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
@@ -341,21 +342,22 @@ MZI Transmission Response</div>
 </section>
 <section id="optisystem">
 <h2>OptiSystem<a class="headerlink" href="#optisystem" title="Link to this heading"></a></h2>
-<p>OptiOmega seamlessly interfaces with OptiSystem which is a powerful optical system design software and a flagship prodcut of Optiwave simulation suite. It has more than 600 different components and offers a huge library of application examples in various domains.
+<p>OptiOmega seamlessly interfaces with OptiSystem which is a powerful optical system design software and a flagship product of Optiwave simulation suite. It has more than 600 different components and offers a huge library of application examples in various domains.
 It has the capability to simulate nearly all kinds of optical links within the transmission layer, encompassing a wide range of optical networks from SAN, LAN and MAN to ultra-long-haul networks.
 It also offers the capabilities to simulate Free Space Optics (FSO) and underwater channel communication systems. OptiSystem enables users to plan, test and simulate complex systems in both time and frequency domain.
-It also offers to simulate the Photonic Integrated circuits (PICs) and characterize it’s performance using variety of visualizers.</p>
-<p>The building blocks can be simulated using the <code class="docutils literal notranslate"><span class="pre">VFD</span> <span class="pre">Mode</span> <span class="pre">Solver</span></code> and <code class="docutils literal notranslate"><span class="pre">FDTD</span> <span class="pre">Electromagnetic</span> <span class="pre">Solver</span></code> and use these results to simulate the chip/system level circuits in OptiSystem. Here, we demostrate simulating a basic ring resonator in OptiSystem with the aid of building blocks
+It also offers to simulate the Photonic Integrated circuits (PICs) and characterize its performance using variety of visualizers.</p>
+<p>The building blocks can be simulated using the <code class="docutils literal notranslate"><span class="pre">VFD</span> <span class="pre">Mode</span> <span class="pre">Solver</span></code> and <code class="docutils literal notranslate"><span class="pre">FDTD</span> <span class="pre">Electromagnetic</span> <span class="pre">Solver</span></code> and use these results to simulate the chip/system level circuits in OptiSystem. Here, we demonstrate simulating a basic ring resonator in OptiSystem with the aid of building blocks
 such as: directional coupler and a straight waveguide.</p>
 <section id="example-ring-resonator">
 <h3>Example: Ring-Resonator<a class="headerlink" href="#example-ring-resonator" title="Link to this heading"></a></h3>
 <section id="id1">
 <h4>Step 1: Simulate a Straight Waveguide<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
-<p>A straight waveguide is simulated using <code class="docutils literal notranslate"><span class="pre">VFD</span> <span class="pre">Mode</span> <span class="pre">Solver</span></code> and the effective refractive index (n<sub>eff</sub>) data is exracted in a <code class="docutils literal notranslate"><span class="pre">.txt</span></code> format.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyModeSolver.py_mode_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">VFDModeSolver</span>
+<p>A straight waveguide is simulated using <code class="docutils literal notranslate"><span class="pre">VFD</span> <span class="pre">Mode</span> <span class="pre">Solver</span></code> and the effective refractive index (n<sub>eff</sub>) data is extracted in a <code class="docutils literal notranslate"><span class="pre">.txt</span></code> format.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyModeSolver.pyModeSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">VFDModeSolver</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">gdstk</span>
 
 <span class="c1">##########################################</span>
@@ -373,11 +375,11 @@ such as: directional coupler and a straight waveguide.</p>
 <span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
 
 <span class="c1"># Add first layer: 250nm thick at z=0</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span>
                     <span class="n">zmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
 
 <span class="c1"># Set background (above structure) and substrate (below structure)</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">substrate_mat</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">substrate_mat</span><span class="p">)</span>
 
 <span class="c1">##########################################</span>
 <span class="c1">###   Device Geometry/Port Settings    ###</span>
@@ -407,23 +409,23 @@ such as: directional coupler and a straight waveguide.</p>
 <span class="n">mode_solver</span> <span class="o">=</span> <span class="n">VFDModeSolver</span><span class="p">()</span>
 
 <span class="c1"># Set boundary conditions (PMC = Perfect Magnetic Conductor)</span>
-<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span>
-    <span class="n">min_x</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span> <span class="n">max_x</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span>
-    <span class="n">min_y</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span> <span class="n">max_y</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">}</span>
-<span class="p">)</span>
+<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span><span class="n">min_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span>
+                        <span class="n">min_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">)</span>
+
+<span class="n">lams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
 
 <span class="c1"># Configure simulation settings</span>
 <span class="n">mode_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span>
     <span class="n">device_geometry</span><span class="o">=</span><span class="n">device_geometry</span><span class="p">,</span>
     <span class="n">mesh</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dx&quot;</span><span class="p">:</span> <span class="mf">0.025</span><span class="p">,</span> <span class="s2">&quot;dy&quot;</span><span class="p">:</span> <span class="mf">0.025</span><span class="p">,</span> <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.025</span><span class="p">},</span>  <span class="c1"># 25nm mesh resolution</span>
-    <span class="n">wavelength</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">1.6</span><span class="p">,</span> <span class="s2">&quot;npts&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">},</span>  <span class="c1"># 1.5-1.6 μm range</span>
+    <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>         <span class="c1"># 1.5-1.6 μm range</span>
     <span class="n">nguess</span><span class="o">=</span><span class="mf">2.1</span><span class="p">,</span>              <span class="c1"># Initial guess for effective index</span>
-    <span class="n">nmodes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>                <span class="c1"># Find first 4 modes</span>
+    <span class="n">nmodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>                <span class="c1"># Find first mode</span>
     <span class="n">cut_plane</span><span class="o">=</span><span class="s2">&quot;YZ&quot;</span><span class="p">,</span>          <span class="c1"># Cross-section plane (propagation along X)</span>
     <span class="n">cut_location</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>        <span class="c1"># Position along X-axis</span>
     <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>                <span class="c1"># Convergence tolerance</span>
-    <span class="n">savepath</span><span class="o">=</span><span class="s2">&quot;./ModeResults&quot;</span><span class="p">,</span>
-    <span class="n">res_filename</span><span class="o">=</span><span class="s2">&quot;my_results&quot;</span>
+    <span class="n">results_path</span><span class="o">=</span><span class="s2">&quot;./ModeResults&quot;</span><span class="p">,</span>
+    <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;my_results&quot;</span>
 <span class="p">)</span>
 
 <span class="c1">##########################################</span>
@@ -433,10 +435,10 @@ such as: directional coupler and a straight waveguide.</p>
 <span class="n">results</span> <span class="o">=</span> <span class="n">mode_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
 
 <span class="c1"># Visualize results</span>
-<span class="n">results</span><span class="o">.</span><span class="n">PlotMode</span><span class="p">()</span>                          <span class="c1"># Field profiles for all modes</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotMode</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s1">&#39;Hx&#39;</span><span class="p">)</span>                <span class="c1"># Field profiles</span>
 <span class="n">results</span><span class="o">.</span><span class="n">PlotPermittivity</span><span class="p">()</span>                  <span class="c1"># Material cross-section</span>
-<span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;neff&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># Effective index vs wavelength</span>
-<span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;ng&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>   <span class="c1"># Group index vs wavelength</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;neff&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># Effective index vs wavelength</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;ng&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>   <span class="c1"># Group index vs wavelength</span>
 <span class="n">results</span><span class="o">.</span><span class="n">ExportNeff</span><span class="p">(</span><span class="s2">&quot;StraightWG-neffData&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Exports effective index data in a .txt format</span>
 <span class="n">results</span><span class="o">.</span><span class="n">ExportNg</span><span class="p">(</span><span class="s2">&quot;StraightWG-ngData&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># Exports group index data in a .txt format</span>
 </pre></div>
@@ -459,7 +461,7 @@ such as: directional coupler and a straight waveguide.</p>
 </section>
 <section id="step-2-simulate-a-directional-coupler">
 <h4>Step 2: Simulate a Directional Coupler<a class="headerlink" href="#step-2-simulate-a-directional-coupler" title="Link to this heading"></a></h4>
-<p>The directional coupler is simulated using <code class="docutils literal notranslate"><span class="pre">FDTD</span> <span class="pre">Electromagnetic</span> <span class="pre">Solver</span></code> and the optical S-parameters are extracted  in a <code class="docutils literal notranslate"><span class="pre">.txt</span></code> format. In this simulation, we are sweeping the parameter <code class="docutils literal notranslate"><span class="pre">gap</span></code> of the directional coupler from <code class="docutils literal notranslate"><span class="pre">0.1um</span></code> to <code class="docutils literal notranslate"><span class="pre">0.5um</span></code>. After simulation completes, the s-parameters for each iteration are automatically saved in the <code class="docutils literal notranslate"><span class="pre">results</span></code> folder, created under current directory.</p>
+<p>The directional coupler is simulated using <code class="docutils literal notranslate"><span class="pre">FDTD</span> <span class="pre">Electromagnetic</span> <span class="pre">Solver</span></code> and the optical S-parameters are extracted in a <code class="docutils literal notranslate"><span class="pre">.txt</span></code> format. In this simulation, we are sweeping the parameter <code class="docutils literal notranslate"><span class="pre">gap</span></code> of the directional coupler from <code class="docutils literal notranslate"><span class="pre">0.1um</span></code> to <code class="docutils literal notranslate"><span class="pre">0.5um</span></code>. After simulation completes, the s-parameters for each iteration are automatically saved in the <code class="docutils literal notranslate"><span class="pre">results</span></code> folder, created under current directory.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span><span class="p">,</span><span class="n">ExperimentalMaterial</span>
@@ -486,10 +488,10 @@ such as: directional coupler and a straight waveguide.</p>
 
 <span class="c1"># Layer Stack Settings</span>
 <span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
                     <span class="n">material</span><span class="o">=</span><span class="n">si_exp</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">sio2_exp</span><span class="p">,</span>
                     <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">sio2_exp</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">sio2_exp</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">sio2_exp</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">sio2_exp</span><span class="p">)</span>
 
 <span class="c1">#Device Geometry Settings</span>
 <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
@@ -523,7 +525,7 @@ such as: directional coupler and a straight waveguide.</p>
 
     <span class="n">device_geometry</span><span class="o">.</span><span class="n">UpdateScriptParams</span><span class="p">(</span><span class="n">script_parameters</span><span class="p">)</span>
     <span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
-    <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">mode_indices</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;2x2&#39;</span><span class="p">)</span>
+    <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">mode_indices</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;2x2&#39;</span><span class="p">)</span>
     <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span><span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="mf">0.11</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
                             <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span>
                             <span class="n">save_ex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ez</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -531,7 +533,7 @@ such as: directional coupler and a straight waveguide.</p>
 
 
 
-    <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">results_filename</span><span class="o">=</span><span class="s1">&#39;coupler&#39;</span><span class="p">,</span>
+    <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">results_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">device_name</span><span class="o">=</span><span class="s1">&#39;coupler&#39;</span><span class="p">,</span>
                             <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span> <span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">results</span> <span class="o">=</span> <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
 

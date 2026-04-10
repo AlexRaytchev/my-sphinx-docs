@@ -41,16 +41,10 @@ Step 2: Define Materials
 
 Create materials with constant refractive indices:
 
-.. code-block:: python
-
-   # Silicon dioxide (n=1.444) for substrate and cladding
-   sio2_mat = ConstMaterial(mat_name="SiO2", epsReal=1.444**2, color='lightgreen')
-   
-   # Silicon (n=3.48) for waveguide core
-   si_mat = ConstMaterial(mat_name="Si", epsReal=3.48**2, color='lightblue')
-   
-   # Air (n=1.0) for background
-   air_mat = ConstMaterial(mat_name="Air", epsReal=1**2, color='lightyellow')
+.. literalinclude:: ../_static/examples/GettingStarted/FDTD_getting_started.py
+   :language: python
+   :start-after: ###         Material Settings          ###
+   :end-at: ### End Material Settings
 
 **Note**: The dielectric constant (epsilon) is the square of the refractive index: ε = n\ :sup:`2`
 
@@ -59,59 +53,20 @@ Step 3: Build the Layer Stack
 
 The layer stack defines your device's vertical structure:
 
-.. code-block:: python
-
-   layer_stack = LayerStack()
-   
-   # Add silicon layer: 220nm thick starting at z=0
-   layer_stack.addLayer(
-       name="L1", 
-       number=1, 
-       thickness=0.22, 
-       zmin=0.0,
-       material=si_mat, 
-       cladding=air_mat,
-       sideWallAng=0
-   )
-   
-   # Set background (above structure) and substrate (below structure)
-   layer_stack.setBGandSub(background=air_mat, substrate=sio2_mat)
+.. literalinclude:: ../_static/examples/GettingStarted/FDTD_getting_started.py
+   :language: python
+   :start-after: ###       Layer Stack Settings         ###
+   :end-at: ### End Layer Stack
 
 Step 4: Create Device Geometry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can load geometry from a GDS file or define it programmatically. Here we'll use gdstk to generate "waveguide.gds" file which will be used to define the geometry:
 
-.. code-block:: python
-
-   length = 10
-   width = 0.5
-   layer_core = 1
-
-   output_filename = "waveguide.gds"
-   lib = gdstk.Library()
-
-   strt_wg = lib.new_cell("Straight")
-   vertices = [(0, -width/2), (length, -width/2), (length, width/2), (0, width/2)]
-   strt_wg.add(gdstk.Polygon(vertices, layer=layer_core))
-
-   lib.write_gds(output_filename)
-
-   device_geometry = DeviceGeometry()
-   device_geometry.SetFromGDS(
-       layer_stack=layer_stack,
-       gds_file='waveguide.gds',
-       buffers={'x': 1.5, 'y': 1.5, 'z': 1.5}  # 1.5 μm padding on all sides
-   )
-   
-   # Automatically detect ports along the x-direction
-   device_geometry.SetAutoPortSettings(
-       direction='x',
-       port_buffer=1.0
-   )
-   
-   device_geometry.PlotGDS()
-   device_geometry.PlotGDSXSection(direction='y',pos=2)
+.. literalinclude:: ../_static/examples/GettingStarted/FDTD_getting_started.py
+   :language: python
+   :start-after: ###   Device Geometry/Port Settings    ###
+   :end-at: ### End Device Geometry
 
 
 **Port Detection**: The solver automatically identifies waveguide ports at domain boundaries. It is also possible to define ports manually if auto port detection fails.
@@ -136,26 +91,10 @@ Step 5: Configure the FDTD Solver
 
 Set up the solver with excitation and monitoring:
 
-.. code-block:: python
-
-   # Define wavelength range
-   lmin = 1.5   # Minimum wavelength (μm)
-   lmax = 1.6   # Maximum wavelength (μm)
-   lcen = (lmax + lmin) / 2  # Center wavelength
-   npts = 21    # Number of frequency points
-   
-   fdtd_solver = pyFDTDSolver()
-   
-   # Configure port excitation with Gaussian pulse
-   fdtd_solver.SetPorts(
-       profile="gaussian-pw",      # Gaussian pulse
-       lcenter=lcen,
-       lmin=lmin,
-       lmax=lmax,
-       npts=npts,
-       mode_indices=0,             # Excite fundamental mode (TE0)
-       symmetries='1x1'            # Use symmetry for single port
-   )
+.. literalinclude:: ../_static/examples/GettingStarted/FDTD_getting_started.py
+   :language: python
+   :start-after: ### Configure the FDTD Solver
+   :end-at: ### End Configure the FDTD Solver
 
 **Key Parameters**:
 
@@ -168,19 +107,10 @@ Step 6: Add Monitors
 
 Add a DFT (Discrete Fourier Transform) monitor to capture frequency-domain fields:
 
-.. code-block:: python
-
-   fdtd_solver.AddDFTMonitor(
-       mon_type="2d-z-normal",     # 2D monitor in XY plane
-       z0=0.11,                     # Z-position (center of waveguide)
-       name="MyDFTMonitor1",
-       lmin=lmin,
-       lmax=lmax,
-       npts=npts,
-       save_ex=True,                # Save Ex field component
-       save_ey=True,                # Save Ey field component
-       save_hz=True                 # Save Hz field component
-   )
+.. literalinclude:: ../_static/examples/GettingStarted/FDTD_getting_started.py
+   :language: python
+   :start-after: ### Add Monitors
+   :end-at: ### End Add Monitors
 
 **Monitor Types**:
 
@@ -193,18 +123,10 @@ Step 7: Set Simulation Parameters
 
 Configure mesh resolution, simulation time, and output:
 
-.. code-block:: python
-
-   fdtd_solver.SetSimSettings(
-       sim_time=350,                    # Total simulation time (ps)
-       space_step=0.05,                 # Mesh size: 50nm
-       subpixel_level=2,                # Subpixel averaging level
-       save_path="./results",
-       results_filename='waveguide',
-       device_geometry=device_geometry,
-       auto_shutoff_limit=1e-2,         # Auto-stop when fields decay
-       export_mat_grid=True             # Export permittivity grid
-   )
+.. literalinclude:: ../_static/examples/GettingStarted/FDTD_getting_started.py
+   :language: python
+   :start-after: ###  Set Simulation Parameters
+   :end-at: ### End Set Simulation Parameters
 
 **Critical Parameters**:
 
@@ -214,10 +136,15 @@ Configure mesh resolution, simulation time, and output:
 - **auto_shutoff_limit**: Stops simulation when field energy falls below threshold
 
 Step 8: Run Simulation
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../_static/examples/GettingStarted/FDTD_getting_started.py
+   :language: python
+   :start-after: ###      Run and Post Processing       ###
+   :end-at: ### End Run and Post Processing
 
 .. code-block:: python
-
+   
    # Run the simulation
    results = fdtd_solver.Run()
    
@@ -251,7 +178,7 @@ Here is the complete code you can copy and run (:download:`FDTD_getting_started.
 Understanding the Results
 -------------------------
 
-The FDTD solver returns an ``FDTDSimResults`` object with several useful components:
+The FDTD solver returns an ``FDTDResults`` object with several useful components:
 
 S-Parameters
 ^^^^^^^^^^^^
@@ -278,10 +205,10 @@ All data is saved in HDF5 format (``results/waveguide.hdf5``):
 
 .. code-block:: python
 
-   from pyOptiShared.SimResults import FDTDSimResults
+   from pyFDTDKernel.FDTDResults import FDTDResults
    
    # Load results from file
-   results = FDTDSimResults()
+   results = FDTDResults()
    results.loadHDF5('results/waveguide.hdf5')
 
 Tips for Success
@@ -309,7 +236,7 @@ For symmetric devices (crossings, splitters), exploit symmetry to simulate only 
 
 .. code-block:: python
 
-   fdtd_solver.SetPorts(
+   fdtd_solver.SetExcitation(
        ...,
        symmetries='4x'  # Predefined 4-port crossing symmetry
    )
@@ -335,7 +262,7 @@ Excite specific modes in different ports:
 
 .. code-block:: python
 
-   fdtd_solver.SetPorts(
+   fdtd_solver.SetExcitation(
        ...,
        mode_indices=[0, 2]  # Port 1: mode 0, Port 2: mode 2
    )

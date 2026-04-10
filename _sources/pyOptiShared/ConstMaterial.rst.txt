@@ -38,5 +38,5 @@ Usage Notes
 --------------
 
 - This material assumes isotropic conditions.
-- For narrowband analysis, loss can be supported via a complex term in the constant model. However, an analytic dispersive model is  recommended to prevent violating Krammers-Kronig relations.
+- For narrowband analysis, loss can be supported via a complex term in the constant model. However, an analytic dispersive model is recommended to prevent violating Kramers-Kronig relations.
 - For more complex materials (e.g., lossy and dispersive), consider using an alternative model like :ref:`sellmeier-material` or :ref:`experimental-material`.

@@ -1,0 +1,31 @@
+:orphan:
+
+
+Directional Coupler
+^^^^^^^^^^^^^^^^^^^^
+
+.. literalinclude:: /_static/examples/FEFD/DirectionalCoupler/DirectionalCoupler2.5.py
+  :language: python
+
+
+.. grid:: 3
+
+    .. grid-item-card::  S21 Power
+
+        .. figure:: /_static/examples/FEFD/DirectionalCoupler/images/S21.png
+           :width: 100%
+           :align: center
+
+    .. grid-item-card::  Field Profile
+
+        .. figure:: /_static/examples/FEFD/DirectionalCoupler/images/FieldProfile.png
+           :width: 100%
+           :align: center
+
+    .. grid-item-card::  Port Profile
+
+        .. figure:: /_static/examples/FEFD/DirectionalCoupler/images/PortProfile.png
+           :width: 100%
+           :align: center
+
+  

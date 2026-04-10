@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import gdstk
-from pyOptiShared.SimResults import FDTDSimResults
+from pyFDTDKernel.FDTDResults import FDTDResults
 
 # Loading the Results
-results = FDTDSimResults()
+results = FDTDResults()
 results.loadHDF5('results/splitter.hdf5')
 res = results.runs[0].dftmonitors["MyDFTMonitor1"]
 x_ax = res.Get('x_axis')

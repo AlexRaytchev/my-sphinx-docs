@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FEMFy.FEFDResults.FEFDResults &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Flex Device Library" href="../../pyOptiShared/Designs.html" />
+    <link rel="prev" title="FEMFy.FEFDSolver.FEFDSolver" href="FEMFy.FEFDSolver.FEFDSolver.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo-traced.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../APIDocumentation/APIDocumentation.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../pyOptiShared/SharedLibraries.html">Shared Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyModeSolver/pyModeSolver.html">Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">FDTD</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../FEMFy.html">FEFD</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../FEMFy.html#api-documentation">API Documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="FEMFy.FEFDSolver.FEFDSolver.html">FEMFy.FEFDSolver.FEFDSolver</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">FEMFy.FEFDResults.FEFDResults</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults"><code class="docutils literal notranslate"><span class="pre">FEFDResults</span></code></a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.GetFieldData"><code class="docutils literal notranslate"><span class="pre">FEFDResults.GetFieldData()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.GetNeffData"><code class="docutils literal notranslate"><span class="pre">FEFDResults.GetNeffData()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.GetProfile1DData"><code class="docutils literal notranslate"><span class="pre">FEFDResults.GetProfile1DData()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.GetSParameterData"><code class="docutils literal notranslate"><span class="pre">FEFDResults.GetSParameterData()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.PlotField"><code class="docutils literal notranslate"><span class="pre">FEFDResults.PlotField()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.PlotMaterial"><code class="docutils literal notranslate"><span class="pre">FEFDResults.PlotMaterial()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.PlotNeff"><code class="docutils literal notranslate"><span class="pre">FEFDResults.PlotNeff()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.PlotPort"><code class="docutils literal notranslate"><span class="pre">FEFDResults.PlotPort()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.PlotSParameters"><code class="docutils literal notranslate"><span class="pre">FEFDResults.PlotSParameters()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.mode_sources"><code class="docutils literal notranslate"><span class="pre">FEFDResults.mode_sources()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.set_sparameters"><code class="docutils literal notranslate"><span class="pre">FEFDResults.set_sparameters()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.sparameters"><code class="docutils literal notranslate"><span class="pre">FEFDResults.sparameters</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#straight-waveguide">Straight Waveguide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#degree-bend">90 Degree Bend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#d-simulation-of-waveguide">2.5D simulation of Waveguide</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#d-simulation-of-ring-resonator">2.5D simulation of Ring Resonator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#d-simulation-of-directional-coupler">2.5D simulation of Directional Coupler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#d-simulation-of-cosine-taper">2.5D simulation of Cosine Taper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../FEMFy.html#d-simulation-of-mmi-1x2">2.5D simulation of MMI 1x2</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyOptiShared/Designs.html">Flex Device Library</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optiwave's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
+          <li class="breadcrumb-item"><a href="../FEMFy.html">FEFD</a></li>
+      <li class="breadcrumb-item active">FEMFy.FEFDResults.FEFDResults</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/FEMFy/library/FEMFy.FEFDResults.FEFDResults.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="femfy-fefdresults-fefdresults">
+<h1>FEMFy.FEFDResults.FEFDResults<a class="headerlink" href="#femfy-fefdresults-fefdresults" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="FEMFy.FEFDResults.FEFDResults">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">FEMFy.FEFDResults.</span></span><span class="sig-name descname"><span class="pre">FEFDResults</span></span><a class="headerlink" href="#FEMFy.FEFDResults.FEFDResults" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SimResults</span></code></p>
+<p>FEFD Results class.</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.GetFieldData" title="FEMFy.FEFDResults.FEFDResults.GetFieldData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetFieldData</span></code></a>([target_wavelength, source_idx])</p></td>
+<td><p>Returns the interpolated 2D field data for a specific wavelength.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.GetNeffData" title="FEMFy.FEFDResults.FEFDResults.GetNeffData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetNeffData</span></code></a>([source_idx])</p></td>
+<td><p>Returns the Effective Index data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.GetProfile1DData" title="FEMFy.FEFDResults.FEFDResults.GetProfile1DData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetProfile1DData</span></code></a>(target_wavelength[, source_idx])</p></td>
+<td><p>Returns the interpolated 1D profile.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.GetSParameterData" title="FEMFy.FEFDResults.FEFDResults.GetSParameterData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetSParameterData</span></code></a>([s_param])</p></td>
+<td><p>_summary_</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.PlotField" title="FEMFy.FEFDResults.FEFDResults.PlotField"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlotField</span></code></a>([target_wavelength, source_idx, ...])</p></td>
+<td><p>Loads an HDF5 file, finds the field data, interpolates it to the requested wavelength, and plots the result.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.PlotMaterial" title="FEMFy.FEFDResults.FEFDResults.PlotMaterial"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlotMaterial</span></code></a>([plot_mode, figsize, cmap, show])</p></td>
+<td><p>Loads the material structure (Permittivity) from the HDF5 file and plots it.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.PlotNeff" title="FEMFy.FEFDResults.FEFDResults.PlotNeff"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlotNeff</span></code></a>([source_idx, figsize, show])</p></td>
+<td><p>Plots the Real and Imaginary parts of the Effective Index (Neff).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.PlotPort" title="FEMFy.FEFDResults.FEFDResults.PlotPort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlotPort</span></code></a>([target_wavelength, source_idx, ...])</p></td>
+<td><p>Plots the 1D Mode Profile cross-section at a specific wavelength.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.PlotSParameters" title="FEMFy.FEFDResults.FEFDResults.PlotSParameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlotSParameters</span></code></a>([s_param, figsize, show])</p></td>
+<td><p>Plots the Linear Magnitude and Phase (rad) of a specific S-parameter.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">loadHDF5</span></code>(filename)</p></td>
+<td><p>This method loads results from an HDF5 file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.mode_sources" title="FEMFy.FEFDResults.FEFDResults.mode_sources"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mode_sources</span></code></a>()</p></td>
+<td><p>A dictionary of mode source data.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_epsilons</span></code>(epsilons)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_fields</span></code>(fields)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_hdf5_path</span></code>(path)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.set_sparameters" title="FEMFy.FEFDResults.FEFDResults.set_sparameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_sparameters</span></code></a>(sparameters[, phase_is_degrees])</p></td>
+<td><p>Converts a raw numpy array of [Wavelength, Mag, Phase...] into a dictionary of your custom NXdata objects.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">epsilon_monitor</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fields</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ports_monitors</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#FEMFy.FEFDResults.FEFDResults.sparameters" title="FEMFy.FEFDResults.FEFDResults.sparameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sparameters</span></code></a></p></td>
+<td><p>A dictionary with scattering parameter results.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDResults.FEFDResults.GetFieldData">
+<span class="sig-name descname"><span class="pre">GetFieldData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEMFy.FEFDResults.FEFDResults.GetFieldData" title="Link to this definition"></a></dt>
+<dd><p>Returns the interpolated 2D field data for a specific wavelength.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_wavelength</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – the wavelength of the field.</p></li>
+<li><p><strong>source_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – the index of the source. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – _description_</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(x_samples, y_samples, interpolated_field_complex, actual_wavelength)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDResults.FEFDResults.GetNeffData">
+<span class="sig-name descname"><span class="pre">GetNeffData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span></span><a class="headerlink" href="#FEMFy.FEFDResults.FEFDResults.GetNeffData" title="Link to this definition"></a></dt>
+<dd><p>Returns the Effective Index data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>source_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – source number. Defaults to 0.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(wavelengths, neff_real, neff_imag, neff_complex)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDResults.FEFDResults.GetProfile1DData">
+<span class="sig-name descname"><span class="pre">GetProfile1DData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEMFy.FEFDResults.FEFDResults.GetProfile1DData" title="Link to this definition"></a></dt>
+<dd><p>Returns the interpolated 1D profile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_wavelength</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a>) – the wavelength of the data.</p></li>
+<li><p><strong>source_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – the source number. Defaults to 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>(x_1d_positions, profile_values, actual_wavelength)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDResults.FEFDResults.GetSParameterData">
+<span class="sig-name descname"><span class="pre">GetSParameterData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s_param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'S21'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEMFy.FEFDResults.FEFDResults.GetSParameterData" title="Link to this definition"></a></dt>
+<dd><p>_summary_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s_param</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – the sparameter label ‘S11’, ‘S21’, … etc. Defaults to “S21”.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – _description_</p>
+</dd>
+</dl>
+<p>Retrieves the numerical data for a specific S-parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(wavelengths, magnitude_linear, phase_rad, s_complex)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)">tuple</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDResults.FEFDResults.PlotField">
+<span class="sig-name descname"><span class="pre">PlotField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'abs'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(10,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'RdBu_r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEMFy.FEFDResults.FEFDResults.PlotField" title="Link to this definition"></a></dt>
+<dd><p>Loads an HDF5 file, finds the field data, interpolates it to the requested wavelength, and plots the result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_wavelength</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – The specific wavelength (in um) you want to visualize..</p></li>
+<li><p><strong>source_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – The integer index of the source (port) to visualize. Defaults to 0.</p></li>
+<li><p><strong>plot_mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – ‘real’ (snapshot), ‘abs’ (envelope), ‘intensity’ . Defaults to ‘abs’.</p></li>
+<li><p><strong>figsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>, </em><em>optional</em>) – Matplotlib figure size (width, height). Default (10,6).</p></li>
+<li><p><strong>cmap</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – _description_. Defaults to ‘RdBu_r’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – _description_</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – _description_</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDResults.FEFDResults.PlotMaterial">
+<span class="sig-name descname"><span class="pre">PlotMaterial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'real'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(10,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Greys'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEMFy.FEFDResults.FEFDResults.PlotMaterial" title="Link to this definition"></a></dt>
+<dd><p>Loads the material structure (Permittivity) from the HDF5 file and plots it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plot_mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – ‘real’: Plots the real part of permittivity (Dielectric Constant).
+‘imag’: Plots the imaginary part (Loss/Gain).
+‘abs’ : Plots the magnitude.. Defaults to ‘real’.</p></li>
+<li><p><strong>figsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>, </em><em>optional</em>) – Matplotlib figure size (width, height). Default (10,6).</p></li>
+<li><p><strong>cmap</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – _description_. Defaults to ‘Greys’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – _description_</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – _description_</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – _description_</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDResults.FEFDResults.PlotNeff">
+<span class="sig-name descname"><span class="pre">PlotNeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(10,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEMFy.FEFDResults.FEFDResults.PlotNeff" title="Link to this definition"></a></dt>
+<dd><p>Plots the Real and Imaginary parts of the Effective Index (Neff).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – The integer index of the source (port) to visualize. Defaults to 0.</p></li>
+<li><p><strong>figsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>, </em><em>optional</em>) – Matplotlib figure size (width, height). Default (10,6).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDResults.FEFDResults.PlotPort">
+<span class="sig-name descname"><span class="pre">PlotPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(10,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEMFy.FEFDResults.FEFDResults.PlotPort" title="Link to this definition"></a></dt>
+<dd><p>Plots the 1D Mode Profile cross-section at a specific wavelength.
+Performs linear interpolation between nearest wavelength frames.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_wavelength</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><em>float</em></a><em>, </em><em>optional</em>) – _description_. Defaults to 1.5.</p></li>
+<li><p><strong>source_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><em>int</em></a><em>, </em><em>optional</em>) – index of the source to plot. Defaults to 0.</p></li>
+<li><p><strong>figsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>, </em><em>optional</em>) – the figure size. Defaults to (10, 6).</p></li>
+<li><p><strong>show</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>optional</em>) – show the plot. Defaults to True.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDResults.FEFDResults.PlotSParameters">
+<span class="sig-name descname"><span class="pre">PlotSParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s_param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'S21'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(10,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEMFy.FEFDResults.FEFDResults.PlotSParameters" title="Link to this definition"></a></dt>
+<dd><p>Plots the Linear Magnitude and Phase (rad) of a specific S-parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s_param</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a><em>, </em><em>optional</em>) – The name of the parameter (e.g., ‘S11’, ‘S21’). Defaults to “S21”.</p></li>
+<li><p><strong>figsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><em>tuple</em></a><em>, </em><em>optional</em>) – Matplotlib figure size (width, height). Default (10,6).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – _description_</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDResults.FEFDResults.mode_sources">
+<span class="sig-name descname"><span class="pre">mode_sources</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">FEFDModeData</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#FEMFy.FEFDResults.FEFDResults.mode_sources" title="Link to this definition"></a></dt>
+<dd><p>A dictionary of mode source data.</p>
+<p>The keys are <code class="docutils literal notranslate"><span class="pre">Mode</span> <span class="pre">Source</span> <span class="pre">o#</span></code> where # is the port number
+starting from 1. The values are FEFDModeData objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, FEFDModeData]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FEMFy.FEFDResults.FEFDResults.set_sparameters">
+<span class="sig-name descname"><span class="pre">set_sparameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sparameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">phase_is_degrees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FEMFy.FEFDResults.FEFDResults.set_sparameters" title="Link to this definition"></a></dt>
+<dd><p>Converts a raw numpy array of [Wavelength, Mag, Phase…] into a dictionary
+of your custom NXdata objects.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="FEMFy.FEFDResults.FEFDResults.sparameters">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">sparameters</span></span><a class="headerlink" href="#FEMFy.FEFDResults.FEFDResults.sparameters" title="Link to this definition"></a></dt>
+<dd><p>A dictionary with scattering parameter results.</p>
+<p>The keys are either <code class="docutils literal notranslate"><span class="pre">&quot;ALL&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;SNM&quot;</span></code>, where
+<strong>N</strong> and <strong>M</strong> are port numbers, starting from 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a>, <a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.SimResults.NXdata.html#pyOptiShared.SimResults.NXdata" title="pyOptiShared.SimResults.NXdata">NXdata</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="FEMFy.FEFDSolver.FEFDSolver.html" class="btn btn-neutral float-left" title="FEMFy.FEFDSolver.FEFDSolver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../pyOptiShared/Designs.html" class="btn btn-neutral float-right" title="Flex Device Library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

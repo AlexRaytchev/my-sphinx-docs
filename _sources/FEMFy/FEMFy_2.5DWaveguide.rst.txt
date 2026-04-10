@@ -1,0 +1,69 @@
+
+
+
+
+2.5D simulation of Waveguide
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This examples shows how to use FEM 2.5 D capabilities in simulating photonic devices and get results close to the 3D models.
+The example also shows how to simulate a device defined by a custom function
+
+The simulation setup in the code snippet below. In this example, TM polarization is used. 
+
+.. literalinclude:: ../_static/examples/FEFD/straight_waveguide2.5/straight_wabeguide2_5.py
+   :language: python
+
+
+.. dropdown:: Waveguide plot
+
+  The code first starts by defining a waveguide from a function and plot it which looks like this
+
+  .. image:: ../_static/examples/FEFD/straight_waveguide2.5/images/waveguide_from_function.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+
+Then the code starts a mode solver instance to simulate the cross-section of the waveguide.
+
+
+.. dropdown:: Field profile
+
+  The code should produce a field profile that looks like this
+
+
+  .. image:: ../_static/examples/FEFD/straight_waveguide2.5/images/straight_wg_fieldTM.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+.. dropdown:: Field profile  
+
+  The code also plots the 1D field profile of the input port.
+
+  .. image:: ../_static/examples/FEFD/straight_waveguide2.5/images/port_field_TM.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+.. dropdown:: Transmission S21 
+
+  The code also plots the S21 transmission parameter.
+
+  .. image:: ../_static/examples/FEFD/straight_waveguide2.5/images/S21_TM.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+.. dropdown:: Effective index comparison 
+
+  The code also plots a comparison between the effective index of the mode solver and the effective index computed with the 2.5D approximation.
+
+  .. image:: ../_static/examples/FEFD/straight_waveguide2.5/images/Neff_TM.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center

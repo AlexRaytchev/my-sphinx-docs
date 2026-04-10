@@ -1,10 +1,12 @@
 import gdstk
 import os
 
-from pyModeSolver.py_mode_solver import VFDModeSolver
+from pyModeSolver.pyModeSolver import VFDModeSolver
 from pyOptiShared.LayerInfo import LayerStack
 from pyOptiShared.DeviceGeometry import DeviceGeometry
 from pyOptiShared.Material import ConstMaterial,ExperimentalMaterial
+import numpy as np
+import matplotlib.pyplot as plt
 
 ##########################################
 ###         Create Fiber GDS File         ###
@@ -28,8 +30,8 @@ sio2_exp.SetFromRefDotInfo(shelf="main", book="SiO2", page="Malitson", wavelengt
 ###       Layer Stack Settings         ###
 ##########################################
 layer_stack = LayerStack()
-layer_stack.addLayer(number=1,material=sio2_exp, thickness=0.0, zmin=0, sideWallAng=0, cladding=air_mat)
-layer_stack.setBGandSub(background=air_mat, substrate=air_mat)
+layer_stack.AddLayer(number=1,material=sio2_exp, thickness=0.0, zmin=0, sideWallAng=0, cladding=air_mat)
+layer_stack.SetBGandSub(background=air_mat, substrate=air_mat)
 
 ##########################################
 ###   Device Geometry/Port Settings    ###
@@ -42,19 +44,21 @@ device_geometry.SetFromGDS(layer_stack=layer_stack,
 ##########################################
 ###       ModeSolver Settings          ###
 ##########################################
+lams=np.linspace(start=1.5,stop=1.6,num=5)
 mode_solver = VFDModeSolver()
-mode_solver.SetBoundaries(min_x = {"bc":"pmc"}, max_x = {"bc":"pmc"},
-                       min_y = {"bc":"pmc"}, max_y = {"bc":"pmc"},)
+mode_solver.SetBoundaries(min_x = "pmc", max_x = "pmc",
+                        min_y = "pmc", max_y = "pmc")
+
 mode_solver.SetSimSettings(device_geometry = device_geometry,
                           mesh={"dx": 0.5,"dy": 0.5, "dz": 0.5},
-                          wavelength={"min":1.5,"max":1.6,"npts": 11},
+                          wavelength=lams,
                           nguess = 3.4,
                           nmodes = 1,
                           cut_plane = "XY",
                           cut_location = 0.0,
                           tol = 1e-8,
-                          savepath = "./ModeResults",
-                          res_filename = "my_results")
+                          results_path = "./ModeResults",
+                          device_name = "my_results")
 
 ##########################################
 ###      Run and Post Processing       ###
@@ -67,3 +71,4 @@ results.PlotMode() # Fundamental Mode Profile
 results.PlotPermittivity()  # Material Profile
 results.PlotIndex('neff',modes=[0]) # Effective Refractive Index
 results.PlotIndex('ng',modes=[0]) # Effective Group Index
+plt.show()

@@ -1,0 +1,17 @@
+:orphan:
+
+Directional Coupler - Sidewall Angle 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. literalinclude:: /_static/examples/FDTD/FDTD_Coupler_Sidewall.py
+  :language: python
+
+
+.. grid:: 1
+
+    .. grid-item-card::  S31 Power
+
+        .. figure:: /_static/Coupler_Sidewall.png
+           :width: 100%
+           :align: center
+

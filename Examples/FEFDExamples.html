@@ -1,0 +1,935 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FEFD &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Application Examples" href="ApplicationExamples.html" />
+    <link rel="prev" title="FDTD" href="FDTDExamples.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-traced.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ModeSolverExamples.html">Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FDTDExamples.html">FDTD</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FEFD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#directional-coupler">Directional Coupler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#splitter">Splitter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#waveguide-run-fefd-simulation-from-a-function">Waveguide - Run FEFD simulation from a function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#waveguide-run-fefd-simulation-from-a-function-gdstk">Waveguide - Run FEFD simulation from a function (gdstk)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ApplicationExamples.html">Application Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DeviceExamples.html">Device Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optiwave's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">FEFD</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Examples/FEFDExamples.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fefd">
+<h1>FEFD<a class="headerlink" href="#fefd" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">orphan<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<section id="directional-coupler">
+<h2>Directional Coupler<a class="headerlink" href="#directional-coupler" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">FEMFy.FEFDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FEFDSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Simulator</span><span class="w"> </span><span class="kn">import</span> <span class="n">PML_Params</span><span class="p">,</span><span class="n">Mesh</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">gdstk</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;DirectionalCoupler2.5.gds&quot;</span>
+
+<span class="n">length</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">width1</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">width2</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">gap</span> <span class="o">=</span> <span class="mf">0.15</span><span class="o">+</span><span class="mf">0.25</span>
+<span class="n">lib</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
+<span class="n">shift</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">strt_wg</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">new_cell</span><span class="p">(</span><span class="s2">&quot;Straight_WG&quot;</span><span class="p">)</span>
+<span class="n">vertices1</span> <span class="o">=</span> <span class="p">[(</span><span class="n">shift</span><span class="o">+</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">width1</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">gap</span><span class="p">),</span> <span class="p">(</span><span class="n">shift</span><span class="o">+</span><span class="n">length</span><span class="p">,</span> <span class="o">-</span><span class="n">width1</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">gap</span><span class="p">),</span> <span class="p">(</span><span class="n">shift</span><span class="o">+</span><span class="n">length</span><span class="p">,</span> <span class="n">width1</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">gap</span><span class="p">),</span> <span class="p">(</span><span class="n">shift</span><span class="o">+</span><span class="mi">0</span><span class="p">,</span> <span class="n">width1</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">gap</span><span class="p">)]</span>
+<span class="n">vertices2</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">width2</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">gap</span><span class="p">),</span> <span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="o">-</span><span class="n">width2</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">gap</span><span class="p">),</span> <span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">width2</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">gap</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">width2</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">gap</span><span class="p">)]</span>
+
+<span class="n">strt_wg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gdstk</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">vertices1</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">strt_wg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gdstk</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">vertices2</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">lib</span><span class="o">.</span><span class="n">write_gds</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+
+
+<span class="c1"># Define Materials</span>
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">sin_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiN&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.99</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+
+<span class="c1"># Creates the Layer Stack</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                        <span class="n">material</span><span class="o">=</span><span class="n">sin_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+<span class="c1"># Defines the Device Geometry</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromGDS</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">2.0</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">port_buffer</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># General Simulation Settings and Simulation Run</span>
+<span class="n">lmin</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">lmax</span> <span class="o">=</span> <span class="mf">1.6</span>
+<span class="n">lcen</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="n">lmin</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+
+<span class="c1">##########################################</span>
+<span class="c1">###           Mesh Settings            ###</span>
+<span class="c1">##########################################</span>
+<span class="n">fem_mesh</span><span class="o">=</span><span class="n">Mesh</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span><span class="n">dy</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span><span class="n">dz</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+<span class="n">fem_mesh</span><span class="o">.</span><span class="n">SetMeshOptions</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;quiet&#39;</span><span class="p">,</span><span class="n">gui</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">export</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">##########################################</span>
+<span class="c1">###       FEFDSolver Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">fefd_solver</span> <span class="o">=</span> <span class="n">FEFDSolver</span><span class="p">()</span>
+
+<span class="n">pml</span><span class="o">=</span><span class="n">PML_Params</span><span class="p">()</span>
+
+
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span> <span class="n">min_x</span> <span class="o">=</span> <span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                            <span class="n">max_x</span> <span class="o">=</span> <span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                            <span class="n">min_y</span> <span class="o">=</span> <span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                            <span class="n">max_y</span> <span class="o">=</span> <span class="s2">&quot;pml&quot;</span><span class="p">,</span><span class="n">params</span><span class="o">=</span><span class="n">pml</span><span class="p">)</span>
+
+
+<span class="n">lams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+                          <span class="n">reciprocity</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span><span class="p">)</span>
+
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span>
+                           <span class="n">mesh</span><span class="o">=</span><span class="n">fem_mesh</span><span class="p">,</span>
+                           <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+                           <span class="n">stability</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                           <span class="n">resolution</span> <span class="o">=</span> <span class="mi">800</span><span class="p">,</span>
+                           <span class="n">interpolation</span> <span class="o">=</span> <span class="s2">&quot;FEM&quot;</span><span class="p">,</span>
+                           <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;direct&#39;</span><span class="p">,</span>
+                           <span class="n">polarization</span><span class="o">=</span><span class="s1">&#39;TM2.5&#39;</span><span class="p">,</span>
+                           <span class="n">number_iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                           <span class="n">results_path</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                           <span class="p">)</span>
+
+
+<span class="n">fefd_results</span> <span class="o">=</span> <span class="n">fefd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+<span class="n">fefd_results</span><span class="o">.</span><span class="n">PlotField</span><span class="p">()</span>
+<span class="n">fefd_results</span><span class="o">.</span><span class="n">PlotPort</span><span class="p">()</span>
+<span class="n">fefd_results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">s_param</span><span class="o">=</span><span class="s2">&quot;S21&quot;</span><span class="p">)</span>
+
+
+</pre></div>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-3 sd-row-cols-xs-3 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+S21 Power</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/S21.png"><img alt="../_images/S21.png" src="../_images/S21.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Field Profile</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/FieldProfile.png"><img alt="../_images/FieldProfile.png" src="../_images/FieldProfile.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Port Profile</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/PortProfile.png"><img alt="../_images/PortProfile.png" src="../_images/PortProfile.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">orphan<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</section>
+<section id="splitter">
+<h2>Splitter<a class="headerlink" href="#splitter" title="Link to this heading"></a></h2>
+<p>For this example we are going to simulate a splitter (<a class="reference download internal" download="" href="../_downloads/3d48f4c4cd9d16230307e41cb97bf84c/splitter.gds"><code class="xref download docutils literal notranslate"><span class="pre">splitter.gds</span></code></a>) and
+then create an image with a DFT monitored field overlapping with the device structure outline.</p>
+<a class="reference internal image-reference" href="../_images/splitter.svg"><img alt="A graphical representation of a generic layer stack." class="align-center" src="../_images/splitter.svg" style="width: 60%;" />
+</a>
+<p>In this particular example we make use of the <strong>DFT Monitor</strong> to monitor the frequency content of the fields, so
+we can plot a particular component and wavelength over the device structure outline.
+The python script for this simulation is presented in the following code snippet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">FEMFy.FEFDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FEFDSolver</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Simulator</span><span class="w"> </span><span class="kn">import</span> <span class="n">PML_Params</span><span class="p">,</span> <span class="n">Mesh</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 1. Material Definitions</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Define materials needed for the simulation.</span>
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 2. Layer Stack Configuration</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Define the vertical layer structure.</span>
+<span class="c1"># Even when importing a GDS (which provides 2D shapes), we must map those shapes</span>
+<span class="c1"># to physical layers with thickness and material properties here.</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                     <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                     <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Set background and substrate materials.</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 3. Device Geometry Setup (GDS Import)</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Initialize the device geometry object.</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+
+<span class="c1"># Instead of using &#39;SetFromFun&#39;, we use &#39;SetFromGDS&#39; to load an external file.</span>
+<span class="c1"># - gds_file: Path to the .gds file containing the design.</span>
+<span class="c1"># - buffers: Padding around the GDS bounding box for the simulation region.</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromGDS</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">gds_file</span><span class="o">=</span><span class="s2">&quot;splitter.gds&quot;</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 4. Port Settings</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Configure automatic port detection.</span>
+<span class="c1"># &#39;reciprocity&#39; in the solver settings often depends on how these ports are set up.</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">port_buffer</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 5. Mesh Settings</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Configure the finite element mesh size.</span>
+<span class="n">fem_mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span> <span class="n">dz</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span>
+<span class="n">fem_mesh</span><span class="o">.</span><span class="n">SetMeshOptions</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;quiet&#39;</span><span class="p">,</span> <span class="n">gui</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">export</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 6. Solver Initialization &amp; Boundaries</span>
+<span class="c1"># ==========================================</span>
+<span class="n">fefd_solver</span> <span class="o">=</span> <span class="n">FEFDSolver</span><span class="p">()</span>
+
+<span class="c1"># Initialize PML parameters (using defaults here as no specific args were passed).</span>
+<span class="n">pml</span> <span class="o">=</span> <span class="n">PML_Params</span><span class="p">()</span>
+
+<span class="c1"># Apply boundaries to the solver instance.</span>
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span><span class="n">min_x</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                          <span class="n">max_x</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                          <span class="n">min_y</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                          <span class="n">max_y</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">pml</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 7. Excitation Settings</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Define simulation wavelengths.</span>
+<span class="n">lams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Set excitation parameters.</span>
+<span class="c1"># &#39;reciprocity&#39; is set to &#39;1x2&#39;, which is typical for a 1-input, 2-output splitter,</span>
+<span class="c1"># allowing the solver to optimize the simulation run.</span>
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+                          <span class="n">reciprocity</span><span class="o">=</span><span class="s1">&#39;1x2&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 8. Final Solver Configuration</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Pass all settings to the solver.</span>
+<span class="c1"># Note the specific resolution, interpolation method, and polarization settings.</span>
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span>
+    <span class="n">device_geometry</span><span class="o">=</span><span class="n">device_geometry</span><span class="p">,</span>
+    <span class="n">mesh</span><span class="o">=</span><span class="n">fem_mesh</span><span class="p">,</span>
+    <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;cubic&quot;</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span><span class="p">,</span>
+    <span class="n">polarization</span><span class="o">=</span><span class="s1">&#39;TM2.5&#39;</span><span class="p">,</span>
+    <span class="n">number_iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">results_path</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">adjoint_info</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">order</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 9. Execution and Visualization</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Run the simulation.</span>
+<span class="n">fefd_results</span> <span class="o">=</span> <span class="n">fefd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+
+<span class="c1"># Visualize results.</span>
+<span class="c1"># Plot the field specifically at 1.55um wavelength.</span>
+<span class="n">fefd_results</span><span class="o">.</span><span class="n">PlotField</span><span class="p">(</span><span class="n">target_wavelength</span><span class="o">=</span><span class="mf">1.55</span><span class="p">)</span>
+
+<span class="c1"># Plot port locations and S-Parameters (specifically S31 transmission).</span>
+<span class="n">fefd_results</span><span class="o">.</span><span class="n">PlotPort</span><span class="p">()</span>
+<span class="n">fefd_results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">s_param</span><span class="o">=</span><span class="s2">&quot;S31&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+S31 Transmission</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/S31.png"><img alt="../_images/S31.png" src="../_images/S31.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Field Profile</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/FieldProfile1.png"><img alt="../_images/FieldProfile1.png" src="../_images/FieldProfile1.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-1 sd-row-cols-lg-1 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Port Field</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/port_field.png"><img alt="../_images/port_field.png" src="../_images/port_field.png" style="width: 100%;" />
+</a>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">orphan<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</section>
+<section id="waveguide-run-fefd-simulation-from-a-function">
+<h2>Waveguide - Run FEFD simulation from a function<a class="headerlink" href="#waveguide-run-fefd-simulation-from-a-function" title="Link to this heading"></a></h2>
+<p>Similarly for this example, we are going to simulate a straight waveguide from a user defined function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span><span class="p">,</span><span class="n">ExperimentalMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">FEMFy.FEFDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FEFDSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Simulator</span><span class="w"> </span><span class="kn">import</span> <span class="n">PML_Params</span><span class="p">,</span> <span class="n">Mesh</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 1. Material Definitions</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Define materials needed for the simulation using the ConstMaterial class.</span>
+<span class="c1"># We define the real permittivity (epsReal = n^2) and visualization colors.</span>
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 2. Layer Stack Configuration</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Define the layer stack. We add layers based on the physical stackup.</span>
+<span class="c1"># - &#39;material&#39;: The material of the geometry defined in this layer.</span>
+<span class="c1"># - &#39;cladding&#39;: The material filling the rest of the layer outside the geometry.</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                     <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                     <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Set the background (above stack) and substrate (below stack) materials.</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 3. Geometry Definition (Function-based)</span>
+<span class="c1"># ==========================================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">waveguide</span><span class="p">(</span><span class="n">port_width</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">waveguide_length</span><span class="o">=</span><span class="mf">5.00</span><span class="p">,</span> <span class="n">input_port_center</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates vertices for the structure to solve using polygons.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        port_width: Width of the waveguide.</span>
+<span class="sd">        waveguide_length: Length of the waveguide.</span>
+<span class="sd">        input_port_center: Tuple (x, y) for the start position.</span>
+<span class="sd">        layer: The layer number this geometry belongs to.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of tuples in the format [(vertices, layer)].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vertices</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">port_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)),</span>
+        <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">waveguide_length</span><span class="p">,</span> <span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">port_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)),</span>
+        <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">waveguide_length</span><span class="p">,</span> <span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">port_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)),</span>
+        <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">port_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="p">]</span>
+    
+    <span class="k">return</span> <span class="p">[(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">layer</span><span class="p">)]</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 4. Parameter Definition</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Define the parameters tuple to pass to the function during simulation.</span>
+<span class="c1"># Format corresponds to function args: (port_width, waveguide_length, input_port_center, layer)</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">5.00</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 5. Device Geometry Setup</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Use DeviceGeometry to substitute parameters into the function and build the device.</span>
+<span class="c1"># We also pass the layer stack and simulation region buffers (x, y, z).</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromFun</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">waveguide</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 6. Port Settings</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Set automatic port detection based on direction (x or y) and buffer size.</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">port_buffer</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">PrintPorts</span><span class="p">()</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 7. Simulation Parameters &amp; PML</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Define wavelength points (start, stop, number of points).</span>
+<span class="n">lams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Set Perfectly Matched Layer (PML) parameters for the boundaries.</span>
+<span class="c1"># This defines thickness, profile, kappa, sigma, and alpha for the absorbing layers.</span>
+<span class="n">pml</span> <span class="o">=</span> <span class="n">PML_Params</span><span class="p">()</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># 8. Mesh Settings</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Configure the finite element mesh size (dx, dy, dz).</span>
+<span class="n">fem_mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+<span class="n">fem_mesh</span><span class="o">.</span><span class="n">SetMeshOptions</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;quiet&#39;</span><span class="p">,</span> <span class="n">gui</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">export</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 9. Solver Initialization &amp; Boundaries</span>
+<span class="c1"># ==========================================</span>
+<span class="n">fefd_solver</span> <span class="o">=</span> <span class="n">FEFDSolver</span><span class="p">()</span>
+
+<span class="c1"># Set boundaries for the solver (min/max x and y).</span>
+<span class="c1"># We apply the PML parameters defined in step 7.</span>
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span><span class="n">min_x</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                          <span class="n">max_x</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                          <span class="n">min_y</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                          <span class="n">max_y</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span> 
+                          <span class="n">params</span><span class="o">=</span><span class="n">pml</span><span class="p">)</span>
+
+<span class="c1"># Set Excitation and Reciprocity.</span>
+<span class="c1"># &#39;reciprocity&#39; avoids simulating symmetrical ports unnecessarily.</span>
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+                          <span class="n">reciprocity</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 10. Final Solver Configuration</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Pass all defined information (geometry, mesh, wavelength, solver settings) to the solver.</span>
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span>
+    <span class="n">device_geometry</span><span class="o">=</span><span class="n">device_geometry</span><span class="p">,</span>
+    <span class="n">mesh</span><span class="o">=</span><span class="n">fem_mesh</span><span class="p">,</span>
+    <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+    <span class="n">stability</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+    <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;FEM&quot;</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span><span class="p">,</span>
+    <span class="n">polarization</span><span class="o">=</span><span class="s1">&#39;TM2.5&#39;</span><span class="p">,</span>
+    <span class="n">number_iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">order</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 11. Execution and Visualization</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Run the simulation.</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">fefd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+
+<span class="c1"># Visualize the results: Fields, Ports, and S-Parameters.</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotField</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotPort</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">s_param</span><span class="o">=</span><span class="s2">&quot;S21&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is also possible to run sweeps on the function by using <a class="reference internal" href="../pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.UpdateScriptParams" title="pyOptiShared.DeviceGeometry.DeviceGeometry.UpdateScriptParams"><code class="xref py py-meth docutils literal notranslate"><span class="pre">UpdateScriptParams</span></code></a> which updates the parameters getting passed to the device geometry.
+Note: you still need to call the solver <a class="reference internal" href="../pyFDTD/library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetSimSettings" title="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetSimSettings"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SetSimSettings</span></code></a> so that the device geometry update takes effect.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">FEMFy.FEFDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FEFDSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Simulator</span><span class="w"> </span><span class="kn">import</span> <span class="n">PML_Params</span><span class="p">,</span> <span class="n">Mesh</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 1. Material Definitions</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Define materials needed for the simulation.</span>
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 2. Layer Stack Configuration</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Define the layer stack structure.</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                     <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                     <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 3. Geometry Definition (Function-based)</span>
+<span class="c1"># ==========================================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">waveguide</span><span class="p">(</span><span class="n">port_width</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">waveguide_length</span><span class="o">=</span><span class="mf">1.00</span><span class="p">,</span> <span class="n">input_port_center</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates vertices for the waveguide structure.</span>
+<span class="sd">    This function will be called repeatedly with updated parameters during the sweep.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vertices</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">port_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)),</span>
+        <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">waveguide_length</span><span class="p">,</span> <span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">port_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)),</span>
+        <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">waveguide_length</span><span class="p">,</span> <span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">port_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)),</span>
+        <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">port_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">layer</span><span class="p">)]</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 4. Sweep Parameter Setup</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Define the range of widths to sweep over.</span>
+<span class="n">min_width</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">max_width</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">num_points</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">widths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">min_width</span><span class="p">,</span> <span class="n">max_width</span><span class="p">,</span> <span class="n">num_points</span><span class="p">)</span>
+
+<span class="c1"># Define initial parameters tuple.</span>
+<span class="c1"># Format: (port_width, waveguide_length, input_port_center, layer)</span>
+<span class="n">initial_parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">widths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">5.00</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 5. Device Geometry Initialization</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Initialize the device geometry with the function and INITIAL parameters.</span>
+<span class="c1"># The parameters will be updated inside the loop later.</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromFun</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">waveguide</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="n">initial_parameters</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Configure ports.</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">port_buffer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                    <span class="nb">min</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.51</span><span class="p">],</span> <span class="nb">max</span><span class="o">=</span><span class="p">[</span><span class="mf">0.55</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">],</span> <span class="n">pad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 6. Simulation Parameters</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Wavelength points for the solver.</span>
+<span class="n">lams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 7. Mesh &amp; PML Settings</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Configure the mesh size.</span>
+<span class="n">fem_mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span> <span class="n">dz</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span>
+<span class="n">fem_mesh</span><span class="o">.</span><span class="n">SetMeshOptions</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;quiet&#39;</span><span class="p">,</span> <span class="n">gui</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">export</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Configure Perfectly Matched Layers (PML) for each boundary.</span>
+<span class="n">pml</span> <span class="o">=</span> <span class="n">PML_Params</span><span class="p">()</span>
+<span class="c1">#pml.SetMinX(thickness=0.6, profile=2, kappa=1, sigma=1.3, alpha=0.00)</span>
+<span class="c1">#pml.SetMaxX(thickness=0.6, profile=2, kappa=1, sigma=1.3, alpha=0.00)</span>
+<span class="c1">#pml.SetMinY(thickness=0.1, profile=2, kappa=1, sigma=1.0, alpha=0.00)</span>
+<span class="c1">#pml.SetMaxY(thickness=0.1, profile=2, kappa=1, sigma=1.0, alpha=0.00)</span>
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 8. Solver Initialization</span>
+<span class="c1"># ==========================================</span>
+<span class="n">fefd_solver</span> <span class="o">=</span> <span class="n">FEFDSolver</span><span class="p">()</span>
+
+<span class="c1"># Apply boundaries (PML) and excitation settings.</span>
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span><span class="n">min_x</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                          <span class="n">max_x</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                          <span class="n">min_y</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                          <span class="n">max_y</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">pml</span><span class="p">)</span>
+
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+                          <span class="n">reciprocity</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span><span class="p">)</span>
+    
+
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 9. Sweep Execution Loop</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Iterate through each width in the defined array.</span>
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">widths</span><span class="p">:</span>
+    <span class="c1"># 9a. Define filename for this specific iteration</span>
+    <span class="n">results_filename</span> <span class="o">=</span> <span class="s1">&#39;waveguide_spx_1_50nm_sweep_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;solving for width : &#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+    
+    <span class="c1"># 9b. Update Geometry Parameters</span>
+    <span class="c1"># Create a new parameters tuple with the current width &#39;w&#39;.</span>
+    <span class="c1"># The other parameters (length, center, layer) remain constant.</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mf">5.00</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># UpdateScriptParams applies the new parameters to the &#39;waveguide&#39; function</span>
+    <span class="c1"># defined in the DeviceGeometry object.</span>
+    <span class="n">device_geometry</span><span class="o">.</span><span class="n">UpdateScriptParams</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+    
+    <span class="c1"># 9c. Update Solver Settings</span>
+    <span class="c1"># Pass the updated device_geometry and unique filename to the solver.</span>
+    <span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span>
+        <span class="n">device_geometry</span><span class="o">=</span><span class="n">device_geometry</span><span class="p">,</span>
+        <span class="n">mesh</span><span class="o">=</span><span class="n">fem_mesh</span><span class="p">,</span>
+        <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+        <span class="n">stability</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">resolution</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+        <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span>
+        <span class="n">method</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span><span class="p">,</span>
+        <span class="n">polarization</span><span class="o">=</span><span class="s1">&#39;TM2.5&#39;</span><span class="p">,</span>
+        <span class="n">number_iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">device_name</span><span class="o">=</span><span class="n">results_filename</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># 9d. Run Simulation</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">fefd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+
+    <span class="c1"># 9e. Visualize Results</span>
+    <span class="c1"># Plots will be generated for every iteration.</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">PlotField</span><span class="p">(</span><span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">PlotPort</span><span class="p">(</span><span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">s_param</span><span class="o">=</span><span class="s2">&quot;S21&quot;</span><span class="p">,</span><span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;width : </span><span class="si">{</span><span class="n">w</span><span class="si">}</span><span class="s2"> --- done !&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Show all generated plots after the loop finishes.</span>
+</pre></div>
+</div>
+</section>
+<section id="waveguide-run-fefd-simulation-from-a-function-gdstk">
+<h2>Waveguide - Run FEFD simulation from a function (gdstk)<a class="headerlink" href="#waveguide-run-fefd-simulation-from-a-function-gdstk" title="Link to this heading"></a></h2>
+<p>The function output can also be a gdstk library.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Designs</span><span class="w"> </span><span class="kn">import</span> <span class="n">flex_taper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">FEMFy.FEFDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">FEFDSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Simulator</span><span class="w"> </span><span class="kn">import</span> <span class="n">PML_Params</span><span class="p">,</span> <span class="n">Mesh</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 1. Material Definitions</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Define materials needed for the simulation.</span>
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 2. Layer Stack Configuration</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Define the layer stack.</span>
+<span class="c1"># Note that even when using GDStk/Library functions, we must still assign</span>
+<span class="c1"># the geometry to a specific layer number (here, layer 1) defined in this stack.</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                     <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                     <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 3. Geometry Definition (Library Function)</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Instead of defining a custom &#39;def waveguide(...)&#39; function, we import </span>
+<span class="c1"># &#39;flex_taper&#39; from the &#39;pyOptiShared.Designs&#39; library.</span>
+<span class="c1"># This function uses GDStk internally to generate complex polygon structures.</span>
+
+<span class="c1"># define the array of widths for the taper profile</span>
+<span class="n">widths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Define the parameters tuple required by &#39;flex_taper&#39;.</span>
+<span class="c1"># These likely correspond to: (width_array, length, width_start, width_end, etc., layer, boolean_flags)</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">(</span><span class="n">widths</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 4. Device Geometry Setup</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Initialize the device geometry.</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+
+<span class="c1"># Pass the imported &#39;flex_taper&#39; function and its parameters.</span>
+<span class="c1"># The &#39;SetFromFun&#39; method handles the generation of vertices from the library function.</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromFun</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">flex_taper</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Configure automatic port settings.</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">port_buffer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 5. Simulation Parameters</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># General simulation constants.</span>
+
+<span class="c1"># Wavelength points for the solver.</span>
+<span class="n">lams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 6. Mesh &amp; PML Settings</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Configure the mesh size.</span>
+<span class="n">fem_mesh</span> <span class="o">=</span> <span class="n">Mesh</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">dz</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">fem_mesh</span><span class="o">.</span><span class="n">SetMeshOptions</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;quiet&#39;</span><span class="p">,</span> <span class="n">gui</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">export</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Configure Perfectly Matched Layers (PML) for boundaries.</span>
+<span class="n">pml</span> <span class="o">=</span> <span class="n">PML_Params</span><span class="p">()</span>
+
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 7. Solver Initialization</span>
+<span class="c1"># ==========================================</span>
+<span class="n">fefd_solver</span> <span class="o">=</span> <span class="n">FEFDSolver</span><span class="p">()</span>
+
+<span class="c1"># Apply boundaries (PML).</span>
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span><span class="n">min_x</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                          <span class="n">max_x</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                          <span class="n">min_y</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span>
+                          <span class="n">max_y</span><span class="o">=</span><span class="s2">&quot;pml&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">pml</span><span class="p">)</span>
+
+<span class="c1"># Apply Excitation settings.</span>
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+                          <span class="n">reciprocity</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 8. Solver Configuration &amp; Run</span>
+<span class="c1"># ==========================================</span>
+<span class="c1"># Pass all settings to the solver.</span>
+<span class="n">fefd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">device_geometry</span><span class="o">=</span><span class="n">device_geometry</span><span class="p">,</span>
+    <span class="n">mesh</span><span class="o">=</span><span class="n">fem_mesh</span><span class="p">,</span>
+    <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+    <span class="n">stability</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">resolution</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
+    <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;FEM&quot;</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;direct&#39;</span><span class="p">,</span>
+    <span class="n">polarization</span><span class="o">=</span><span class="s1">&#39;TM2.5&#39;</span><span class="p">,</span>
+    <span class="n">number_iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">device_name</span><span class="o">=</span><span class="s1">&#39;flex_taper&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Run the simulation.</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">fefd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+
+<span class="c1"># ==========================================</span>
+<span class="c1"># 9. Visualization</span>
+<span class="c1"># ==========================================</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotField</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotPort</span><span class="p">()</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotSParameters</span><span class="p">(</span><span class="n">s_param</span><span class="o">=</span><span class="s2">&quot;S21&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="FDTDExamples.html" class="btn btn-neutral float-left" title="FDTD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ApplicationExamples.html" class="btn btn-neutral float-right" title="Application Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

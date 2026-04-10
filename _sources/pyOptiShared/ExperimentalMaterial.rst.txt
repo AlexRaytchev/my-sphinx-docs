@@ -8,7 +8,7 @@ Experimental Material Model
    :depth: 2
    :backlinks: top
 
-Introduciton
+Introduction
 ----------------
 
 The :class:`ExperimentalMaterial <pyOptiShared.Material.ExperimentalMaterial>` describes the frequency-dependent refractive index of a material using experimental data. 
@@ -75,8 +75,8 @@ Content of the ``my_material.txt``:
 Instantiating from RefractiveIndex.info
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This examples shows how load the information from `RefractiveIndex.info <https://refractiveindex.info/>`_
-to set the permittivity values of material defined by *shelf/book/page* values. This values can be consulted
+This example shows how to load the information from `RefractiveIndex.info <https://refractiveindex.info/>`_
+to set the permittivity values of material defined by *shelf/book/page* values. These values can be consulted
 directly on `RefractiveIndex.info <https://refractiveindex.info/>`_ webpage.
 
 .. code-block:: python

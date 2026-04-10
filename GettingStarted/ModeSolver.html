@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VFD Mode Solver &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+  <title>VFD Mode Solver &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -17,11 +17,12 @@
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=58fbf978"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../_static/copybutton.js?v=f281be69"></script>
       <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -73,12 +74,18 @@
 <li class="toctree-l4"><a class="reference internal" href="#id1">Complete Example Code</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#example-3-bend-waveguide">Example 3: Bend Waveguide</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bend-radius-inclusion">Bend Radius Inclusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Complete Example Code</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#understanding-the-results">Understanding the Results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tips-for-success">Tips for Success</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#next-steps">Next Steps</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="FDTD.html">Finite Difference Time Domain Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FEFD.html">Finite Element Frequency Domain Solver</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Examples/Examples.html">Examples</a></li>
@@ -92,7 +99,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Optiwaves's Python EM Modules</a>
+          <a href="../index.html">Optiwave's Python EM Modules</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -115,29 +122,35 @@
 <h1>VFD Mode Solver<a class="headerlink" href="#vfd-mode-solver" title="Link to this heading"></a></h1>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#basic-workflow" id="id2">Basic Workflow</a></p></li>
-<li><p><a class="reference internal" href="#example-1-rectangular-dielectric-waveguide" id="id3">Example 1: Rectangular Dielectric Waveguide</a></p>
+<li><p><a class="reference internal" href="#basic-workflow" id="id3">Basic Workflow</a></p></li>
+<li><p><a class="reference internal" href="#example-1-rectangular-dielectric-waveguide" id="id4">Example 1: Rectangular Dielectric Waveguide</a></p>
 <ul>
-<li><p><a class="reference internal" href="#step-1-import-required-modules" id="id4">Step 1: Import Required Modules</a></p></li>
-<li><p><a class="reference internal" href="#step-2-define-materials" id="id5">Step 2: Define Materials</a></p></li>
-<li><p><a class="reference internal" href="#step-3-build-the-layer-stack" id="id6">Step 3: Build the Layer Stack</a></p></li>
-<li><p><a class="reference internal" href="#step-4-create-device-geometry-from-gds" id="id7">Step 4: Create Device Geometry from GDS</a></p></li>
-<li><p><a class="reference internal" href="#step-5-configure-the-mode-solver" id="id8">Step 5: Configure the Mode Solver</a></p></li>
-<li><p><a class="reference internal" href="#step-6-run-and-visualize-results" id="id9">Step 6: Run and Visualize Results</a></p></li>
-<li><p><a class="reference internal" href="#complete-example-code" id="id10">Complete Example Code</a></p></li>
+<li><p><a class="reference internal" href="#step-1-import-required-modules" id="id5">Step 1: Import Required Modules</a></p></li>
+<li><p><a class="reference internal" href="#step-2-define-materials" id="id6">Step 2: Define Materials</a></p></li>
+<li><p><a class="reference internal" href="#step-3-build-the-layer-stack" id="id7">Step 3: Build the Layer Stack</a></p></li>
+<li><p><a class="reference internal" href="#step-4-create-device-geometry-from-gds" id="id8">Step 4: Create Device Geometry from GDS</a></p></li>
+<li><p><a class="reference internal" href="#step-5-configure-the-mode-solver" id="id9">Step 5: Configure the Mode Solver</a></p></li>
+<li><p><a class="reference internal" href="#step-6-run-and-visualize-results" id="id10">Step 6: Run and Visualize Results</a></p></li>
+<li><p><a class="reference internal" href="#complete-example-code" id="id11">Complete Example Code</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#example-2-optical-fiber-with-programmatic-gds-creation" id="id11">Example 2: Optical Fiber with Programmatic GDS Creation</a></p>
+<li><p><a class="reference internal" href="#example-2-optical-fiber-with-programmatic-gds-creation" id="id12">Example 2: Optical Fiber with Programmatic GDS Creation</a></p>
 <ul>
-<li><p><a class="reference internal" href="#creating-geometry-with-gdstk" id="id12">Creating Geometry with gdstk</a></p></li>
-<li><p><a class="reference internal" href="#using-experimental-materials" id="id13">Using Experimental Materials</a></p></li>
-<li><p><a class="reference internal" href="#xy-cross-section-configuration" id="id14">XY Cross-Section Configuration</a></p></li>
-<li><p><a class="reference internal" href="#id1" id="id15">Complete Example Code</a></p></li>
+<li><p><a class="reference internal" href="#creating-geometry-with-gdstk" id="id13">Creating Geometry with gdstk</a></p></li>
+<li><p><a class="reference internal" href="#using-experimental-materials" id="id14">Using Experimental Materials</a></p></li>
+<li><p><a class="reference internal" href="#xy-cross-section-configuration" id="id15">XY Cross-Section Configuration</a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id16">Complete Example Code</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#understanding-the-results" id="id16">Understanding the Results</a></p></li>
-<li><p><a class="reference internal" href="#tips-for-success" id="id17">Tips for Success</a></p></li>
-<li><p><a class="reference internal" href="#next-steps" id="id18">Next Steps</a></p></li>
+<li><p><a class="reference internal" href="#example-3-bend-waveguide" id="id17">Example 3: Bend Waveguide</a></p>
+<ul>
+<li><p><a class="reference internal" href="#bend-radius-inclusion" id="id18">Bend Radius Inclusion</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id19">Complete Example Code</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#understanding-the-results" id="id20">Understanding the Results</a></p></li>
+<li><p><a class="reference internal" href="#tips-for-success" id="id21">Tips for Success</a></p></li>
+<li><p><a class="reference internal" href="#next-steps" id="id22">Next Steps</a></p></li>
 </ul>
 </nav>
 <p>The Vector Finite Difference (VFD) Mode Solver is a powerful tool for analyzing electromagnetic modes in dielectric waveguides. This guide will walk you through the essential steps to set up and run your first mode analysis.</p>
@@ -157,22 +170,31 @@
 <p>Let’s start with a simple rectangular waveguide to understand the core concepts.</p>
 <section id="step-1-import-required-modules">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Step 1: Import Required Modules</a><a class="headerlink" href="#step-1-import-required-modules" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyModeSolver.py_mode_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">VFDModeSolver</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###           Import Modules           ###</span>
+<span class="c1">##########################################</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyModeSolver.pyModeSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">VFDModeSolver</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">gdstk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1">### End Import Modules</span>
 </pre></div>
 </div>
 </section>
 <section id="step-2-define-materials">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Step 2: Define Materials</a><a class="headerlink" href="#step-2-define-materials" title="Link to this heading"></a></h3>
 <p>Create materials with constant refractive indices:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Low-index material (n=1.444) for substrate</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###         Material Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="c1"># Low-index material (n=1.444) for substrate</span>
 <span class="n">substrate_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.444</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">epsImag</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
 
 <span class="c1"># High-index material (n=3.48) for waveguide core</span>
 <span class="n">core_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.48</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">epsImag</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+<span class="c1">### End Material Settings</span>
 </pre></div>
 </div>
 <p><strong>Note</strong>: The dielectric constant (epsilon) is the square of the refractive index: ε = n<sup>2</sup></p>
@@ -180,25 +202,30 @@
 <section id="step-3-build-the-layer-stack">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Step 3: Build the Layer Stack</a><a class="headerlink" href="#step-3-build-the-layer-stack" title="Link to this heading"></a></h3>
 <p>The layer stack defines your device’s vertical structure:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###       Layer Stack Settings         ###</span>
+<span class="c1">##########################################</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
 
 <span class="c1"># Add first layer: 250nm thick at z=0</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span>
-                     <span class="n">zmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> 
+                    <span class="n">zmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
 
 <span class="c1"># Add second layer: 250nm thick at z=0.25μm</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.09</span><span class="p">,</span>
-                     <span class="n">zmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.09</span><span class="p">,</span> 
+                    <span class="n">zmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
 
 <span class="c1"># Set background (above structure) and substrate (below structure)</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">substrate_mat</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">substrate_mat</span><span class="p">)</span>
+
+<span class="c1">### End Layer Stack</span>
 </pre></div>
 </div>
 </section>
 <section id="step-4-create-device-geometry-from-gds">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Step 4: Create Device Geometry from GDS</a><a class="headerlink" href="#step-4-create-device-geometry-from-gds" title="Link to this heading"></a></h3>
 <p>Load your waveguide layout and add padding around it:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Create GDS mask for the device</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###  Create GDS mask for the device  ###</span>
+<span class="c1">########################################</span>
 <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;wg.gds&quot;</span>
 
 <span class="n">length</span> <span class="o">=</span> <span class="mi">10</span>
@@ -216,39 +243,39 @@
 
 <span class="n">lib</span><span class="o">.</span><span class="n">write_gds</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
-<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
-<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromGDS</span><span class="p">(</span>
-    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
-    <span class="n">gds_file</span><span class="o">=</span><span class="s2">&quot;wg.gds&quot;</span><span class="p">,</span>
-    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>  <span class="c1"># 1 μm padding on all sides</span>
-<span class="p">)</span>
+
+<span class="c1">### End GDS mask</span>
 </pre></div>
 </div>
 </section>
 <section id="step-5-configure-the-mode-solver">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Step 5: Configure the Mode Solver</a><a class="headerlink" href="#step-5-configure-the-mode-solver" title="Link to this heading"></a></h3>
 <p>Set up boundary conditions and simulation parameters:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mode_solver</span> <span class="o">=</span> <span class="n">VFDModeSolver</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###       ModeSolver Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">mode_solver</span> <span class="o">=</span> <span class="n">VFDModeSolver</span><span class="p">()</span>
 
 <span class="c1"># Set boundary conditions (PMC = Perfect Magnetic Conductor)</span>
-<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span>
-    <span class="n">min_x</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span> <span class="n">max_x</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span>
-    <span class="n">min_y</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span> <span class="n">max_y</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">}</span>
-<span class="p">)</span>
+<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span><span class="n">min_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span>
+                        <span class="n">min_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">)</span>
 
 <span class="c1"># Configure simulation settings</span>
+<span class="n">lams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">mode_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span>
     <span class="n">device_geometry</span><span class="o">=</span><span class="n">device_geometry</span><span class="p">,</span>
     <span class="n">mesh</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dx&quot;</span><span class="p">:</span> <span class="mf">0.025</span><span class="p">,</span> <span class="s2">&quot;dy&quot;</span><span class="p">:</span> <span class="mf">0.025</span><span class="p">,</span> <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.025</span><span class="p">},</span>  <span class="c1"># 25nm mesh resolution</span>
-    <span class="n">wavelength</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">1.6</span><span class="p">,</span> <span class="s2">&quot;npts&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>  <span class="c1"># 1.5-1.6 μm range</span>
+    <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>  <span class="c1"># 1.5-1.6 μm range</span>
     <span class="n">nguess</span><span class="o">=</span><span class="mf">2.1</span><span class="p">,</span>              <span class="c1"># Initial guess for effective index</span>
     <span class="n">nmodes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>                <span class="c1"># Find first 4 modes</span>
     <span class="n">cut_plane</span><span class="o">=</span><span class="s2">&quot;YZ&quot;</span><span class="p">,</span>          <span class="c1"># Cross-section plane (propagation along X)</span>
     <span class="n">cut_location</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>        <span class="c1"># Position along X-axis</span>
     <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>                <span class="c1"># Convergence tolerance</span>
-    <span class="n">savepath</span><span class="o">=</span><span class="s2">&quot;./ModeResults&quot;</span><span class="p">,</span>
-    <span class="n">res_filename</span><span class="o">=</span><span class="s2">&quot;my_results&quot;</span>
+    <span class="n">results_path</span><span class="o">=</span><span class="s2">&quot;./ModeResults&quot;</span><span class="p">,</span>
+    <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;my_results&quot;</span>
 <span class="p">)</span>
+
+
+<span class="c1">### End ModeSolver Settings</span>
 </pre></div>
 </div>
 <p><strong>Key Parameters Explained:</strong></p>
@@ -261,7 +288,9 @@
 </section>
 <section id="step-6-run-and-visualize-results">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Step 6: Run and Visualize Results</a><a class="headerlink" href="#step-6-run-and-visualize-results" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the simulation</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###   Run and Results Visualization    ###</span>
+<span class="c1">##########################################</span>
+<span class="c1"># Run the simulation</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">mode_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
 
 <span class="c1"># Visualize results</span>
@@ -269,17 +298,25 @@
 <span class="n">results</span><span class="o">.</span><span class="n">PlotPermittivity</span><span class="p">()</span>                 <span class="c1"># Material cross-section</span>
 <span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;neff&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># Effective index vs wavelength</span>
 <span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;ng&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>   <span class="c1"># Group index vs wavelength</span>
+
+<span class="c1">### End Run and Results</span>
 </pre></div>
 </div>
 </section>
 <section id="complete-example-code">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Complete Example Code</a><a class="headerlink" href="#complete-example-code" title="Link to this heading"></a></h3>
 <p>Here is the complete code you can copy and run (<a class="reference download internal" download="" href="../_downloads/d645b4ba8be9b832df70d01dbf558b1c/ModeSolver_getting_started_1.py"><code class="xref download docutils literal notranslate"><span class="pre">ModeSolver_getting_started_1.py</span></code></a>):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyModeSolver.py_mode_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">VFDModeSolver</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##########################################</span>
+<span class="c1">###           Import Modules           ###</span>
+<span class="c1">##########################################</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyModeSolver.pyModeSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">VFDModeSolver</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">gdstk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1">### End Import Modules</span>
 
 <span class="c1">##########################################</span>
 <span class="c1">###         Material Settings          ###</span>
@@ -290,23 +327,28 @@
 <span class="c1"># High-index material (n=3.48) for waveguide core</span>
 <span class="n">core_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.48</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">epsImag</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
 
+<span class="c1">### End Material Settings</span>
+
 <span class="c1">##########################################</span>
 <span class="c1">###       Layer Stack Settings         ###</span>
 <span class="c1">##########################################</span>
 <span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
 
 <span class="c1"># Add first layer: 250nm thick at z=0</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> 
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> 
                     <span class="n">zmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
 
 <span class="c1"># Add second layer: 250nm thick at z=0.25μm</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.09</span><span class="p">,</span> 
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.09</span><span class="p">,</span> 
                     <span class="n">zmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
 
 <span class="c1"># Set background (above structure) and substrate (below structure)</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">substrate_mat</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">substrate_mat</span><span class="p">)</span>
 
-<span class="c1">#Create GDS mask for the device</span>
+<span class="c1">### End Layer Stack</span>
+<span class="c1">########################################</span>
+<span class="c1">###  Create GDS mask for the device  ###</span>
+<span class="c1">########################################</span>
 <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;wg.gds&quot;</span>
 
 <span class="n">length</span> <span class="o">=</span> <span class="mi">10</span>
@@ -324,6 +366,9 @@
 
 <span class="n">lib</span><span class="o">.</span><span class="n">write_gds</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
+
+<span class="c1">### End GDS mask</span>
+
 <span class="c1">##########################################</span>
 <span class="c1">###   Device Geometry/Port Settings    ###</span>
 <span class="c1">##########################################</span>
@@ -334,30 +379,34 @@
     <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>  <span class="c1"># 1 μm padding on all sides</span>
 <span class="p">)</span>
 
+<span class="c1">### End Device Geometry</span>
+
 <span class="c1">##########################################</span>
 <span class="c1">###       ModeSolver Settings          ###</span>
 <span class="c1">##########################################</span>
 <span class="n">mode_solver</span> <span class="o">=</span> <span class="n">VFDModeSolver</span><span class="p">()</span>
 
 <span class="c1"># Set boundary conditions (PMC = Perfect Magnetic Conductor)</span>
-<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span>
-    <span class="n">min_x</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span> <span class="n">max_x</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span>
-    <span class="n">min_y</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span> <span class="n">max_y</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">}</span>
-<span class="p">)</span>
+<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span><span class="n">min_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span>
+                        <span class="n">min_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">)</span>
 
 <span class="c1"># Configure simulation settings</span>
+<span class="n">lams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">mode_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span>
     <span class="n">device_geometry</span><span class="o">=</span><span class="n">device_geometry</span><span class="p">,</span>
     <span class="n">mesh</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dx&quot;</span><span class="p">:</span> <span class="mf">0.025</span><span class="p">,</span> <span class="s2">&quot;dy&quot;</span><span class="p">:</span> <span class="mf">0.025</span><span class="p">,</span> <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.025</span><span class="p">},</span>  <span class="c1"># 25nm mesh resolution</span>
-    <span class="n">wavelength</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">1.6</span><span class="p">,</span> <span class="s2">&quot;npts&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>  <span class="c1"># 1.5-1.6 μm range</span>
+    <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>  <span class="c1"># 1.5-1.6 μm range</span>
     <span class="n">nguess</span><span class="o">=</span><span class="mf">2.1</span><span class="p">,</span>              <span class="c1"># Initial guess for effective index</span>
     <span class="n">nmodes</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>                <span class="c1"># Find first 4 modes</span>
     <span class="n">cut_plane</span><span class="o">=</span><span class="s2">&quot;YZ&quot;</span><span class="p">,</span>          <span class="c1"># Cross-section plane (propagation along X)</span>
     <span class="n">cut_location</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>        <span class="c1"># Position along X-axis</span>
     <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>                <span class="c1"># Convergence tolerance</span>
-    <span class="n">savepath</span><span class="o">=</span><span class="s2">&quot;./ModeResults&quot;</span><span class="p">,</span>
-    <span class="n">res_filename</span><span class="o">=</span><span class="s2">&quot;my_results&quot;</span>
+    <span class="n">results_path</span><span class="o">=</span><span class="s2">&quot;./ModeResults&quot;</span><span class="p">,</span>
+    <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;my_results&quot;</span>
 <span class="p">)</span>
+
+
+<span class="c1">### End ModeSolver Settings</span>
 
 <span class="c1">##########################################</span>
 <span class="c1">###   Run and Results Visualization    ###</span>
@@ -370,6 +419,8 @@
 <span class="n">results</span><span class="o">.</span><span class="n">PlotPermittivity</span><span class="p">()</span>                 <span class="c1"># Material cross-section</span>
 <span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;neff&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c1"># Effective index vs wavelength</span>
 <span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;ng&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>   <span class="c1"># Group index vs wavelength</span>
+
+<span class="c1">### End Run and Results</span>
 </pre></div>
 </div>
 </section>
@@ -377,11 +428,11 @@
 <section id="example-2-optical-fiber-with-programmatic-gds-creation">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Example 2: Optical Fiber with Programmatic GDS Creation</a><a class="headerlink" href="#example-2-optical-fiber-with-programmatic-gds-creation" title="Link to this heading"></a></h2>
 <p>This example shows how to create geometry programmatically and use an XY cross-section.
-The entire polygon in the GDSII file is used as a cross-section, enabling 2D geometries with arbitrarty shapes.</p>
+The entire polygon in the GDSII file is used as a cross-section, enabling 2D geometries with arbitrary shapes.</p>
 <section id="creating-geometry-with-gdstk">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Creating Geometry with gdstk</a><a class="headerlink" href="#creating-geometry-with-gdstk" title="Link to this heading"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gdstk</span>
-
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###      Create Fiber GDS File         ###</span>
+<span class="c1">##########################################</span>
 <span class="c1"># Create circular fiber core</span>
 <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;fiber.gds&quot;</span>
 <span class="n">lib</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
@@ -389,14 +440,15 @@ The entire polygon in the GDSII file is used as a cross-section, enabling 2D geo
 <span class="n">circle</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">ellipse</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mf">7.5</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 7.5 μm radius</span>
 <span class="n">cell</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
 <span class="n">lib</span><span class="o">.</span><span class="n">write_gds</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="c1">### End Create Fiber</span>
 </pre></div>
 </div>
 </section>
 <section id="using-experimental-materials">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Using Experimental Materials</a><a class="headerlink" href="#using-experimental-materials" title="Link to this heading"></a></h3>
 <p>For realistic material properties, use the refractive index database:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span><span class="p">,</span> <span class="n">ExperimentalMaterial</span>
-
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###         Material Settings          ###</span>
+<span class="c1">##########################################</span>
 <span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="s2">&quot;air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">epsImag</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
 
 <span class="c1"># Load silica data from refractiveindex.info database</span>
@@ -407,24 +459,34 @@ The entire polygon in the GDSII file is used as a cross-section, enabling 2D geo
     <span class="n">page</span><span class="o">=</span><span class="s2">&quot;Malitson&quot;</span><span class="p">,</span>
     <span class="n">wavelength_unit</span><span class="o">=</span><span class="mf">1e-6</span>
 <span class="p">)</span>
+<span class="c1">### End Material Settings</span>
 </pre></div>
 </div>
 </section>
 <section id="xy-cross-section-configuration">
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">XY Cross-Section Configuration</a><a class="headerlink" href="#xy-cross-section-configuration" title="Link to this heading"></a></h3>
 <p>For propagation along Z (fiber axis):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mode_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###       ModeSolver Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">mode_solver</span> <span class="o">=</span> <span class="n">VFDModeSolver</span><span class="p">()</span>
+
+<span class="c1"># Set boundary conditions (PMC = Perfect Magnetic Conductor)</span>
+<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span><span class="n">min_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span>
+                        <span class="n">min_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">)</span>
+
+<span class="n">lams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">1.6</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span>
+<span class="c1"># Configure simulation settings</span>
+<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span>
     <span class="n">device_geometry</span><span class="o">=</span><span class="n">device_geometry</span><span class="p">,</span>
     <span class="n">mesh</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dx&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;dy&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">},</span>
-    <span class="n">wavelength</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">1.6</span><span class="p">,</span> <span class="s2">&quot;npts&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">},</span>
+    <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
     <span class="n">nguess</span><span class="o">=</span><span class="mf">3.4</span><span class="p">,</span>
     <span class="n">nmodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">cut_plane</span><span class="o">=</span><span class="s2">&quot;XY&quot;</span><span class="p">,</span>      <span class="c1"># Cross-section for Z-propagation</span>
     <span class="n">cut_location</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
-    <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
-    <span class="n">savepath</span><span class="o">=</span><span class="s2">&quot;./ModeResults&quot;</span><span class="p">,</span>
-    <span class="n">res_filename</span><span class="o">=</span><span class="s2">&quot;fiber_results&quot;</span>
+    <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span>
 <span class="p">)</span>
+<span class="c1">### End ModeSolver Settings</span>
 </pre></div>
 </div>
 </section>
@@ -432,10 +494,11 @@ The entire polygon in the GDSII file is used as a cross-section, enabling 2D geo
 <h3><a class="toc-backref" href="#contents" role="doc-backlink">Complete Example Code</a><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <p>Here is the complete code you can copy and run (<a class="reference download internal" download="" href="../_downloads/f9977f18b91202daadd389a1a4d1eceb/ModeSolver_getting_started_2.py"><code class="xref download docutils literal notranslate"><span class="pre">ModeSolver_getting_started_2.py</span></code></a>):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gdstk</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyModeSolver.py_mode_solver</span><span class="w"> </span><span class="kn">import</span> <span class="n">VFDModeSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyModeSolver.pyModeSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">VFDModeSolver</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span><span class="p">,</span> <span class="n">ExperimentalMaterial</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="c1">##########################################</span>
 <span class="c1">###      Create Fiber GDS File         ###</span>
@@ -447,7 +510,7 @@ The entire polygon in the GDSII file is used as a cross-section, enabling 2D geo
 <span class="n">circle</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">ellipse</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mf">7.5</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 7.5 μm radius</span>
 <span class="n">cell</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">circle</span><span class="p">)</span>
 <span class="n">lib</span><span class="o">.</span><span class="n">write_gds</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
+<span class="c1">### End Create Fiber</span>
 <span class="c1">##########################################</span>
 <span class="c1">###         Material Settings          ###</span>
 <span class="c1">##########################################</span>
@@ -461,15 +524,15 @@ The entire polygon in the GDSII file is used as a cross-section, enabling 2D geo
     <span class="n">page</span><span class="o">=</span><span class="s2">&quot;Malitson&quot;</span><span class="p">,</span>
     <span class="n">wavelength_unit</span><span class="o">=</span><span class="mf">1e-6</span>
 <span class="p">)</span>
-
+<span class="c1">### End Material Settings</span>
 <span class="c1">##########################################</span>
 <span class="c1">###       Layer Stack Settings         ###</span>
 <span class="c1">##########################################</span>
 <span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">sio2_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="n">sio2_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
                      <span class="n">zmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">air_mat</span><span class="p">)</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">air_mat</span><span class="p">)</span>
-
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">air_mat</span><span class="p">)</span>
+<span class="c1">### End Layer Stack</span>
 <span class="c1">##########################################</span>
 <span class="c1">###   Device Geometry/Port Settings    ###</span>
 <span class="c1">##########################################</span>
@@ -479,32 +542,29 @@ The entire polygon in the GDSII file is used as a cross-section, enabling 2D geo
     <span class="n">gds_file</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
     <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
 <span class="p">)</span>
-
+<span class="c1">### End Device Geometry</span>
 <span class="c1">##########################################</span>
 <span class="c1">###       ModeSolver Settings          ###</span>
 <span class="c1">##########################################</span>
 <span class="n">mode_solver</span> <span class="o">=</span> <span class="n">VFDModeSolver</span><span class="p">()</span>
 
 <span class="c1"># Set boundary conditions (PMC = Perfect Magnetic Conductor)</span>
-<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span>
-    <span class="n">min_x</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span> <span class="n">max_x</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span>
-    <span class="n">min_y</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">},</span> <span class="n">max_y</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;bc&quot;</span><span class="p">:</span> <span class="s2">&quot;pmc&quot;</span><span class="p">}</span>
-<span class="p">)</span>
+<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span><span class="n">min_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span>
+                        <span class="n">min_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">)</span>
 
+<span class="n">lams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">1.6</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span>
 <span class="c1"># Configure simulation settings</span>
 <span class="n">mode_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span>
     <span class="n">device_geometry</span><span class="o">=</span><span class="n">device_geometry</span><span class="p">,</span>
     <span class="n">mesh</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dx&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;dy&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">},</span>
-    <span class="n">wavelength</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">1.6</span><span class="p">,</span> <span class="s2">&quot;npts&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">},</span>
+    <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
     <span class="n">nguess</span><span class="o">=</span><span class="mf">3.4</span><span class="p">,</span>
     <span class="n">nmodes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">cut_plane</span><span class="o">=</span><span class="s2">&quot;XY&quot;</span><span class="p">,</span>      <span class="c1"># Cross-section for Z-propagation</span>
     <span class="n">cut_location</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
-    <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span>
-    <span class="n">savepath</span><span class="o">=</span><span class="s2">&quot;./ModeResults&quot;</span><span class="p">,</span>
-    <span class="n">res_filename</span><span class="o">=</span><span class="s2">&quot;fiber_results&quot;</span>
+    <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span>
 <span class="p">)</span>
-
+<span class="c1">### End ModeSolver Settings</span>
 <span class="c1">##########################################</span>
 <span class="c1">###      Run and Post Processing       ###</span>
 <span class="c1">##########################################</span>
@@ -516,6 +576,146 @@ The entire polygon in the GDSII file is used as a cross-section, enabling 2D geo
 <span class="n">results</span><span class="o">.</span><span class="n">PlotPermittivity</span><span class="p">()</span>            <span class="c1"># Material cross-section</span>
 <span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;neff&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># Effective index vs wavelength</span>
 <span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;ng&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>   <span class="c1"># Group index vs wavelength</span>
+
+<span class="c1"># End Run and Results</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="example-3-bend-waveguide">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Example 3: Bend Waveguide</a><a class="headerlink" href="#example-3-bend-waveguide" title="Link to this heading"></a></h2>
+<p>This example shows how to use the mode solver to simulate bend modes. The solver uses conformal mapping to transform the bend geometry into a straight waveguide, allowing it to find modes in curved structures.
+The conformal mapping works by transforming the R axis by :</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+x = R \ln(\rho / R)
+\end{align}\]</div>
+<p>And transform the material properties by :</p>
+<div class="math notranslate nohighlight">
+\[n' = n_{\text{material}} \exp\left(\frac{x}{R}\right)\]</div>
+<section id="bend-radius-inclusion">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Bend Radius Inclusion</a><a class="headerlink" href="#bend-radius-inclusion" title="Link to this heading"></a></h3>
+<p>To include the bend radius in the simulation, set the <code class="docutils literal notranslate"><span class="pre">radius</span></code> parameter in the mode solver settings to the desired bend radius.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">###       ModeSolver Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">mode_solver</span> <span class="o">=</span> <span class="n">VFDModeSolver</span><span class="p">()</span>
+<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span><span class="n">min_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span>
+                        <span class="n">min_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">)</span>
+
+<span class="n">num_wavelength</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">lams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="n">num_wavelength</span><span class="p">)</span>
+
+<span class="n">ri</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># Bend radius in Um </span>
+<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span>
+                        <span class="n">mesh</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dx&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span><span class="s2">&quot;dy&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span> <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">},</span>
+                        <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+                        <span class="n">nguess</span> <span class="o">=</span> <span class="mf">2.1</span><span class="p">,</span>
+                        <span class="n">nmodes</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+                        <span class="n">cut_plane</span> <span class="o">=</span> <span class="s2">&quot;YZ&quot;</span><span class="p">,</span>
+                        <span class="n">cut_location</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+                        <span class="n">radius</span><span class="o">=</span><span class="n">ri</span><span class="p">,</span> <span class="c1"># Bend Radius</span>
+                        <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-8</span><span class="p">,</span>
+                        <span class="n">results_path</span> <span class="o">=</span> <span class="s2">&quot;./ModeResults&quot;</span><span class="p">,</span>
+                        <span class="n">device_name</span> <span class="o">=</span> <span class="s2">&quot;my_results&quot;</span><span class="p">)</span>
+
+<span class="c1">### End ModeSolver Settings</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3><a class="toc-backref" href="#contents" role="doc-backlink">Complete Example Code</a><a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>Here is the complete code you can copy and run (<a class="reference download internal" download="" href="../_downloads/2d1687d85652e6c298ffb3ab1c50fd70/ModeSolver_getting_started_3.py"><code class="xref download docutils literal notranslate"><span class="pre">ModeSolver_getting_started_3.py</span></code></a>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyModeSolver.pyModeSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">VFDModeSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gdstk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="c1">##########################################</span>
+<span class="c1">###             WG GDS File            ###</span>
+<span class="c1">##########################################</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;wg.gds&quot;</span>
+
+<span class="n">length</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">width1</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">width2</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">lib</span> <span class="o">=</span> <span class="n">gdstk</span><span class="o">.</span><span class="n">Library</span><span class="p">()</span>
+
+<span class="n">strt_wg</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">new_cell</span><span class="p">(</span><span class="s2">&quot;Straight_WG&quot;</span><span class="p">)</span>
+<span class="n">vertices1</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">width1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="o">-</span><span class="n">width1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">width1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">width1</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+<span class="n">vertices2</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">width2</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="o">-</span><span class="n">width2</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">width2</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">width2</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="n">strt_wg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gdstk</span><span class="o">.</span><span class="n">Polygon</span><span class="p">(</span><span class="n">vertices1</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1">#strt_wg.add(gdstk.Polygon(vertices2, layer=2))</span>
+
+<span class="n">lib</span><span class="o">.</span><span class="n">write_gds</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="c1">### End WG GDS</span>
+<span class="c1">##########################################</span>
+<span class="c1">###         Material Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">substrate_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.444</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">epsImag</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="n">core_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.48</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">epsImag</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="c1">### End Material Settings</span>
+<span class="c1">##########################################</span>
+<span class="c1">###       Layer Stack Settings         ###</span>
+<span class="c1">##########################################</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">number</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">material</span><span class="o">=</span><span class="n">core_mat</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.09</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s2">&quot;Air_default&quot;</span><span class="p">)</span>
+<span class="c1">### End Layer Stack</span>
+<span class="c1">##########################################</span>
+<span class="c1">###   Device Geometry/Port Settings    ###</span>
+<span class="c1">##########################################</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromGDS</span><span class="p">(</span><span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+                           <span class="n">gds_file</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
+                           <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+<span class="c1">### End Device Geometry</span>
+<span class="c1">##########################################</span>
+<span class="c1">###       ModeSolver Settings          ###</span>
+<span class="c1">##########################################</span>
+<span class="n">mode_solver</span> <span class="o">=</span> <span class="n">VFDModeSolver</span><span class="p">()</span>
+<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetBoundaries</span><span class="p">(</span><span class="n">min_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span>
+                        <span class="n">min_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">,</span> <span class="n">max_y</span> <span class="o">=</span> <span class="s2">&quot;pmc&quot;</span><span class="p">)</span>
+
+<span class="n">num_wavelength</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">lams</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mf">1.6</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="n">num_wavelength</span><span class="p">)</span>
+
+<span class="n">ri</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># Bend radius in Um </span>
+<span class="n">mode_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span>
+                        <span class="n">mesh</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;dx&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span><span class="s2">&quot;dy&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span> <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">},</span>
+                        <span class="n">wavelength</span><span class="o">=</span><span class="n">lams</span><span class="p">,</span>
+                        <span class="n">nguess</span> <span class="o">=</span> <span class="mf">2.1</span><span class="p">,</span>
+                        <span class="n">nmodes</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+                        <span class="n">cut_plane</span> <span class="o">=</span> <span class="s2">&quot;YZ&quot;</span><span class="p">,</span>
+                        <span class="n">cut_location</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+                        <span class="n">radius</span><span class="o">=</span><span class="n">ri</span><span class="p">,</span> <span class="c1"># Bend Radius</span>
+                        <span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-8</span><span class="p">,</span>
+                        <span class="n">results_path</span> <span class="o">=</span> <span class="s2">&quot;./ModeResults&quot;</span><span class="p">,</span>
+                        <span class="n">device_name</span> <span class="o">=</span> <span class="s2">&quot;my_results&quot;</span><span class="p">)</span>
+
+<span class="c1">### End ModeSolver Settings</span>
+
+<span class="c1">##########################################</span>
+<span class="c1">###   Run and Results Visualization    ###</span>
+<span class="c1">##########################################</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">mode_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+<span class="c1"># Visualize results</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotMode</span><span class="p">(</span><span class="n">field</span><span class="o">=</span><span class="s1">&#39;Hy&#39;</span><span class="p">)</span>               <span class="c1"># Field profile of the fundamental mode</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotPermittivity</span><span class="p">()</span>                 <span class="c1"># Material cross-section</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotIndex</span><span class="p">(</span><span class="s1">&#39;neff&#39;</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span> <span class="c1"># Effective index vs wavelength</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1">### End Run and Results</span>
+
+
+
+
+
+
 </pre></div>
 </div>
 </section>

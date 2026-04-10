@@ -1,0 +1,236 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finite-Element Frequency-Domain (FEFD) Electromagnetic Solver &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation Guide" href="../Installation/Installation.html" />
+    <link rel="prev" title="Finite-Difference Time-Domain (FDTD) Electromagnetic Solver" href="FDTDOverview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo-traced.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="ProductOverview.html">Overview</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ModeSolverOverview.html">Vector Finite Difference (VFD) Mode Solver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FDTDOverview.html">Finite-Difference Time-Domain (FDTD) Electromagnetic Solver</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Finite-Element Frequency-Domain (FEFD) Electromagnetic Solver</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#key-features">Key Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#boundary-conditions">Boundary Conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#applications">Applications</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples/Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Optiwave's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="ProductOverview.html">Overview</a></li>
+      <li class="breadcrumb-item active">Finite-Element Frequency-Domain (FEFD) Electromagnetic Solver</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/ProductOverview/FEMOverview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="finite-element-frequency-domain-fefd-electromagnetic-solver">
+<span id="fefd-intro"></span><h1>Finite-Element Frequency-Domain (FEFD) Electromagnetic Solver<a class="headerlink" href="#finite-element-frequency-domain-fefd-electromagnetic-solver" title="Link to this heading"></a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#key-features" id="id2">Key Features</a></p></li>
+<li><p><a class="reference internal" href="#mathematical-foundation" id="id3">Mathematical Foundation</a></p></li>
+<li><p><a class="reference internal" href="#boundary-conditions" id="id4">Boundary Conditions</a></p></li>
+<li><p><a class="reference internal" href="#applications" id="id5">Applications</a></p></li>
+</ul>
+</nav>
+<p><strong>Based on:</strong></p>
+<p>Jianming Jin,
+<em>“The Finite Element Method in Electromagnetics”</em>, 3rd Edition,
+Wiley Publishing, 2014. ISBN: 9781118571361</p>
+<p>Tsuji, Yasuhide, and Masanori Koshiba,
+<em>“Finite element method using port truncation by perfectly matched layer boundary conditions for optical waveguide discontinuity problems.”</em>,
+Journal of lightwave technology 20, no. 3 (2002): 463-468.</p>
+<p>Ivanova, R. Stoffer, and M. Hammer,
+<em>“A dimensionality reduction technique for 2D scattering problems in photonics,”</em>
+J. Opt., vol. 12, no. 3, Art. no. 035502, Mar. 2010.</p>
+<section id="introduction">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This solver implements the <strong>Finite-Element Frequency-Domain (FEFD)</strong> method for solving Maxwell’s equations in 2D space and frequency domain, specifically optimized for the simulation of <strong>integrated photonic devices</strong>.</p>
+<p>It supports <strong>linear, isotropic, dispersive</strong> materials and provides advanced features tailored to photonic circuit design, such as <strong>automatic mode injection</strong>, <strong>port detection</strong>, and <strong>S-parameter extraction</strong>.</p>
+</section>
+<section id="key-features">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Key Features</a><a class="headerlink" href="#key-features" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Frequency-domain Maxwell solver</strong> using triangular discretization in 2D space.</p></li>
+<li><p><strong>Perfectly Matched Layer (PML)</strong> boundary conditions for accurate open-region simulations.</p></li>
+<li><p><strong>GDSII Import</strong>: Reads standard GDSII layout files to define device geometry.</p></li>
+<li><p><strong>Automatic Matching Mesh Generation</strong>: Automatically generates a triangular mesh that precisely matches the passed geometry.</p></li>
+<li><p><strong>First and Second Order Element</strong> Support: Choose between linear and quadratic elements for improved accuracy.</p></li>
+<li><p><strong>2D and 2.5D simulation</strong>: Simulate 2D geometries and collapse 3D ones into 2D with acceptable accuracy.</p></li>
+<li><p><strong>Port Identification &amp; Mode Matching</strong>:
+- Automatic port detection and classification.
+- Single-mode excitation using computed eigenmodes.
+- Mode solver integration for accurate injection and extraction.</p></li>
+<li><p><strong>S-Parameter Computation</strong>:
+- Computes scattering parameters (S-matrix) from frequency-domain data.
+- Automatically exports results in standard <cite>.snp</cite> format.</p></li>
+<li><p><strong>HDF5 Output</strong>:
+- All simulation data, field snapshots, and metadata are stored in <cite>.h5</cite> format for efficient post-processing.</p></li>
+</ul>
+</section>
+<section id="mathematical-foundation">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Mathematical Foundation</a><a class="headerlink" href="#mathematical-foundation" title="Link to this heading"></a></h2>
+<p>The FEFD method relies on discretizing the 2D Helmholtz wave equation using triangular elements.</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\nabla^2 u(x,y) + k^2(x,y)\,u(x,y) = -s(x,y),
+\end{align}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(s\)</span> is the source, <span class="math notranslate nohighlight">\(u\)</span> is either <span class="math notranslate nohighlight">\(E_z\)</span> or <span class="math notranslate nohighlight">\(H_z\)</span> for either TE or TM, respectively.</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\nabla^2 = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2},
+\end{align}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+k(x,y) = \frac{\omega}{c}\, n(x,y) = \omega \sqrt{\mu(x,y)\,\varepsilon(x,y)}.
+\end{align}\]</div>
+<p>The 2.5D formulation is based on the method reported in:
+“A dimensionality reduction technique for 2D scattering problems in photonics”</p>
+<p>In which the field <span class="math notranslate nohighlight">\(u\)</span> is decomposed into two orthogonal components <span class="math notranslate nohighlight">\(Z(z)\)</span> and <span class="math notranslate nohighlight">\(v(x,y)\)</span>.
+Then, the variational formulation is applied in the <span class="math notranslate nohighlight">\(z\)</span> direction by multiplying by a weight function <span class="math notranslate nohighlight">\(Z'(z)\)</span>.
+Then the resulting wave equation is integrated in the <span class="math notranslate nohighlight">\(z\)</span> direction, resulting in a wave equation in <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.</p>
+</section>
+<section id="boundary-conditions">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Boundary Conditions</a><a class="headerlink" href="#boundary-conditions" title="Link to this heading"></a></h2>
+<p>This solver supports <strong>Perfectly Matched Layer (PML)</strong> absorbing boundary conditions, as described by Y. Tsuji and M. Koshiba in “Finite element method using port truncation by perfectly matched layer boundary conditions for optical waveguide discontinuity problems”.
+PML is used to prevent artificial reflections at simulation domain boundaries.</p>
+<p>This is the core equation that defines the coordinate transformation in the frequency domain. For a coordinate direction <span class="math notranslate nohighlight">\(i\)</span> (where <span class="math notranslate nohighlight">\(i = x, y, \text{or } z\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+s_i(i, \omega) = \kappa_i(i) + \frac{\sigma_i(i)}{\alpha_i(i) + j\omega\epsilon_0}
+\end{align}\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\kappa_i\)</span> is the real coordinate stretching (usually <span class="math notranslate nohighlight">\(\ge 1\)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma_i\)</span>: Conductivity profile (attenuation).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha_i\)</span>: Complex frequency shift (stability).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon_0\)</span>: Vacuum permittivity.</p></li>
+</ul>
+</section>
+<section id="applications">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Applications</a><a class="headerlink" href="#applications" title="Link to this heading"></a></h2>
+<p>This solver is particularly suited for:</p>
+<ul class="simple">
+<li><p>Silicon photonics and integrated optical circuits</p></li>
+<li><p>Passive photonic devices (e.g., splitters, multiplexers, filters)</p></li>
+<li><p>Waveguide tapering, crossings, and junctions</p></li>
+<li><p>Irregularly shaped devices</p></li>
+<li><p>Dispersive and lossy materials</p></li>
+<li><p>Single frequency optimization</p></li>
+<li><p>High index contrast problems (First order elements are recommended for <span class="math notranslate nohighlight">\(\delta n &lt; 2\)</span> and second order for <span class="math notranslate nohighlight">\(\delta n &gt; 2\)</span>)</p></li>
+</ul>
+<p>This solver is not suited for:</p>
+<ul class="simple">
+<li><p>Devices of thin layers (<span class="math notranslate nohighlight">\(&lt; 20 nm\)</span>) in the <span class="math notranslate nohighlight">\(z\)</span> direction.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="FDTDOverview.html" class="btn btn-neutral float-left" title="Finite-Difference Time-Domain (FDTD) Electromagnetic Solver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Installation/Installation.html" class="btn btn-neutral float-right" title="Installation Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

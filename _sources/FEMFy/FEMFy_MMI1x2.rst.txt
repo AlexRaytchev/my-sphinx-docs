@@ -1,0 +1,74 @@
+
+
+
+
+2.5D simulation of MMI 1x2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This examples shows how to use FEM 2.5 D capabilities in simulating MMI1x2 and get results close to the 3D models.
+For this example we use a gds file.
+
+The simulation setup in the code snippet below. In this example, TM polarization is used. 
+
+.. literalinclude:: ../_static/examples/FEFD/MMI1x2/MMI1x2.py
+   :language: python
+
+
+.. dropdown:: MMI1x2 plot
+
+  The code first starts by defining a waveguide from a gds and plot it which looks like this
+
+  .. image:: ../_static/examples/FEFD/MMI1x2/images/MMI1x2.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+
+Then the code starts a mode solver instance to simulate the cross-section of the waveguide.
+
+
+.. dropdown:: Field profile
+
+  The code should produce a field profile at 1.5 that looks like
+
+
+  .. image:: ../_static/examples/FEFD/MMI1x2/images/field.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+
+
+
+
+
+.. dropdown:: Port field  
+
+  The code also plots the 1D field profile of the input port.
+
+  .. image:: ../_static/examples/FEFD/MMI1x2/images/port_field.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+.. dropdown:: S21 
+
+  The code also plots the S21 transmission parameter that compared with full 3D simulation should look like.
+
+  .. image:: ../_static/examples/FEFD/MMI1x2/images/S21.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+.. dropdown:: S31 
+
+  The code also plots the S31 transmission parameter that compared with full 3D simulation should look like.
+
+  .. image:: ../_static/examples/FEFD/MMI1x2/images/S31.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center

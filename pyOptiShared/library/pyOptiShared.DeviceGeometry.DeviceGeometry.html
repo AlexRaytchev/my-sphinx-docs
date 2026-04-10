@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pyOptiShared.DeviceGeometry.DeviceGeometry &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+  <title>pyOptiShared.DeviceGeometry.DeviceGeometry &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -17,8 +17,8 @@
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../_static/documentation_options.js?v=58fbf978"></script>
-      <script src="../../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../_static/copybutton.js?v=f281be69"></script>
       <script src="../../_static/design-tabs.js?v=f930bc37"></script>
@@ -82,6 +82,8 @@
 <li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.SetFromGDS"><code class="docutils literal notranslate"><span class="pre">DeviceGeometry.SetFromGDS()</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.SetFromSTL"><code class="docutils literal notranslate"><span class="pre">DeviceGeometry.SetFromSTL()</span></code></a></li>
 <li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.UpdateScriptParams"><code class="docutils literal notranslate"><span class="pre">DeviceGeometry.UpdateScriptParams()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.ensure_file_exists"><code class="docutils literal notranslate"><span class="pre">DeviceGeometry.ensure_file_exists()</span></code></a></li>
+<li class="toctree-l7"><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.group_indices"><code class="docutils literal notranslate"><span class="pre">DeviceGeometry.group_indices()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -96,6 +98,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../pyModeSolver/pyModeSolver.html">Mode Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../pyFDTD/pyFDTD.html">FDTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../FEMFy/FEMFy.html">FEFD</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Designs.html">Flex Device Library</a></li>
 </ul>
 </li>
@@ -107,7 +110,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">Optiwaves's Python EM Modules</a>
+          <a href="../../index.html">Optiwave's Python EM Modules</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -132,7 +135,7 @@
 <h1>pyOptiShared.DeviceGeometry.DeviceGeometry<a class="headerlink" href="#pyoptishared-devicegeometry-devicegeometry" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pyOptiShared.DeviceGeometry.DeviceGeometry">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyOptiShared.DeviceGeometry.</span></span><span class="sig-name descname"><span class="pre">DeviceGeometry</span></span><a class="headerlink" href="#pyOptiShared.DeviceGeometry.DeviceGeometry" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyOptiShared.DeviceGeometry.</span></span><span class="sig-name descname"><span class="pre">DeviceGeometry</span></span><a class="headerlink" href="#pyOptiShared.DeviceGeometry.DeviceGeometry" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class handles the geometry of the device under
 simulation.</p>
@@ -142,14 +145,20 @@ simulation.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.AddPort" title="pyOptiShared.DeviceGeometry.DeviceGeometry.AddPort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AddPort</span></code></a>([port])</p></td>
 <td><p>Add ports manually to the geometry.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.GetBoundingBox" title="pyOptiShared.DeviceGeometry.DeviceGeometry.GetBoundingBox"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetBoundingBox</span></code></a>([with_buffer])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetADEMats</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.GetBoundingBox" title="pyOptiShared.DeviceGeometry.DeviceGeometry.GetBoundingBox"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetBoundingBox</span></code></a>([with_buffer])</p></td>
 <td><p>This function returns the bounding box of the original domain size and optionaly you can add the buffer size.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.GetMatVals" title="pyOptiShared.DeviceGeometry.DeviceGeometry.GetMatVals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetMatVals</span></code></a>(points)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.GetMatVals" title="pyOptiShared.DeviceGeometry.DeviceGeometry.GetMatVals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetMatVals</span></code></a>(points)</p></td>
 <td><p>This method returns the material number of every point in <cite>points</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.GetPermittivityMesh" title="pyOptiShared.DeviceGeometry.DeviceGeometry.GetPermittivityMesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetPermittivityMesh</span></code></a>(points, wavelength[, temp])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.GetPermittivityMesh" title="pyOptiShared.DeviceGeometry.DeviceGeometry.GetPermittivityMesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetPermittivityMesh</span></code></a>(points, wavelength[, temp])</p></td>
 <td><p>This method accepts a material mesh containing material numbers from the LayerStack and evaluates the permittivity of the mesh at particular wavelengths.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PadGeometry</span></code>(x_margins, y_margins[, write_gds])</p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.PlotGDS" title="pyOptiShared.DeviceGeometry.DeviceGeometry.PlotGDS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PlotGDS</span></code></a>([filename, width, height])</p></td>
 <td><p>Displays the geometry configuration for the GDS file.</p></td>
@@ -178,24 +187,39 @@ simulation.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.UpdateScriptParams" title="pyOptiShared.DeviceGeometry.DeviceGeometry.UpdateScriptParams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UpdateScriptParams</span></code></a>(parameters)</p></td>
 <td><p>Changes the input values to the func passed to SetFromFun method</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.ensure_file_exists" title="pyOptiShared.DeviceGeometry.DeviceGeometry.ensure_file_exists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ensure_file_exists</span></code></a>()</p></td>
+<td><p>Checks if a file exists using pathlib.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.group_indices" title="pyOptiShared.DeviceGeometry.DeviceGeometry.group_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">group_indices</span></code></a>(values)</p></td>
+<td><p>Group flat indices of a 1D integer array by value.</p></td>
+</tr>
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">background_material</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ade_mats</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">domain_buffer</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">background_material</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gds_wizard</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">buffers</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">layer_stack</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">device_name</span></code></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ports</span></code></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">domain_buffer</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gds_wizard</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">layer_stack</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ports</span></code></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -236,7 +260,7 @@ tuple[float, float]
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pyOptiShared.DeviceGeometry.DeviceGeometry.GetMatVals">
-<span class="sig-name descname"><span class="pre">GetMatVals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><span class="pre">ndarray</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><span class="pre">ndarray</span></a></span></span><a class="headerlink" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.GetMatVals" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">GetMatVals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a></span></span><a class="headerlink" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.GetMatVals" title="Link to this definition"></a></dt>
 <dd><p>This method returns the material number of every point in <cite>points</cite>.
 The material number corresponds to the specified material in the MaterialLibrary.</p>
 <dl class="field-list simple">
@@ -254,7 +278,7 @@ The material number corresponds to the specified material in the MaterialLibrary
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pyOptiShared.DeviceGeometry.DeviceGeometry.GetPermittivityMesh">
-<span class="sig-name descname"><span class="pre">GetPermittivityMesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><span class="pre">ndarray</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><span class="pre">ndarray</span></a></span></span><a class="headerlink" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.GetPermittivityMesh" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">GetPermittivityMesh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.GetPermittivityMesh" title="Link to this definition"></a></dt>
 <dd><p>This method accepts a material mesh containing material numbers from the LayerStack
 and evaluates the permittivity of the mesh at particular wavelengths. Use GetMAterialMesh()
 first to get the appropriate material mesh mapping with respect to the layer stack material
@@ -349,7 +373,7 @@ specifying the wavelength in units used by the material model.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pyOptiShared.DeviceGeometry.DeviceGeometry.SetFromFun">
-<span class="sig-name descname"><span class="pre">SetFromFun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.3)"><span class="pre">ndarray</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_stack</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><span class="pre">LayerStack</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'x':</span> <span class="pre">[0.5,</span> <span class="pre">0.5],</span> <span class="pre">'y':</span> <span class="pre">[0.5,</span> <span class="pre">0.5],</span> <span class="pre">'z':</span> <span class="pre">[0.5,</span> <span class="pre">0.5]}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_limits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.SetFromFun" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">SetFromFun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_stack</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyOptiShared.LayerInfo.LayerStack.html#pyOptiShared.LayerInfo.LayerStack" title="pyOptiShared.LayerInfo.LayerStack"><span class="pre">LayerStack</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'x':</span> <span class="pre">[0.5,</span> <span class="pre">0.5],</span> <span class="pre">'y':</span> <span class="pre">[0.5,</span> <span class="pre">0.5],</span> <span class="pre">'z':</span> <span class="pre">[0.5,</span> <span class="pre">0.5]}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_limits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.SetFromFun" title="Link to this definition"></a></dt>
 <dd><p>Configures a DeviceGeometry object from a function definition.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -472,6 +496,43 @@ to set both. Defaults to None.</p></li>
 Should have the same length as the function inputs length. Defaults to None.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.DeviceGeometry.DeviceGeometry.ensure_file_exists">
+<span class="sig-name descname"><span class="pre">ensure_file_exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.ensure_file_exists" title="Link to this definition"></a></dt>
+<dd><p>Checks if a file exists using pathlib. Raises FileNotFoundError if it doesn’t.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyOptiShared.DeviceGeometry.DeviceGeometry.group_indices">
+<span class="sig-name descname"><span class="pre">group_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><span class="pre">ndarray</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyOptiShared.DeviceGeometry.DeviceGeometry.group_indices" title="Link to this definition"></a></dt>
+<dd><p>Group flat indices of a 1D integer array by value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>values</strong> (<em>np.ndarray</em>) – np.ndarray, shape (N,), dtype int.
+Flat integer array where each entry is a material ID.
+0 is treated as vacuum and excluded from the output.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Keys are unique non-zero integer values.</dt><dd><p>Values are int32 arrays of flat indices where that value occurs,
+shape (n_points,).</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)">int</a>, np.ndarray]</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groups</span> <span class="o">=</span> <span class="n">group_indices</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groups</span>
+<span class="go">{1: array([1, 3]), 2: array([2, 5]), 3: array([6])}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>

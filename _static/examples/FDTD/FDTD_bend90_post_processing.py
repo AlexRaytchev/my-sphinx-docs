@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import mpld3
-from pyOptiShared.SimResults import FDTDSimResults
+from pyFDTDKernel.FDTDResults import FDTDResults
 
 # Plotting Options
 my_cmap = 'turbo' # For Colormap selection
@@ -9,13 +9,13 @@ save_svg = True # Save figure in SVG format
 save_html = True # Uses mpld3 and export figure to HTML
 
 # Load the Results Files
-results_spx1 = FDTDSimResults()
+results_spx1 = FDTDResults()
 results_spx1.loadHDF5('results/bend90_spx_1_50nm.hdf5')
-results_spx2 = FDTDSimResults()
+results_spx2 = FDTDResults()
 results_spx2.loadHDF5('results/bend90_spx_2_50nm.hdf5')
-results_spx3 = FDTDSimResults()
+results_spx3 = FDTDResults()
 results_spx3.loadHDF5('results/bend90_spx_1_25nm.hdf5')
-results_spx4 = FDTDSimResults()
+results_spx4 = FDTDResults()
 results_spx4.loadHDF5('results/bend90_spx_2_25nm.hdf5')
 
 # Get the Material Cross sections
@@ -52,7 +52,7 @@ def export_html(fig:plt.Figure, filename:str) -> None:
 fig = plt.figure(figsize=(16,5))
 ax = plt.subplot(1,4,1)
 ax.imshow(np.abs(Hz_cs1),origin='lower',cmap=my_cmap)
-set_plot_settings(ax,"Space Step: 25nm - Subp. Level: 1")
+set_plot_settings(ax,"Space Step: 50nm - Subp. Level: 1")
 
 ax = plt.subplot(1,4,2)
 ax.imshow(np.abs(Hz_cs2),origin='lower',cmap=my_cmap)
@@ -118,7 +118,7 @@ if save_html: export_html(fig, "subpixel_epsx_zoomed")
 # Get Wavelength and S21 Data
 lam = abs(results_spx1.sparameters['S21'].Get('wavelength'))
 
-# Get SParameter Data - S21 - Tranmission
+# Get SParameter Data - S21 - Transmission
 s21_spx1 = results_spx1.sparameters['S21'].Get('data')
 s21_spx2 = results_spx2.sparameters['S21'].Get('data')
 s21_spx3 = results_spx3.sparameters['S21'].Get('data')

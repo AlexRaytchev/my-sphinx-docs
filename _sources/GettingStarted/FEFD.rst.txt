@@ -1,0 +1,255 @@
+Finite Element Frequency Domain Solver
+========================================
+.. contents::
+   :local:
+   :depth: 2
+   :backlinks: top
+   
+The Finite-Element Frequency-Domain (FEFD) solver is a powerful electromagnetic simulation tool for analyzing integrated photonic devices. This guide will walk you through setting up and running your first FEFD simulation using a straight waveguide example.
+
+Basic Workflow
+--------------
+
+Every FEFD simulation follows these steps:
+
+1. **Define materials** with their optical properties
+2. **Create layer stack** describing the vertical structure
+3. **Set up device geometry** from a GDS layout file or function
+4. **Configure ports** for mode injection and monitoring
+5. **Set simulation parameters** including mesh and boundaries
+6. **Run simulation** and analyze results
+
+Example 1: Straight Waveguide Simulation
+--------------------------------------------
+
+This example demonstrates the essential steps to simulate a straight silicon waveguide and extract S-parameters.
+
+Step 1: Import Required Modules
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../_static/examples/FEFD/straight_waveguide/FEFD_straight_wg.py
+   :language: python
+   :lines: 4-11
+
+Step 2: Define Materials
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Create materials with constant refractive indices:
+
+.. literalinclude:: ../_static/examples/FEFD/straight_waveguide/FEFD_straight_wg.py
+   :language: python
+   :lines: 13-19
+
+
+**Note**: The dielectric constant (epsilon) is the square of the refractive index: ε = n\ :sup:`2`
+
+Step 3: Build the Layer Stack
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The layer stack defines your device's vertical structure:
+
+.. literalinclude:: ../_static/examples/FEFD/straight_waveguide/FEFD_straight_wg.py
+   :language: python
+   :start-after: ###             Layer Stack            ###
+   :end-at: layer_stack.SetBGandSub(background=myindex1p0, substrate=myindex1p0)
+
+
+Step 4: Define Mesh Parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Then define the mesh parameters including the options to visualize/save:
+
+.. literalinclude:: ../_static/examples/FEFD/straight_waveguide/FEFD_straight_wg.py
+   :language: python
+   :start-after: ###           Mesh Settings            ###
+   :end-at: fem_mesh.SetMeshOptions(mode='quiet',gui=False,export=True)
+
+
+   
+
+Step 5: Create Device Geometry
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can load geometry from a GDS file or define it programmatically. Here we'll use gdstk to generate "waveguide.gds" file which will be used to define the geometry:
+
+
+
+Step 6: Set PML Parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Now we define the PML settings including the thickness, profile, alpha, sigma, and kappa:
+profile : defines the order of the decay, typically 2.
+sigma : defines the maximum conductivity at the edge of the PML. Typically : 2. 
+Note : you can ignore setting the PML parameters. In this case, the solver will use the default values which are typically sufficient for most cases.
+
+
+.. literalinclude:: ../_static/examples/FEFD/straight_waveguide/FEFD_straight_wg.py
+   :language: python
+   :start-after: ###            PML Settings            ###
+   :end-at: ### End PML Settings
+
+Step 7: Configure the FEFD Solver
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+First the boundary conditions are set. If the boundaries are not set, the solver will use the PML in all directions with default values which suppresses the outgoing waves in all directions.
+Then the settings of the solver are defined including the wavelength range, the number of frequencies, and the type of excitation (TE or TM). Finally, the settings for saving the results are defined.
+
+
+.. literalinclude:: ../_static/examples/FEFD/straight_waveguide/FEFD_straight_wg.py
+   :language: python
+   :start-after: ###       FEFDSolver Settings          ###
+   :end-at: ### End FEFDSolver Settings
+
+
+
+Step 8: Run Simulation
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. literalinclude:: ../_static/examples/FEFD/straight_waveguide/FEFD_straight_wg.py
+   :language: python
+   :start-after: ###         Run and Visualize          ###
+   :end-at: ### End Visualize
+
+
+
+
+Complete Example Code
+^^^^^^^^^^^^^^^^^^^^^
+
+Here is the complete code you can copy and run (:download:`FEFD_straight_wg.py <../_static/examples/FEFD/straight_waveguide/FEFD_straight_wg.py>`):
+
+.. literalinclude:: ../_static/examples/FEFD/straight_waveguide/FEFD_straight_wg.py
+   :language: python
+
+Understanding the Results
+-------------------------
+
+The FEFD solver returns an ``FEFDResults`` object with several useful components:
+
+S-Parameters
+^^^^^^^^^^^^
+
+S-parameters quantify how much power is transmitted and reflected:
+
+- **S11**: Reflection at Port 1 (how much power bounces back)
+- **S21**: Transmission from Port 1 to Port 2 (how much power passes through)
+- Power transmission: \|S21\|\ :sup:`2`
+- Power reflection: \|S11\|\ :sup:`2`
+
+
+
+Port
+^^^^^^^^^^^^
+
+Plot the field profile of the excitation port:
+
+- For TE modes, the field profile should look continuous.
+- For TM modes, the field should look piece wise continuous around the interface between two materials. 
+- **wavelength**: The selected wavelength of the port. 
+- **source_idx**: The source number.
+
+
+
+
+Tips for Success
+----------------
+
+1. **Mesh Resolution**: Start with 40nm (0.04 μm) and refine if needed. Smaller mesh = more accuracy but longer runtime.
+
+2. **High Index Contrast**: For high index contrast devices (e.g., silicon on oxide), consider using second-order elements for improved accuracy.
+
+3. **PML Boundary Settings**: For high resonance devices or high index contrast simulations. Adjust PML parameters (thickness, sigma, kappa) to ensure proper absorption and minimize reflections.
+
+4. **Boundary Padding**: Use at least 1 μm buffers around devices to prevent reflections from PML boundaries.
+
+5. **Mode Selection**: ``mode_indices=0`` excites the fundamental mode. For multimode devices, use higher indices (1, 2, etc.).
+
+6. **Wavelength Range**: Choose range based on your application. More frequency points give smoother spectra but take longer.
+
+7. **2.5D simulations**: For 2.5D simulations, usually ``number_iterations=2`` is sufficient for converged results.
+
+Advanced Features
+-----------------
+
+Port Symmetries
+^^^^^^^^^^^^^^^
+
+For symmetric devices (crossings, splitters), exploit symmetry to simulate only the necessary port:
+
+.. code-block:: python
+
+   fefd_solver.SetExcitation(
+       ...,
+       reciprocity='4x'  # Predefined 4-port crossing symmetry
+       
+   )
+
+
+
+Material Experimental Data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Since the solver is a frequency domain solver, it can handle materials with experimental data. 
+You can use the ``AddMaterial`` method to add a material with experimental data. The data should be in the form of a list of wavelengths and a list of corresponding complex refractive indices. 
+The solver will interpolate the data to get the refractive index at the desired wavelengths.
+
+.. code-block:: python
+
+   from pyOptiShared.Material import ExperimentalMaterial
+   si=ExperimentalMaterial(mat_name="Si",
+                           lamb=[1.5,1.6], # list of wavelengths in microns
+                           values=[3.48**2,3.45**2], #  list of corresponding complex epsilons (n^2) at the wavelengths
+                           color='lightgreen')
+
+
+
+
+
+Higher Order Elements
+^^^^^^^^^^^^^^^^^^^^^^
+
+For more accurate results, especially in high index contrast devices, consider using second-order elements:
+
+.. code-block:: python
+
+   fefd_solver.SetSimSettings(
+       ...,
+       order=2  # Use second-order elements for improved accuracy
+       
+   )
+
+
+2.5D Simulations
+^^^^^^^^^^^^^^^^^^^^^^
+
+For more accurate results, especially in high index contrast devices, consider using second-order elements:
+
+For TE modes:
+
+.. code-block:: python
+
+   fefd_solver.SetSimSettings(
+       ...,
+       polarization='TE2.5'  # Use second-order elements for improved accuracy
+       
+   )
+
+or for TM modes:
+
+.. code-block:: python
+
+   fefd_solver.SetSimSettings(
+       ...,
+       polarization='TM2.5'  # Use second-order elements for improved accuracy
+       
+   )
+
+Use ``number_iterations`` to control the number of iterations for the 2.5D solver. Typically, 2 iterations are sufficient for convergence.
+
+.. code-block:: python
+
+   fefd_solver.SetSimSettings(
+       ...,
+       number_iterations=2  # 2 is typically sufficient for convergence
+       
+   )

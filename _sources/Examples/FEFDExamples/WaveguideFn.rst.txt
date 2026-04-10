@@ -1,0 +1,60 @@
+:orphan:
+
+Waveguide - Run FEFD simulation from a function
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Similarly for this example, we are going to simulate a straight waveguide from a user defined function.
+
+.. literalinclude:: /_static/examples/FEFD/FEFD_FunWaveguide_example.py
+   :language: python
+
+It is also possible to run sweeps on the function by using :meth:`UpdateScriptParams <pyOptiShared.DeviceGeometry.DeviceGeometry.UpdateScriptParams>` which updates the parameters getting passed to the device geometry.
+Note: you still need to call the solver :meth:`SetSimSettings <pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetSimSettings>` so that the device geometry update takes effect. 
+
+.. literalinclude:: /_static/examples/FEFD/FEFD_FunWaveguide_sweep_example.py
+   :language: python
+
+Waveguide - Run FEFD simulation from a function (gdstk)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The function output can also be a gdstk library.
+
+
+.. literalinclude:: /_static/examples/FEFD/FEFD_Fun_GdstkExample.py
+   :language: python
+
+
+
+.. S-Bend - Creating a GIF from Fields
+.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. For this example we are going to simulate an S-bend (:download:`bend90.gds <../_static/sbend.gds>`) and
+.. then create a ``.gif`` from the main component of the injected mode overlaping with the permittivity grid.
+
+.. .. image:: ../_static/sbend.svg
+..   :alt: A graphical representation of a generic layer stack.
+..   :width: 40%
+..   :align: center
+
+.. In this particular example we make use of the **Time Monitor** to store the fields at particular time instants, so we can animate them later.
+.. The python script for this simulation is presented in the following code snipet:
+
+.. .. literalinclude:: ../_static/examples/FDTD/FDTD_Sbend_example.py
+..    :language: python
+
+.. .. dropdown:: Post Processing Code
+
+..   .. literalinclude:: ../_static/examples/FDTD/FDTD_Sbend_post_processing.py
+..    :language: python
+
+
+.. The results is shown as follows:
+
+.. .. grid:: 1
+
+..     .. grid-item-card::  Main Mode Component Propagation
+
+..         .. figure:: ../_static/sbend_hz.gif
+..            :width: 85%
+..            :align: center
+
+

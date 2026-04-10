@@ -34,7 +34,7 @@
          ~pyFDTDSolver.SetBoundaries
       
       
-         ~pyFDTDSolver.SetPorts
+         ~pyFDTDSolver.SetExcitation
       
       
          ~pyFDTDSolver.SetSimSettings

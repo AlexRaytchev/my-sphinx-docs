@@ -6,9 +6,9 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Device Optimization &mdash; Optiwaves&#39;s Python EM Modules 1.1.1 documentation</title>
+  <title>Device Optimization &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -17,8 +17,8 @@
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=58fbf978"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../_static/copybutton.js?v=f281be69"></script>
       <script src="../_static/design-tabs.js?v=f930bc37"></script>
@@ -57,6 +57,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="Examples.html">Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ModeSolverExamples.html">Mode Solver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="FDTDExamples.html">FDTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FEFDExamples.html">FEFD</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ApplicationExamples.html">Application Examples</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Device Optimization</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#flexible-device-library">Flexible Device Library</a><ul>
@@ -84,7 +85,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Optiwaves's Python EM Modules</a>
+          <a href="../index.html">Optiwave's Python EM Modules</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -195,7 +196,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.pyFDTDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyFDTDSolver</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.SimResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDTDSimResults</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.FDTDResults</span><span class="w"> </span><span class="kn">import</span> <span class="n">FDTDResults</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.OptimizeVerse</span><span class="w"> </span><span class="kn">import</span> <span class="n">PSO</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Designs</span><span class="w"> </span><span class="kn">import</span> <span class="n">flex_splitter</span>
 
@@ -207,7 +208,7 @@
                   <span class="n">subpixel_level</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                   <span class="n">mode_indices</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                   <span class="n">mon_z</span><span class="o">=</span><span class="mf">0.11</span><span class="p">,</span>
-                  <span class="n">auto_shutoff_limit</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">FDTDSimResults</span><span class="p">:</span>
+                  <span class="n">auto_shutoff_limit</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">FDTDResults</span><span class="p">:</span>
     
     <span class="c1"># Defines the Device Geometry</span>
     <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
@@ -230,22 +231,21 @@
     <span class="c1">#device_geometry.Show()</span>
     
     <span class="c1"># General Simulation Settings and Simulation Run</span>
-    <span class="n">lmin</span> <span class="o">=</span> <span class="n">lmin</span>
-    <span class="n">lmax</span> <span class="o">=</span> <span class="n">lmax</span>
+
     <span class="n">lcen</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="n">lmin</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
     <span class="n">npts</span><span class="o">=</span><span class="n">npts</span>
     <span class="n">tfinal</span> <span class="o">=</span> <span class="mi">35000</span>
     
     <span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
     
-    <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetPorts</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">mode_indices</span> <span class="o">=</span> <span class="n">mode_indices</span> <span class="p">,</span><span class="n">symmetries</span><span class="o">=</span><span class="n">symmetries</span><span class="p">)</span>
+    <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">mode_indices</span> <span class="o">=</span> <span class="n">mode_indices</span> <span class="p">,</span><span class="n">symmetries</span><span class="o">=</span><span class="n">symmetries</span><span class="p">)</span>
     
     <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span><span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="n">mon_z</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
                                                   <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span>
                                                   <span class="n">save_hx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">save_hy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">save_hz</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                                   <span class="n">save_ex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">save_ey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">save_ez</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
-    <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="n">space_step</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="n">subpixel_level</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">results_filename</span><span class="o">=</span><span class="n">results_filename</span><span class="p">,</span>
+    <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="n">space_step</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="n">subpixel_level</span><span class="p">,</span> <span class="n">results_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">device_name</span><span class="o">=</span><span class="n">results_filename</span><span class="p">,</span>
                                                   <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span><span class="n">auto_shutoff_limit</span><span class="o">=</span><span class="n">auto_shutoff_limit</span><span class="p">,</span><span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">verbosity</span><span class="o">=</span><span class="s1">&#39;ERROR&#39;</span><span class="p">)</span>
     <span class="n">results</span> <span class="o">=</span> <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
 
@@ -276,11 +276,11 @@
 
 <span class="c1"># Creates the Layer Stack</span>
 <span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
                     <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span>
                     <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">layer_stack</span><span class="o">.</span><span class="n">setBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">air_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
 
 <span class="n">lower_bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mf">0.4998</span><span class="p">,</span><span class="mf">0.55</span><span class="p">,</span><span class="mf">0.60</span><span class="p">,</span><span class="mf">0.60</span><span class="p">,</span><span class="mf">0.70</span><span class="p">,</span><span class="mf">0.75</span><span class="p">,</span><span class="mf">0.80</span><span class="p">,</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.95</span><span class="p">,</span><span class="mf">0.9998</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
 <span class="n">upper_bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mf">0.5002</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.25</span><span class="p">,</span><span class="mf">1.15</span><span class="p">,</span><span class="mf">1.002</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>

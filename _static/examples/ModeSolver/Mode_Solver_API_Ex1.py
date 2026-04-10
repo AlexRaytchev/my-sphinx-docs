@@ -1,9 +1,10 @@
-from pyModeSolver.py_mode_solver import VFDModeSolver
+from pyModeSolver.pyModeSolver import VFDModeSolver
 from pyOptiShared.LayerInfo import LayerStack
 from pyOptiShared.DeviceGeometry import DeviceGeometry
 from pyOptiShared.Material import ConstMaterial
 import gdstk
-
+import numpy as np
+import matplotlib.pyplot as plt
 ##########################################
 ###             WG GDS File            ###
 ##########################################
@@ -34,9 +35,9 @@ core_mat = ConstMaterial("Si", epsReal=3.48**2, epsImag=0.0)
 ###       Layer Stack Settings         ###
 ##########################################
 layer_stack = LayerStack()
-layer_stack.addLayer(number=1,material=core_mat, thickness=0.22, zmin=0, sideWallAng=0, cladding="Air_default")
-layer_stack.addLayer(number=2,material=core_mat, thickness=0.09, zmin=0.0, sideWallAng=0, cladding="Air_default")
-layer_stack.setBGandSub(background="Air_default", substrate=substrate_mat)
+layer_stack.AddLayer(number=1,material=core_mat, thickness=0.22, zmin=0, sideWallAng=0, cladding="Air_default")
+layer_stack.AddLayer(number=2,material=core_mat, thickness=0.09, zmin=0.0, sideWallAng=0, cladding="Air_default")
+layer_stack.SetBGandSub(background="Air_default", substrate=substrate_mat)
 
 ##########################################
 ###   Device Geometry/Port Settings    ###
@@ -50,18 +51,21 @@ device_geometry.SetFromGDS(layer_stack=layer_stack,
 ###       ModeSolver Settings          ###
 ##########################################
 mode_solver = VFDModeSolver()
-mode_solver.SetBoundaries(min_x = {"bc":"pmc"}, max_x = {"bc":"pmc"},
-                        min_y = {"bc":"pmc"}, max_y = {"bc":"pmc"},)
+mode_solver.SetBoundaries(min_x = "pmc", max_x = "pmc",
+                        min_y = "pmc", max_y = "pmc")
+
+lams=np.linspace(start=1.5,stop=1.6,num=5)
+
 mode_solver.SetSimSettings(device_geometry = device_geometry,
                            mesh={"dx": 0.02,"dy": 0.02, "dz": 0.02},
-                           wavelength={"min":1.5,"max":1.6,"npts": 5},
+                           wavelength=lams,
                            nguess = 2.1,
-                           nmodes = 4,
+                           nmodes = 10,
                            cut_plane = "YZ",
                            cut_location = 0.0,
                            tol = 1e-8,
-                           savepath = "./ModeResults",
-                           res_filename = "my_results")
+                           results_path = "./ModeResults",
+                           device_name = "my_results")
 
 ##########################################
 ###   Run and Results Visualization    ###
@@ -73,3 +77,5 @@ results.PlotMode(field='Hy') # Fundamental Mode Profile
 results.PlotPermittivity()  # Material Profile
 results.PlotIndex('neff',modes=[0,1,2,3]) # Effective Refractive Index
 results.PlotIndex('ng',modes=[0,1,2,3]) # Effective Group Index
+results.Polarity(wavelength=1.5) # polarity of the modes
+plt.show()

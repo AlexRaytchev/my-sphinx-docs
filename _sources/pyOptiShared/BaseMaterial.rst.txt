@@ -34,7 +34,7 @@ the required methods.
 
 Creating a Custom Material Object
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-This examples shows how to create a custom material object and override
+This example shows how to create a custom material object and override
 the ``__init__``, ``eps()`` and ``index()`` methods.
 
 .. code-block:: python
@@ -44,7 +44,7 @@ the ``__init__``, ``eps()`` and ``index()`` methods.
 
    class CustomMaterial(Material):
         def __init__(self, n):
-        super.__init__()
+            super().__init__()
         self.n = n  # Refractive index
 
         def eps(self, wavelengths):
@@ -52,6 +52,6 @@ the ``__init__``, ``eps()`` and ``index()`` methods.
             return np.full_like(wavelengths, self.n**2, dtype=np.complex64)
 
         def index(self, wavelengths):
-            # Return constant permittivity for all wavelengths
+            # Return constant refractive index for all wavelengths
             return np.full_like(wavelengths, self.n, dtype=np.complex64)
 

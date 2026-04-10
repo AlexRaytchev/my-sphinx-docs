@@ -1,0 +1,74 @@
+
+
+
+
+2.5D simulation of Directional Coupler
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This examples shows how to use FEM 2.5 D capabilities in simulating directional coupler and get results close to the 3D models.
+For this example we use a gds file.
+
+The simulation setup in the code snippet below. In this example, TM polarization is used. 
+
+.. literalinclude:: ../_static/examples/FEFD/DirectionalCoupler_withBends/DirectionalCoupler2.5.py
+   :language: python
+
+
+.. dropdown:: Directional Coupler plot
+
+  The code first starts by defining a waveguide from a gds and plot it which looks like this
+
+  .. image:: ../_static/examples/FEFD/DirectionalCoupler_withBends/images/coupler.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+
+Then the code starts a mode solver instance to simulate the cross-section of the waveguide.
+
+
+.. dropdown:: Field profile
+
+  The code should produce a field profile at 1.5 that looks like
+
+
+  .. image:: ../_static/examples/FEFD/DirectionalCoupler_withBends/images/fieldprofile.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+
+
+
+
+
+.. dropdown:: Port field  
+
+  The code also plots the 1D field profile of the input port.
+
+  .. image:: ../_static/examples/FEFD/DirectionalCoupler_withBends/images/port_field.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+.. dropdown:: S31 
+
+  The code also plots the S31 transmission parameter that compared with full 3D simulation should look like.
+
+  .. image:: ../_static/examples/FEFD/DirectionalCoupler_withBends/images/S31.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+.. dropdown:: S41 
+
+  The code also plots the S41 transmission parameter that compared with full 3D simulation should look like.
+
+  .. image:: ../_static/examples/FEFD/DirectionalCoupler_withBends/images/S41.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center

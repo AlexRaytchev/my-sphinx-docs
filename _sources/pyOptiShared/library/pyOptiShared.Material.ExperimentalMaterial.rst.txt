@@ -58,5 +58,6 @@
       ~ExperimentalMaterial.material_number
       ~ExperimentalMaterial.mstrMode
       ~ExperimentalMaterial.name
+      ~ExperimentalMaterial.number
    
    

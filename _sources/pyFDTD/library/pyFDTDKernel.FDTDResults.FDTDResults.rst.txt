@@ -1,0 +1,49 @@
+﻿pyFDTDKernel.FDTDResults.FDTDResults
+====================================
+
+.. currentmodule:: pyFDTDKernel.FDTDResults
+
+.. autoclass:: FDTDResults
+   :members:
+   :show-inheritance:
+   :class-doc-from: init
+   :member-order: groupwise
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+         ~FDTDResults.PlotDFTMonitor
+      
+      
+         ~FDTDResults.PlotPermittivity
+      
+      
+         ~FDTDResults.PlotSParameters
+      
+      
+         ~FDTDResults.PlotTimeMonitor
+      
+      
+      
+         ~FDTDResults.loadHDF5
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FDTDResults.mode_sources
+      ~FDTDResults.permeability
+      ~FDTDResults.permittivity
+      ~FDTDResults.runs
+      ~FDTDResults.sparameters
+   
+   

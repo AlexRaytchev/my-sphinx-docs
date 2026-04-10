@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Waveguide - Run FDTD simulation from a function &mdash; Optiwave&#39;s Python EM Modules 1.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=58fbf978"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo-traced.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductOverview/ProductOverview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Installation/Installation.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../GettingStarted/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ProductInterworking/ProductInterworking.html">Product Interworking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../APIDocumentation/APIDocumentation.html">API Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Optiwave's Python EM Modules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Waveguide - Run FDTD simulation from a function</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/Examples/FDTDExamples/WaveguideFn.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="waveguide-run-fdtd-simulation-from-a-function">
+<h1>Waveguide - Run FDTD simulation from a function<a class="headerlink" href="#waveguide-run-fdtd-simulation-from-a-function" title="Link to this heading"></a></h1>
+<p>Similarly for this example, we are going to simulate a straight waveguide from a user defined function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.pyFDTDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyFDTDSolver</span>
+
+<span class="c1"># Material Settings</span>
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
+
+<span class="c1"># Layer Stack Settings</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                    <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">waveguide</span><span class="p">(</span><span class="n">port_width</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">waveguide_length</span><span class="o">=</span><span class="mf">5.00</span><span class="p">,</span><span class="n">input_port_center</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">vertices</span><span class="o">=</span><span class="p">[(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">port_width</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span>
+                <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">waveguide_length</span><span class="p">,</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">port_width</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span>
+                <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">waveguide_length</span><span class="p">,</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">port_width</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span>
+                <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">port_width</span><span class="o">/</span><span class="mi">2</span><span class="p">))]</span>
+    
+    <span class="k">return</span> <span class="p">[(</span><span class="n">vertices</span><span class="p">,</span><span class="n">layer</span><span class="p">)]</span> 
+
+<span class="n">parameters</span><span class="o">=</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">5.00</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># (port_width,waveguide_length,input_port_center,layer)</span>
+
+
+<span class="c1">#Device Geometry Settings</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromFun</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">waveguide</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">})</span>
+
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">port_buffer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">edge_tol_x</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">PrintPorts</span><span class="p">()</span>
+
+<span class="c1"># Simulation Settings and Runs</span>
+<span class="n">lmin</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">lmax</span> <span class="o">=</span> <span class="mf">1.6</span>
+<span class="n">lcen</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="n">lmin</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">npts</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">tfinal</span> <span class="o">=</span> <span class="mi">1500</span>
+
+<span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">mode_indices</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span><span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="mf">0.11</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
+                        <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span>
+                        <span class="n">save_ex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ez</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">save_hx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_hy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_hz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+      
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.050</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">results_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">device_name</span><span class="o">=</span><span class="s1">&#39;waveguide_spx_1_50nm&#39;</span><span class="p">,</span>
+                        <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span><span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+
+<span class="n">results</span><span class="o">.</span><span class="n">PlotPermittivity</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="mf">0.11</span><span class="p">)</span>
+<span class="n">results</span><span class="o">.</span><span class="n">PlotDFTMonitor</span><span class="p">(</span><span class="s1">&#39;MyDFTMonitor1&#39;</span><span class="p">,</span><span class="n">field</span><span class="o">=</span><span class="s1">&#39;Ey&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is also possible to run sweeps on the function by using <a class="reference internal" href="../../pyOptiShared/library/pyOptiShared.DeviceGeometry.DeviceGeometry.html#pyOptiShared.DeviceGeometry.DeviceGeometry.UpdateScriptParams" title="pyOptiShared.DeviceGeometry.DeviceGeometry.UpdateScriptParams"><code class="xref py py-meth docutils literal notranslate"><span class="pre">UpdateScriptParams</span></code></a> which updates the parameters getting passed to the device geometry.
+Note: you still need to call the solver <a class="reference internal" href="../../pyFDTD/library/pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.html#pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetSimSettings" title="pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetSimSettings"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SetSimSettings</span></code></a> so that the device geometry update takes effect.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.pyFDTDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyFDTDSolver</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Material Settings</span>
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
+
+<span class="c1"># Layer Stack Settings</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                    <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">waveguide</span><span class="p">(</span><span class="n">port_width</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">waveguide_length</span><span class="o">=</span><span class="mf">1.00</span><span class="p">,</span><span class="n">input_port_center</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">vertices</span><span class="o">=</span><span class="p">[(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">port_width</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span>
+                <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">waveguide_length</span><span class="p">,</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">port_width</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span>
+                <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">waveguide_length</span><span class="p">,</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">port_width</span><span class="o">/</span><span class="mi">2</span><span class="p">)),</span>
+                <span class="p">(</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">input_port_center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">port_width</span><span class="o">/</span><span class="mi">2</span><span class="p">))]</span>
+    
+    <span class="k">return</span> <span class="p">[(</span><span class="n">vertices</span><span class="p">,</span><span class="n">layer</span><span class="p">)]</span> 
+
+<span class="n">min_width</span><span class="o">=</span><span class="mf">0.3</span>
+<span class="n">max_width</span><span class="o">=</span><span class="mf">0.8</span>
+<span class="n">num_points</span><span class="o">=</span><span class="mi">6</span>
+<span class="n">widths</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">min_width</span><span class="p">,</span><span class="n">max_width</span><span class="p">,</span><span class="n">num_points</span><span class="p">)</span>
+
+<span class="n">parameters</span><span class="o">=</span><span class="p">(</span><span class="n">widths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mf">5.00</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># (port_width,waveguide_length,input_port_center,layer)</span>
+
+
+<span class="c1">#Device Geometry Settings</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromFun</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">waveguide</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">port_buffer</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="nb">min</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.51</span><span class="p">],</span><span class="nb">max</span><span class="o">=</span><span class="p">[</span><span class="mf">0.55</span><span class="p">,</span><span class="mf">0.55</span><span class="p">])</span>
+
+<span class="c1"># Simulation Settings and Runs</span>
+<span class="n">lmin</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">lmax</span> <span class="o">=</span> <span class="mf">1.6</span>
+<span class="n">lcen</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="n">lmin</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">npts</span><span class="o">=</span><span class="mi">21</span>
+<span class="n">tfinal</span> <span class="o">=</span> <span class="mi">1500</span>
+
+<span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">mode_indices</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span><span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="mf">0.11</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
+                        <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span>
+                        <span class="n">save_ex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ez</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">save_hx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_hy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_hz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      
+
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">widths</span><span class="p">:</span>
+    <span class="n">results_filename</span><span class="o">=</span><span class="s1">&#39;waveguide_spx_1_50nm_sweep_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;solving for width : &#39;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="mf">5.00</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span> 
+    <span class="n">device_geometry</span><span class="o">.</span><span class="n">UpdateScriptParams</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.050</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">results_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">device_name</span><span class="o">=</span><span class="n">results_filename</span><span class="p">,</span>
+                        <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span><span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+
+    <span class="n">results</span><span class="o">.</span><span class="n">PlotPermittivity</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="mf">0.11</span><span class="p">,</span><span class="n">cut</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">PlotDFTMonitor</span><span class="p">(</span><span class="s1">&#39;MyDFTMonitor1&#39;</span><span class="p">,</span><span class="n">field</span><span class="o">=</span><span class="s1">&#39;Ey&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="waveguide-run-fdtd-simulation-from-a-function-gdstk">
+<h1>Waveguide - Run FDTD simulation from a function (gdstk)<a class="headerlink" href="#waveguide-run-fdtd-simulation-from-a-function-gdstk" title="Link to this heading"></a></h1>
+<p>The function output can also be a gdstk library.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.DeviceGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.LayerInfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">LayerStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Material</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConstMaterial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyFDTDKernel.pyFDTDSolver</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyFDTDSolver</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyOptiShared.Designs</span><span class="w"> </span><span class="kn">import</span> <span class="n">flex_taper</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Material Settings</span>
+<span class="n">si02_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;SiO2&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">1.45</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">)</span>
+<span class="n">si_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mf">3.5</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="n">air_mat</span> <span class="o">=</span> <span class="n">ConstMaterial</span><span class="p">(</span><span class="n">mat_name</span><span class="o">=</span><span class="s2">&quot;Air&quot;</span><span class="p">,</span> <span class="n">epsReal</span><span class="o">=</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">)</span>
+
+<span class="c1"># Layer Stack Settings</span>
+<span class="n">layer_stack</span> <span class="o">=</span> <span class="n">LayerStack</span><span class="p">()</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">AddLayer</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;L1&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">thickness</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">zmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                    <span class="n">material</span><span class="o">=</span><span class="n">si_mat</span><span class="p">,</span> <span class="n">cladding</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span>
+                    <span class="n">sideWallAng</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">layer_stack</span><span class="o">.</span><span class="n">SetBGandSub</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">,</span> <span class="n">substrate</span><span class="o">=</span><span class="n">si02_mat</span><span class="p">)</span>
+
+
+<span class="n">widths</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">parameters</span><span class="o">=</span><span class="p">(</span><span class="n">widths</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">2.0</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1">#Device Geometry Settings</span>
+<span class="n">device_geometry</span> <span class="o">=</span> <span class="n">DeviceGeometry</span><span class="p">()</span>
+
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetFromFun</span><span class="p">(</span>
+    <span class="n">layer_stack</span><span class="o">=</span><span class="n">layer_stack</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span><span class="n">flex_taper</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+    <span class="n">buffers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">})</span>
+
+<span class="n">device_geometry</span><span class="o">.</span><span class="n">SetAutoPortSettings</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">port_buffer</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Simulation Settings and Runs</span>
+<span class="n">lmin</span> <span class="o">=</span> <span class="mf">1.5</span>
+<span class="n">lmax</span> <span class="o">=</span> <span class="mf">1.6</span>
+<span class="n">lcen</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="n">lmin</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">npts</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">tfinal</span> <span class="o">=</span> <span class="mi">1500</span>
+
+<span class="n">fdtd_solver</span> <span class="o">=</span> <span class="n">pyFDTDSolver</span><span class="p">()</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetExcitation</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;gaussian-pw&quot;</span><span class="p">,</span> <span class="n">lcenter</span><span class="o">=</span><span class="n">lcen</span><span class="p">,</span> <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">mode_indices</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">symmetries</span><span class="o">=</span><span class="s1">&#39;1x1&#39;</span><span class="p">)</span>
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">AddDFTMonitor</span><span class="p">(</span><span class="n">mon_type</span><span class="o">=</span><span class="s2">&quot;2d-z-normal&quot;</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="mf">0.11</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MyDFTMonitor1&quot;</span><span class="p">,</span>
+                        <span class="n">lmin</span><span class="o">=</span><span class="n">lmin</span><span class="p">,</span> <span class="n">lmax</span><span class="o">=</span><span class="n">lmax</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span>
+                        <span class="n">save_ex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_ez</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">save_hx</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_hy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save_hz</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+<span class="n">fdtd_solver</span><span class="o">.</span><span class="n">SetSimSettings</span><span class="p">(</span><span class="n">sim_time</span><span class="o">=</span><span class="n">tfinal</span><span class="p">,</span> <span class="n">space_step</span><span class="o">=</span><span class="mf">0.0250</span><span class="p">,</span> <span class="n">subpixel_level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">results_path</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="n">device_name</span><span class="o">=</span><span class="s1">&#39;flex_taper&#39;</span><span class="p">,</span>
+                        <span class="n">device_geometry</span> <span class="o">=</span> <span class="n">device_geometry</span><span class="p">,</span><span class="n">export_mat_grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">fdtd_solver</span><span class="o">.</span><span class="n">Run</span><span class="p">()</span>
+
+<span class="n">results</span><span class="o">.</span><span class="n">PlotDFTMonitor</span><span class="p">(</span><span class="s1">&#39;MyDFTMonitor1&#39;</span><span class="p">,</span><span class="n">field</span><span class="o">=</span><span class="s1">&#39;Ey&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Optiwave Systems Inc.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

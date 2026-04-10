@@ -1,0 +1,65 @@
+
+
+
+
+2.5D simulation of Cosine Taper
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This examples shows how to use FEM 2.5 D capabilities in simulating Cosine Taper and get results close to the 3D models.
+For this example we use a gds file.
+
+The simulation setup in the code snippet below. In this example, TM polarization is used. 
+
+.. literalinclude:: ../_static/examples/FEFD/Cosine_Taper/cosine_taper.py
+   :language: python
+
+
+.. dropdown:: Cosine_Taper plot
+
+  The code first starts by defining a waveguide from a gds and plot it which looks like this
+
+  .. image:: ../_static/examples/FEFD/Cosine_Taper/images/cosinetaper.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+
+Then the code starts a mode solver instance to simulate the cross-section of the waveguide.
+
+
+.. dropdown:: Field profile
+
+  The code should produce a field profile at 1.5 that looks like
+
+
+  .. image:: ../_static/examples/FEFD/Cosine_Taper/images/field_profile.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+
+
+
+
+
+.. dropdown:: Port field  
+
+  The code also plots the 1D field profile of the input port.
+
+  .. image:: ../_static/examples/FEFD/Cosine_Taper/images/port_profile.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+
+
+.. dropdown:: S21 
+
+  The code also plots the S21 transmission parameter that compared with full 3D simulation should look like.
+
+  .. image:: ../_static/examples/FEFD/Cosine_Taper/images/S21.png
+    :alt: A graphical representation of a generic layer stack.
+    :width: 40%
+    :align: center
+

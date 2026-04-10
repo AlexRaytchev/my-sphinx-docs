@@ -49,5 +49,6 @@
       ~ConstMaterial.color
       ~ConstMaterial.material_number
       ~ConstMaterial.name
+      ~ConstMaterial.number
    
    

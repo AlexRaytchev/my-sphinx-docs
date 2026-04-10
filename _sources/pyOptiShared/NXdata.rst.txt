@@ -12,11 +12,11 @@ Introduction
 --------------------------
 
 In order to store simulation results we provide them in the ``.hdf5`` format. Which a versatile and efficient way to
-organize and store data and metadata. To improve data visualition, we whent further and provided initial support to the 
+organize and store data and metadata. To improve data visualization, we went further and provided initial support to the 
 `NeXus format <https://manual.nexusformat.org/classes/base_classes/NXdata>`_, that allows to organize data even further, including metadata and better support to results visualization.
 
-The :class:`NXdata <pyOptiShared.SimResults.NXdata>` dataclass is the object that is used to store our solver restults.
-In general you can access data based on the NeXus format (``signal``, ``auxiliary_signals``, ``axes``, etc), and to facilitated its visualization we provide the 
+The :class:`NXdata <pyOptiShared.SimResults.NXdata>` dataclass is the object that is used to store our solver results.
+In general you can access data based on the NeXus format (``signal``, ``auxiliary_signals``, ``axes``, etc), and to facilitate its visualization we provide the 
 :meth:`Plot <pyOptiShared.SimResults.NXdata.Plot>` method to easily provide a data visualization interface for the user.
 
 Examples
@@ -25,9 +25,9 @@ Examples
 Visualization of FDTD Results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This example relies on the :class:`FDTD Solver <pyFDTDKernel.pyFDTDSolver.pyFDTDSolver>` and the :class:`FDTDSimResults <pyOptiShared.SimResults.FDTDSimResults>`.
+This example relies on the :class:`FDTD Solver <pyFDTDKernel.pyFDTDSolver.pyFDTDSolver>` and the :class:`FDTDResults <pyFDTDKernel.FDTDResults.FDTDResults>`.
 The ``.hdf5`` with the results can be downloaded here: :download:`wg_results_fdtd.hdf5 <../_static/wg_results_fdtd.hdf5>`.
-The results shown are the permittivity profile, mode profile on ``Mode Source o1``, DFT field progile of ``MyFDTMonitor1`` and ``ALL`` the scattering parameters.
+The results shown are the permittivity profile, mode profile on ``Mode Source o1``, DFT field profile of ``MyFDTMonitor1`` and ``ALL`` the scattering parameters.
 
 .. raw:: html
 
@@ -39,11 +39,11 @@ The results shown are the permittivity profile, mode profile on ``Mode Source o1
 
 .. code-block:: python
 
-	from pyOptiShared.SimResults import FDTDSimResults
+	from pyFDTDKernel.FDTDResults import FDTDResults
 	import sys 
 
 	filename=r"wg_results_fdtd.hdf5"
-	results = FDTDSimResults()
+	results = FDTDResults()
 	results.loadHDF5(filename)
 
 	#Python is not running in ipykernel. Desktop plotting tools can be used with NXDATA
@@ -87,15 +87,15 @@ The results shown are the permittivity profile, mode profile on ``Mode Source o1
 Visualization of Mode Solver Results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This example relies on the :class:`Mode Solver <pyFDTDKernel.pyModeSolver.py_mode_solver.VFDModeSolver>` and the 
-:class:`ModeSolverResults <pyOptiShared.SimResults.ModeSolverResults>` classes.
+This example relies on the :class:`Mode Solver <pyFDTDKernel.pyModeSolver.pyModeSolver.VFDModeSolver>` and the 
+:class:`ModeSolverResults <pyModeSolver.ModeSolverResults.ModeSolverResults>` classes.
 The ``.hdf5`` with the results can be downloaded here: :download:`wg_results_mode.hdf5 <../_static/wg_results_mode.hdf5>`.
 The data we are showing is the mode profile of Hy for the fundamental mode (index equals 0) for the same dielectric waveguide example as
 the one in the previous example.
 
 .. code-block:: python
 
-	from pyOptiShared.SimResults import ModeSolverResults
+	from pyModeSolver.ModeSolverResults import ModeSolverResults
 	import sys
 	
 	filename=r"wg_results_mode.hdf5"

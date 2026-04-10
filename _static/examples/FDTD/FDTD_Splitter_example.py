@@ -10,18 +10,18 @@ air_mat = ConstMaterial(mat_name="Air", epsReal=1**2,color='lightyellow')
 
 # Creates the Layer Stack
 layer_stack = LayerStack()
-layer_stack.addLayer(name="L1", number=1, thickness=0.22, zmin=0.0,
+layer_stack.AddLayer(name="L1", number=1, thickness=0.22, zmin=0.0,
                     material=si_mat, cladding=si02_mat,
                     sideWallAng=0)
 
-layer_stack.setBGandSub(background=si02_mat, substrate=si02_mat)
+layer_stack.SetBGandSub(background=si02_mat, substrate=si02_mat)
 
 # Defines the Device Geometry
 device_geometry = DeviceGeometry()
 device_geometry.SetFromGDS(
     layer_stack=layer_stack,
     gds_file='splitter.gds',
-    buffers={'x':1.5,'y':1.5,'z':1.5}
+    buffers={'x':3,'y':3,'z':3}
 )
 device_geometry.SetAutoPortSettings(direction='x',port_buffer=1)
 
@@ -33,10 +33,10 @@ npts=21
 tfinal = 550
 
 fdtd_solver = pyFDTDSolver()
-fdtd_solver.SetPorts(profile="gaussian-pw", lcenter=lcen, lmin=lmin, lmax=lmax, npts=npts, mode_indices = 0,symmetries='1x2')
+fdtd_solver.SetExcitation(profile="gaussian-pw", lcenter=lcen, lmin=lmin, lmax=lmax, npts=npts, mode_indices = 0,symmetries='1x2')
 fdtd_solver.AddDFTMonitor(mon_type="2d-z-normal", z0=0.11, name="MyDFTMonitor1",
                                                       lmin=lmin, lmax=lmax,npts=npts,
                                                       save_hz=True)
-fdtd_solver.SetSimSettings(sim_time=tfinal, space_step=0.05, subpixel_level=2, save_path=r"results",results_filename='splitter',
+fdtd_solver.SetSimSettings(sim_time=tfinal, space_step=0.05, subpixel_level=2, results_path=r"results",device_name='splitter',
                                                       device_geometry = device_geometry,auto_shutoff_limit=1e-3)
 results = fdtd_solver.Run()

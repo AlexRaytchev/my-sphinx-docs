@@ -1,0 +1,40 @@
+:orphan:
+
+Splitter - Field over Device Structure Outline
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For this example we are going to simulate a splitter (:download:`splitter.gds </_static/examples/FDTD/splitter.gds>`) and
+then create an image with a DFT monitored field overlapping with the device structure outline.
+
+.. image:: /_static/splitter.svg
+  :alt: A graphical representation of a generic layer stack.
+  :width: 60%
+  :align: center
+
+In this particular example we make use of the **DFT Monitor** to monitor the frequency content of the fields, so
+we can plot a particular component and wavelength over the device structure outline.
+The python script for this simulation is presented in the following code snippet:
+
+.. literalinclude:: /_static/examples/FDTD/FDTD_Splitter_example.py
+  :language: python
+
+
+Once the simulation is over we can then use a post processing script to read the results, get the DFT Monitor data
+and then plot that with the outline of the device structure.
+
+.. dropdown:: Post Processing Code
+
+  .. literalinclude:: /_static/examples/FDTD/FDTD_Splitter_post_processing.py
+    :language: python
+
+.. splitter_hz_outline
+.. grid:: 1
+
+    .. grid-item-card::  Real Part of the Hz
+
+        .. figure:: /_static/splitter_hz_outline.svg
+           :width: 85%
+           :align: center
+
+
+

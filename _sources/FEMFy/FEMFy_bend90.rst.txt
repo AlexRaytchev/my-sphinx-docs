@@ -1,0 +1,107 @@
+
+
+
+90 Degree Bend
+^^^^^^^^^^^^^^^^
+
+This examples shows how the FEM handles curved structures (:download:`bend90.gds <../_static/examples/FDTD/bend90.gds>`):
+
+.. image:: ../_static/bend90.svg
+  :alt: A graphical representation of a generic layer stack.
+  :width: 40%
+  :align: center
+
+
+The simulation setup in the code snippet below. In this example, TM polarization is used 
+
+.. literalinclude:: ../_static/examples/FEFD/bend90/FEFD_bend90.py
+   :language: python
+
+
+
+.. dropdown:: Permittivity profile
+
+  The relative permittivity profile would look like this. Note: the material distribution may look staggered just because of the interpolation of the scattered points for plotting.
+  Using a high resolution for plotting would lessen this effect. You can control the resolution by changing resolution under the FEM solver settings 
+
+  .. image:: ../_static/examples/FEFD/bend90/images/material_profile.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: Field Profile TE
+
+  In the full field plots, the Ez field profile would look like this.
+
+  .. image:: ../_static/examples/FEFD/bend90/images/bend90_fieldTE.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: Port Profiles TE
+
+  For the TE solution, the mode profile of the TE solution should look continuous because of the continuity boundary conditions.
+  For accurate results the port field should look decaying naturally with no ripples.
+
+  .. image:: ../_static/examples/FEFD/bend90/images/port_field_TE.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: Port Effective Index TE
+
+  The corresponding effective index of the port mode vs wavelength should decrease with the increase of the wavelength as the profile gets more outside the core at longer wavelength.
+
+  .. image:: ../_static/examples/FEFD/bend90/images/Neff_TE.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: S21 Transmission TE
+
+  The transmission component of the S-parameter should indicate perfect transmission ~1. The phase should be a linear function in the wavelength.
+
+  .. image:: ../_static/examples/FEFD/bend90/images/S21_TE.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+
+.. dropdown:: Field Profiles TM
+
+  For the TM solution, the field would look as shown below. The field would start decay efficiently in the PML as it can be observed.
+  If the PML is not sufficiently suppressing the outgoing waves, ripples will appear inside the computational domain.
+
+  .. image:: ../_static/examples/FEFD/bend90/images/bend90_fieldTM.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: Port Profiles TM
+
+  For the TM solution, the mode profile of the TM solution should look piece-wise continuous because of the discontinuity boundary conditions of the magnetic field derivative.
+  For accurate results the port field should look decaying naturally with no ripples.
+
+  .. image:: ../_static/examples/FEFD/bend90/images/port_field_TM.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: Port Effective Index TM
+
+  The corresponding effective index of the port mode vs wavelength should decrease with the increase of the wavelength as the profile gets more outside the core at longer wavelength.
+
+  .. image:: ../_static/examples/FEFD/bend90/images/Neff_TM.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+
+.. dropdown:: S21 Transmission TM
+
+  The transmission component of the S-parameter should indicate perfect transmission ~1. The phase should be a linear function in the wavelength.
+
+  .. image:: ../_static/examples/FEFD/bend90/images/S21_TM.png
+            :alt: A graphical representation of a generic layer stack.
+            :width: 100%
+            :align: center
+

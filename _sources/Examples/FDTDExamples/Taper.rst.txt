@@ -1,0 +1,12 @@
+:orphan:
+
+Taper - Domain Limits for GDSII/STL 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Below are two examples showing how limiting the domain can be used to reduce the memory requirements and improve simulation time.
+
+.. literalinclude:: /_static/examples/FDTD/FDTD_DomainLimit_GDSII.py
+  :language: python
+
+.. literalinclude:: /_static/examples/FDTD/FDTD_DomainLimit_STL.py
+  :language: python

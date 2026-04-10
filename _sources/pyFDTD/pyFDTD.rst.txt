@@ -10,9 +10,9 @@ API Documentation
    :template: members.rst
    
    pyFDTDKernel.pyFDTDSolver.pyFDTDSolver
-   pyOptiShared.SimResults.FDTDSimResults
-   pyOptiShared.SimResults.FDTDModeData
-   pyOptiShared.SimResults.FDTDSimRun
+   pyFDTDKernel.FDTDResults.FDTDResults
+   pyFDTDKernel.FDTDResults.FDTDModeData
+   pyFDTDKernel.FDTDResults.FDTDSimRun
    
 Checking Solver Global Units
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -33,7 +33,7 @@ the solver settings:
 90 Degree Bend - Subpixel Averaging
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This examples shows the effect using subpixel averaging on a 90 degree bend (:download:`bend90.gds <../_static/bend90.gds>`):
+This examples shows the effect using subpixel averaging on a 90 degree bend (:download:`bend90.gds <../_static/examples/FDTD/bend90.gds>`):
 
 .. image:: ../_static/bend90.svg
   :alt: A graphical representation of a generic layer stack.
@@ -48,7 +48,7 @@ by changing the space step from 50 nm to 25 nm while varying the subpixel_level 
    :language: python
 
 
-The post processing part consists of loading the HDF5 results file into the :class:`FDTDSimResults <pyOptiShared.SimResults.FDTDSimResults>`
+The post processing part consists of loading the HDF5 results file into the :class:`FDTDResults <pyFDTDKernel.FDTDResults.FDTDResults>`
 objects and then using ``matplotlib`` for visualization of the data. The code is available in the following folded section.
 
 .. dropdown:: Post Processing Code
@@ -59,8 +59,8 @@ objects and then using ``matplotlib`` for visualization of the data. The code is
 
 .. dropdown:: Permittivity Profile
 
-  The permittivity plots show the averaging of the material properties, specialy at curved locations. The subpixel
-  averaging allows better description of the material properties on thos conditions, reducing the stair-casing of
+  The permittivity plots show the averaging of the material properties, especially at curved locations. The subpixel
+  averaging allows better description of the material properties on those conditions, reducing the stair-casing of
   the permittivity profile.
 
   .. image:: ../_static/subpixel_example/subpixel_epsx_zoomed.svg
@@ -72,8 +72,8 @@ objects and then using ``matplotlib`` for visualization of the data. The code is
 .. dropdown:: Field Profiles
 
   In the full field plots, it is possible to see that a coarse mesh without subpixel averaging presents field
-  leakage as the mode propagates thorugh the bend. It gets reduces as we add the subpixel averaging. Increasing
-  the subpixel averaging can provide similar results to those of almost halfing the space step.
+  leakage as the mode propagates through the bend. It gets reduced as we add the subpixel averaging. Increasing
+  the subpixel averaging can provide similar results to those of almost halving the space step.
 
   .. image:: ../_static/subpixel_example/subpixel_Hz.svg
             :alt: A graphical representation of a generic layer stack.
@@ -82,7 +82,7 @@ objects and then using ``matplotlib`` for visualization of the data. The code is
 
 .. dropdown:: Zoomed Field Profiles:
 
-  It is more obivoues the fields looks smoother at a higher subpixel level. Usualy, level two is enough, as higher levels, might deteriorate the 
+  It is more obvious the fields look smoother at a higher subpixel level. Usually, level two is enough, as higher levels might deteriorate the 
   meshing process, without relevant increase in the results accuracy.
 
   .. image:: ../_static/subpixel_example/subpixel_Hz_zoomed.svg
@@ -104,9 +104,9 @@ objects and then using ``matplotlib`` for visualization of the data. The code is
             frameborder="0px">
     </iframe>
 
-.. dropdown:: Reflecttance:
+.. dropdown:: Reflectance:
 
-  Similar to the transmittance results, the reflecttance gets improved with subpixel averaging, lowering the reflection and making them more accurate 
+  Similar to the transmittance results, the reflectance gets improved with subpixel averaging, lowering the reflection and making them more accurate 
   as the subpixel level gets increased to two.
 
   .. raw:: html
@@ -119,12 +119,12 @@ objects and then using ``matplotlib`` for visualization of the data. The code is
 
 Waveguide - Run FDTD simulation from a function
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Similarly for this example, we are going to  simulate a straight waveguide from a user defined function.
+Similarly for this example, we are going to simulate a straight waveguide from a user defined function.
 
 .. literalinclude:: ../_static/examples/FDTD/FDTD_FunWaveguide_example.py
    :language: python
 
-It is also possible to run sweeps on the function by using :meth:`UpdateScriptParams <pyOptiShared.DeviceGeometry.DeviceGeometry.UpdateScriptParams>` which updates the parameters getting passed to the device gemoetry.
+It is also possible to run sweeps on the function by using :meth:`UpdateScriptParams <pyOptiShared.DeviceGeometry.DeviceGeometry.UpdateScriptParams>` which updates the parameters getting passed to the device geometry.
 Note: you still need to call the solver :meth:`SetSimSettings <pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetSimSettings>` so that the device geometry update takes effect. 
 
 .. literalinclude:: ../_static/examples/FDTD/FDTD_FunWaveguide_sweep_example.py
@@ -152,7 +152,7 @@ The function output can also be a gdstk library.
 ..   :align: center
 
 .. In this particular example we make use of the **Time Monitor** to store the fields at particular time instants, so we can animate them later.
-.. The python script for this simulation is presented in the following code snipet:
+.. The python script for this simulation is presented in the following code snippet:
 
 .. .. literalinclude:: ../_static/examples/FDTD/FDTD_Sbend_example.py
 ..    :language: python
@@ -174,10 +174,10 @@ The function output can also be a gdstk library.
 ..            :align: center
 
 
-Splitter - Field over Device Strucutre Outline
+Splitter - Field over Device Structure Outline
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For this example we are going to simulate a splitter (:download:`splitter.gds <../_static/splitter.gds>`) and
+For this example we are going to simulate a splitter (:download:`splitter.gds <../_static/examples/FDTD/splitter.gds>`) and
 then create an image with a DFT monitored field overlapping with the device structure outline.
 
 .. image:: ../_static/splitter.svg
@@ -187,7 +187,7 @@ then create an image with a DFT monitored field overlapping with the device stru
 
 In this particular example we make use of the **DFT Monitor** to monitor the frequency content of the fields, so
 we can plot a particular component and wavelength over the device structure outline.
-The python script for this simulation is presented in the following code snipet:
+The python script for this simulation is presented in the following code snippet:
 
 .. literalinclude:: ../_static/examples/FDTD/FDTD_Splitter_example.py
   :language: python
@@ -215,12 +215,12 @@ and then plot that with the outline of the device structure.
 Waveguide Crossing - Using Port Symmetry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To accelerate simulation pyFDTD supports the specification of port symmetries.
+To accelerate simulation pyFDTD supports the specification of port reciprocities.
 
-For this example we are going to use a waveguide crossing (:download:`etchedCrossing <../_static/etchedCrossing.gds>`).
+For this example we are going to use a waveguide crossing (:download:`etchedCrossing <../_static/examples/FDTD/etchedCrossing.gds>`).
 Due to its symmetries only one port needs to be excited and all the s-parameters can be inferred from that single run.
 
-The device geometry and its symmetry can be viewed in the following image:
+The device geometry and its reciprocity can be viewed in the following image:
 
 .. grid:: 1
 
@@ -230,25 +230,25 @@ The device geometry and its symmetry can be viewed in the following image:
            :width: 65%
            :align: center
 
-Therefore we specifying ``symmetries`` in the ``SetPorts()`` method to:
+Therefore we specifying ``reciprocities`` in the ``SetExcitation()`` method to:
 
 .. code-block:: python
 
-  symmetries = {"1_2":"2_1","2_2":"1_1","3_2":"4_1","4_2":"3_1",
+  reciprocities = {"1_2":"2_1","2_2":"1_1","3_2":"4_1","4_2":"3_1",
                 "1_3":"3_1","2_3":"3_1","3_3":"1_1","4_3":"2_1",
                 "1_4":"4_1","2_4":"4_1","3_4":"2_1","4_4":"1_1",}
 
 The logic is that each s-parameter is defined by a string ``i_j`` where ``i`` and ``j`` are port numbers. 
 By convention ``i`` is the monitored port, ``j`` is the excited port.
-Following a python ``dictionary``, the ``key`` is the s-s-parameter reference that will receive the 
+Following a python ``dictionary``, the ``key`` is the s-parameter reference that will receive the 
 s-parameter results from the ``value``. For example, the first item: ``"1_2":"2_1"`` indicates that
 the s-parameter S12 is equal to S21. Closer look at the combinations, will see that all ``j`` in the ``value``'s 
 are equal to ``1``. Thus, only port ``1`` will be excited.
 
 Alternatively predefined symmetry options can be used. For example waveguide crossing symmetry can be defined by setting symmetries='4x' instead of defining individual port combinations. 
-Predefined symmetry options can be found in the :meth:`SetPorts <pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetPorts>` method.
+Predefined symmetry options can be found in the :meth:`SetExcitation <pyFDTDKernel.pyFDTDSolver.pyFDTDSolver.SetExcitation>` method.
 
-The full simulation setup is presented in the follow code snipet:
+The full simulation setup is presented in the following code snippet:
 
 .. literalinclude:: ../_static/examples/FDTD/FDTD_WGCrossing_example.py
   :language: python

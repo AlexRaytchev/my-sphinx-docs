@@ -1,0 +1,78 @@
+﻿FEMFy.FEFDResults.FEFDResults
+=============================
+
+.. currentmodule:: FEMFy.FEFDResults
+
+.. autoclass:: FEFDResults
+   :members:
+   :show-inheritance:
+   :class-doc-from: init
+   :member-order: groupwise
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      
+         ~FEFDResults.GetFieldData
+      
+      
+         ~FEFDResults.GetNeffData
+      
+      
+         ~FEFDResults.GetProfile1DData
+      
+      
+         ~FEFDResults.GetSParameterData
+      
+      
+         ~FEFDResults.PlotField
+      
+      
+         ~FEFDResults.PlotMaterial
+      
+      
+         ~FEFDResults.PlotNeff
+      
+      
+         ~FEFDResults.PlotPort
+      
+      
+         ~FEFDResults.PlotSParameters
+      
+      
+      
+         ~FEFDResults.loadHDF5
+      
+      
+         ~FEFDResults.mode_sources
+      
+      
+         ~FEFDResults.set_epsilons
+      
+      
+         ~FEFDResults.set_fields
+      
+      
+         ~FEFDResults.set_hdf5_path
+      
+      
+         ~FEFDResults.set_sparameters
+      
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FEFDResults.epsilon_monitor
+      ~FEFDResults.fields
+      ~FEFDResults.ports_monitors
+      ~FEFDResults.sparameters
+   
+   

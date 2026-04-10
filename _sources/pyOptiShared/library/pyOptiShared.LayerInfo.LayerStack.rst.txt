@@ -16,10 +16,40 @@
    .. autosummary::
    
       
+         ~LayerStack.AddLayer
+      
+      
+         ~LayerStack.AddMaterial
+      
+      
+         ~LayerStack.AddMaterialLayer
+      
+      
+         ~LayerStack.GetBGandSub
+      
+      
+         ~LayerStack.GetBGandSubNums
+      
+      
          ~LayerStack.GetLayer
       
       
+         ~LayerStack.GetLayerCladMatNum
+      
+      
+         ~LayerStack.GetLayerCladMatObj
+      
+      
+         ~LayerStack.GetLayerMaterialNum
+      
+      
+         ~LayerStack.GetLayerMaterialObj
+      
+      
          ~LayerStack.GetLayerOffsetFunc
+      
+      
+         ~LayerStack.GetLayerShapeInfo
       
       
          ~LayerStack.GetLayerThickness
@@ -31,7 +61,16 @@
          ~LayerStack.GetLayerZmin
       
       
+         ~LayerStack.GetLayersThickness
+      
+      
          ~LayerStack.GetLayersWithTol
+      
+      
+         ~LayerStack.GetMaterialLib
+      
+      
+         ~LayerStack.GetMaterialMap
       
       
          ~LayerStack.GetMinZmin
@@ -43,50 +82,14 @@
          ~LayerStack.GetZBounds
       
       
+         ~LayerStack.LoadFromFolder
+      
+      
+         ~LayerStack.SetBGandSub
+      
+      
          ~LayerStack.Show
       
-      
-      
-         ~LayerStack.addLayer
-      
-      
-         ~LayerStack.addMaterial
-      
-      
-         ~LayerStack.addMaterialLayer
-      
-      
-         ~LayerStack.getBGandSub
-      
-      
-         ~LayerStack.getBGandSubNums
-      
-      
-         ~LayerStack.getLayerCladMatNum
-      
-      
-         ~LayerStack.getLayerCladMatObj
-      
-      
-         ~LayerStack.getLayerMaterialNum
-      
-      
-         ~LayerStack.getLayerMaterialObj
-      
-      
-         ~LayerStack.getLayerShapeInfo
-      
-      
-         ~LayerStack.getMaterialLib
-      
-      
-         ~LayerStack.getMaterialMap
-      
-      
-         ~LayerStack.loadFromFolder
-      
-      
-         ~LayerStack.setBGandSub
       
    
    

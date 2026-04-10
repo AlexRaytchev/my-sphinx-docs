@@ -1,0 +1,53 @@
+:orphan:
+
+
+Directional Coupler - Coupling length
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. literalinclude:: /_static/examples/ModeSolver/Mode_Solver_CouplingLength.py
+   :language: python
+
+
+
+
+
+.. grid:: 4
+
+    .. grid-item-card::  Fundamental Mode Profile (Odd)
+
+        .. figure:: /_static/examples/ModeSolver/images/OddMode.png
+           :width: 100%
+           :align: center
+
+    .. grid-item-card::  Fundamental Mode Profile (Even)
+
+        .. figure:: /_static/examples/ModeSolver/images/EvenMode.png
+           :width: 100%
+           :align: center
+
+    .. grid-item-card::  Material Profile
+
+        .. figure:: /_static/examples/ModeSolver/images/RefractiveIndex.png
+           :width: 100%
+           :align: center
+
+
+    .. grid-item-card::  Effective Refractive Index
+
+        .. figure:: /_static/examples/ModeSolver/images/EffectiveIndex.png
+           :width: 100%
+           :align: center
+
+
+    .. grid-item-card::  Effective Group Index
+
+        .. figure:: /_static/examples/ModeSolver/images/GroupIndex.png
+           :width: 100%
+           :align: center
+
+
+    .. grid-item-card::  Coupling Length
+
+        .. figure:: /_static/examples/ModeSolver/images/CouplingLength.png
+           :width: 100%
+           :align: center
